@@ -1,5 +1,5 @@
 # Use github pages for docker image
-FROM ghcr.io/finsberg/IN1910:v2022.0.0
+FROM ghcr.io/finsberg/IN1910:v2022.0.1
 
 # Create user with a home directory
 ARG NB_USER
