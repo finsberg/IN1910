@@ -1,0 +1,94 @@
+format: jb-book
+root: README.md
+parts:
+- caption: General information
+  chapters:
+  - file: docs/info/curriculum.md
+  - file: docs/info/motivation.md
+  - file: docs/info/dictionary.md
+- caption: Setting up your computer for IN1910
+  chapters:
+  - file: docs/setup/setup.md
+  - file: docs/setup/cpp_compiler.md
+- caption: Lecture videos
+  chapters:
+  - file: docs/videos/videos_H22.md
+  - file: docs/videos/videos_H21.md
+  - file: docs/videos/videos_H20.md
+  - file: docs/videos/videos_H19.md
+- caption: Lectures
+  chapters:
+  - file: docs/lectures/python/python_intro.md
+  - file: docs/lectures/python/python_oop.md
+    sections:
+    - file: docs/lectures/python/intro_to_oop.md
+    - file: docs/lectures/python/oop_methods.md
+    - file: docs/lectures/python/oop_concepts.md
+  - file: docs/lectures/python/functional_programming.md
+  - file: docs/lectures/git/version_control_with_git.md
+  - file: docs/lectures/python_development/python_development.md
+    sections:
+    - file: docs/lectures/python_development/writing_functioning_code.md
+    - file: docs/lectures/python_development/codestyle_and_docstrings.md
+    - file: docs/lectures/python_development/type_annotations.md
+    - file: docs/lectures/python_development/debugging.md
+  - file: docs/lectures/cpp/cpp.md
+    sections:
+    - file: docs/lectures/cpp/intro_to_cpp.md
+    - file: docs/lectures/cpp/arrays_and_pointers.md
+    - file: docs/lectures/cpp/oop_in_cpp.md
+    - file: docs/lectures/cpp/dynamic_allocation.md
+    - file: docs/lectures/cpp/cpptools.md
+    - file: docs/lectures/cpp/arraylist.md
+    - file: docs/lectures/cpp/linked_lists.md
+    - file: docs/lectures/cpp/algorithm_analysis.md
+    - file: docs/lectures/cpp/linkedlists_vs_dynamicarrays.md
+    - file: docs/lectures/cpp/sorting.md
+  - file: docs/lectures/data_science/data_science.md
+    sections:
+    - file: docs/lectures/data_science/plotting_with_matplotlib.md
+    - file: docs/lectures/data_science/streamlit.md
+  - file: docs/lectures/stochastic_processes/stochastic_processes.md
+    sections:
+    - file: docs/lectures/stochastic_processes/random_number_generators.md
+    - file: docs/lectures/stochastic_processes/using_random_numbers.md
+    - file: docs/lectures/stochastic_processes/random_walks_and_markov_processes.md
+    - file: docs/lectures/stochastic_processes/solving_the_1D_diffusion_equation.md
+    - file: docs/lectures/stochastic_processes/markov_chains.md
+  - file: docs/lectures/optimization/optimization.md
+    sections:
+    - file: docs/lectures/optimization/software_optimization.md
+    - file: docs/lectures/optimization/optimization_and_mixed_programming.md
+    - file: docs/lectures/optimization/parallel_programming.md
+  - file: docs/lectures/summary/course_summary.md
+- caption: Exercises
+  chapters:
+  - file: docs/exercises/week1/E1_python_refresh_and_git.ipynb
+  - file: docs/exercises/week3/E3_testing_and_docstrings.ipynb
+  - file: docs/exercises/week2/E2_exercises_on_oop.ipynb
+  - file: docs/exercises/week4/pancake_sort.md
+  - file: docs/exercises/week6/E6_intro_to_cpp.md
+    sections:
+    - file: docs/exercises/week6/E6_references_and_pointers.md
+    - file: docs/exercises/week6/C1_primes_by_trial_division.md
+  - file: docs/exercises/week7/E7_oop_in_cpp.md
+    sections:
+    - file: docs/exercises/week7/C2_primes_by_sieve.md
+  - file: docs/exercises/cpp_exercises.md
+  - file: docs/exercises/week10/E8_random_number_generators.ipynb
+  - file: docs/exercises/week11/E9_random_walks_and_markov_process.ipynb
+  - file: docs/exercises/Exercises for Plotly Express.ipynb
+  - file: docs/exercises/week12/E10_optimization_and_mixed_programming.md
+  - file: docs/exercises/week13/E11_parallel_programming.md
+- caption: Exercise solutions
+  chapters:
+  - file: docs/exercises/week1/E1_solutions.ipynb
+  - file: docs/exercises/week3/E3_solutions.ipynb
+  - file: docs/exercises/week2/E2_solutions.ipynb
+  - file: docs/exercises/week4/pancake_sort_solution.md
+  - file: docs/exercises/week6/E6_solutions.md
+  - file: docs/exercises/week6/week6-challenge.md
+  - file: docs/exercises/week7/E7_solutions.md
+  - file: docs/exercises/week11/E9_solutions.ipynb
+  - file: docs/exercises/week12/E10_solutions.md
+  - file: docs/exercises/week13/E11_solutions.md

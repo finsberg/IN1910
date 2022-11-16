@@ -1,0 +1,11 @@
+dictionaryDefinitions:
+  - name: in1910
+    path: .cspell_dict.txt
+    addWords: true
+  - name: norsk
+    path: .cspell_dict_norsk.txt
+    addWords: true
+dictionaries:
+  - in1910
+  - norsk
+ignoreWords: []

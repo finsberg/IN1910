@@ -1,0 +1,54 @@
+#######################################################################################
+# Book settings
+title: IN1910 - Programming with Scientific Applications
+author: Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes
+logo: "_static/logo.png"
+copyright: "2022"
+only_build_toc_files: true
+
+# Information about where the book exists on the web
+description: >-
+  The course is a continuation of the course IN1900, and provides an introduction to more advanced concepts in programming and software development. The central goal of the subject is to introduce new tools and concepts for scientific programming.
+
+#######################################################################################
+# Execution settings
+execute:
+  execute_notebooks: cache
+  allow_errors: true
+  timeout: 3000 # We should increase this when we actually want to publish
+
+#######################################################################################
+# HTML-specific settings
+html:
+  home_page_in_navbar: true
+  use_issues_button: true
+  extra_navbar: <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+
+# #######################################################################################
+# Interact link settings
+notebook_interface: "notebook"
+
+#######################################################################################
+# Launch button settings
+launch_buttons:
+  notebook_interface: "classic"
+  binderhub_url: "https://mybinder.org"
+  thebe: true
+
+repository:
+  url: https://github.com/finsberg/IN1910
+  path_to_book: _sources
+  branch: gh-pages
+
+latex:
+  latex_engine: "xelatex"
+  latex_documents:
+    targetname: book.tex
+
+sphinx:
+  config:
+    bibtex_bibfiles: ["refs.bib"]
+  extra_extensions:
+    - sphinx_inline_tabs
+    - myst_nb
+    - sphinxcontrib.bibtex
