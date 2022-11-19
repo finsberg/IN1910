@@ -1,0 +1,1599 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Version Control with Git &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Python development" href="../python_development/python_development.html" />
+    <link rel="prev" title="Functional programming in python" href="../python/functional_programming.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/git/version_control_with_git.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/git/version_control_with_git.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/git/version_control_with_git.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/git/version_control_with_git.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-version-control">
+   Why version control?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#benefits-of-version-control">
+   Benefits of version control
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#different-version-control-systems">
+     Different Version Control Systems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enter-git">
+   Enter: Git
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-commits">
+     Git Commits
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-and-setting-up-git">
+   Installing and Setting up Git
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#choosing-a-remote-server">
+     Choosing a remote server
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getting-a-repository">
+     Getting a repository
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-new-repository">
+     Creating a new repository
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-repository-locally">
+     Creating a repository locally
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-repository-through-github">
+     Creating a repository through Github
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-files-to-your-project">
+     Adding files to your project
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#your-turn-making-a-gitignore-file">
+     Your turn: Making a .gitignore file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#making-a-commit">
+     Making a commit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-note-on-adding-and-editing-files">
+     A note on adding and editing files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-commit-am">
+     git commit -am
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interacting-with-github">
+   Interacting with Github
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pushing-and-pulling">
+     Pushing and Pulling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-test-pushing-and-pulling-on-your-own">
+     How to test pushing and pulling on your own
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-forking">
+     Git Forking
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-branching">
+     Git Branching
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#merge-requests-and-pull-requests">
+     Merge requests and Pull requests
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#taking-a-step-back">
+   Taking a step back
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#commit-often">
+     Commit often!
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-practices-for-scientific-computing">
+   Best Practices for Scientific Computing
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Version Control with Git</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-version-control">
+   Why version control?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#benefits-of-version-control">
+   Benefits of version control
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#different-version-control-systems">
+     Different Version Control Systems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enter-git">
+   Enter: Git
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-commits">
+     Git Commits
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-and-setting-up-git">
+   Installing and Setting up Git
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#choosing-a-remote-server">
+     Choosing a remote server
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getting-a-repository">
+     Getting a repository
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-new-repository">
+     Creating a new repository
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-repository-locally">
+     Creating a repository locally
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-repository-through-github">
+     Creating a repository through Github
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-files-to-your-project">
+     Adding files to your project
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#your-turn-making-a-gitignore-file">
+     Your turn: Making a .gitignore file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#making-a-commit">
+     Making a commit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-note-on-adding-and-editing-files">
+     A note on adding and editing files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-commit-am">
+     git commit -am
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interacting-with-github">
+   Interacting with Github
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pushing-and-pulling">
+     Pushing and Pulling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-test-pushing-and-pulling-on-your-own">
+     How to test pushing and pulling on your own
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-forking">
+     Git Forking
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-branching">
+     Git Branching
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#merge-requests-and-pull-requests">
+     Merge requests and Pull requests
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#taking-a-step-back">
+   Taking a step back
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#commit-often">
+     Commit often!
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-practices-for-scientific-computing">
+   Best Practices for Scientific Computing
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="version-control-with-git">
+<h1>Version Control with Git<a class="headerlink" href="#version-control-with-git" title="Permalink to this headline">#</a></h1>
+<p>In this lecture we will cover version control with Git. These lecture notes will go into what Git is, and simple examples of use. The accompanying exercises will require you to use Git to track and store your code.</p>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<p>Learning Git, like most aspects of programming, is best learnt by doing it yourself. In this course, you will learn the basics of using Git and GitHub by using it for your assignments and hand-ins. In this lecture, you will learn the basics, and as the course goes on, you will learn more and become more proficient.</p>
+<p>However, if you want a different introduction to Git than these lecture notes, or you want something in addition, there are <em>a lot</em> of resources for learning Git online. And we will list some here.</p>
+<p>Perhaps the best and simplest resource available is the <a class="reference external" href="https://guides.github.com">GitHub guides</a>. Here you will find the <a class="reference external" href="https://guides.github.com/introduction/git-handbook/">Git Handbook</a> that contains a reference all the basic Git commands as well links to more resources. The <a class="reference external" href="https://guides.github.com/introduction/flow/">Understanding the GitHub flow</a> section is a short but great read to learn the basic concepts about how developers use GitHub in their workflow. Finally there is a simple <a class="reference external" href="https://guides.github.com/activities/hello-world/">Hello world</a> project that we recommend all students to check out, if you are a complete newbie to Git or GitHub.</p>
+<p>Another very good resource is from one for GitHub’s competitors <a class="reference external" href="https://www.atlassian.com/git">Atlassian</a>.</p>
+<p>If you want a more interactive tool, you can also check out <a class="reference external" href="https://learngitbranching.js.org">https://learngitbranching.js.org</a>.</p>
+<p>If you want to go more in depth, or have a more extensive reference work, the book <em>Pro Git</em> by Scott Chacon and Ben Straub is released under a <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/3.0/?utm_source=www.domtail.com">Creative Commons BY-NC-SA3.0 license</a>, meaning you can download it for free. The 2. edition was released in 2014, and on the book’s website you can download it as a pdf as well as some common e-book formats (epub, mobi). The book itself is very extensive, being over 500 pages. However, it starts of fairly easy, and goes into more technical details towards the end, so reading the first few chapters can still be a good introduction to git.</p>
+<figure class="align-default" id="progit">
+<a class="reference internal image-reference" href="../../../_images/progit.png"><img alt="progit" src="../../../_images/progit.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Pro Git Book website: <a class="reference external" href="https://git-scm.com/book/en/v2">https://git-scm.com/book/en/v2</a></span><a class="headerlink" href="#progit" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Another very good alternative it the book called <a class="reference external" href="https://ericsink.com/vcbe/vcbe_a4_lo.pdf"><em>Version Control by Example</em></a> which also touches upon the history of version control as well as other version control system than git.</p>
+<p>At this point we should stress that these resources are simply offered as an alternative, or in addition, to the lecture notes, and we do not expect you to use them unless you want to.</p>
+</section>
+<section id="why-version-control">
+<h2>Why version control?<a class="headerlink" href="#why-version-control" title="Permalink to this headline">#</a></h2>
+<p>Imagine you have a new software assignment, with a three week deadline. You start working and things are progressing nicely, things are working well and you are happy with your code. Entering the last week, all you have left is to refactor your code and add some small final changes. However, in this process, things suddenly <em>stop</em> working. What happened, and what do you do? Some change you did while refactoring probably messed something up, but you cannot undo everything you have changed, can you? This is just one case where <em>version control</em> would be useful. Giving you the option to “go back in time” in your code.</p>
+<figure class="align-default" id="phd-final">
+<a class="reference internal image-reference" href="../../../_images/phd_final.gif"><img alt="../../../_images/phd_final.gif" src="../../../_images/phd_final.gif" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Source: Taken from <a class="reference external" href="http://phdcomics.com/comics/archive_print.php?comicid=1531">www.phdcomics.com</a>. Created by Jorge Cham</span><a class="headerlink" href="#phd-final" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Today we will discuss version control systems (VCS), and <em>Git</em>, a tool to automate version control. Simply put, VCS is a crucial tool for any software developer, and the bigger a project you are working on, the more important it is.</p>
+<p>The main idea of VCS is very simple, we make regular “backups” of our code at different times, enabling us to look at how the code looked earlier, or in extreme cases, revert the whole codebase to an earlier time. There are many tools for automatic backup of your machine, and many tools have it built in. Dropbox for example has checkpoints of your files built in, which can be very helpful at times. The tools we will discuss today however, are especially built for software development.</p>
+</section>
+<section id="benefits-of-version-control">
+<h2>Benefits of version control<a class="headerlink" href="#benefits-of-version-control" title="Permalink to this headline">#</a></h2>
+<p>Some benefits of version control are</p>
+<ul class="simple">
+<li><p>Backup of files in case of computer crashes etc</p></li>
+<li><p>Make it easier to see which changes introduced an error</p></li>
+<li><p>Let’s the user undo bad changes and revert to working copies</p></li>
+<li><p>Great for collaboration, and let’s several people contribute to the same project</p></li>
+<li><p>Allows for <em>branching</em> of code, to test new ideas or make different versions of the code</p></li>
+<li><p>Accountability. Version control lets you see who did what</p></li>
+</ul>
+<section id="different-version-control-systems">
+<h3>Different Version Control Systems<a class="headerlink" href="#different-version-control-systems" title="Permalink to this headline">#</a></h3>
+<p>A VCS is any framework that allows you to keep track of your project over time, and stores revisions. The simplest form is a local one, where the entire file history is stored locally on your computer or network.</p>
+<figure class="align-default" id="local-vcs">
+<a class="reference internal image-reference" href="../../../_images/local_vcs.png"><img alt="local vcs" src="../../../_images/local_vcs.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">A local VCS. Source: Chacon &amp; Straub, ProGit (2014)</span><a class="headerlink" href="#local-vcs" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>There are two problems with using a local VCS. The first is that there is no backup in case of a computer crash or failure. In addition, most programmers do not work on projects by themselves, but often need to pass code back and forth, or have the options of several programmers working on the code simultaneously. A local VCS does not handle such collaboration too well.</p>
+<p>One way to deal with these challenges is to use a <em>centralized</em> server to keep track of the version history. Different users can read out specific versions of files, work on the code and upload their changes to the server. This makes collaboration between programmers easy. Admins and team leaders can also monitor the server and give people the rights to alter the code they are working on. It also has the benefit that if any persons laptop or computer crashes, it doesn’t impact the whole system, only their last changes they haven’t uploaded yet. However, the central server is still a single point of failure, and should be properly backed up—and if the server is down for a while due to maintenance or issues, working becomes hard for the team, and efficiency drops.</p>
+<figure class="align-default" id="centralized-vcs">
+<a class="reference internal image-reference" href="../../../_images/centralized_vcs.png"><img alt="centralized vcs" src="../../../_images/centralized_vcs.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">A centralized VCS. Source: Chacon &amp; Straub, ProGit (2014)</span><a class="headerlink" href="#centralized-vcs" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The kind of VCS we will be using is called a <em>distributed</em> VCS. Like the centralized system, we will also interact with an external server to do backups and collaboration. The difference is that with the distributed VCS, every user stores a complete copy of the entire project history. This gives additional safety, as every user has a complete backup. It also gives efficiency, as users can access the whole project history, even offline, and only have to push or pull the changes in code. The only downside is use of space, as we are storing the same information multiple places. However, most software projects take little space, and so this is of little issue.</p>
+<figure class="align-default" id="distributed-vcs">
+<a class="reference internal image-reference" href="../../../_images/distributed_vcs.png"><img alt="distributed vcs" src="../../../_images/distributed_vcs.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">A distributed VCS. Source: Chacon &amp; Straub, ProGit (2014)</span><a class="headerlink" href="#distributed-vcs" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="enter-git">
+<h2>Enter: Git<a class="headerlink" href="#enter-git" title="Permalink to this headline">#</a></h2>
+<p>There are <em>many</em> different version control softwares to choose from today. The one we will be using for IN1910 is called <em>Git</em>. We choose <em>Git</em> because it is highly popular and sees much use, especially in open source development and scientific programming. Secondly, it is open source and free, which is always nice. In the “real world”, you might be part of a team or scientific group, in which case you should use the same VCS as them. However, other common VCS, such as Mercurial and Bazaar, also look a lot like Git. So knowing Git, you will most likely be able to pick them up with little issue.</p>
+<p>So where does Git come from? It was created by Linus Torvalds in 2005 to be used for the development of the Linux kernel. The Linux development team had been using a proprietary software called BitKeeper, but there was a falling out. As a result, Linus decided to develop his own software to take its place. (That was oversimplifying the story considerably).</p>
+<p>One reason Git grew into popularity so fast was that it was precisely that, <em>fast</em>. It is so fast you rarely have to wait for it at all, even when working on huge projects (like the Linux kernel).</p>
+<section id="git-commits">
+<h3>Git Commits<a class="headerlink" href="#git-commits" title="Permalink to this headline">#</a></h3>
+<p>When you work with Git, you will edit and work with your files as normal. At regular intervals however, you make <em>commits</em>. These commits are “snapshots” of your project files that will be stored in the projects history. Over time you get a long chain of these commits. When looking at your project through your normal file tracker or text editor, you only see your current version of the software. To store the history, Git creates a <em>hidden</em> <code class="docutils literal notranslate"><span class="pre">.git</span></code>-directory. You should ignore this hidden directory and all its files, and never access or edit them manually, as this will mostly break your version control. If you want to look at or access older commits, you do some simple git-commands.</p>
+<figure class="align-default" id="snapshot-filestream">
+<a class="reference internal image-reference" href="../../../_images/snapshot_filestream.png"><img alt="snapshot filestream" src="../../../_images/snapshot_filestream.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Source: Chacon &amp; Straub, ProGit (2014)</span><a class="headerlink" href="#snapshot-filestream" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The entire project, including the project history stored in the .git folder, is referred to as a <em>repository</em>. Typically, we create a new repository for each new software project we do.</p>
+<p>A <em>commit</em> typically includes all changes to your project files since your last commit. This includes edits to files, but also creation and deletion of files. If you delete a file from your project, older commits will still contain that file. Thus, when making new commits, we only ever <em>add</em> things to our project, we never remove it. What happens in git, stays in git. In addition, each commit is named after a hash of the complete project history thus far, which makes the project history tamper proof. If you go in and try to change the history, the hashes will no longer match.</p>
+<p>In this sense, Git is quite like a <a class="reference external" href="https://en.wikipedia.org/wiki/Blockchain">blockchain</a>. Strictly speaking, Git doesn’t really use a blockchain, but it is based on Merkle trees, which also underlies blockchains. You can read <a class="reference external" href="https://stackoverflow.com/questions/46192377/why-is-git-not-considered-a-block-chain">this Stack Overflow question</a> if you are curious.</p>
+</section>
+</section>
+<section id="installing-and-setting-up-git">
+<h2>Installing and Setting up Git<a class="headerlink" href="#installing-and-setting-up-git" title="Permalink to this headline">#</a></h2>
+<p>Please consult the <a class="reference internal" href="../../setup/setup.html"><span class="doc std std-doc">setup instructions</span></a> for information about how to set up git correctly.</p>
+<p>After you have installed Git, you need to configure it before we use it. Specifically we need to add your name and email to git, so that changes you make your and others repositories are marked to you. This is quite simple, just open a terminal and write</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;John Doe&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="n">johndoe</span><span class="nd">@example</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+<p>Once you have run these two commands successfully, you are ready to use Git! You can check out <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">first time git setup guide</a> for more configurations.</p>
+<section id="choosing-a-remote-server">
+<h3>Choosing a remote server<a class="headerlink" href="#choosing-a-remote-server" title="Permalink to this headline">#</a></h3>
+<p>Git is a piece of software you install on your computer and use through the terminal. You can choose to use Git only locally on your machine, and it will work nicely. However, a major benefit of Git is that it is distributed VCS, and so we will want to also copy our project repository over to an external server as well. Here there are many third party services to choose from, but the two major ones for Git repositories are Github, Bitbucket and Gitlab. All of them provide free accounts, and paid accounts with more functionality. They also provide benefits for students, so signing up with your student email is recommended.</p>
+<p>For this course we will use UiO’s own Github server. This will behave and look quite a lot like the official Github server <a class="reference external" href="https://github.com/">https://github.com/</a>. You do not need to create a user for the UiO github, you simply log in with your UiO user and password.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.uio.no/">https://github.uio.no</a></p></li>
+</ul>
+<p>If you also want to create a user on <a class="reference external" href="http://github.com">github.com</a>, you are welcome to do so. However, the project work will be carried out and handed in via <a class="reference external" href="http://github.uio.no">github.uio.no</a>. Note however that some functionality (which you will see already in project 0) is not available on UiO’s own GitHub server yet.</p>
+</section>
+<section id="getting-a-repository">
+<h3>Getting a repository<a class="headerlink" href="#getting-a-repository" title="Permalink to this headline">#</a></h3>
+<p>Now that you have Git, and a Github user, we need to get our hands on a git repository to play around with. There are two alternatives:</p>
+<ul class="simple">
+<li><p>Making a brand new one</p></li>
+<li><p>Copying an existing one</p></li>
+</ul>
+<p>To copy an existing one, you need to first find one. For example the IN1910 repository. You can then copy the repository to your machine by using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> command and adding the url of the repository.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">uio</span><span class="o">.</span><span class="n">no</span><span class="o">/</span><span class="n">IN1910</span><span class="o">/</span><span class="n">IN1910_H21</span>
+</pre></div>
+</div>
+<p>This is made easier by using the “Clone” button on any repository website. You now get a local copy of the entire repository on your machine. This is for example one way to download the course material, although we recommend to just use the Github pages directly.</p>
+<p>When cloning a repository somebody else has made, you get a local copy of it. When the original owner makes a new change to the online repository, you can get these changes into your own copy by doing a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>-command, more on this later. For the IN1910 repo, this means every time we add new lecture notes or assignments, you can pull these changes down to your machine with a simple command.</p>
+</section>
+<section id="creating-a-new-repository">
+<h3>Creating a new repository<a class="headerlink" href="#creating-a-new-repository" title="Permalink to this headline">#</a></h3>
+<p>Playing around with the IN1910 repository isn’t the best for learning, so let us instead create a new repository from scratch. This can either be done locally on our machine, or through Github.</p>
+</section>
+<section id="creating-a-repository-locally">
+<h3>Creating a repository locally<a class="headerlink" href="#creating-a-repository-locally" title="Permalink to this headline">#</a></h3>
+<p>To create a new repository locally, first create a new folder for your project, then navigate to it in a terminal, and then run the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>. The name of your repository is the name of the folder, so choose a good one. As an example, let’s say we want a repository to track exercises we do on the website <a class="reference external" href="https://projecteuler.net/">projecteuler.net</a>, so we call our project <code class="docutils literal notranslate"><span class="pre">euler</span></code>. We would do as follows</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">euler</span>
+<span class="n">cd</span> <span class="n">euler</span>
+<span class="n">git</span> <span class="n">init</span>
+</pre></div>
+</div>
+<p>Note that we are creating an empty repository here. If you already have a project folder filled with code, you can start a repository from it using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>.</p>
+</section>
+<section id="creating-a-repository-through-github">
+<h3>Creating a repository through Github<a class="headerlink" href="#creating-a-repository-through-github" title="Permalink to this headline">#</a></h3>
+<p>An alternative is to make it through Github. In which case, you just go onto Github. Click the <code class="docutils literal notranslate"><span class="pre">+</span></code> sign and choose “New Repository”. You will come to a page that looks like the following:</p>
+<figure class="align-default" id="repo-creation">
+<a class="reference internal image-reference" href="../../../_images/repo_creation.png"><img alt="repo creation" src="../../../_images/repo_creation.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Creating a repository at GitHub</span><a class="headerlink" href="#repo-creation" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Here we need to enter the name of the project, and an optional short description. We can choose to make our repo public, in which case it can be accessed by everyone online (or everyone with a UiO user for <a class="reference external" href="http://github.uio.no">github.uio.no</a>), or private, in case only the people we explicitly give access can see it. If you want to get more out of your regular GitHub account you can apply for a <a class="reference external" href="https://help.github.com/articles/applying-for-a-student-developer-pack/">student develop pack</a>.</p>
+<p>Finally we can add a README, a <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> and a license. For now we do want the README, as it makes things practical. We don’t use the <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> for now, we will talk about it later. We also leave the license blank.</p>
+<p>Once you have made your repo on Github. You can clone it down to your local machine</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jvbrink</span><span class="o">/</span><span class="n">euler</span>
+</pre></div>
+</div>
+<p>In which case, git will make a folder called <code class="docutils literal notranslate"><span class="pre">euler</span></code> which we can access.</p>
+</section>
+<section id="adding-files-to-your-project">
+<h3>Adding files to your project<a class="headerlink" href="#adding-files-to-your-project" title="Permalink to this headline">#</a></h3>
+<p>We now have a folder called <code class="docutils literal notranslate"><span class="pre">euler</span></code>. We can treat this as a completely normal folder on our computer, meaning you can move files into it, or create new files within it. Say we now add a file called <code class="docutils literal notranslate"><span class="pre">problem1.py</span></code>, which solves the <a class="reference external" href="https://projecteuler.net/problem=1">first Project Euler problem</a>.</p>
+<p>When you want to include new files into your project history through a commit, you first have to <em>add</em> them, this is also known as “staging” the files or changes. When you do a commit command, all staged changes are now added to the project history.</p>
+<figure class="align-default" id="three-states">
+<a class="reference internal image-reference" href="../../../_images/three_states.png"><img alt="repo creation" src="../../../_images/three_states.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Source: Chacon &amp; Straub, ProGit (2014)</span><a class="headerlink" href="#three-states" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We can at any time check the current status of the git repository by running</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>which now tells us</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">On</span> <span class="n">branch</span> <span class="n">master</span>
+<span class="n">Your</span> <span class="n">branch</span> <span class="ow">is</span> <span class="n">up</span> <span class="n">to</span> <span class="n">date</span> <span class="k">with</span> <span class="s1">&#39;origin/master&#39;</span><span class="o">.</span>
+
+<span class="n">Untracked</span> <span class="n">files</span><span class="p">:</span>
+  <span class="p">(</span><span class="n">use</span> <span class="s2">&quot;git add &lt;file&gt;...&quot;</span> <span class="n">to</span> <span class="n">include</span> <span class="ow">in</span> <span class="n">what</span> <span class="n">will</span> <span class="n">be</span> <span class="n">committed</span><span class="p">)</span>
+
+	<span class="n">problem1</span><span class="o">.</span><span class="n">py</span>
+
+<span class="n">nothing</span> <span class="n">added</span> <span class="n">to</span> <span class="n">commit</span> <span class="n">but</span> <span class="n">untracked</span> <span class="n">files</span> <span class="n">present</span> <span class="p">(</span><span class="n">use</span> <span class="s2">&quot;git add&quot;</span> <span class="n">to</span> <span class="n">track</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first lines tells us there is nothing new on Github that has been added after we cloned our repository (you won’t see this if you only have a local repository for now). Next it tells us that there is an <em>untracked</em> file, which is the new file we created.</p>
+<p>If we want to commit our new solution, we will therefore first have to add it</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">problem1</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>or simply</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>which adds everything in the folder and sub-folders. Doing this is very practical, but perhaps we are storing files in our folder we don’t want to enter into the project history (because they should only be stored locally, and don’t need backups), then doing <code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">.</span></code> would add those too. The solution is to add a file called <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> in our project folder. This file contains a list of files that should not be added into git. There is a website, <a class="reference external" href="https://www.gitignore.io/">gitignore.io</a>, that let’s you autogenerate a gitignore file based on your system and programs you used. If you are starting a new repository, it is helpful to take the 30 seconds it takes to make a proper gitignore file. Useful things to add into <a class="reference external" href="http://gitignore.io">gitignore.io</a> is your operating system, your text editor, and the programming languages you are using for your project. This will keep your public repo looking nice and clean.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> will add everything in that is not in your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file. If only want to add the files that have already been added, i.e you only want to update the existing files you can use the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-u</span> <span class="pre">.</span></code>.</p>
+</section>
+<section id="your-turn-making-a-gitignore-file">
+<h3>Your turn: Making a .gitignore file<a class="headerlink" href="#your-turn-making-a-gitignore-file" title="Permalink to this headline">#</a></h3>
+<p>Create a file called <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> (exactly that), go to the website <a class="reference external" href="https://www.gitignore.io/">gitignore.io</a> and fill in your OS, your editor, Jupyter notebook, and Python. Copy the output you get from the website into your newly created file and save it. Then <em>stage</em> it by doing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.gitignore</span></code>.</p>
+</section>
+<section id="making-a-commit">
+<h3>Making a commit<a class="headerlink" href="#making-a-commit" title="Permalink to this headline">#</a></h3>
+<p>To make a commit, we simply use the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>. If you just run that command, it will open a text editor for you to enter a commit <em>message</em>. A commit message is a short text, usually a sentence, that describes the changes you have performed since the last commit. All commits should have commit messages, because it allows others, including your future self, track changes to the project over time. A large software project will usually grow to thousands of commits over time, so having some explanations can really help. The messages also makes it easier to see where possible bugs were introduced.</p>
+<p>Instead of letting git open an editor for you, you can write your commit message straight into your commit command using the <code class="docutils literal notranslate"><span class="pre">-m</span></code> flag.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Solved problem 1 using Python.&quot;</span>
+</pre></div>
+</div>
+<p>And that is it. We have stored a snapshot of our project.</p>
+</section>
+<section id="a-note-on-adding-and-editing-files">
+<h3>A note on adding and editing files<a class="headerlink" href="#a-note-on-adding-and-editing-files" title="Permalink to this headline">#</a></h3>
+<p>All new files you create will need to be added using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>. However, most of the time you are simply editing existing files. We can for example now go in and change our <code class="docutils literal notranslate"><span class="pre">problem1.py</span></code> around a bit. If we have an edited file, this will also show up in <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>. Let us also add a <code class="docutils literal notranslate"><span class="pre">problem2.py</span></code> for illustration. The status command now gives us (and some additional information we removed for readability)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Changes</span> <span class="ow">not</span> <span class="n">staged</span> <span class="k">for</span> <span class="n">commit</span><span class="p">:</span>
+	<span class="n">modified</span><span class="p">:</span>   <span class="n">problem1</span><span class="o">.</span><span class="n">py</span>
+
+<span class="n">Untracked</span> <span class="n">files</span><span class="p">:</span>
+	<span class="n">problem2</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>To stage both the changes, and the new file, we can use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> to include both at once.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Solved problem 2 using Python.&quot;</span>
+</pre></div>
+</div>
+<p>This commit will now add <code class="docutils literal notranslate"><span class="pre">problem2.py</span></code> and the changes to <code class="docutils literal notranslate"><span class="pre">problem1.py</span></code> simultaneously.</p>
+</section>
+<section id="git-commit-am">
+<h3>git commit -am<a class="headerlink" href="#git-commit-am" title="Permalink to this headline">#</a></h3>
+<p>If we only want to include changes to existing files, but we have not made any <em>new</em> files. We can use the <code class="docutils literal notranslate"><span class="pre">-a</span></code> flag to the commit. That way, we don’t have to keep running the add command for every commit, we only do it when we are actually adding new files. A typical commit command can then look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">am</span> <span class="s2">&quot;Added support for reading .png images to the scan module.&quot;</span>
+</pre></div>
+</div>
+<p>We have now made a repository and made two commits to it. We can use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> to get out a report of commits in a chain</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">log</span>
+</pre></div>
+</div>
+<p>Giving</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">commit</span> <span class="mi">08</span><span class="n">b79fde10ad4ad7aed89881aa44275c175af509</span> <span class="p">(</span><span class="n">HEAD</span> <span class="o">-&gt;</span> <span class="n">master</span><span class="p">)</span>
+<span class="n">Author</span><span class="p">:</span> <span class="n">jvbrink</span> <span class="o">&lt;</span><span class="n">jonasvdbrink</span><span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+<span class="n">Date</span><span class="p">:</span>   <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">9</span> <span class="mi">12</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="mi">38</span> <span class="mi">2018</span> <span class="o">+</span><span class="mi">0200</span>
+
+    <span class="n">Solved</span> <span class="n">problem</span> <span class="mi">2</span> <span class="k">with</span> <span class="n">Python</span>
+
+<span class="n">commit</span> <span class="mi">3</span><span class="n">fd2c980dfe696a8f42bc414e260721e11a7f48e</span>
+<span class="n">Author</span><span class="p">:</span> <span class="n">jvbrink</span> <span class="o">&lt;</span><span class="n">jonasvdbrink</span><span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+<span class="n">Date</span><span class="p">:</span>   <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">9</span> <span class="mi">11</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="mi">42</span> <span class="mi">2018</span> <span class="o">+</span><span class="mi">0200</span>
+
+    <span class="n">Solved</span> <span class="n">problem</span> <span class="mi">1</span> <span class="n">using</span> <span class="n">Python</span>
+
+<span class="n">commit</span> <span class="mi">0</span><span class="n">c2dd72daaa5aa3496a036611d52b57193e83f3a</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">HEAD</span><span class="p">)</span>
+<span class="n">Author</span><span class="p">:</span> <span class="n">Jonas</span> <span class="n">van</span> <span class="n">den</span> <span class="n">Brink</span> <span class="o">&lt;</span><span class="n">jvbrink</span><span class="nd">@users</span><span class="o">.</span><span class="n">noreply</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span>
+<span class="n">Date</span><span class="p">:</span>   <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">9</span> <span class="mi">11</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">56</span> <span class="mi">2018</span> <span class="o">+</span><span class="mi">0200</span>
+
+    <span class="n">Initial</span> <span class="n">commit</span>
+</pre></div>
+</div>
+<p>The most recent commit comes first, and then older ones below it. The time of the commit, and the person commit is also given. Each commit is named by its <em>hash</em>. In addition we have some info, <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> is a concept in Git, it is pointing at the latest commit (but can be moved around if needed). Note that the <code class="docutils literal notranslate"><span class="pre">origin/HEAD</span></code> is still at our initial commit, this is because our changes so far have only been local, and <code class="docutils literal notranslate"><span class="pre">origin</span></code> is the name of our copy of the repository on github. Let us see how to fix this.</p>
+<div class="tip admonition">
+<p class="admonition-title">Pro tip: Committing only a part of a file</p>
+<p>Sometimes you may have multiple changes to a file, but the changes might belong in different commits. To add only part of the file to the staging area you can use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-p</span></code>. This will
+open and interactive window and show you the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> of a section with a question <code class="docutils literal notranslate"><span class="pre">(1/2)</span> <span class="pre">Stage</span> <span class="pre">this</span> <span class="pre">hunk</span> <span class="pre">[y,n,q,a,d,j,J,g,/,e,?]?</span></code>. In this case you see that there are two sections (or hunks) and you are looking are the first one. Type <code class="docutils literal notranslate"><span class="pre">y</span></code> to include it <code class="docutils literal notranslate"><span class="pre">n</span></code> to not include it or <code class="docutils literal notranslate"><span class="pre">?</span></code> to see more info.</p>
+<p>Similarly, if you want to discard changes to only parts of a file you can use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-p</span></code></p>
+</div>
+</section>
+</section>
+<section id="interacting-with-github">
+<h2>Interacting with Github<a class="headerlink" href="#interacting-with-github" title="Permalink to this headline">#</a></h2>
+<p>We will now start interacting between our local repo and Github. The server (be it Github, or something else) is called the <em>origin</em> in Git-lingo. And so as you might have already seen in your <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> messages, we see references to <em>origin</em> quite often.</p>
+<p>To do the next steps, our repo must be coupled to Github. If you created your repo via the website and cloned it, they are already linked. If you created it locally using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>. You need to couple them together manually. To do this, first go to Github and create a new repository there as normal, but do <em>not</em> include a README, gitignore or license.</p>
+<p>Then you can run the following command to couple it to the online repo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="o">&lt;</span><span class="n">URL</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You can verify the new remote URL using</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<p>Then finally, push everything up using</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+</div>
+<p>I prefer starting new repos on the website, then cloning them down, to avoid having to set the origin manually. But this is just personal preference.</p>
+<section id="pushing-and-pulling">
+<h3>Pushing and Pulling<a class="headerlink" href="#pushing-and-pulling" title="Permalink to this headline">#</a></h3>
+<p>The two main commands you need to interact between your locally copy of the repository and the online one, are <code class="docutils literal notranslate"><span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">pull</span></code>. Here <code class="docutils literal notranslate"><span class="pre">push</span></code> means you are copying commits you made locally up to the origin. While <code class="docutils literal notranslate"><span class="pre">pull</span></code> means you are copying commits that have been pushed to the online repo down to your local machine.</p>
+<p>When we write <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> in our euler project now, we get a message (unless you already pushed your commits)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Your</span> <span class="n">branch</span> <span class="ow">is</span> <span class="n">ahead</span> <span class="n">of</span> <span class="s1">&#39;origin/master&#39;</span> <span class="n">by</span> <span class="mi">2</span> <span class="n">commits</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This message is telling us we (meaning our local repo), is two commits ahead of the version on Github. To remedy this we push our latest changes. Run the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+<p>And you will be prompted for your username and password. This ensures no one else can push things to your repository. If you find it tiring to write your username and password all the time you can <a class="reference external" href="https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git">cache your GitHub credentials in Git</a>. An alternative to this is to <a class="reference external" href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">set up SSH authentication </a></p>
+<p>Pushing is important, because it is what ensures there is an external backup of your project. If you only do commits, and no pushing, and your computer is lost or broken, there goes all your hard work. If you have committed <em>and</em> pushed it, then you have a backup you can clone to a different machine. In addition, if you are sharing your code with others, then they will only get the changes you have made once you have pushed it. Because of these two things, we push often. You don’t have to push after every single commit, but it is a good habit to push at least at the end of every coding session.</p>
+<figure class="align-default" id="in-case-of-fire">
+<a class="reference internal image-reference" href="../../../_images/in_case_of_fire.png"><img alt="in case of fire" src="../../../_images/in_case_of_fire.png" style="width: 250px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">A common joke in the Git world. Getting your work to safety requires first a commit to store your last changes, and then a push to get your newest commits to the external sever</span><a class="headerlink" href="#in-case-of-fire" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Pulling is not as much used if you are working on software alone, as it is used for copying changes others have contributed to a repository down to your local machine. But say for instance you are collaborating on a project with a friend, and your friend pushes a new piece of code you want to work on. Then you would do a</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
+</pre></div>
+</div>
+<p>and the changes would be entered into your local repository.</p>
+<div class="tip admonition">
+<p class="admonition-title">Pro tip: Pull = Fetch + Merge</p>
+<p>If you work on a project where your partner have pushed out changes to GitHub and you execute the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> (or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">master</span></code>), the changes from your partner will first be fetched (downloaded) from GitHub and then merged into the branch you are working on. In other words, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">master</span></code> consist of first executing the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">origin</span> <span class="pre">master</span></code> and then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">origin/master</span></code>. If you only want to view your partners changes without merging you can do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> (or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">origin</span> <span class="pre">master</span></code>).</p>
+</div>
+</section>
+<section id="how-to-test-pushing-and-pulling-on-your-own">
+<h3>How to test pushing and pulling on your own<a class="headerlink" href="#how-to-test-pushing-and-pulling-on-your-own" title="Permalink to this headline">#</a></h3>
+<p>We will go more in detail on collaborating through Git at a later time. But for now, let us show you an easy way you can “fake” being to two people collaborating just to learn some git—this is not something you will actually do when working with <em>git</em>. It is just a way to illustrate how it would work. To do this I simply clone my repository from Github once again, but place it in a different location on my machine.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">git_collab_example</span>
+<span class="n">cd</span> <span class="n">git_collab_example</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jvbrink</span><span class="o">/</span><span class="n">euler</span>
+</pre></div>
+</div>
+<p>I now have to copies of the same repository. One stored in my home directory, and one stored in a subfolder of my home directory. These two copies do not know the other one exists, and so for all intents and purposes they could just as well be on two different machines.</p>
+<p>If I make changes to one of them and commit it, it won’t show up in the other one by itself. However, I can do a <em>git push</em> in the one with the changes, and a <em>git pull</em> in the other, and they will both be up to date. This is because the push command sends the changes to the github server, and the pull command pulls down the new changes to the other repo. Imagine that these two repos were located on different machines, this would be a way for two colleague could work on the same code together.</p>
+<p>The best way to <em>actually</em> learn how to collaborate in git is to find a partner and just try it out, and this is what we will be doing in the project work of the course.</p>
+</section>
+<section id="git-forking">
+<h3>Git Forking<a class="headerlink" href="#git-forking" title="Permalink to this headline">#</a></h3>
+<p>So far we have seen how we can <em>clone</em> a repository from Github. When we do this we get a local copy of it, and you can do this with any public repository found on Github, Bitbucket and similar pages. This means for most open source code projects, you can clone their repo and instantly have access to the source code, documentation and the like. In fact, many open source code projects share their code this way, making you first clone the repo and then build or install the software through some additional steps.</p>
+<p>When you clone somebody else’s repository, you can make local changes to it, but you won’t be able to push any of those changes back to their online repository. This makes sense, it wouldn’t work very well sharing code openly, if anybody could start messing with that code. However, you can instead link your local repository to a new public repository which you own. We call this process <em>forking</em>, and it works quite well. If you find some openly available software project you want to build on or modify in some way, you just make your own personal fork of it. Github makes it very easy to fork any repository, if you are logged in and looking at a repository, there is a “Fork” button, which automatically creates a new repository on your user from the other one, which you can then clone down to your local machine.</p>
+<figure class="align-default" id="forking">
+<a class="reference internal image-reference" href="../../../_images/github_forking.png"><img alt="forking" src="../../../_images/github_forking.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">You can easily Fork existing projects to build on, extend or modifying existing code</span><a class="headerlink" href="#forking" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="git-branching">
+<h3>Git Branching<a class="headerlink" href="#git-branching" title="Permalink to this headline">#</a></h3>
+<p>Another crucial feature of git, at least for large projects. Is that you can make <em>branches</em> in your code. A branch is exactly what the name implies, a diverging version of the code. We can make branches for several reasons:</p>
+<ul class="simple">
+<li><p>For testing purposes</p></li>
+<li><p>Supporting different versions of the same code at the time</p></li>
+<li><p>For developing new features without disrupting the main code</p></li>
+<li><p>Doing crazy things that might break the code</p></li>
+<li><p>Bug fixing</p></li>
+</ul>
+<p>To make a new branch you can do the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="o">&lt;</span><span class="n">new_branch_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Let’s say we make one called <code class="docutils literal notranslate"><span class="pre">testing</span></code> for example. The situation is now as shown below:</p>
+<figure class="align-default" id="making-a-branch">
+<a class="reference internal image-reference" href="../../../_images/making_a_branch.png"><img alt="making a branch" src="../../../_images/making_a_branch.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Source: Chacon &amp; Straub, ProGit (2014)</span><a class="headerlink" href="#making-a-branch" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Note that our original branch is called <em>master</em> (although it should actually be called <a class="reference external" href="https://github.com/github/renaming">main</a>). When we start a new repo it only has the master branch. The new branch is called testing, and “HEAD” is where we are currently at. Because the HEAD is at master, if we make a new commit, it will be entered into the master branch, not the testing branch. If we instead want to change the testing branch, we have to move the head with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="o">&lt;</span><span class="n">branch_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note that branches can diverge in commits, this is sort of the whole point of branches. We can then jump between the branches using <code class="docutils literal notranslate"><span class="pre">checkout</span></code> as needed.</p>
+<figure class="align-default" id="branch">
+<a class="reference internal image-reference" href="../../../_images/branching.png"><img alt="branch" src="../../../_images/branching.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Source: Chacon &amp; Straub, ProGit (2014)</span><a class="headerlink" href="#branch" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Say we have made a branch to develop a cool new feature without disrupting the master branch others are also working on. Once we are happy with our code, we need to <em>merge</em> our branch back into the master branch.</p>
+<figure class="align-default" id="merge">
+<a class="reference internal image-reference" href="../../../_images/merging.png"><img alt="merge" src="../../../_images/merging.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Source: Chacon &amp; Straub, ProGit (2014)</span><a class="headerlink" href="#merge" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To merge branches we want to be on the branch we want to keep (typically the master branch), and do the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">merge</span> <span class="o">&lt;</span><span class="n">branch_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>So once we manage to solve issue 53 in the image, we would do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>
+<span class="n">git</span> <span class="n">merge</span> <span class="n">iss53</span>
+</pre></div>
+</div>
+<p>and that would be that.</p>
+<p>Note that to merge branches, git tries to automatically understand what code to keep. If both branches that are to be merged has performed changes to the <em>same code</em>, this can be a bit tricky. In this case we get what is called a <em>merge conflict</em>. Which we have to resolve manually, meaning we need to choose which parts of the code to keep, and which to discard. Your first proper merge conflict will probably be a stressful situation, but just remember to keep calm and ask for help from your local git guru if needed.</p>
+</section>
+<section id="merge-requests-and-pull-requests">
+<h3>Merge requests and Pull requests<a class="headerlink" href="#merge-requests-and-pull-requests" title="Permalink to this headline">#</a></h3>
+<p>Another useful feature are merge and pull <em>requests</em>. Often when working in a software team, there is a team leader that is responsible for managing the big picture view of the whole codebase. The different developers on the team handle different tasks, and often do their development in separate branches of the main code. Once they finish a task, instead of simply merging it into the master branch, they make a <em>merge request</em>. This request is automatically sent to the team leader, who can then review the changes to be merged. After reviewing they can either accept the request, in which case the merge happens, make additional comments or requests to be carried out before the merge is acceptable, or they can outright deny the request. Pull requests are basically the same thing, but for pulling a commit into a repository. If you for example find and solve a big in an open source project you find online, you don’t have <em>write access</em> to that repository, so you cannot actually push your changes. Instead you can make a pull request for the owner of the repo, and they can either accept or deny. If they accept, they get the changes you made into their project.</p>
+<p>Linus Torvalds, the original creator, and currently principle developer of the Linux kernel, is sort of notorious for being quite harsh when it comes to pull requests—he will only accept good code, and if you produce a pull request of bad code he will let you hear it. This makes him a bit unpopular in some circles.</p>
+</section>
+</section>
+<section id="taking-a-step-back">
+<h2>Taking a step back<a class="headerlink" href="#taking-a-step-back" title="Permalink to this headline">#</a></h2>
+<p>We have just covered a lot of different aspects of Git, and mentioned a lot of things you might not even use that much in IN1910. If it is all a bit overwhelming right now, don’t worry. You will get hands on experience doing the weekly assignment.</p>
+<p>The most important commands are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;URL&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;...&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></li>
+</ul>
+<p>If you know how to use these commands, you can probably get through IN1910 just fine. Other commands that are useful in the “real world”, are branching, merging and tagging.</p>
+<section id="commit-often">
+<h3>Commit often!<a class="headerlink" href="#commit-often" title="Permalink to this headline">#</a></h3>
+<p>For Git to be useful as a version control system, and not just a online backup, it is important to commit often. The more often you commit (within reason), the easier it is for both others and your future self to understand how the project changed over time, and exactly where potential errors occurred.</p>
+<p>Each commit should also also have a <em>commit message</em> that explains the changes made. The commit message should be a single sentence, and should explain exactly what you did in the code itself, to see that people can always check out the commit log. Instead, your commit should explain the big-picture of what you were trying to accomplish. Did you write a new module? Add new functionality? Fix a bug? And so on.</p>
+<p>In an ideal word, a commit should revolve around a single concept, sort of like a paragraph in a text. This means you should commit once you finish tackling a given problem, and started working on something else. If you are writing a commit message and see you are writing “Did A and B and C” and these are completely different tasks, then you should probably have made three separate commits. If you have already commit and done some more changes you feel should be part of that commit, you can <em>amend</em> that commit by doing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">--</span><span class="n">amend</span>
+</pre></div>
+</div>
+<p>The bigger a software project, the more important good commits and messages are. For assignments in this course, they are probably not that important, but we are trying to learn good practices, and so you should strive to make at least decent commits.</p>
+<figure class="align-default" id="xdcd-git">
+<a class="reference internal image-reference" href="../../../_images/xkcd1296_commit_messages.png"><img alt="xdcd-git" src="../../../_images/xkcd1296_commit_messages.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Source: <a class="reference external" href="https://xkcd.com/1296/">XKCD #1296</a></span><a class="headerlink" href="#xdcd-git" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="best-practices-for-scientific-computing">
+<h2>Best Practices for Scientific Computing<a class="headerlink" href="#best-practices-for-scientific-computing" title="Permalink to this headline">#</a></h2>
+<p>Let us wrap up this lecture by looking back at the paper mentioned during the first lecture, <a class="reference external" href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745"><em>Best Practices for Scientific Computing</em></a> by Wilson, et al. Many of them cover good use of Git.</p>
+<p>The most relevant point, which explicitly talks about using VCS in the first place</p>
+<ol class="simple">
+<li><p>Make incremental changes</p>
+<ul class="simple">
+<li><p>(a) Work in small steps with frequent feedback and course correction</p></li>
+<li><p>(b) Use a version control system</p></li>
+<li><p>(c) Put everything that has been manually created in version control</p></li>
+</ul>
+</li>
+</ol>
+<p>In addition, the following points are very relevant:
+5. Plan for mistakes
+6. Optimize software only after it works correctly
+8. Collaborate</p>
+<p>Using VCS is, by its very nature, planning for mistakes. When optimizing code, it is very easy to break some functionality, and so having good revision control is crucial to refactoring and optimizing code effectively. Lastly, collaboration on code should be, and very often is, done through <em>git</em> or similar tools. By collaborating through git, it is a lot easier to track changes over time, see who made what changes, and all revisions are accessible. This is <em>a lot</em> better than just emailing code back and forth—which many scientists do!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/git"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../python/functional_programming.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Functional programming in python</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../python_development/python_development.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Python development</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

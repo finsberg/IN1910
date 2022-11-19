@@ -1,0 +1,1770 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>More on pointers and arrays and dynamic allocation &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="C++ tips and tricks" href="cpptools.html" />
+    <link rel="prev" title="Object-oriented Programming in C++" href="oop_in_cpp.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="cpp.html">
+   C++
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/cpp/dynamic_allocation.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/cpp/dynamic_allocation.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/cpp/dynamic_allocation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/cpp/dynamic_allocation.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-repetition">
+   Some repetition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pointers-to-objects">
+   Pointers to objects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#arrays-and-pointers">
+   Arrays and Pointers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-memory-allocation">
+   Dynamic Memory Allocation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lifetime-of-variables">
+     Lifetime of Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scope-and-lifetime">
+     Scope and lifetime
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deallocating-memory-and-garbage-collection">
+   Deallocating Memory and Garbage Collection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memory-leaks">
+     Memory Leaks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memory-leaks-in-practice">
+     Memory leaks in Practice
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#freeing-memory">
+     Freeing memory
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-destructor">
+   The Destructor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stack-vs-heap">
+   Stack vs Heap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#smart-pointers">
+   Smart Pointers
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-example-with-smart-pointers">
+     First example with smart pointers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-smart-pointers-for-custom-classes">
+     Using smart pointers for custom classes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#allocation-on-the-stack">
+       Allocation on the stack
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#allocation-on-the-heap-using-raw-pointers">
+       Allocation on the heap using raw pointers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#allocation-on-the-heap-using-smart-pointers">
+       Allocation on the heap using smart pointers
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shared-pointers">
+     Shared pointers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-to-use-unique-ptr-vs-shared-ptr-vs-raw-pointer">
+     When to use
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       unique_ptr
+      </span>
+     </code>
+     vs
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       shared_ptr
+      </span>
+     </code>
+     vs raw pointer
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>More on pointers and arrays and dynamic allocation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-repetition">
+   Some repetition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pointers-to-objects">
+   Pointers to objects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#arrays-and-pointers">
+   Arrays and Pointers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-memory-allocation">
+   Dynamic Memory Allocation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lifetime-of-variables">
+     Lifetime of Variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scope-and-lifetime">
+     Scope and lifetime
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deallocating-memory-and-garbage-collection">
+   Deallocating Memory and Garbage Collection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memory-leaks">
+     Memory Leaks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memory-leaks-in-practice">
+     Memory leaks in Practice
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#freeing-memory">
+     Freeing memory
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-destructor">
+   The Destructor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stack-vs-heap">
+   Stack vs Heap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#smart-pointers">
+   Smart Pointers
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-example-with-smart-pointers">
+     First example with smart pointers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-smart-pointers-for-custom-classes">
+     Using smart pointers for custom classes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#allocation-on-the-stack">
+       Allocation on the stack
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#allocation-on-the-heap-using-raw-pointers">
+       Allocation on the heap using raw pointers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#allocation-on-the-heap-using-smart-pointers">
+       Allocation on the heap using smart pointers
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shared-pointers">
+     Shared pointers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-to-use-unique-ptr-vs-shared-ptr-vs-raw-pointer">
+     When to use
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       unique_ptr
+      </span>
+     </code>
+     vs
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       shared_ptr
+      </span>
+     </code>
+     vs raw pointer
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="more-on-pointers-and-arrays-and-dynamic-allocation">
+<h1>More on pointers and arrays and dynamic allocation<a class="headerlink" href="#more-on-pointers-and-arrays-and-dynamic-allocation" title="Permalink to this headline">#</a></h1>
+<p>In this lecture we will continue looking a bit more at pointers and how they relate to arrays. We will also use what we have learned about object oriented programming to design a few classes for making list objects.</p>
+<section id="some-repetition">
+<h2>Some repetition<a class="headerlink" href="#some-repetition" title="Permalink to this headline">#</a></h2>
+<p>Recall that we can create <em>pointer</em> variables, that store the memory address of some data. We can for example create an <em>integer pointer</em> as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"> </span><span class="c1">// integer variable</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">;</span><span class="w">     </span><span class="c1">// integer pointer</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">b</span></code> will be a pointer, because we use the asterisk (*) when declaring it’s type. To make <code class="docutils literal notranslate"><span class="pre">b</span></code> point at <code class="docutils literal notranslate"><span class="pre">a</span></code>, meaning the variable is storing the memory address of <code class="docutils literal notranslate"><span class="pre">a</span></code>, we use the address-of operator:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="c1">// make b point at a</span>
+</pre></div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">b</span></code> points at <code class="docutils literal notranslate"><span class="pre">a</span></code> and we can use it to access and change <code class="docutils literal notranslate"><span class="pre">a</span></code>, however, recall that we cannot do so directly, if we for example attempt to print it out:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We do not get the value of <code class="docutils literal notranslate"><span class="pre">a</span></code> (which is 12), but instead the <em>value</em> of <code class="docutils literal notranslate"><span class="pre">b</span></code>, which is the memory address, which will look something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mh">0x7ffc072c388c</span>
+</pre></div>
+</div>
+<p>To actually get the variable a pointer is pointing to, we use the dereference operator:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>expression</p></th>
+<th class="head"><p>can be read as</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>int i</p></td>
+<td><p>integer variable</p></td>
+</tr>
+<tr class="row-odd"><td><p>int *p</p></td>
+<td><p>pointer variable</p></td>
+</tr>
+<tr class="row-even"><td><p>*x</p></td>
+<td><p>pointed to by x</p></td>
+</tr>
+<tr class="row-odd"><td><p>&amp;x</p></td>
+<td><p>address of x</p></td>
+</tr>
+</tbody>
+</table>
+<p>Also recall that we can set a pointer to point at “nothing”:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="pointers-to-objects">
+<h2>Pointers to objects<a class="headerlink" href="#pointers-to-objects" title="Permalink to this headline">#</a></h2>
+<p>Let’s say we create a struct</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">GridPoint</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We can then create an instance of this struct, and access its members using dot-notation:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">GridPoint</span><span class="w"> </span><span class="n">start</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">start</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">start</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We can also make a pointer to the object:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">GridPoint</span><span class="w"> </span><span class="o">*</span><span class="n">sp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">start</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now, if we want to access one of the member attributes of the underlying object, we first need to dereference the pointer, and then use dot-notation:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">sp</span><span class="p">).</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We need the parenthesis to get the right order of operations. This syntax works, but is often regarded cumbersome. Instead of dot syntax, it is common to draw an arrow:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sp</span><span class="o">-&gt;</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The arrow (<code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>) means the member attribute of the object pointed at, and thus is equivalent to writing <code class="docutils literal notranslate"><span class="pre">(*sp).x</span></code>.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>expression</p></th>
+<th class="head"><p>can be read as</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x.y</p></td>
+<td><p>member y of object x</p></td>
+</tr>
+<tr class="row-odd"><td><p>x-&gt;y</p></td>
+<td><p>member y of object pointed to by x</p></td>
+</tr>
+<tr class="row-even"><td><p>(*x).y</p></td>
+<td><p>member y of object pointed to by x</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="arrays-and-pointers">
+<h2>Arrays and Pointers<a class="headerlink" href="#arrays-and-pointers" title="Permalink to this headline">#</a></h2>
+<p>We have briefly shown how arrays can be created, for example:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">x</span></code> will be an array of 100 ints. We can access these by indexing: <code class="docutils literal notranslate"><span class="pre">x[0]</span></code>, <code class="docutils literal notranslate"><span class="pre">x[1]</span></code>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <code class="docutils literal notranslate"><span class="pre">x[99]</span></code>.</p>
+<p>Earlier, we stated that an array will be <em>contiguous</em> in memory, i.e., each element follows each other directly. We can check this statement by writing out the memory addresses:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Which prints out:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="mh">0x7ffed0407920</span><span class="w"> </span><span class="mh">0x7ffed0407924</span><span class="w"> </span><span class="mh">0x7ffed0407928</span><span class="w"> </span><span class="mh">0x7ffed040792c</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note that the memory address increases by 4 every step (it goes 8-&gt;c because it is hexadecimal), this is because memory addresses are in terms of byte (8 bits), and integers are 32-bit variables.</p>
+<p>If we write out the array variable itself:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we get the memory address of the first element <code class="docutils literal notranslate"><span class="pre">x[0]</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mh">0x7ffed0407920</span>
+</pre></div>
+</div>
+<p>This indicates that the array variable <code class="docutils literal notranslate"><span class="pre">x</span></code>, is almost the same as a pointer to the first variable of the array.</p>
+<p>Let us highlight this in another way. Look at the following code snippet:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">};</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we make an array, and then make an integer pointer and set it to point at the third element, with a value of 6. However, because array variables behave much like pointers to the first element, the reverse is also true. Now <code class="docutils literal notranslate"><span class="pre">y</span></code> will behave like an array:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This is because the square bracket indexing in C++ indicates looking at the next elements in memory. <code class="docutils literal notranslate"><span class="pre">y</span></code> will therefore behave just like an array. We could also have accessed the elements using <em>pointer arithmetic</em>:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, dereferencing <code class="docutils literal notranslate"><span class="pre">y</span></code> itself gives the first element, by computing <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">+</span> <span class="pre">1</span></code> we go the the next integer in memory, which would be element 2, and so on.</p>
+<p>In short, a pointer is variable that stores the memory address of some data type. If these data lie contiguously in memory, then having the address of the first element is all we need to reference the whole set. Therefore, an <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*</span></code> pointer, can point to a single integer, or to a whole sequence of them. Note that the pointer itself does not know how many elements it points at. An array does not know how many elements it contains, which is why you won’t get an <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> if you go out of bounds, you get undefined behavior. Be careful!</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>expression</p></th>
+<th class="head"><p>can be read as</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x[0]</p></td>
+<td><p>first object pointed to by x</p></td>
+</tr>
+<tr class="row-odd"><td><p>x[1]</p></td>
+<td><p>second object pointed to by x</p></td>
+</tr>
+<tr class="row-even"><td><p>x[n]</p></td>
+<td><p>(n+1)th object pointed to by x</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dynamic-memory-allocation">
+<h2>Dynamic Memory Allocation<a class="headerlink" href="#dynamic-memory-allocation" title="Permalink to this headline">#</a></h2>
+<p>So far we have seen how to create a pointer object, and how to make it point at something. We have also seen how to point it at “nothing” (aka null). However, we have only pointed it at things that already exist. However, it is possible to get a pointer to point at something brand new. Take a look at the following example:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
+<span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we first create an integer pointer. Then we say we want a new integer object to be made, and its address to point to it. An interesting consequence of this is that we have a variable that <em>is not named</em>. We can only access it through our pointer.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword in this way is referred to as <em>dynamic memory allocation</em>.</p>
+<section id="lifetime-of-variables">
+<h3>Lifetime of Variables<a class="headerlink" href="#lifetime-of-variables" title="Permalink to this headline">#</a></h3>
+<p>In C++, things are automatically destroyed once they go out of scope. If you for example define a vector inside a function, then that vector simply ceases to exist once that function finished. Any dynamically allocated memory however, sticks around. Let us look at an example.</p>
+<p>We have discussed how arrays are so efficient because they are contiguous in memory, but pointed out that the arrays do not know their size. We therefore decide we want to make a class called <code class="docutils literal notranslate"><span class="pre">Array</span></code> that stores both the data array and the size of it as a single object. We first define the object as</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Array</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">data</span></code> is a pointer to the first element of the underlying array, and <code class="docutils literal notranslate"><span class="pre">size</span></code> the number of elements.</p>
+<p>Next we turn to making the constructor. When we make the constructor we want to take in the number of elements we want as an integer. The constructor should then allocate the memory of the array, set all the elements to zero, and point the <code class="docutils literal notranslate"><span class="pre">data</span></code> pointer to this array. You might try to do the following, but <strong>it will not work:</strong></p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Array</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tmp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>While this looks reasonable, there is a big problem. Whenever a function finishes, everything created inside that function is automatically destroyed. As the array is created inside the constructor, it is destroyed too. Our pointer is set to point at this array, but if the thing pointed at is destroyed, the pointer won’t be much good.
+If we try to run the following code</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Array</span><span class="w"> </span><span class="nf">a</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>it produces the output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">31872064</span> <span class="mi">1</span> <span class="mi">31872064</span> <span class="mi">1</span> <span class="mi">30535429</span> <span class="mi">1</span> <span class="mi">31872064</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>and this output will change every time you run the program.</p>
+<p>However, when using dynamic memory allocation, the data is not destroyed at the end of the function. To dynamically allocate an array, we do the following:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">Array</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now we see that we get the expected results.</p>
+</section>
+<section id="scope-and-lifetime">
+<span id="id1"></span><h3>Scope and lifetime<a class="headerlink" href="#scope-and-lifetime" title="Permalink to this headline">#</a></h3>
+<p>A scope is a the region or section where a variable can be accessed and you can think of the scope as the inner most curly braces (<code class="docutils literal notranslate"><span class="pre">{}</span></code>) that encapsulates the variable declaration. This could be in a function, but you can also simple create a scoped variable inside a function. The lifetime of an object is the portion of the program execution during which store is guaranteed to be reserved for it.</p>
+<p>Consider the following code</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we define an integer pointer <code class="docutils literal notranslate"><span class="pre">p</span></code> and then inside a local scope (which we just create using curly braces) we create an integer variable <code class="docutils literal notranslate"><span class="pre">x</span></code> and points <code class="docutils literal notranslate"><span class="pre">p</span></code> at it. The problem with this code is that when we exit the scope and prints out the value that <code class="docutils literal notranslate"><span class="pre">p</span></code> points to, <code class="docutils literal notranslate"><span class="pre">x</span></code> does not exist anymore, and so <code class="docutils literal notranslate"><span class="pre">p</span></code> points at some address in memory that is not owned by the program anymore. Note that, you will probably still see <code class="docutils literal notranslate"><span class="pre">5</span></code> printed out on the console, but there is no guarantee that the value stored at this memory address will remain <code class="docutils literal notranslate"><span class="pre">5</span></code>. We call this <em>undefined behavior</em> and this is the root of some of the most tricksiest bugs to debug.</p>
+</section>
+</section>
+<section id="deallocating-memory-and-garbage-collection">
+<h2>Deallocating Memory and Garbage Collection<a class="headerlink" href="#deallocating-memory-and-garbage-collection" title="Permalink to this headline">#</a></h2>
+<p>In Python, you are used to having built-in garbage collection. Garbage collection is a term for automatic processes that collects unused variables and destroys them for us, freeing the underlying memory. In Python, any variable that no longer has a name referencing it, is flagged for garbage collection and is destroyed.</p>
+<p>In C++, there is no garbage collection. Instead, data will be destroyed when it goes out of scope. However, as we just showed you, dynamic memory allocation survives even when it goes out of scope. This means dynamically allocated objects will continue to take memory until we ourselves destroy the objects.</p>
+<p>If we <em>do not</em> de-allocate memory we have created dynamically, it will continue to take space until our program finished. Often, this isn’t a problem, but in certain situations, it can actually lead to program-crashing bugs.</p>
+<section id="memory-leaks">
+<h3>Memory Leaks<a class="headerlink" href="#memory-leaks" title="Permalink to this headline">#</a></h3>
+<p>Earlier, we showed this snippet:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
+<span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If we now do a new dynamic allocation:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Then <code class="docutils literal notranslate"><span class="pre">x</span></code> will point to a new object, but the old one is never freed. The other integer has no name, and we no longer have any pointer to it. We have reached a point where a piece of memory is locked down until the entire program terminates and we have no way of accessing or using that variable. This is referred to as a memory leak.</p>
+<p>A small memory leak is of no issue and not noticeable. However, if you get a large memory leak, the machine will run out of memory and the program and OS will grind to a halt, most likely requiring termination of the program or even a full reboot of the system.</p>
+<p>Let us create a program that on purpose leaks a lot of memory:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">doomsday</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we define an infinite loop. For each iteration we allocate a new integer in memory, but they are never deallocated. This means, for each iteration of the loop, our program will use a bit more memory (32 bits to be exact).</p>
+<p>If we compile our <code class="docutils literal notranslate"><span class="pre">doomsday.cpp</span></code> code, you probably won’t get any warnings. But if you now run it, you definitely will get some problems. The program will ask for more and more memory from the system, and never give any back. The program never aborts itself or stops, so it is up to the system to recognize that this program is not acting right and terminate it. Wether or not that actually happens depends on your system. In the worst case, all memory will be hogged by the doomsday program, leaving non for the system. The only way to regain control in this scenario is now a hard reboot of the machine. Not ideal!</p>
+<p>If you want to know how to debug such memory leaks, please consult the <a class="reference internal" href="cpptools.html"><span class="doc std std-doc">debugging section</span></a>.</p>
+</section>
+<section id="memory-leaks-in-practice">
+<h3>Memory leaks in Practice<a class="headerlink" href="#memory-leaks-in-practice" title="Permalink to this headline">#</a></h3>
+<p>In practice, memory leaks are hard to detect. The leak doesn’t build up as fast as here, but does so over hours or days. When testing software, we often opt for small, efficient tests. And so often everything will seem fine, until we start a long simulation and we get an issue.</p>
+<p>Memory leaks, and other similar bugs, sneak into a surprising amount of professional software, and is a major contributor to <a class="reference external" href="https://en.wikipedia.org/wiki/Software_aging"><em>software aging</em></a>, where things seem to become unresponsive or stop functioning when running over a longer time, but return to normal after a reboot.</p>
+<p>The wikipedia article on memory leaks has a <a class="reference external" href="https://en.wikipedia.org/wiki/Memory_leak#An_example_of_memory_leak">good example</a> for how a seemingly “trivial” program for an elevator could contain a memory leak.</p>
+</section>
+<section id="freeing-memory">
+<h3>Freeing memory<a class="headerlink" href="#freeing-memory" title="Permalink to this headline">#</a></h3>
+<p>So if dynamically allocated memory has to be freed, how do we do so? It is quite simple, we use the <code class="docutils literal notranslate"><span class="pre">delete</span></code> keyword:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">delete</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">delete</span> <span class="pre">x</span></code> will free the thing pointed at by <code class="docutils literal notranslate"><span class="pre">x</span></code>, the pointer will still exist and be usable. If we are freeing an allocated array, we instead use <code class="docutils literal notranslate"><span class="pre">delete[]</span></code>:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">200</span><span class="p">];</span><span class="w"></span>
+
+<span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-destructor">
+<h2>The Destructor<a class="headerlink" href="#the-destructor" title="Permalink to this headline">#</a></h2>
+<p>Returning to our <code class="docutils literal notranslate"><span class="pre">Array</span></code> class example. We defined the following class:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Array</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Array</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span><span class="w"></span>
+<span class="w">        </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This class works well, and we can now use it inside other functions where we need arrays, however, at the end of those functions, our newly created <code class="docutils literal notranslate"><span class="pre">Array</span></code> object will automatically be destroyed. However, the dynamically allocated memory inside the object won’t be!</p>
+<p>To ensure that the dynamic memory is deallocated with the object, we need to define a <em>destructor</em>, which is called automatically when an object goes out of scope and is destroyed. Where as the constructor is named the same as the class, the destructor is named the same with a tilde (~) in front:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="o">~</span><span class="n">Array</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>You could try this yourself with the simple test program:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">create_and_destroy_array</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Array</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">create_and_destroy_array</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If you run this program without implementing the deallocator, the memory usage of the program will skyrocket. If you do implement the deallocator, then everything is fine, as every function call properly destroys the object and all the underlying data.</p>
+</section>
+<section id="stack-vs-heap">
+<h2>Stack vs Heap<a class="headerlink" href="#stack-vs-heap" title="Permalink to this headline">#</a></h2>
+<p>In C++, and many other programming languages, we refer to two different forms of memory: the stack and the heap. Everything you create lives in one of these two memory spaces. Variables you create normally will live on the stack. Every function has its own stack space, and when the function finished, the stack is emptied and the variables destroyed. When you declare variables dynamically, you create them on the heap instead, where nothing is automatically deallocated.</p>
+<p>We won’t talk much about stack and heap, but you might run across it in other sources, or if you ever learn more about C++ in more dedicated courses.</p>
+</section>
+<section id="smart-pointers">
+<span id="id2"></span><h2>Smart Pointers<a class="headerlink" href="#smart-pointers" title="Permalink to this headline">#</a></h2>
+<p>Knowing about how memory is acquired and released will improve the way you program. This is also one reason why knowing how to program in a lower level programming language such as C++ will improve your programming skills in general.</p>
+<p>However, forgetting to delete objects that are allocated on the heap is a huge source for bugs and memory leaks, and therefore C++ programmers try to avoid called <code class="docutils literal notranslate"><span class="pre">new</span></code> and <code class="docutils literal notranslate"><span class="pre">delete</span></code> as much as possible.</p>
+<p>The recommendation from the C++ community is to use a principle known as <em>Resource Acquisition Is Initialization</em> (RAII). According to RAII, you should only acquire resources in the constructor and release them in the destructor (just like we did in the <code class="docutils literal notranslate"><span class="pre">Array</span></code> class).</p>
+<p>On way to ensure this is to use <em>smart pointers</em>. A smart pointer is a pointer that owns the object it points to, and make sure that the memory it points to is automatically deallocated once the pointer goes out of scope.</p>
+<p>To use smart pointer we need to include the <code class="docutils literal notranslate"><span class="pre">&lt;memory&gt;</span></code> header and compile with the flag <code class="docutils literal notranslate"><span class="pre">-std=c++14</span></code>.</p>
+<section id="first-example-with-smart-pointers">
+<h3>First example with smart pointers<a class="headerlink" href="#first-example-with-smart-pointers" title="Permalink to this headline">#</a></h3>
+<p>Let us first have a look at a very simple usage of a smart pointer and compare this with the <em>raw</em> pointer version.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">C++ (raw pointer)</label><div class="tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">{</span><span class="mi">42</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">C++ (smart pointer)</label><div class="tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First thing we see is that we need to include the <code class="docutils literal notranslate"><span class="pre">&lt;memory&gt;</span></code> header, which is where the declarations for the smart pointers are defined.</p>
+<p>Next, instead of <code class="docutils literal notranslate"><span class="pre">p</span></code> being of type <code class="docutils literal notranslate"><span class="pre">int*</span></code> it is now of type <code class="docutils literal notranslate"><span class="pre">std::unique_ptr&lt;int&gt;</span></code>. We say that <code class="docutils literal notranslate"><span class="pre">p</span></code> is a <em>unique pointer</em>. A unique pointer is one type of smart pointers. There are also other types of smart pointers, for example <em>shared pointer</em>. We will see shared pointer later.</p>
+<p>We also se that that way we create a unique pointer is by using the function <code class="docutils literal notranslate"><span class="pre">std::make_unique&lt;type&gt;(value)</span></code> for some type (here <code class="docutils literal notranslate"><span class="pre">int</span></code>) and some value (here <code class="docutils literal notranslate"><span class="pre">42</span></code>).</p>
+</section>
+<section id="using-smart-pointers-for-custom-classes">
+<h3>Using smart pointers for custom classes<a class="headerlink" href="#using-smart-pointers-for-custom-classes" title="Permalink to this headline">#</a></h3>
+<p>A more typical use case is to create a smart pointer for a custom <code class="docutils literal notranslate"><span class="pre">class</span></code> or <code class="docutils literal notranslate"><span class="pre">struct</span></code>. Consider the following example</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">_name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">Person</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">say_hello</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello from &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="o">~</span><span class="n">Person</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Goodbye from &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we have a <code class="docutils literal notranslate"><span class="pre">Person</span></code> class that takes a name of type <code class="docutils literal notranslate"><span class="pre">string</span></code> in the constructor. It has a method for saying hello, and once the destructor is called, it print a goodbye message.</p>
+<section id="allocation-on-the-stack">
+<h4>Allocation on the stack<a class="headerlink" href="#allocation-on-the-stack" title="Permalink to this headline">#</a></h4>
+<p>We can write a simple program that allocates an instance of a Person on the stack as follows:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Beginning of scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="p">{</span><span class="s">&quot;Henrik&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">person</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">say_hello</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of function main </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Let us carefully walk through this example. The <code class="docutils literal notranslate"><span class="pre">main</span></code> function starts with an open curly brace (<code class="docutils literal notranslate"><span class="pre">{</span></code>) which defines the beginning of a scope. Once the program reaches the closing brace (<code class="docutils literal notranslate"><span class="pre">}</span></code>), i.e the end of the scope, any variables declared on the stack will be freed automatically, see <a class="reference internal" href="#scope-and-lifetime"><span class="std std-ref">Scope and lifetime</span></a>.</p>
+<p>First we print a message saying <code class="docutils literal notranslate"><span class="pre">Beginning</span> <span class="pre">of</span> <span class="pre">scope</span></code> to indicate that the scope is beginning. Then we create an instance of <code class="docutils literal notranslate"><span class="pre">Person</span></code> called <code class="docutils literal notranslate"><span class="pre">person</span></code> with the name <code class="docutils literal notranslate"><span class="pre">&quot;Henrik&quot;</span></code>. Next we create a pointer to this object and use the pointer to say hello by calling the <code class="docutils literal notranslate"><span class="pre">say_hello</span></code> method. Next we print a new message saying <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">of</span> <span class="pre">scope</span></code> to indicate that the scope is ending and finally, before the <code class="docutils literal notranslate"><span class="pre">main</span></code> function is ending we print a message saying <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">of</span> <span class="pre">function</span> <span class="pre">main</span></code>.</p>
+<p>If we compile and run this code, it will give the following output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Beginning</span> <span class="n">of</span> <span class="n">scope</span>
+<span class="n">Hello</span> <span class="kn">from</span> <span class="nn">Henrik</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">scope</span>
+<span class="n">Goodbye</span> <span class="kn">from</span> <span class="nn">Henrik</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">function</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>And we see that also the destructor is called at the end of the scope as expected.</p>
+</section>
+<section id="allocation-on-the-heap-using-raw-pointers">
+<h4>Allocation on the heap using raw pointers<a class="headerlink" href="#allocation-on-the-heap-using-raw-pointers" title="Permalink to this headline">#</a></h4>
+<p>Now let us rewrite the example by allocating the object on the heap instead. Remember, that allocations happening on the stack need to be known at compile time, meaning that in most cases you need to allocate some memory on the heap to account for user input. As we have seen there are two options when allocating objects on the heap; using raw pointer or smart pointer. Let first look at the example using a raw pointer:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Beginning of scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span><span class="s">&quot;Henrik&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">say_hello</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of function main </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We use the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword to indicate the the object is allocated on the heap, and we must also remember to use <code class="docutils literal notranslate"><span class="pre">delete</span></code> on the pointer at the end of the scope. The output from this program is the same as the output from the program above the allocated the object on the stack, i.e</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Beginning</span> <span class="n">of</span> <span class="n">scope</span>
+<span class="n">Hello</span> <span class="kn">from</span> <span class="nn">Henrik</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">scope</span>
+<span class="n">Goodbye</span> <span class="kn">from</span> <span class="nn">Henrik</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">function</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>Now, this is a very simple example, but it is easy to imaging a more complicated use case (for example the <code class="docutils literal notranslate"><span class="pre">Array</span></code> class). Having to explicitly call <code class="docutils literal notranslate"><span class="pre">delete</span></code> can potentially be forgotten, especially if the call to <code class="docutils literal notranslate"><span class="pre">delete</span></code> has to happen at a different location in the code than where it was allocated (which is usually the case).</p>
+<p>Lets see what happens if we forget to call delete, i.e lets try to run the following program</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Beginning of scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span><span class="s">&quot;Henrik&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">say_hello</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of function main </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The program compiles without any error and output is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Beginning</span> <span class="n">of</span> <span class="n">scope</span>
+<span class="n">Hello</span> <span class="kn">from</span> <span class="nn">Henrik</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">scope</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">function</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>We can see that there is no call to the destructor. We have a memory leak. If this code was part of a long running program, and this code run repeatedly then we might end up in a situation when the computer runs out of memory and crashes.</p>
+</section>
+<section id="allocation-on-the-heap-using-smart-pointers">
+<h4>Allocation on the heap using smart pointers<a class="headerlink" href="#allocation-on-the-heap-using-smart-pointers" title="Permalink to this headline">#</a></h4>
+<p>To save us from needing to call delete while ensuring that memory allocated on the heap is freed, we can use smart pointer. Lets look at the same example using smart pointers (note that the <code class="docutils literal notranslate"><span class="pre">&lt;memory&gt;</span></code> header is included in the part of the code where the <code class="docutils literal notranslate"><span class="pre">Person</span></code> class is defined):</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Beginning of scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Henrik&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">say_hello</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of function main </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Instead of using <code class="docutils literal notranslate"><span class="pre">new</span></code> and <code class="docutils literal notranslate"><span class="pre">delete</span></code> we now let <code class="docutils literal notranslate"><span class="pre">p</span></code> be of type <code class="docutils literal notranslate"><span class="pre">std::unique_ptr&lt;Person&gt;</span></code> and create it using <code class="docutils literal notranslate"><span class="pre">std::make_unique&lt;Person&gt;(&quot;Henrik&quot;)</span></code>. When running this program we get</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Beginning</span> <span class="n">of</span> <span class="n">scope</span>
+<span class="n">Hello</span> <span class="kn">from</span> <span class="nn">Henrik</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">scope</span>
+<span class="n">Goodbye</span> <span class="kn">from</span> <span class="nn">Henrik</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">function</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>In other words, the smart pointer makes sure that the destructor is called when the pointer goes out of scope.</p>
+</section>
+</section>
+<section id="shared-pointers">
+<h3>Shared pointers<a class="headerlink" href="#shared-pointers" title="Permalink to this headline">#</a></h3>
+<p>We have now seen one example of a smart pointer, namely the unique pointer (<code class="docutils literal notranslate"><span class="pre">unique_ptr</span></code>). The unique pointer has one limitation which is that the object pointed to by a unique pointer can not be pointed to by any other pointer.</p>
+<p>As a result, the following code is not allowed</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Henrik&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If you want several different pointers to point to the same object we need to use <em>shared pointers</em> instead of unique pointers.</p>
+<p>Consider the following code, where each person object now holds a pointer to some shared object</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">SharedObject</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">SharedObject</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Creating shared object</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="o">~</span><span class="n">SharedObject</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Deleting shared object</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">SharedObject</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_obj</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">Person</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">SharedObject</span><span class="o">&gt;</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_name</span><span class="p">(</span><span class="n">name</span><span class="p">),</span><span class="w"> </span><span class="n">_obj</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Creating Person &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; with shared object &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">_obj</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="o">~</span><span class="n">Person</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Deleting &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we have defined a <code class="docutils literal notranslate"><span class="pre">struct</span></code> called <code class="docutils literal notranslate"><span class="pre">SharedObject</span></code> and each instance of <code class="docutils literal notranslate"><span class="pre">Person</span></code> holds a shared pointer to an in instance of <code class="docutils literal notranslate"><span class="pre">SharedObject</span></code> which is named <code class="docutils literal notranslate"><span class="pre">_obj</span></code>. We also print a little message in the constructors and destructors.</p>
+<p>Let us write a simple main function that creates one shared object that is used by two different instances of <code class="docutils literal notranslate"><span class="pre">Person</span></code>. To make it all a bit more interesting, let us define the shared object in the scope of the <code class="docutils literal notranslate"><span class="pre">main</span></code> function and let us create the to <code class="docutils literal notranslate"><span class="pre">Person</span></code> object within different scopes.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">SharedObject</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shared_object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">SharedObject</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Use count: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">shared_object</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Beginning of outer scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="p">{</span><span class="s">&quot;Henrik&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">shared_object</span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Use count: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">shared_object</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Beginning of inner scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">Person</span><span class="w"> </span><span class="n">p2</span><span class="p">{</span><span class="s">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">shared_object</span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Use count: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">shared_object</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of inner scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of outer scope </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Use count: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">shared_object</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Use count: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">shared_object</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of function main </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Creating a shared pointer is very similar to creating a unique pointer; simple swap out <code class="docutils literal notranslate"><span class="pre">unique</span></code> with <code class="docutils literal notranslate"><span class="pre">shared</span></code>.
+With shared pointers we can also see how many pointer are pointing to the object at any given time using the <code class="docutils literal notranslate"><span class="pre">use_count</span></code> method.</p>
+<p>When executing this code we get the following printed to the console</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Creating</span> <span class="n">shared</span> <span class="nb">object</span>
+<span class="n">Use</span> <span class="n">count</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">Beginning</span> <span class="n">of</span> <span class="n">outer</span> <span class="n">scope</span>
+<span class="n">Creating</span> <span class="n">Person</span> <span class="n">Henrik</span> <span class="k">with</span> <span class="n">shared</span> <span class="nb">object</span> <span class="mh">0x145e06808</span>
+<span class="n">Use</span> <span class="n">count</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">Beginning</span> <span class="n">of</span> <span class="n">inner</span> <span class="n">scope</span>
+<span class="n">Creating</span> <span class="n">Person</span> <span class="n">John</span> <span class="k">with</span> <span class="n">shared</span> <span class="nb">object</span> <span class="mh">0x145e06808</span>
+<span class="n">Use</span> <span class="n">count</span><span class="p">:</span> <span class="mi">3</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">inner</span> <span class="n">scope</span>
+<span class="n">Deleting</span> <span class="n">John</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">outer</span> <span class="n">scope</span>
+<span class="n">Use</span> <span class="n">count</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">Deleting</span> <span class="n">Henrik</span>
+<span class="n">Use</span> <span class="n">count</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">End</span> <span class="n">of</span> <span class="n">function</span> <span class="n">main</span>
+<span class="n">Deleting</span> <span class="n">shared</span> <span class="nb">object</span>
+</pre></div>
+</div>
+<p>We notice that the use count goes up every time we create a new person that holds a pointer to the object, and that the use count goes down when the person object goes out of scope. Finally the shared object is deleted when the main function ends.</p>
+</section>
+<section id="when-to-use-unique-ptr-vs-shared-ptr-vs-raw-pointer">
+<h3>When to use <code class="docutils literal notranslate"><span class="pre">unique_ptr</span></code> vs <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code> vs raw pointer<a class="headerlink" href="#when-to-use-unique-ptr-vs-shared-ptr-vs-raw-pointer" title="Permalink to this headline">#</a></h3>
+<p>The <a class="reference external" href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-resource">C++ core guidelines</a> explains very well when to use different types for pointers.</p>
+<p>Use raw pointers if you want to allocate the object on the stack.</p>
+<p>Use smart pointers if the object pointed to is owned by another object. For example in the shared pointer example, each instances of <code class="docutils literal notranslate"><span class="pre">Person</span></code> owns a references to the shared object. For the <code class="docutils literal notranslate"><span class="pre">Array</span></code> class the data array is owned by the <code class="docutils literal notranslate"><span class="pre">Array</span></code> instance. However, in this particular case we are trying to mimic what is indeed implemented by <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>, and <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> is using raw pointers under the hood. Therefore, it is difficult to avoid using raw pointers at all. To quote the <a class="reference external" href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#r3-a-raw-pointer-a-t-is-non-owning">C++ core guidelines R3</a>:</p>
+<blockquote>
+<div><p>This problem cannot be solved (at scale) by transforming all owning pointers to unique_ptrs and shared_ptrs, partly because we need/use owning “raw pointers” as well as simple pointers in the implementation of our fundamental resource handles.</p>
+</div></blockquote>
+<p>We will go into more details about implementing a Dynamic Array in <a class="reference internal" href="arraylist.html#arraylist"><span class="std std-ref">Dynamic Arrays aka Array Lists</span></a>, and we will indeed use raw pointers to do so. Thats said, in most real world scenarios you would smart pointers.</p>
+<p>When it comes to <code class="docutils literal notranslate"><span class="pre">unique_ptr</span></code> vs <code class="docutils literal notranslate"><span class="pre">shared_ptr</span></code> you should prefer <code class="docutils literal notranslate"><span class="pre">unique_ptr</span></code>, but if you need more pointers to the same object then you can upgrade the pointer to a shared pointer.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/cpp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="oop_in_cpp.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Object-oriented Programming in C++</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="cpptools.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">C++ tips and tricks</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

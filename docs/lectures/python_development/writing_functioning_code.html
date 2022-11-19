@@ -1,0 +1,2122 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Writing Reliable Software &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Code Style and Documentation" href="codestyle_and_docstrings.html" />
+    <link rel="prev" title="Python development" href="python_development.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="python_development.html">
+   Python development
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/python_development/writing_functioning_code.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/python_development/writing_functioning_code.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/python_development/writing_functioning_code.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/python_development/writing_functioning_code.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-constitutes-reliable-software">
+   What constitutes
+   <em>
+    reliable
+   </em>
+   software?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assertions">
+   Assertions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#disabling-assertions">
+     Disabling Assertions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exceptions">
+   Exceptions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#catching-exceptions">
+     Catching Exceptions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#error-types-in-python">
+       Error types in Python
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#defining-custom-exceptions">
+         Defining Custom Exceptions
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#assertions-vs-other-exceptions">
+       Assertions vs other Exceptions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing">
+   Testing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-testing">
+     Unit Testing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-pytest-package">
+     The pytest package
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pytest-basics">
+     pytest basics
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#unit-testing-examples-with-vector3d">
+       Unit testing examples with
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         Vector3D
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#asserting-exception-raising">
+       Asserting exception raising
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parametrized-tests">
+       Parametrized tests
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#running-only-a-subset-of-your-tests-with-pytest">
+       Running only a subset of your tests with pytest
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#get-print-output-when-running-tests">
+       Get print output when running tests
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#debugging-tests">
+       Debugging tests
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration-testing">
+     Integration testing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regression-testing">
+     Regression testing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#agile-software-development">
+   Agile software development
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-and-version-control">
+     Testing and Version Control
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-coverage">
+     Test coverage
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avoiding-confirmation-bias">
+     Avoiding Confirmation Bias
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exit-codes">
+   Exit codes
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Writing Reliable Software</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-constitutes-reliable-software">
+   What constitutes
+   <em>
+    reliable
+   </em>
+   software?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assertions">
+   Assertions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#disabling-assertions">
+     Disabling Assertions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exceptions">
+   Exceptions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#catching-exceptions">
+     Catching Exceptions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#error-types-in-python">
+       Error types in Python
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#defining-custom-exceptions">
+         Defining Custom Exceptions
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#assertions-vs-other-exceptions">
+       Assertions vs other Exceptions
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing">
+   Testing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-testing">
+     Unit Testing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-pytest-package">
+     The pytest package
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pytest-basics">
+     pytest basics
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#unit-testing-examples-with-vector3d">
+       Unit testing examples with
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         Vector3D
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#asserting-exception-raising">
+       Asserting exception raising
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parametrized-tests">
+       Parametrized tests
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#running-only-a-subset-of-your-tests-with-pytest">
+       Running only a subset of your tests with pytest
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#get-print-output-when-running-tests">
+       Get print output when running tests
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#debugging-tests">
+       Debugging tests
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integration-testing">
+     Integration testing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regression-testing">
+     Regression testing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#agile-software-development">
+   Agile software development
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-and-version-control">
+     Testing and Version Control
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-coverage">
+     Test coverage
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avoiding-confirmation-bias">
+     Avoiding Confirmation Bias
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exit-codes">
+   Exit codes
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="writing-reliable-software">
+<h1>Writing Reliable Software<a class="headerlink" href="#writing-reliable-software" title="Permalink to this headline">#</a></h1>
+<p>This week we will start to look closer at <em>how</em> to write reliable and readable software. How should we develop code that is trustworthy? In this lecture we look closer at assertions, exceptions and testing, and in the next lecture we look at code style and documenting code.</p>
+<section id="what-constitutes-reliable-software">
+<h2>What constitutes <em>reliable</em> software?<a class="headerlink" href="#what-constitutes-reliable-software" title="Permalink to this headline">#</a></h2>
+<p>To say that software is reliable means that we should be able to trust it. Ideally speaking, this means the program should produce answers that are correct. However, how can we trust that the answers are correct? And what should happen if we meet edge cases were we can no longer be sure that the output will be correct? To explain what we mean when we say reliable, let us list some important points:</p>
+<ul class="simple">
+<li><p>Software should not return incorrect results</p></li>
+<li><p>Software should fail rather than return incorrect results</p></li>
+<li><p>Software should fail in controlled ways</p></li>
+<li><p>Software should be tested solidly</p></li>
+</ul>
+<p>Ideally we want our code to produce correct results, but we would much rather that our program <em>fail</em> than it return incorrect results. And when it fails, it should fail in <em>controlled ways</em>, i.e., it should ideally give some nice error message we can use to understand what went wrong. A program shouldn’t corrupt any data files or similar if it has to halt half-way through running, and so on. Lastly, the only way to trust our software is to <em>test</em> it. It doesn’t matter how competent a programmer, there will always be bugs, and testing can help us track these down.</p>
+<p>Let us look closer at achieving these elements of reliable software in Python. First we cover how to write programs that fail on purpose in a controlled manner, and then we turn to testing.</p>
+</section>
+<section id="assertions">
+<h2>Assertions<a class="headerlink" href="#assertions" title="Permalink to this headline">#</a></h2>
+<p>The first thing we shall talk about are <em>assertions</em>. Most programming language support writing assertions in a simple manner. Assertions are meant to be very simple “emergency stops” in our code and can be a nice and simple way to “idiot proofing” your code. The idiot in this case can be other users of your code, but also your future self.</p>
+<p>In Python an assertion is written using the <code class="docutils literal notranslate"><span class="pre">assertion</span></code> keyword, followed by a condition that is evaluated to either true or false, much like an if-test:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="o">&lt;</span><span class="n">condition</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If the condition is true, the assertion does nothing and the code continues. If it is false, the program crashes with an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code>. In this sense, an assertion is a check that checks if some requirement is fulfilled, if it isn’t, the execution of the program is stopped.</p>
+<p>In addition to the condition itself, we can put in a string that is given to the user in case of failure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="o">&lt;</span><span class="n">condition</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;fail message&quot;</span>
+</pre></div>
+</div>
+<p>It is useful to add a simple message, as it makes it easier to understand what went wrong and fix it.</p>
+<p>Let us look at a specific example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sphere</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">radius</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Radius cannot be negative.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we are defining there <code class="docutils literal notranslate"><span class="pre">Sphere</span></code>-class that we discussed in last week’s lecture. The constructor takes the radius of the <code class="docutils literal notranslate"><span class="pre">Sphere</span></code> as an argument, and the class can have various functionality added. Now, we know that a negative radius doesn’t make any sense, but Python doesn’t know this. So it is completely possible to add a negative radius. We therefore add an <code class="docutils literal notranslate"><span class="pre">assert</span></code> to check the input.</p>
+<p>If we now try to define a sphere as normal, it works fine, but if we try to do something like:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Sphere</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>we get the following error</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">AssertionError</span><span class="p">:</span> <span class="n">Radius</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">negative</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Adding the assertion takes us about 10 seconds. But it can potentially save us, or others, a lot of frustration later, as it might catch a bug where someone misunderstands how our class works, or perhaps have a different bug where they send the wrong variable in as an argument.</p>
+<p>Assertions can also be put into programs to check for “can’t happen” scenarios. To understand where it makes sense to put assertions, think of how you yourself look for a bug in a program that is misbehaving. You probably put in various print statements to check inputs, outputs, types, and so forth. When you do this, an alternative would be to put in <code class="docutils literal notranslate"><span class="pre">asserts</span></code> checking what you expect to be the case at logical locations. If these assertions fail, you have probably found your bug. The benefit of putting in asserts is that your program will now also catch bugs that might arise later.</p>
+<p>Assertions are closely linked to something called programming <a href="https://en.wikipedia.org/wiki/Invariant_(computer_science)">invariants</a> in computer science. The <em>invariants</em> of a program, solution or algorithm are statements the programmer can rely on being true. Invariants are important when doing more formal software development, as it is a concrete way to making sure correct behavior can be checked or enforced, which can be important for future use and reliableness.</p>
+<section id="disabling-assertions">
+<h3>Disabling Assertions<a class="headerlink" href="#disabling-assertions" title="Permalink to this headline">#</a></h3>
+<p>Assertions are nice because they are fast to write, but also efficient to run. Having assertions in your code most likely won’t cause any significant slow-down. However, in Python we can also run in and “optimized” mode were assertions are ignored. Say an assertion for example occurs inside a function that is called repeatedly in a large loop or something, then it might be nice to run without checking the assertions. This can be done by running Python with the <code class="docutils literal notranslate"><span class="pre">-O</span></code> flag:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">O</span> <span class="n">run_simulation</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>This flag only does two things:</p>
+<ul class="simple">
+<li><p>completely ignores any assertion</p></li>
+<li><p>sets the builtin variable <code class="docutils literal notranslate"><span class="pre">__debug__</span></code> to False (it is True by default)</p></li>
+</ul>
+</section>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">#</a></h2>
+<p>Assertions were used to abort the program given that some condition was not met. However, there is a different way to halt the execution of a program in a controlled manner, raising exceptions.</p>
+<p>We raise an exception by using the <code class="docutils literal notranslate"><span class="pre">raise</span></code> keyword as follows</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">raise</span> <span class="o">&lt;</span><span class="n">exception</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>where we fill the proper exception type. All the normal “errors” you get in Python (<code class="docutils literal notranslate"><span class="pre">TypeError</span></code>, <code class="docutils literal notranslate"><span class="pre">NameError</span></code>, etc) are exceptions. So in our Sphere example as before, we could change our assertion to raising an error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sphere</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">radius</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Radius cannot be negative&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we put the error message as a string into the constructor of the exception (because the exceptions are classes in Python). This time, if we try to define <code class="docutils literal notranslate"><span class="pre">Sphere(-4)</span></code> the program crashes, but with the error message</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">Radius</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">negative</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>One apparent benefit of raising an error over the assertion is that it provides more information. The <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> tells us it’s something with the <em>value</em> that is going wrong. This type is also very important when we <em>catch exceptions</em>.</p>
+<section id="catching-exceptions">
+<h3>Catching Exceptions<a class="headerlink" href="#catching-exceptions" title="Permalink to this headline">#</a></h3>
+<p>When a exception is raised, for example during a function call, it will crash the program, unless that exception is <em>caught</em>. In Python, we catch exceptions by putting them inside a <code class="docutils literal notranslate"><span class="pre">try</span></code>-block. Let us for example we have a long list of values, and we want to create a corresponding list of Spheres, with radii given by those values. However, the values are sometimes negative, in which case we want the radii to be set to 0. We could then do the following</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sphere</span><span class="p">(</span><span class="n">Sphere</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">6.3</span><span class="p">]</span>
+<span class="n">spheres</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">spheres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Sphere</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">spheres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Sphere</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">spheres</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Sphere(4.5), Sphere(0), Sphere(3.4), Sphere(2.7), Sphere(0), Sphere(6.3)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Try</span></code>/<code class="docutils literal notranslate"><span class="pre">Except</span></code> structure has a fairly intuitive names in Python. First we <em>try</em> something, if something specific goes wrong, we do something else. We could for example <em>try</em> opening a file, but if there is no file, we could instead make one, or choose to use some default data, or ask the user for a new file. In most languages it is also called “try”, but instead of “except” we call it “catch”. This is because <em>raising</em> an error is also referred to <em>throwing</em> an error, and we can then throw an error somewhere in the code, for example inside a function, and then catch it and handle it somewhere else.</p>
+<p>Note that we specifically catch a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>, because we know this is what can go wrong. It is possible to just write <code class="docutils literal notranslate"><span class="pre">except:</span></code>, and this catches <em>any</em> exception. However, this is not recommended, because this would also catch a simple syntax error inside the Sphere class for example—which should crash the program. Because we catch a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> specifically, we let all other errors still go through to the user as desired.</p>
+<p>You can also catch errors of different types and handle them similarly as follows:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="o">...</span>
+<span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>or you can have several, different except blocks:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+   <span class="o">...</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+   <span class="o">...</span>
+<span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+   <span class="o">...</span>
+</pre></div>
+</div>
+<p>You can also get the error message of the error if you write</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>in which case <code class="docutils literal notranslate"><span class="pre">e</span></code> will be a string with the error message.</p>
+<section id="error-types-in-python">
+<h4>Error types in Python<a class="headerlink" href="#error-types-in-python" title="Permalink to this headline">#</a></h4>
+<p>In Python, there is a general superclass for all errors called simply <code class="docutils literal notranslate"><span class="pre">Exception</span></code>. All other errors inherit from this class. The following diagram shows all the built in errors</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+--</span> <span class="ne">Exception</span>
+      <span class="o">+--</span> <span class="n">StandardError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">ArithmeticError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="ne">FloatingPointError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="ne">OverflowError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="ne">ZeroDivisionError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">AssertionError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">AttributeError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">EnvironmentError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="ne">IOError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">EOFError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">ImportError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">LookupError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="ne">IndexError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="ne">KeyError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">NameError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">RuntimeError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="ne">NotImplementedError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">SyntaxError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="ne">IndentationError</span>
+      <span class="o">|</span>    <span class="o">|</span>         <span class="o">+--</span> <span class="ne">TabError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">SystemError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">TypeError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">ValueError</span>
+</pre></div>
+</div>
+<p>Any of these can be raised and caught in your code.</p>
+<section id="defining-custom-exceptions">
+<h5>Defining Custom Exceptions<a class="headerlink" href="#defining-custom-exceptions" title="Permalink to this headline">#</a></h5>
+<p>There are many built in exceptions and errors that can be used to make your errors more specific. However, it is also trivial to define <em>custom</em> exceptions in your code. Simply subclass an existing exception class, or <code class="docutils literal notranslate"><span class="pre">Exception</span></code> itself.</p>
+<p>Why would you want to define your own custom exceptions? For larger projects these can be nice, as they can make it even clearer what is going wrong, or they can make sure that you are catching exactly the bug you are expecting. Say for example our earlier Sphere example, where the radius shouldn’t be negative. We could raise a ValueError, but we could also create a custom exception that can be even more specific.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NegativeRadiusError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Sphere</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">radius</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NegativeRadiusError</span><span class="p">(</span><span class="s2">&quot;Radius must be non-negative&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+    <span class="k">def</span> <span class="nf">shrink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shrinkage</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">-</span> <span class="n">shrinkage</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NegativeRadiusError</span><span class="p">(</span><span class="s2">&quot;Radius would become negative.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">-=</span> <span class="n">shrinkage</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">Sphere</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">shrink</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">NegativeRadiusError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Radius would become negative.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we subclass the <code class="docutils literal notranslate"><span class="pre">Exception</span></code> class with a new custom exception called <code class="docutils literal notranslate"><span class="pre">NegativeRadiusError</span></code>. We just write <code class="docutils literal notranslate"><span class="pre">pass</span></code> because we are not overwriting any functionality from the exception class, we are just defining a new class with a custom name. Now we are free to raise and catch this error in the rest of our code.</p>
+</section>
+</section>
+<section id="assertions-vs-other-exceptions">
+<h4>Assertions vs other Exceptions<a class="headerlink" href="#assertions-vs-other-exceptions" title="Permalink to this headline">#</a></h4>
+<p>We have now covered how we can use both assert statements, and raising exceptions to get a program to fail controllably. But for which cases should you use asserts and when should you use exceptions? The main benefit of asserts are that they are very fast to implement, and that they can be turned of to run in “optimized” mode. The main benefit of raising exceptions is that we can be more specific with the exception type, which can then be easier to catch and handle in other parts of the program.</p>
+<p>Because of their benefits, asserts should be used to test for conditions that should never happen. We use them mostly as an aid when developing the code. For any error that we expect to possibly happen during normal use of the software should instead raise exceptions, which will be much better for the end user due to the better information and handling possibilities.</p>
+</section>
+</section>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">#</a></h2>
+<p>So far we have talked about how to get the program to fail in a controlled manner. Now we turn to how to <em>test</em> code. When writing larger pieces of software, we will make mistakes, 100 % guaranteed. Tests let us catch these errors before the software is used for something important.</p>
+<p>Testing code means checking if it is behaving as expected, and that it meets our requirements. <a class="reference external" href="https://en.wikipedia.org/wiki/Software_testing">Software testing</a> is a large and broad field, and its possible to work as a dedicated software tester. In IN1910 we won’t go too in depth in testing, but show you some nice tools to test your own code. Testing is an essential part of quality assurance, and for software to be considered high quality it has to include testing. Others won’t trust your code if it isn’t tested, and neither should you.</p>
+<p>One of the simplest forms of testing, and the one we will focus most on in IN1910, is called <em>unit testing</em>.</p>
+<section id="unit-testing">
+<h3>Unit Testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">#</a></h3>
+<p>A unit test is a test of a small component of a program, a single “unit”. If we are talking about object-oriented programming, a unit test would for example check that a single method of a class does what it is expected to do. When unit testing a piece of code, we are checking that piece of code is working in isolation. The unit test offers no insurance the the code as a whole works, but at least we can feel more confident in that piece of the code. While this might sound like unit tests are <em>too</em> simple, it also makes them straight-forward to think up and implement. When starting a new project, you can write a piece of code, then make the unit tests for that piece of code right there and then. Verifying that the the whole code works on the other hand, won’t be possible until you’ve written the whole code.</p>
+<p>Another important point about unit tests is that they should be <em>automated</em>, meaning that it should be a a test case that can run by itself, and also check whether it passes or fails by itself. This way, we write the unit test once, and then run it every time we change the code to make sure nothing is broken. The goal of automated testing is of course efficiency, but also that we don’t get sloppy over time. To automate the process of making and running tests, we want to use a package meant for unit testing.</p>
+</section>
+<section id="the-pytest-package">
+<h3>The pytest package<a class="headerlink" href="#the-pytest-package" title="Permalink to this headline">#</a></h3>
+<p>As with everything else in software, many packages exist for unit testing in Python. In fact, Python has its own built in package called <code class="docutils literal notranslate"><span class="pre">unittest</span></code> which we could use. Other popular choices are <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, <code class="docutils literal notranslate"><span class="pre">doctest</span></code> and <code class="docutils literal notranslate"><span class="pre">nose</span></code>. These all have slightly different syntax, workflow, and use cases, but in most regards they are quite similar. In IN1910, we only write fairly simple tests, and all of these frameworks would work well. We opt to go for <code class="docutils literal notranslate"><span class="pre">pytest</span></code> because it by far the most used testing library in python, it is easy to use but also has a lot of powerful extensions if you want to use more advanced testing features.</p>
+<p>Note that while we use <code class="docutils literal notranslate"><span class="pre">pytest</span></code> to write our unit tests, the concept of unit testing doesn’t rely on any specific framework, the important takeaways are the ideas.</p>
+<p>We use the rest of this lecture to show example of how to write unit tests in <code class="docutils literal notranslate"><span class="pre">pytest</span></code>. If you want a more thorough introduction to <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, the following tutorials might be helpful</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://pythontesting.net/framework/pytest/pytest-introduction/">pytest introduction by Brian Okken</a></p></li>
+<li><p><a class="reference external" href="https://docs.pytest.org/en/latest/">official pytest documentation</a></p></li>
+</ul>
+<p>Before you continue, you should make sure that you have <code class="docutils literal notranslate"><span class="pre">pytest</span></code> installed. <code class="docutils literal notranslate"><span class="pre">pytest</span></code> is not part of the standard library, but can easily be installed with e.g <code class="docutils literal notranslate"><span class="pre">pip</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip3 install pytest
+</pre></div>
+</div>
+</section>
+<section id="pytest-basics">
+<h3>pytest basics<a class="headerlink" href="#pytest-basics" title="Permalink to this headline">#</a></h3>
+<p>As we said earlier, the main goal of unit tests is to automate things, <code class="docutils literal notranslate"><span class="pre">pytest</span></code> therefore finds our tests automatically. It does this by assuming everything (files, functions, classes) with a name beginning with <code class="docutils literal notranslate"><span class="pre">test</span></code> or <code class="docutils literal notranslate"><span class="pre">Test</span></code> is a test. When we ask pytest to run tests it looks for these tests and runs all of them, and giving us a report back about which ones succeeded and which ones failed. Any test that finishes executing without throwing an exception <em>succeeds</em>, any test that throws an exception fails.</p>
+<p>It is very useful to put all your tests into one or several files with names starting with <code class="docutils literal notranslate"><span class="pre">test_</span></code>. By keeping tests separate from your source code, you keep everything nice and tidy.</p>
+<section id="unit-testing-examples-with-vector3d">
+<h4>Unit testing examples with <code class="docutils literal notranslate"><span class="pre">Vector3D</span></code><a class="headerlink" href="#unit-testing-examples-with-vector3d" title="Permalink to this headline">#</a></h4>
+<p>As a running example of unit testing, we will use the <code class="docutils literal notranslate"><span class="pre">Vector3D</span></code> class we made during the previous lecture. In this case we have our source code in the file <code class="docutils literal notranslate"><span class="pre">vector.py</span></code>. And we would put all our tests in a separate file called <code class="docutils literal notranslate"><span class="pre">test_vector.py</span></code>. In these lecture notes we simply import the <code class="docutils literal notranslate"><span class="pre">Vector3D</span></code> class and test it directly to show examples. But we also put the <code class="docutils literal notranslate"><span class="pre">test_vector.py</span></code> file there so you can try running pytest yourself.</p>
+<p>Let’s start writing some unit tests for <code class="docutils literal notranslate"><span class="pre">Vector3D</span></code>. To do this we first have to think of examples of how the code <em>should</em> behave. Let us for example define to vectors</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(u = (1,2,0)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(v = (1, -1, 3)\)</span></p></li>
+</ul>
+<p>And then we can compute by hand:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(u+v = (2, 1, 3)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(u-v = (0, 3, -3)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(u\cdot v = -1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(||u||^2 = 5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(||v||^2 = 11\)</span></p></li>
+</ul>
+<p>So we know what these simple computations <em>should</em> be. What we do now is implement a unit test to check if this is actually the case for our code.</p>
+<p>First, we want to check that <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">+</span> <span class="pre">v</span></code> gives us the expected values. To check this we use assertions. We can write this test out as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vector</span> <span class="kn">import</span> <span class="n">Vector3D</span>
+
+
+<span class="k">def</span> <span class="nf">test_add</span><span class="p">():</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span>
+    <span class="k">assert</span> <span class="n">w</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="k">assert</span> <span class="n">w</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">w</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>In this test we create two vectors and add them together like we would when using the class normally. Then we check the result using <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">w.z</span> <span class="pre">==</span> <span class="pre">3</span></code>. If these pass, meaning the results are as expected, the test passes (we don’t need to return true or anything like that). If they fail, the test fails.</p>
+<p>Because this function’s name starts with <code class="docutils literal notranslate"><span class="pre">test_</span></code>, it will automatically be found an run by pytest. You can run <code class="docutils literal notranslate"><span class="pre">pytest</span></code> from the command line by writing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span><span class="o">.</span><span class="n">test</span>
+</pre></div>
+</div>
+<p>Another way to run <code class="docutils literal notranslate"><span class="pre">pytest</span></code> is to execute it as a module</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytest</span>
+</pre></div>
+</div>
+<p>This is very handy if you have different versions of python installed and want to be certain that you run pytest with the version that you want.
+In which case it looks for all tests in the current folder and any sub-folders. Or you could run it on a specific folder by writing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">&lt;</span><span class="n">folder</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If we run pytest now, we get the following output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collected</span> <span class="mi">1</span> <span class="n">item</span>
+
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span> <span class="o">.</span>                                                                                                 <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span>
+
+<span class="o">==============================================</span> <span class="mi">1</span> <span class="n">passed</span> <span class="ow">in</span> <span class="mf">0.14</span> <span class="n">seconds</span> <span class="o">===============================================</span>
+</pre></div>
+</div>
+<p>It ran 1 test, because that is all we have written so far. It says the test passed, which means there were no exceptions or assertion errors. This means our <em>add</em> function works as expected, at least for this input!</p>
+<p>Let us produce an error on purpose to see how that looks. We go and change the <code class="docutils literal notranslate"><span class="pre">Vector3D.__add__</span></code> method so that we do something wrong on purpose, say for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span>
+<span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span>
+<span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">z</span>
+</pre></div>
+</div>
+<p>(Copying and pasting code that needs small adjustments is an extremely common place for errors). We would get the following result from pytest:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collected</span> <span class="mi">1</span> <span class="n">item</span>
+
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span> <span class="n">F</span>                                                                                                 <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span>
+
+<span class="o">======================================================</span> <span class="n">FAILURES</span> <span class="o">=======================================================</span>
+<span class="n">______________________________________________________</span> <span class="n">test_add</span> <span class="n">_______________________________________________________</span>
+
+    <span class="k">def</span> <span class="nf">test_add</span><span class="p">():</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span>
+        <span class="k">assert</span> <span class="n">w</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="o">&gt;</span>       <span class="k">assert</span> <span class="n">w</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">E</span>       <span class="k">assert</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">E</span>        <span class="o">+</span>  <span class="n">where</span> <span class="mi">2</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">y</span>
+
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span> <span class="ne">AssertionError</span>
+<span class="o">==============================================</span> <span class="mi">1</span> <span class="n">failed</span> <span class="ow">in</span> <span class="mf">0.19</span> <span class="n">seconds</span> <span class="o">===============================================</span>
+</pre></div>
+</div>
+<p>The test fails because <code class="docutils literal notranslate"><span class="pre">w.y</span></code> would become 2, because of the bug, but we assert it to be 1. Note that the error message points to which line the error occurs(<code class="docutils literal notranslate"><span class="pre">&gt;assert</span> <span class="pre">w.y</span> <span class="pre">==</span> <span class="pre">1</span></code>), and explains what the wrongfully assertion is(<code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">==</span> <span class="pre">1</span></code>).</p>
+<p>The statement <code class="docutils literal notranslate"><span class="pre">assert</span></code> effectively asserts that two variables are equal, i.e., that <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></code> is true. In this case, we checked each component separately. However, we could also try <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">w</span> <span class="pre">==</span> <span class="pre">Vector3D(2,</span> <span class="pre">1,</span> <span class="pre">3)</span></code>, but this would fail. This is because we are comparing custom objects, and when comparing custom objects, Python defaults to comparing their location in memory. Because we are comparing two different objects, this would therefore fail by default.</p>
+<p>To make vectors comparable by their values, we need to add a <code class="docutils literal notranslate"><span class="pre">__eq__</span></code> special method to our <code class="docutils literal notranslate"><span class="pre">Vector3D</span></code> method, when we check for equality by doing <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">==</span> <span class="pre">v</span></code>, this is equivalent to calling <code class="docutils literal notranslate"><span class="pre">u.__eq__(v)</span></code>, so our method should return a True or a False.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Vector3D</span><span class="p">(</span><span class="n">Vector3D</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="n">same_x</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+        <span class="n">same_y</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+        <span class="n">same_z</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">z</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+        <span class="k">return</span> <span class="n">same_x</span> <span class="ow">and</span> <span class="n">same_y</span> <span class="ow">and</span> <span class="n">same_z</span>
+</pre></div>
+</div>
+<p>In stead of asserting that the numbers are equal, we instead check that the two numbers are close, by checking that the absolute value of their difference is less that some tolerance (here <span class="math notranslate nohighlight">\(10^{-12}\)</span>).</p>
+<p>When testing for equality of floating point numbers, you should always check that numbers are close in stead of strict equality. The reason is that floating point operations can lead to round off errors which can be seen in the following example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">==</span> <span class="mf">0.2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.19999999999999996
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="k">assert</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">==</span> <span class="mf">0.2</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output from this would yield the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.19999999999999996</span>
+<span class="ne">AssertionError</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">8</span><span class="n">ca4158e488d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+      <span class="mi">2</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span>
+      <span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="o">----&gt;</span> <span class="mi">4</span> <span class="k">assert</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">==</span> <span class="mf">0.2</span>
+
+<span class="ne">AssertionError</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>With the equality method implemented, let’s write a unit test to check if it works</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_eq</span><span class="p">():</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">u</span> <span class="o">==</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">u</span> <span class="o">==</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mf">1.00000001</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">u</span> <span class="o">!=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">u</span> <span class="o">!=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mf">1.001</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First note that we need to define a new vector to test with, because each unit test we write is a separate function, they don’t see each other. Sometimes stated as: <em>“Each unit test is an island.”</em>. We write four assertions:</p>
+<ol class="simple">
+<li><p>two vectors of the same components should be equal</p></li>
+<li><p>two vectors with a small round-off error should also be equal</p></li>
+<li><p>two vectors with a different component should not be equal</p></li>
+<li><p>two vectors with a small, but noticeable difference, should not be equal</p></li>
+</ol>
+<p>Running the tests with pytest show that things are working as expected. With the <code class="docutils literal notranslate"><span class="pre">__eq__</span></code> implemented and tested we could now write out the add test as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_add</span><span class="p">():</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">u</span> <span class="o">+</span> <span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us move on and make a few more tests for the following cases:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(u+v = (2, 1, 3)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(u-v = (0, 3, -3)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(u\cdot v = -1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(u\times v = (6, -3, -3)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((u\times v)\cdot u = 0\)</span> and <span class="math notranslate nohighlight">\((u\times v)\cdot v = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(||u||^2 = 5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(||v||^2 = 11\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_sub</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Test subtraction&quot;&quot;&quot;</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_dot</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Test dot product&quot;&quot;&quot;</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">u</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">u</span> <span class="o">*</span> <span class="n">v</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">test_cross</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Test cross product&quot;&quot;&quot;</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">u</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">u</span> <span class="o">@</span> <span class="n">v</span> <span class="o">==</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_perp</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Test perpendicularity&quot;&quot;&quot;</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">u</span><span class="o">.</span><span class="n">perpendicular</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">u</span> <span class="o">@</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">perpendicular</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">u</span> <span class="o">@</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">perpendicular</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_length</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Test length&quot;&quot;&quot;</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">length</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">length</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">11</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now run our tests are before, and we will get the following output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collected</span> <span class="mi">7</span> <span class="n">items</span>
+
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span> <span class="o">.......</span>                                                                                           <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span>
+
+<span class="o">==============================================</span> <span class="mi">7</span> <span class="n">passed</span> <span class="ow">in</span> <span class="mf">0.05</span> <span class="n">seconds</span> <span class="o">===============================================</span>
+</pre></div>
+</div>
+<p>Every test passed! Not very surprising as we had already tested our code somewhat with simple examples during the previous lecture. But this is a lot more formal and rigorous, and shows anyone who missed that lecture that it seems to be working.</p>
+<p>To get more feedback on what tests are run, we can add the <code class="docutils literal notranslate"><span class="pre">-v</span></code> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<p>to get the output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collected</span> <span class="mi">7</span> <span class="n">items</span>
+
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_add</span> <span class="n">PASSED</span>                                                                                  <span class="p">[</span> <span class="mi">14</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_eq</span> <span class="n">PASSED</span>                                                                                   <span class="p">[</span> <span class="mi">28</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_sub</span> <span class="n">PASSED</span>                                                                                  <span class="p">[</span> <span class="mi">42</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_dot</span> <span class="n">PASSED</span>                                                                                  <span class="p">[</span> <span class="mi">57</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_cross</span> <span class="n">PASSED</span>                                                                                <span class="p">[</span> <span class="mi">71</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_perp</span> <span class="n">PASSED</span>                                                                                 <span class="p">[</span> <span class="mi">85</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_vector</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_length</span> <span class="n">PASSED</span>                                                                               <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span>
+
+<span class="o">==============================================</span> <span class="mi">7</span> <span class="n">passed</span> <span class="ow">in</span> <span class="mf">0.11</span> <span class="n">seconds</span> <span class="o">===============================================</span>
+</pre></div>
+</div>
+</section>
+<section id="asserting-exception-raising">
+<h4>Asserting exception raising<a class="headerlink" href="#asserting-exception-raising" title="Permalink to this headline">#</a></h4>
+<p>One last thing we often want to check for, is that an exception is actually raised given the right conditions. This can easily be implemented using something called a context manager. When testing for an exception we want to allow a specific exception to be raised, but we would also like to fail the test if that specific exception was not raised.
+To do this we create a context block using a <code class="docutils literal notranslate"><span class="pre">with</span></code> statement as be calling <code class="docutils literal notranslate"><span class="pre">pytest.raises</span></code>, <code class="docutils literal notranslate"><span class="pre">pytest</span></code> will listen for for the exception that we provided within that context block, and fail the test if we exit the block without the specific exception raised.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+
+<span class="k">def</span> <span class="nf">test_no_scalar_addition</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+        <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, we check that a vector <span class="math notranslate nohighlight">\(u\)</span> plus a scalar <span class="math notranslate nohighlight">\(3\)</span> is undefined as a TypeError. Note that here we also need to import <code class="docutils literal notranslate"><span class="pre">pytest</span></code> because we are using a function from the <code class="docutils literal notranslate"><span class="pre">pytest</span></code> library.</p>
+<p>Let us show a different one</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_no_unit_vector</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+        <span class="n">Vector3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which verifies that we cannot find a unit-vector for a vector with zero length. When we now run pytest we get the following output (changed somewhat for readability in the notebook)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>collected 9 items
+
+test_vector.py ........F                                                                                         [100%]
+
+====================================================== FAILURES =======================================================
+_________________________________________________ test_no_unit_vector _________________________________________________
+
+    def test_no_unit_vector():
+        with pytest.raises(RuntimeError):
+&gt;           Vector3D(0, 0, 0).unit()
+E           Failed: DID NOT RAISE &lt;class &#39;RuntimeError&#39;&gt;
+
+test_vector.py:79: Failed
+</pre></div>
+</div>
+<p>This means the last test failed, but the other 8 passed. The last test fails because we never added functionality that raises an exception for the zero-length vector case. Let us add this now.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Vector3D</span><span class="p">(</span><span class="n">Vector3D</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Vector of zero length has no unit vector.&quot;</span><span class="p">)</span>
+
+        <span class="n">new_vector</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+        <span class="n">new_vector</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">new_vector</span>
+</pre></div>
+</div>
+<p>And after adding this, our test passes!</p>
+</section>
+<section id="parametrized-tests">
+<h4>Parametrized tests<a class="headerlink" href="#parametrized-tests" title="Permalink to this headline">#</a></h4>
+<p>Imagine that you want to test your functions against different input. Let us take the <code class="docutils literal notranslate"><span class="pre">test_length</span></code> function we wrote above</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_length</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Test length&quot;&quot;&quot;</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">length</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">length</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">11</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this test we test two things. First we test that the squared length of <code class="docutils literal notranslate"><span class="pre">u</span></code> equals 5 and then we test that the squared length of <code class="docutils literal notranslate"><span class="pre">v</span></code> equals 11. Futhermore, if the first test fails, then <code class="docutils literal notranslate"><span class="pre">assert</span></code> statement will raise an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> and the test will fail. As a consequence, the second test will never run. Sometimes, this is OK, but in many situations you want to get as much information as possible from your tests. If for example both these cases are failing it might indicate that there is something wrong with the way we have implemented the <code class="docutils literal notranslate"><span class="pre">.length</span></code> method while if only the first test case fails it might be only a problem in the test.</p>
+<p>Another scenario that you could imagine is if you wanted to test your code against a large number of examples (say 10 or even 100 different examples). In that case you have to copy and paste the code above a lot and this would go again the DRY (Don’t Repeat Yourselves) principle.</p>
+<p>Lets have a look at some ways we can deal with this.</p>
+<p>First of all, note that if we let <code class="docutils literal notranslate"><span class="pre">arg</span> <span class="pre">=</span> <span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">0)</span></code>, we can create a new vector as follows</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arg</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>In fact, this is a good opportunity to show the unpacking operator in python. In this case we can actually do the following</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arg</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">*</span></code> is called an unpacking operator so that <code class="docutils literal notranslate"><span class="pre">*arg</span></code> unpacks the list so that <code class="docutils literal notranslate"><span class="pre">Vector3D(*arg)</span></code> is identical to <code class="docutils literal notranslate"><span class="pre">Vector3D(arg[0],</span> <span class="pre">arg[1],</span> <span class="pre">arg[2])</span></code> when <code class="docutils literal notranslate"><span class="pre">arg</span></code> is a list of three elements.</p>
+<p>Anyway, with this in mind we can now rewrite our tests as a for loop</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_length_with_multiple_inputs</span><span class="p">():</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+    <span class="n">expected_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">expected_values</span><span class="p">):</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">length</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This will fix the copy-passing issue since any new examples could now just be added to the list. However, if the first test fails it will still not run the remaining tests.</p>
+<p>Luckily, <code class="docutils literal notranslate"><span class="pre">pytest</span></code> provides a way to run all these cases in a simple way without the execution stopping if one of the tests are failing. This is called parameterized testing. The following code implements the same tests but will not stop the execution if one of the tests fail</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;arg, expected&quot;</span><span class="p">,</span> <span class="p">[[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">11</span><span class="p">]])</span>
+<span class="k">def</span> <span class="nf">test_length_parameterized</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">arg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">length</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The perhaps strange looking code starting with an <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> is called a decorator which we will learn more about later in course. For now you can think of it as a function which modifies the function below it. In this case it will create a new function for each parameter set that is provided.</p>
+<p>When running <code class="docutils literal notranslate"><span class="pre">pytest</span></code> against this function it will output the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m pytest -k test_length_parameterized -v
+======================== test session starts ========================
+platform darwin -- Python 3.9.2, pytest-6.2.4, py-1.10.0, pluggy-0.13.1 -- /Users/henriknf/miniconda3/envs/IN1910-book/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/henriknf/local/src/IN1910/IN1910_dev/book/docs/lectures/python_development
+plugins: anyio-2.2.0, cov-2.12.0
+collected 12 items / 10 deselected / 2 selected
+
+test_vector.py::test_length_parameterized[arg0-5] PASSED      [ 50%]
+test_vector.py::test_length_parameterized[arg1-11] PASSED     [100%]
+
+================= 2 passed, 10 deselected in 0.11s ==================
+</pre></div>
+</div>
+<p>and we see now that it runs two tests.</p>
+<p>The first argument to <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.parametrize</span></code> is a string with the name of the arguments that should be passed to the function. The second argument is the actual input that should be passed to the function in each iteration. Here is another example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;x, x2&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">test_square</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">x2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>which will output the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m pytest -k test_square -v
+======================== test session starts ========================
+platform darwin -- Python 3.9.2, pytest-6.2.4, py-1.10.0, pluggy-0.13.1 -- /Users/henriknf/miniconda3/envs/IN1910-book/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/henriknf/local/src/IN1910/IN1910_dev/book/docs/lectures/python_development
+plugins: anyio-2.2.0, cov-2.12.0
+collected 16 items / 12 deselected / 4 selected
+
+test_vector.py::test_square[0-0] PASSED                       [ 25%]
+test_vector.py::test_square[1-1] PASSED                       [ 50%]
+test_vector.py::test_square[2-4] PASSED                       [ 75%]
+test_vector.py::test_square[3-9] PASSED                       [100%]
+
+================= 4 passed, 12 deselected in 0.13s ==================
+</pre></div>
+</div>
+<p>You can read more about parameterized test at the <a class="reference external" href="https://docs.pytest.org/en/stable/parametrize.html">pytest documentation page</a>.</p>
+<p>We have now covered what we want to cover on making and running unit tests in <em>pytest</em>. For the remainder of this lecture we will cover some more terminology and theory on testing.</p>
+</section>
+<section id="running-only-a-subset-of-your-tests-with-pytest">
+<h4>Running only a subset of your tests with pytest<a class="headerlink" href="#running-only-a-subset-of-your-tests-with-pytest" title="Permalink to this headline">#</a></h4>
+<p>A very handy tip is to know how to run only a subset of your tests. If you have many tests then running all tests when you develop a new tests can be inconvenient.  You can do this using the <code class="docutils literal notranslate"><span class="pre">-k</span></code> option. For example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytest</span> <span class="o">-</span><span class="n">k</span> <span class="n">test_square</span>
+</pre></div>
+</div>
+<p>will run all tests functions whose name starts with <code class="docutils literal notranslate"><span class="pre">test_square</span></code>. This means that if you have a test called <code class="docutils literal notranslate"><span class="pre">test_square_root</span></code> then that will also be run. It is there good practice to name your functions in a way that you could run only that test.</p>
+<p>For large projects you might have multiple files with tests. A common pattern is to create a test folder containing all tests, see for example the <a class="reference external" href="https://github.com/tonybaloney/wily">wily project</a> which has a very nice structure.</p>
+<p>In this case you want add either the path to the file you want to run, e.g</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytest</span> <span class="n">tests</span><span class="o">/</span><span class="n">test_vector</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</section>
+<section id="get-print-output-when-running-tests">
+<h4>Get print output when running tests<a class="headerlink" href="#get-print-output-when-running-tests" title="Permalink to this headline">#</a></h4>
+<p>Sometimes you might experience that your tests is not behaving as expected. The natural thing to do in this case is to add a few print statements to get some more information. However, it you do this and then try to run <code class="docutils literal notranslate"><span class="pre">pytest</span></code> you will not see anything being printed. This is because <code class="docutils literal notranslate"><span class="pre">pytest</span></code> turns off all printing by default. You can turn this on again if you pass in the <code class="docutils literal notranslate"><span class="pre">-s</span></code> option, e.g</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytest</span> <span class="o">-</span><span class="n">s</span>
+</pre></div>
+</div>
+<p>and this can of course also be combined with other options for example if we add a print statement to the <code class="docutils literal notranslate"><span class="pre">test_square</span></code> function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;x, x2&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">test_square_root</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Input = &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;, output = &quot;</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">x2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>we get the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m pytest -k test_square -sv
+======================== test session starts ========================
+platform darwin -- Python 3.9.2, pytest-6.2.4, py-1.10.0, pluggy-0.13.1 -- /Users/henriknf/miniconda3/envs/IN1910-book/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/henriknf/local/src/IN1910/IN1910_dev/book/docs/lectures/python_development
+plugins: anyio-2.2.0, cov-2.12.0
+collected 16 items / 12 deselected / 4 selected
+
+test_vector.py::test_square_root[0-0]
+Input =  0 , output =  0
+PASSED
+test_vector.py::test_square_root[1-1]
+Input =  1 , output =  1
+PASSED
+test_vector.py::test_square_root[2-4]
+Input =  2 , output =  4
+PASSED
+test_vector.py::test_square_root[3-9]
+Input =  3 , output =  9
+PASSED
+
+================= 4 passed, 12 deselected in 0.11s ==================
+</pre></div>
+</div>
+</section>
+<section id="debugging-tests">
+<h4>Debugging tests<a class="headerlink" href="#debugging-tests" title="Permalink to this headline">#</a></h4>
+<p>When print statements doesn’t help you you can try using the built in debugger in python. If you are using python3.7 or above (which you should), then you can drop into a debugger anywhere in your code by calling the <code class="docutils literal notranslate"><span class="pre">breakpoint()</span></code> function.</p>
+<p>For example let us try to add a breakpoint in the <code class="docutils literal notranslate"><span class="pre">test_square</span></code> function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;x, x2&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">test_square_root</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="nb">breakpoint</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">x2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Running pytest now will drop you into a debug shell</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m pytest -k test_square
+======================== test session starts ========================
+platform darwin -- Python 3.9.2, pytest-6.2.4, py-1.10.0, pluggy-0.13.1
+rootdir: /Users/henriknf/local/src/IN1910/IN1910_dev/book/docs/lectures/python_development
+plugins: anyio-2.2.0, cov-2.12.0
+collected 16 items / 12 deselected / 4 selected
+
+test_vector.py
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; PDB set_trace (IO-capturing turned off) &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+&gt; /Users/henriknf/local/src/IN1910_H21/book/docs/lectures/python_development/test_vector.py(94)test_square_root()
+-&gt; assert square(x) == x2
+(Pdb)
+</pre></div>
+</div>
+<p>and now you have access to all the variables like you would have in a normal python shell. You can also type <code class="docutils literal notranslate"><span class="pre">help</span></code> to see a list of specific commands you can use with the debugger. The most important command are probably <code class="docutils literal notranslate"><span class="pre">q</span></code> (quit) and <code class="docutils literal notranslate"><span class="pre">c</span></code> (continue) and <code class="docutils literal notranslate"><span class="pre">interact</span></code> (which gives you an interactive python shell). You can read more about the python debugger in the <a class="reference external" href="https://docs.python.org/3/library/pdb.html">official documentation</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">A better debugger</p>
+<p>If you want a better debugger than the built in one (with coloring and tab completion), I recommend a debugger called <code class="docutils literal notranslate"><span class="pre">pdb++</span></code>. You can install it with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pdbpp</span></code>. Once this is installed it will use it by default.</p>
+</div>
+</section>
+</section>
+<section id="integration-testing">
+<h3>Integration testing<a class="headerlink" href="#integration-testing" title="Permalink to this headline">#</a></h3>
+<p>We have mostly talked about testing in the terms of unit testing, but this is obviously not the only kind of testing out there. On the other end of the spectrum we find <em>integration testing</em>, which is where we test a larger codebase to find out how the different components of the code base work together and <em>integrate</em> into a complete program or software package (The term isn’t directly connected to calculus). For scientific applications especially, this is quite important, because for larger mathematical modeling, comparing your output to analytical solutions or similar means we need to actually write an example use-case, which would be an example of an integration test.</p>
+<p>An analogy could be to think of how a car is made. First, individual components of the car is made in different factories spread across several countries or even continents. Some make the wheels, some the axels, some the engine, etc. Each individual factory obviously need to test the components they are producing and shipping out. These “component tests” would be the unit tests. Finally, we have the factory that takes all the different components and builds the cars (the components are “integrated” into a car). When the car is finished, it too should be tested before being sold, which would be the integration tests.</p>
+<p>As seen in the analogy, unit testing code and integration testing aren’t competitors, and good software needs both. However, the two are done in different parts of the development. The unit tests are written before and during development. They need to test each component <em>as they are made</em>. Integration tests however, are carried out once you have nearly finished code. In IN1910 we focus on writing automated unit tests with <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, and then finding some good example case where we can compare the output to a known analytic solution as our integration case.</p>
+</section>
+<section id="regression-testing">
+<h3>Regression testing<a class="headerlink" href="#regression-testing" title="Permalink to this headline">#</a></h3>
+<p>A different kind of term you might come across is called “regression testing”. This isn’t really a third type of test, but is more descriptive of the <em>goal</em> of the testing. A “regression” in this sense means a step back, and the goal of regression tests are to make sure that code that has been implemented and works, isn’t changed and broken. In this sense, unit tests can be a type of regression test. Say you have a well-tested piece of code with plenty of unit tests. Now you want to refactor, change or optimize that code in some way. Then you can rerun all your unit tests after incorporating your changes, and thus check for regressions.</p>
+<p>In larger software projects, regression tests are also used to fix bugs. When a bug or issue is found, the first step is often to find out how to reproduce that bug reliably. Here the developers often ask for a <em>minimal working example</em>, i.e., the least amount of code needed to cause the bug to happen. This minimal working example can be made into a test. This is extremely useful in the long run because this will become an automatic regression test. When the bug is fixed, the newly created test will pass. If the bug is ever reintroduced later, the regression test will immediately catch it.</p>
+</section>
+</section>
+<section id="agile-software-development">
+<h2>Agile software development<a class="headerlink" href="#agile-software-development" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Agile_software_development">Agile software development</a> is a modern (2001-) set of software development methods that is seeing frequent use in the industry. It focuses tools, methods and structures that make it easier to develop software quickly and efficiently, while maintaining quality and flexibility.</p>
+<p>In agile software development, there is a strong focus on testing, and especially on <a class="reference external" href="https://en.wikipedia.org/wiki/Test-driven_development">test-driven development</a>. Test driven development means that all development is focused around testing, rather than doing testing as an afterthought. In fact, ideally, one writes the tests <em>first</em>, and then you develop code until that test passes. This way, it is clear when the code is doing what it is supposed to do. In this way, the tests can be seen also as a code specification.</p>
+<p>One of the main ideas of test-driven development can be summarized by:</p>
+<blockquote>
+<div><p>Write tests first, otherwise you’ll write them never</p>
+</div></blockquote>
+<section id="testing-and-version-control">
+<h3>Testing and Version Control<a class="headerlink" href="#testing-and-version-control" title="Permalink to this headline">#</a></h3>
+<p>As mentioned earlier, for testing to be as efficient as possible, we want to automate testing. This ideally also means that we shouldn’t need to run the tests ourselves, rather it should happen automatically every time we change the code. For a software project, the code changes when someone <em>commits and pushes</em> new code. Because of this, it should come as no surprise that there are many tools possible to automate the running of all tests in a git repository any time that code is changed.</p>
+<p>Tools that do this are often known as often known as <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a> tools, and these “watch” our repository and lets us know when something seems to break. CI tools can also do other kinds of testing, such as “building” where it sets up a clean virtual machine, installs all the dependencies of your code, installs your code, and then runs all the tests. This way, the CI watcher can also catch when your code breaks not because <em>you</em> introduced some bug, but because some other package is changed somehow. CI can automate such build-tests at regular intervals, perhaps several times a day.</p>
+<p>The most popular CI tool for Github is <a class="reference external" href="https://travis-ci.org/">Travis CI</a>, but many other options exist, such as <a class="reference external" href="http://jenkins-ci.org">Jenkins</a> and <a class="reference external" href="https://www.atlassian.com/software/bamboo">Bitbucket Bamboo</a>.</p>
+<p>Setting up CI monitoring is recommended if you ever write software you want others to start using.</p>
+</section>
+<section id="test-coverage">
+<h3>Test coverage<a class="headerlink" href="#test-coverage" title="Permalink to this headline">#</a></h3>
+<p>Finally. If testing is a crucial part of good software, how can we measure how <em>well</em> a software is tested? Having some tests is better than having no tests. But is having many tests a guarantee of good code? The short answer is: no, it isn’t. One metric of measuring how well software is tested is called test <em>coverage</em>. It is a simple measurement of how much of the code is actually run when running the tests.</p>
+<p>There are different ways to measure “coverage”, but the simplest way is usually “line coverage”, which simply denotes the percentage of lines that are actually run when going through all the tests. If we have a line coverage of 30%, then the unit tests only use 30% of the actual code, and so 70% of the code is never actually tested.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pytest</span></code> comes with many <a class="reference external" href="https://pytest.readthedocs.io/en/2.7.3/plugins_index/index.html">plugins</a>, and one of them is <code class="docutils literal notranslate"><span class="pre">pytest-cov</span></code> which can be used to check coverage for us when we run our unit tests. To use it you first need to install the plugin</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install pytest-cov
+</pre></div>
+</div>
+<p>If you have the plugin, you can do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">--</span><span class="n">cov</span>
+</pre></div>
+</div>
+<p>And you will get an output that shows how our line coverage is. It automatically reports on any file that is invoked in the tests, which means it might spew out tons of info on packages such as numpy and scipy. To avoid this we can do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">--</span><span class="n">cov</span><span class="o">=</span><span class="n">vector</span>
+</pre></div>
+</div>
+<p>which tells <code class="docutils literal notranslate"><span class="pre">pytest</span></code> to only report coverage from the package “vector”, which in this case means the <code class="docutils literal notranslate"><span class="pre">vector.py</span></code> file, but it could be a folder as well. Running our command, we now get the output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.........</span>
+<span class="n">Name</span>        <span class="n">Stmts</span>   <span class="n">Miss</span>  <span class="n">Cover</span>
+<span class="o">-------------------------------</span>
+<span class="n">vector</span><span class="o">.</span><span class="n">py</span>      <span class="mi">60</span>     <span class="mi">14</span>    <span class="mi">77</span><span class="o">%</span>
+<span class="o">----------------------------------------------------------------------</span>
+<span class="n">Ran</span> <span class="mi">9</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">0.070</span><span class="n">s</span>
+
+<span class="n">OK</span>
+</pre></div>
+</div>
+<p>Here “Stmts” are the number of statements, i.e., code lines, in the <a class="reference external" href="http://vector.py">vector.py</a> module, “Miss” are the number of lines that are <em>not</em> covered, and “Cover” shows the line coverage as a percentage. In this case we have 77% coverage, not too shabby.</p>
+<p>There are many other tools for checking line coverage, and some editors and IDE’s lets you do it straight in the editor. CI tools can also automatically check and show coverage on your repository as a HTML “badge”. See for example the <a class="reference external" href="https://requests.readthedocs.io/en/master/">requests repository</a>.</p>
+<p>Note that coverage is a much used and referred to because it is easy to measure and can be done automatically. However, it is far from perfect. A code with 100% test coverage is not guaranteed to be error-free, and a code with 30% coverage can be better tested than one with 70%.</p>
+</section>
+<section id="avoiding-confirmation-bias">
+<h3>Avoiding Confirmation Bias<a class="headerlink" href="#avoiding-confirmation-bias" title="Permalink to this headline">#</a></h3>
+<p>Confirmation bias is the tendency of trying to verify your own hypotheses, rather than trying to <em>refute</em> them. The same tendency can be found in software developers, that they tend to write tests that prove their code works, rather than write tests that get the code to fail.</p>
+<p>It is important to remember the goal of testing is to find errors in the code and fix them. When writing tests, you should therefore try to avoid confirmation bias and write tests that are a bit vicious. Put simply, good tests try to break the code.</p>
+<p>There is a famous logic puzzle that illustrates confirmation bias well, called the <em>four-card problem</em>. See if you can solve it.</p>
+<p><strong>Problem:</strong> Suppose you have a deck of cards, where each card has a letter on one side, and a number on the other. On the table in front of you, there are 4 cards, shown below. We now propose the following hypothesis: <em>“If a card has a vowel on one side, then the other side is an even number.”</em>. Which cards are worthwhile to flip over to test this hypothesis?</p>
+<figure class="align-default" id="caesar">
+<a class="reference internal image-reference" href="../../../_images/four_card_problem.png"><img alt="caesar.four card problem" src="../../../_images/four_card_problem.png" style="width: 400px;" /></a>
+</figure>
+<p><strong>Solution:</strong> This problem was originally formulated by psychologist Peter Cathcart Wason in 1966, who proceeded to test university students with it. They found that “A and 4” was the most common answer (46%), followed by “Just A” (32%). Both of these answers are wrong. Because A is a vowel, turning this card over is useful, because if the card on the other side is odd, then we have disproved the hypothesis. Turning over the 4 however, isn’t helpful, because the state hypothesis is “one-way”, i.e., it states “if vowel, then even number”, not vice versa. However, we <em>should</em> flip the 7 over, as this is an odd number, and so if there is a vowel on the other side, then we have disproved the hypothesis! Thus the answer is “A and 7”.</p>
+<p>Wason’s logic puzzle is a good illustration of confirmation bias. Most people when confronted with the riddle want to try to <em>prove</em> the hypothesis, when they should be trying to <em>disprove</em> it. The take away to software development is that good tests try to break code, not confirm that it works!</p>
+</section>
+</section>
+<section id="exit-codes">
+<span id="python-exit-codes"></span><h2>Exit codes<a class="headerlink" href="#exit-codes" title="Permalink to this headline">#</a></h2>
+<p>In this section we will cover a topic that might seem a bit strange but will make more sense when we transition from python to C++. Imagine that you want to chain together two commands in the terminal, meaning that you for example first want to run a python program and if that completes without errors you would like to do something else. Consider the following program</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># divide.py</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You need to provide 2 arguments&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The result is </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You need to provide 2 arguments
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we ask the user to provide two numbers and the program will print the first number divided by the second, e.g</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python divide.py 4 2
+The result is 2.0
+</pre></div>
+</div>
+<p>The execution of this program was successful because it ran without any errors. We can verify this by checking that the exit code is <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo $?
+0
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">echo</span></code> is the equivalent of <code class="docutils literal notranslate"><span class="pre">print</span></code> in python, but in <code class="docutils literal notranslate"><span class="pre">bash</span></code>, and $? just mean <em>the exit code of the last running program</em>.
+If you try to run the program with the input <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">0</span></code> you will get the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python divide.py 1 0
+Traceback (most recent call last):
+  File &quot;/Users/henriknf/divide.py&quot;, line 12, in &lt;module&gt;
+    exit(main(sys.argv[1:]))
+  File &quot;/Users/henriknf/divide.py&quot;, line 8, in main
+    print(f&quot;The result is {float(args[0]) / float(args[1])}&quot;)
+ZeroDivisionError: float division by zero
+</pre></div>
+</div>
+<p>and now the exit code is <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>echo $?
+1
+</pre></div>
+</div>
+<p>Why is this important? If you have a big program the consist of several programs then exit codes are a way to tell the next program if the previous program failed. In <code class="docutils literal notranslate"><span class="pre">bash</span></code> you can chain together programs using <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code>, for example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python divide.py 4 2 &amp;&amp; echo &#39;Success!&#39;
+The result is 2.0
+Success!
+</pre></div>
+</div>
+<p>and we we that ‘Success!’ is printed after the python program is finished. However, if you try</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python divide.py 1 0 &amp;&amp; echo &#39;Success!&#39;
+Traceback (most recent call last):
+  File &quot;/Users/henriknf/test/divide.py&quot;, line 12, in &lt;module&gt;
+    main(sys.argv[1:])
+  File &quot;/Users/henriknf/test/divide.py&quot;, line 8, in main
+    print(f&quot;The result is {float(args[0]) / float(args[1])}&quot;)
+ZeroDivisionError: float division by zero
+</pre></div>
+</div>
+<p>you will only get the error and not the message ‘Success!’. This is because <code class="docutils literal notranslate"><span class="pre">bash</span></code> knows that it should stop if it receives a non-zero exit code.</p>
+<p>Now, you may want to also abort the program if you provided to few or too many arguments to the script, but currently we get the following behavior if you for example try to provide three arguments</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python divide.py 4 2 3 &amp;&amp; echo &#39;Success!&#39;
+You need to provide 2 arguments
+Success!
+</pre></div>
+</div>
+<p>which is not what we want. One way to handle this is to return an exit code from the program to the <code class="docutils literal notranslate"><span class="pre">exit</span></code> method so that your program becomes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You need to provide 2 arguments&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The result is </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You need to provide 2 arguments
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the value <code class="docutils literal notranslate"><span class="pre">2</span></code> (which is chosen somewhat arbitrarily) is returned and passed to the <code class="docutils literal notranslate"><span class="pre">exit</span></code> method if the number of arguments are different from two. If we try to repeat the procedure above we get</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python divide.py 4 2 3 &amp;&amp; echo &#39;Success!&#39;
+You need to provide 2 arguments
+</pre></div>
+</div>
+<p>which is what we want. Note that if you want to continue the program even if a failure occurs (such as <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code>) you can just add a <code class="docutils literal notranslate"><span class="pre">try-except</span></code> block and just suppress the error that way.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/python_development"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="python_development.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Python development</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="codestyle_and_docstrings.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Code Style and Documentation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

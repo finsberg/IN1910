@@ -1,0 +1,2036 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Markov processes and Markov chains &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Software optimization and parallelism" href="../optimization/optimization.html" />
+    <link rel="prev" title="Solving the 1D Diffusion Equation using Finite Differences" href="solving_the_1D_diffusion_equation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/stochastic_processes/markov_chains.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/stochastic_processes/markov_chains.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/stochastic_processes/markov_chains.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/stochastic_processes/markov_chains.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-plotting-setup">
+   Some Plotting setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-ehrenfest-experiment">
+   The Ehrenfest  Experiment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-the-probabilities-of-the-system-with-markov-chains">
+   Analyzing the probabilities of the system with Markov Chains
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-transition-matrix">
+     The Transition Matrix
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-the-transition-matrix-to-compute-bar-p">
+     Using the transition matrix to compute
+     <span class="math notranslate nohighlight">
+      \(\bar{p}\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#steady-state">
+     Steady state
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-modified-ehrenfest-experiment">
+     The Modified Ehrenfest Experiment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-walks-and-markov-chains">
+   Random Walks and Markov Chains
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-uniform-1d-walker">
+     The Uniform 1D Walker
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples-of-markov-chains">
+     Examples of Markov Chains
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#google-s-page-rank-algorithm">
+       Google’s Page Rank algorithm
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#modelling-ion-channels">
+       Modelling ion channels
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chutes-and-ladders">
+   Chutes and Ladders
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-game-with-no-chutes-or-ladders">
+     The game with no chutes or ladders
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-the-chutes-and-ladders">
+     Adding the Chutes and Ladders
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#monte-carlo-with-chutes-ladders">
+       Monte Carlo with Chutes/Ladders
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#markov-chains-with-chutes-ladders">
+       Markov Chains with Chutes/Ladders
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comparing-the-random-walk-and-the-markov-chain">
+       Comparing the Random walk and the Markov Chain
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-a-new-rule">
+     Adding a new Rule
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Markov processes and Markov chains</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-plotting-setup">
+   Some Plotting setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-ehrenfest-experiment">
+   The Ehrenfest  Experiment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-the-probabilities-of-the-system-with-markov-chains">
+   Analyzing the probabilities of the system with Markov Chains
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-transition-matrix">
+     The Transition Matrix
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-the-transition-matrix-to-compute-bar-p">
+     Using the transition matrix to compute
+     <span class="math notranslate nohighlight">
+      \(\bar{p}\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#steady-state">
+     Steady state
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-modified-ehrenfest-experiment">
+     The Modified Ehrenfest Experiment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-walks-and-markov-chains">
+   Random Walks and Markov Chains
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-uniform-1d-walker">
+     The Uniform 1D Walker
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples-of-markov-chains">
+     Examples of Markov Chains
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#google-s-page-rank-algorithm">
+       Google’s Page Rank algorithm
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#modelling-ion-channels">
+       Modelling ion channels
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chutes-and-ladders">
+   Chutes and Ladders
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-game-with-no-chutes-or-ladders">
+     The game with no chutes or ladders
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-the-chutes-and-ladders">
+     Adding the Chutes and Ladders
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#monte-carlo-with-chutes-ladders">
+       Monte Carlo with Chutes/Ladders
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#markov-chains-with-chutes-ladders">
+       Markov Chains with Chutes/Ladders
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comparing-the-random-walk-and-the-markov-chain">
+       Comparing the Random walk and the Markov Chain
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-a-new-rule">
+     Adding a new Rule
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="markov-processes-and-markov-chains">
+<h1>Markov processes and Markov chains<a class="headerlink" href="#markov-processes-and-markov-chains" title="Permalink to this headline">#</a></h1>
+<p>A Markov process is any stochastic process where the probabilities of the systems future behavior is given solely by its current state, and not its past state. This property is sometimes referred to as a “memoryless” system. Markov chains are a specific type of markov process that occur in discrete steps, or discrete states. Another name typically used for Markov processes/chains are Markov models.</p>
+<p>Markov processes are analogous to difference or differential equations, because the current state of the system is what decides how the system will continue to develop over time. A Markov model is therefore like a stochastic differential equation.</p>
+<figure class="align-default" id="markov-chain">
+<a class="reference internal image-reference" href="../../../_images/markov_chain.png"><img alt="markov_chain" src="../../../_images/markov_chain.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text"><strong>A Markov Chain:</strong> A Markov Chain can be drawn out with the the different states as circles, and arrows indicating the transitions between them. This is an example of a three state markov chain. The numbers by the arrows indicate the probability of each transition. For example, if the system is in state A it has a 60% likelihood of staying in A, and a 40% likelihood of transitioning into state B.</span><a class="headerlink" href="#markov-chain" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="some-plotting-setup">
+<h2>Some Plotting setup<a class="headerlink" href="#some-plotting-setup" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.titlesize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123456789</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-ehrenfest-experiment">
+<h2>The Ehrenfest  Experiment<a class="headerlink" href="#the-ehrenfest-experiment" title="Permalink to this headline">#</a></h2>
+<p>The Ehrenfest experiment is an example of a Markov chain. In this experiment, imagine you have two urns, with <span class="math notranslate nohighlight">\(m\)</span> balls spread between the two urns. For every iteration, you pick one ball at random, and then move it from the urn it is currently in, to the other one.</p>
+<figure class="align-default" id="ehrenfest">
+<a class="reference internal image-reference" href="../../../_images/ehrenfest.png"><img alt="ehrenfest" src="../../../_images/ehrenfest.png" style="width: 300px;" /></a>
+</figure>
+<p>This is an example of a Markov process, because the probabilities of moving a ball from one urn to the other is given solely by how many balls are currently in each urn, i.e., it depends solely on the current <em>state</em>.</p>
+<p>If we assume we have <span class="math notranslate nohighlight">\(m\)</span> balls in total, then we can define the current state of the system as the number of balls in the left urn. This urn can have <span class="math notranslate nohighlight">\(0, 1, \ldots, m\)</span> balls, so with <span class="math notranslate nohighlight">\(m\)</span> balls in total, we have <span class="math notranslate nohighlight">\(m+1\)</span> possible states in our system.</p>
+<p>Let us model this markov process as a Monte Carlo process, i.e., a random walk. For each step of the iteration, we need to first pick a ball at random. If we have <span class="math notranslate nohighlight">\(m\)</span> balls, we can do this with <code class="docutils literal notranslate"><span class="pre">np.random.randint(m)</span></code>. Next we check wether we picked a ball from the left urn, in which case it is moved to the right, or vice versa.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># Number of steps</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># Total number of balls</span>
+
+<span class="c1"># State of the system (balls in left urn)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">ball</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ball</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;State $x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_3_0.png" src="../../../_images/markov_chains_3_0.png" />
+</div>
+</div>
+<p>Looking at the plot, we can see that curve rises quickly in the beginning, men then flattens out a bit. This is because we start at <span class="math notranslate nohighlight">\(x=0\)</span>, i.e., with 0 balls in the left urn. This means it is overwhelmingly likely to pick a ball in the right urn, increasing <span class="math notranslate nohighlight">\(x\)</span>. However, as <span class="math notranslate nohighlight">\(x\)</span> grows, there are now more balls in the left urn, and so the probability of picking either urn is growing. When <span class="math notranslate nohighlight">\(x=10\)</span> there is an equal number of balls in either urn, meaning it is equally likely to take a step in either direction.</p>
+<p>Our model is just like the 1D uniform random walker, but the probability is only uniform if <span class="math notranslate nohighlight">\(x=10\)</span>, as soon as the walker steps away from this value, it has a higher probability of walking back to <span class="math notranslate nohighlight">\(x=m/2\)</span> than further away.</p>
+<p>If we increase the number of steps taken, we see that there is considerable swinging around the <span class="math notranslate nohighlight">\(m/2\)</span> mark, but that we never get really big divergence from this mean value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># Number of steps</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># Total number of balls</span>
+
+<span class="c1"># State of the system (balls in left urn)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">ball</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ball</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;State $x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_5_0.png" src="../../../_images/markov_chains_5_0.png" />
+</div>
+</div>
+</section>
+<section id="analyzing-the-probabilities-of-the-system-with-markov-chains">
+<h2>Analyzing the probabilities of the system with Markov Chains<a class="headerlink" href="#analyzing-the-probabilities-of-the-system-with-markov-chains" title="Permalink to this headline">#</a></h2>
+<p>We just performed a Monte Carlo random walk on our system. But we can also analyze the system in a different way. In our random walk, we express the specific state the system is in as an integer in the range <span class="math notranslate nohighlight">\([0, m]\)</span>, i.e., we model the system as being in a given state at any time.</p>
+<p>An alternative to this is instead to talk about the <em>probability</em> of the system to be in a given state. We can express this as a given <em>probability</em> vector, <span class="math notranslate nohighlight">\(\bar{p}\)</span>. This vector would be <span class="math notranslate nohighlight">\(m+1\)</span> elements long, and the element <span class="math notranslate nohighlight">\(p_{i}\)</span> would express the probability that the system is in state <span class="math notranslate nohighlight">\(i\)</span>. As this probability changes over time, we will denote the probability vector after <span class="math notranslate nohighlight">\(N\)</span> steps as <span class="math notranslate nohighlight">\(\bar{p}_N\)</span>.</p>
+<p>As the system starts in <span class="math notranslate nohighlight">\(x=0\)</span>, we know that
+$<span class="math notranslate nohighlight">\(\bar{p}_0 = (1, 0, 0, \ldots, 0).\)</span>$</p>
+<p>For the first step of the iteration, we know we will have to move to <span class="math notranslate nohighlight">\(x=1\)</span> with 100% likelihood, so we get</p>
+<div class="math notranslate nohighlight">
+\[\bar{p}_1 = (0, 1, 0, \ldots, 0).\]</div>
+<p>But what happens now? The probability of moving another ball from the right urn to the left is <span class="math notranslate nohighlight">\(19/20\)</span>, i.e., 95%. But there is a small chance of <span class="math notranslate nohighlight">\(1/20\)</span>, or 5%, of moving the ball back. Thus, the probability vector splits:</p>
+<div class="math notranslate nohighlight">
+\[\bar{p}_2 = (\frac{1}{20}, 0, \frac{19}{20}, 0, 0, \ldots, 0).\]</div>
+<p>Performing more steps by hand quickly becomes tedious. The point is that we can model the <em>probability</em> of being in each possible state. This vector is often called the <em>probability distribution</em> of the system, as it tells us how the probability is <em>distributed</em> across the many states. If you think this concept is too abstract, it can help envision it as releasing a large number of random walkers, say a million. Then <span class="math notranslate nohighlight">\(\bar{p}\)</span> denotes the ratio of the walkers in the different states over time.</p>
+<section id="the-transition-matrix">
+<h3>The Transition Matrix<a class="headerlink" href="#the-transition-matrix" title="Permalink to this headline">#</a></h3>
+<p>If we want to model <span class="math notranslate nohighlight">\(\bar{p}\)</span> over time, we need to find some way to compute <span class="math notranslate nohighlight">\(\bar{p}_{N+1}\)</span> from <span class="math notranslate nohighlight">\(\bar{p}_N.\)</span> This is done with something called a <em>transition matrix</em> or alternatively a <em>propagator matrix</em>. This matrix denotes the probability of transitioning between states. It can be set up in a few different ways, but we want to generate a matrix <span class="math notranslate nohighlight">\(M\)</span>, so that the matrix element <span class="math notranslate nohighlight">\(M_{ij}\)</span> is the probability of transitioning from <span class="math notranslate nohighlight">\(j\)</span> to <span class="math notranslate nohighlight">\(i\)</span>. When generated this way, we can easily iterate the probability vector by matrix-vector multiplication:
+$<span class="math notranslate nohighlight">\(\bar{p}_{N+1} = M\bar{p}_N.\)</span>$</p>
+<p>Let us try this for our current problem, the Ehrenfest experiment. As we have <span class="math notranslate nohighlight">\(m+1\)</span> possible states, our transition matrix must have dimensions of <span class="math notranslate nohighlight">\((m+1)\times(m+1)\)</span>, as both indices indicate a state. As <span class="math notranslate nohighlight">\(M_{i, j}\)</span> indicates the probability of transitioning from <span class="math notranslate nohighlight">\(j\)</span> to <span class="math notranslate nohighlight">\(i\)</span>, we know that</p>
+<div class="math notranslate nohighlight">
+\[M_{x+1, x} = \frac{m-x}{m}, \qquad M_{x-1, x} = \frac{x}{m}.\]</div>
+<p>The first term is the probability of the transition <span class="math notranslate nohighlight">\(x \to x+1\)</span>, this means the step where a ball from the right urn is drawn, increasing <span class="math notranslate nohighlight">\(x\)</span> by 1. This happens with probability <span class="math notranslate nohighlight">\((m-x)/m\)</span> as described earlier. The other transition is that we draw a ball from the left urn, decreasing <span class="math notranslate nohighlight">\(x\)</span>, so <span class="math notranslate nohighlight">\(x \to x-1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">m</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">m</span>
+
+<span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">M</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we are using a loop to set both transitions from each state: <span class="math notranslate nohighlight">\(x\to x+1\)</span> and <span class="math notranslate nohighlight">\(x\to x-1\)</span>. However, we cannot get the ends correct inside the loop, as there is no <span class="math notranslate nohighlight">\(x \to x-1\)</span> at the lower end when <span class="math notranslate nohighlight">\(x=0\)</span>, and similarly there is no <span class="math notranslate nohighlight">\(x\to x+1\)</span> when <span class="math notranslate nohighlight">\(x=m\)</span>. This is included in the mathematics, because the expressions actually give 0 transition rates for these transitions, but if we try to set them to 0 in our code, we get an IndexError.</p>
+<p>With the transition matrix generated, let’s plot it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Next position $i$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Current Position $j$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ehrenfest Experiment Transition Matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_9_0.png" src="../../../_images/markov_chains_9_0.png" />
+</div>
+</div>
+<p>Analyzing the transition matrix by looking at it is quite tricky, as it is quite an abstract quantity with a lot of information in it. However, there is a simply test we can perform to see if it is reasonable. Note that because
+$<span class="math notranslate nohighlight">\(\bar{p}_N = (p_{0,N}, p_{1, N}, \cdots, p_{i, N}, \cdots)\)</span>$</p>
+<p>represents a probability distribution, the sum of all the elements of <span class="math notranslate nohighlight">\(\bar{p}\)</span> but be 1:</p>
+<div class="math notranslate nohighlight">
+\[\sum_i p_{i, N} = 1.\]</div>
+<p>But this must be the case at any time step as well, so we have
+$<span class="math notranslate nohighlight">\(\sum_i p_{i, N} = 1\ \forall\ N.\)</span><span class="math notranslate nohighlight">\(
+(\)</span>\forall$ means “for all”).</p>
+<p>If the sum of <span class="math notranslate nohighlight">\(\bar{p}\)</span> should remain at 1 for each time step, this puts a constraint on the transition matrix <span class="math notranslate nohighlight">\(M\)</span>, which is that it cannot make <span class="math notranslate nohighlight">\(\bar{p}\)</span> grow or shrink. Without going through all the linear algebra, this means that each column of <span class="math notranslate nohighlight">\(M\)</span> must also sum to 1:</p>
+<div class="math notranslate nohighlight">
+\[\sum_i M_{i, x} = 1.\]</div>
+<p>This statement is the same as saying as the sum of all transitions out of state <span class="math notranslate nohighlight">\(x\)</span> must be 1.</p>
+<p>We can check that our current matrix satisfies the condition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This expression first sums each column of the matrix with <code class="docutils literal notranslate"><span class="pre">np.sum(M,</span> <span class="pre">axis=0)</span></code>. This should in theory give a vector with only ones. However, because we are computing with floats, we use <code class="docutils literal notranslate"><span class="pre">np.isclose</span></code> instead of <code class="docutils literal notranslate"><span class="pre">==</span></code> to check this, as we might have very tiny deviations from precisely 1.0. The result of <code class="docutils literal notranslate"><span class="pre">np.isclose</span></code> is a vector of boolean values. We want all of these booleans to be true. If even a single column sums to something different from 1, we will get in trouble. We therefore use <code class="docutils literal notranslate"><span class="pre">np.all</span></code>. Finally we use an <code class="docutils literal notranslate"><span class="pre">assert</span></code>, if everything is normal and good, we keep going, if something is wrong, we need to fix it right away.</p>
+<p>It is a good idea to always use such an assertion when setting up a transition matrix, as it is easy to mess up an element somewhere.</p>
+</section>
+<section id="using-the-transition-matrix-to-compute-bar-p">
+<h3>Using the transition matrix to compute <span class="math notranslate nohighlight">\(\bar{p}\)</span><a class="headerlink" href="#using-the-transition-matrix-to-compute-bar-p" title="Permalink to this headline">#</a></h3>
+<p>Let us instead use it to compute the probability vector, <span class="math notranslate nohighlight">\(\bar{p}\)</span>, over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">p</span><span class="p">[:,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">p</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we use <code class="docutils literal notranslate"><span class="pre">np.dot</span></code> to compute the matrix-vector multiplication <span class="math notranslate nohighlight">\(M\cdot p\)</span>. This is because <code class="docutils literal notranslate"><span class="pre">M*p</span></code> would not work in the desired way. Instead we could have written <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">&#64;</span> <span class="pre">p</span></code>, because <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> is the matrix multiplication operator, introduced with Python 3.6.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Step, $N$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Distribution $\bar</span><span class="si">{p}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_15_0.png" src="../../../_images/markov_chains_15_0.png" />
+</div>
+</div>
+<p>We see the same trend as we saw for our single walker. As we start at step 0, the probability is collected 100% in <span class="math notranslate nohighlight">\(x=0\)</span> as this is our start point. As we iterate, the probability goes towards the mean <span class="math notranslate nohighlight">\(x=10\)</span> but also spreads out into a thicker band. We see that the probability of finding the system in states <span class="math notranslate nohighlight">\(x\in[5, 15]\)</span> is quite likely, but unlikely outside this interval.</p>
+<p>Another thing we can clearly see from the figure is a distinct <em>checkerboard</em> pattern. This pattern emerges because our system <em>has to</em> transition for each step. We start of in <span class="math notranslate nohighlight">\(x=0\)</span> at <span class="math notranslate nohighlight">\(N=0\)</span>. Now, for each step, <span class="math notranslate nohighlight">\(x\)</span> must increase or decrease by exactly 1. This means <span class="math notranslate nohighlight">\(x\)</span> will jump from an even to odd number for each iteration, no matter what. Thus only even values of <span class="math notranslate nohighlight">\(x\)</span> will have any probability for even steps <span class="math notranslate nohighlight">\(N\)</span> and vice versa for odd steps. This gives the distinct checkerboard pattern.</p>
+</section>
+<section id="steady-state">
+<h3>Steady state<a class="headerlink" href="#steady-state" title="Permalink to this headline">#</a></h3>
+<p>Looking at <span class="math notranslate nohighlight">\(\bar{p}_N\)</span>, we can see that it stabilizes over time, this is known as the <em>equilibrium</em> of the system, and we can say the system is in a <em>steady state</em>. Now, we started with <span class="math notranslate nohighlight">\(x=0\)</span>, which is far away from the steady state, yet the system equilibrates. In fact, for this system, no matter what initial condition you choose, you will end up in the same steady state. This is the case for many Markov chains, and finding the equilibrium behavior of a model is often a goal.</p>
+<p>If we want to get a better understanding of the steady state, we can plot out the final probability density vector <span class="math notranslate nohighlight">\(\bar{p}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">p</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;State $x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_17_0.png" src="../../../_images/markov_chains_17_0.png" />
+</div>
+</div>
+<p>Here we see the probability of being in each possible state <span class="math notranslate nohighlight">\(x\)</span> after <span class="math notranslate nohighlight">\(N=100\)</span> steps. Note that the checkerboard pattern is also visible here, with only the even states being possible. We also see that the probability of being in a state far from <span class="math notranslate nohighlight">\(x=10\)</span> falls of rapidly, being incredibly likely when we get far away from the mean value.</p>
+</section>
+<section id="the-modified-ehrenfest-experiment">
+<h3>The Modified Ehrenfest Experiment<a class="headerlink" href="#the-modified-ehrenfest-experiment" title="Permalink to this headline">#</a></h3>
+<p>Ehrenfest also proposed a modified version of his experiment. With the exact same setup, we not only choose a ball at random, but we also choose what urn to place it in at random. Let us look at how this changes the behavior of the model.</p>
+<p>The modified model does not change the states themselves, as there are still <span class="math notranslate nohighlight">\(m+1\)</span> possible states: <span class="math notranslate nohighlight">\(x=0, 1, 2, \ldots, m\)</span>. What changes are the transition rates between the states. As before, we pick at ball at random. The probability of picking a ball from the left urn is still <span class="math notranslate nohighlight">\(x/m\)</span>, and picking a ball from the right urn is still <span class="math notranslate nohighlight">\((m-x)/m\)</span>. The difference is that after picking a ball, there is a 50% chance we just place it back into the urn it is already in, and only a 50% chance we put it in the other urn.</p>
+<p>Because we need to construct a new transition matrix, we name it <span class="math notranslate nohighlight">\(Q\)</span> instead of <span class="math notranslate nohighlight">\(M\)</span>. We then have</p>
+<div class="math notranslate nohighlight">
+\[Q_{x+1, x} = \frac{m-x}{2m}, \qquad Q_{x, x} = \frac{1}{2}, \qquad Q_{x-1, x} = \frac{x}{2m}.\]</div>
+<p>Let us generate this matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">Q</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">Q</span><span class="p">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">:</span>
+        <span class="n">Q</span><span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Check that all columns sum to 1</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As our assertion went through, let us move on to modeling the system. We now name our probability vector <span class="math notranslate nohighlight">\(\bar{q}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">q</span><span class="p">[:,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">q</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Step, $N$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Distribution $\bar</span><span class="si">{q}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_21_0.png" src="../../../_images/markov_chains_21_0.png" />
+</div>
+</div>
+<p>Comparing the normal and the modified Ehrenfest models, we notice two things. First of, the checkerboard pattern is gone! This is because the model can now also remain in place, therefore, there is no longer any guarantee that the state of the system is even or odd at different times.</p>
+<p>In addition to this, we can see that it takes longer before the system reaches its steady state. This makes sense, as the probability of staying put is <span class="math notranslate nohighlight">\(1/2\)</span>, meaning every other step of the system will tend to be no change. This means we would expect it to take about twice as long for the model to hit its steady state, which we can see that it does.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">q</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;State $x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Modified Ehrenfest Model ($N=100$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_23_0.png" src="../../../_images/markov_chains_23_0.png" />
+</div>
+</div>
+<p>Again we see that we do not get the checkerboard pattern. In addition we see that there is a slightly higher chance of being to the left of <span class="math notranslate nohighlight">\(x=10\)</span> compared to the right. This is because we started the whole system in <span class="math notranslate nohighlight">\(x=0\)</span> and it clearly has not had enough time to reach equilibrium. Let us try again with more steps and see.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">q</span><span class="p">[:,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">q</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">q</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;State $x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Modified Ehrenfest Model ($N=10000$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_25_0.png" src="../../../_images/markov_chains_25_0.png" />
+</div>
+</div>
+<p>Now the model has had time to equilibrate and reach a fully symmetric state.</p>
+</section>
+</section>
+<section id="random-walks-and-markov-chains">
+<h2>Random Walks and Markov Chains<a class="headerlink" href="#random-walks-and-markov-chains" title="Permalink to this headline">#</a></h2>
+<p>In the previous lecture we discussed random walks, and now we are talking about markov chains. But what is actually the difference between the two? Put simply, a random walk is actually just a type of markov chain. And so a markov chain is just the generalized concept. However, in practice, people use the terms slightly differently.</p>
+<p>The example we just looked at, Ehrenfest’s experiment, is an example of a markov chain. This is because the probabilities of moving from one state to another does not depend on time, or on the history of the system. The system itself is <em>memoryless</em>.</p>
+<p>When analyzing the Ehrenfest system, we first performed a <em>stochastic</em> simulation of the system itself. We simply modeled how a single experiment carried out. We can refer to this process as carrying out a random walk. Later we analyzed the probabilities of different states in a completely deterministic manner, it was not a stochastic simulation.</p>
+<p>While a random walk is an example of a markov chain, one often uses <em>random walk</em> specifically when one talks about stochastic simulation. Another term for such simulations is Monte Carlo Markov Chain (MCMC). Recall that “Monte Carlo” is often used for stochastic algorithms, named after the famous casino. Random walks as a term is therefore often, but not exclusively, used to refer to how the system is studied.</p>
+<section id="the-uniform-1d-walker">
+<h3>The Uniform 1D Walker<a class="headerlink" href="#the-uniform-1d-walker" title="Permalink to this headline">#</a></h3>
+<p>Last lecture, we looked at random walks with the uniform 1D walker. This is also an example of a markov process, and we can analyze it with markov chains, instead of stochastic simulation. Let us do this.</p>
+<p>First we must generate the transition matrix <span class="math notranslate nohighlight">\(M\)</span>. However, how many possible <em>states</em> does our 1D uniform walker actually have? Well, the one we covered in the previous lecture is an <em>unbounded</em> walker, the longer you let it carry on, the further away from the origin it gets. Therefore, there’s in theory an infinite number of states. This is a bit tricky for us to deal with, so instead, let us look at a <em>bounded walker</em>.</p>
+<p>A bounded walker is a walker that walks freely and uniformly within its domain, but at the boundary of the domain there are hard walls, and so if it walks all the way out there, it cannot pass through the walls.</p>
+<p>Let us say our walker starts in <span class="math notranslate nohighlight">\(x=0\)</span>, and cannot walk further than 50 in either direction, i.e., the boundaries are at <span class="math notranslate nohighlight">\(x=-50\)</span> or <span class="math notranslate nohighlight">\(x=50\)</span>. This means the system has 101 states (<span class="math notranslate nohighlight">\(x \in [-50, 50]\)</span>). For each step of the walker, it takes a step to the left or right with equal probability, so</p>
+<div class="math notranslate nohighlight">
+\[M_{i+1, i} = 0.5, \qquad M_{i-1, i} = 0.5.\]</div>
+<p>As before, we need to be especially careful at the boundary. If the walker tries to walk through the boundaries, it is not allowed to do so, and instead stays put, so
+$<span class="math notranslate nohighlight">\(M_{0, 0} = 0.5, \quad M_{100, 100} = 0.5\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">states</span> <span class="o">=</span> <span class="mi">101</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">states</span><span class="p">,</span> <span class="n">states</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">states</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">M</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">M</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_28_0.png" src="../../../_images/markov_chains_28_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">starting_position</span> <span class="o">=</span> <span class="p">(</span><span class="n">states</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span> <span class="c1"># start in middle</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">states</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">p</span><span class="p">[</span><span class="n">starting_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_29_0.png" src="../../../_images/markov_chains_29_0.png" />
+</div>
+</div>
+<p>We see that the walker starts at the middle, and then probability spreads out. Again we see a clear checkerboard pattern, because the random walker always takes a step in either direction. Let us close the range where the walker can walk considerably</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">states</span> <span class="o">=</span> <span class="mi">21</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">states</span><span class="p">,</span> <span class="n">states</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">states</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">M</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">M</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">starting_position</span> <span class="o">=</span> <span class="p">(</span><span class="n">states</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">states</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">p</span><span class="p">[</span><span class="n">starting_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_32_0.png" src="../../../_images/markov_chains_32_0.png" />
+</div>
+</div>
+<p>We now see the same checkerboard pattern at the start, but because the walkers at the edge of the domains can remain still for one or more steps, the checkerboard eventually gets washed out. As time moves on, we see that the probability gets completely washed out, meaning the probability of being anywhere within the domain becomes equally likely. This is different from the Ehrenfest model, because in the Ehrenfest model, the system has a tendency to stick close to <span class="math notranslate nohighlight">\(x=10\)</span>.</p>
+</section>
+<section id="examples-of-markov-chains">
+<h3>Examples of Markov Chains<a class="headerlink" href="#examples-of-markov-chains" title="Permalink to this headline">#</a></h3>
+<p>Markov process are a generalization of random walks, and so just like we discussed last lecture, they can be used for a large number of applications across a large number of fields. Here, we give to example of use cases of Markov chains.</p>
+<section id="google-s-page-rank-algorithm">
+<h4>Google’s Page Rank algorithm<a class="headerlink" href="#google-s-page-rank-algorithm" title="Permalink to this headline">#</a></h4>
+<p>A popular example of the use of Markov chain comes from the search engine Google. To rank webpages Google envisions the entire world wide web as one giant markov chain. A given webpage is a state in the model. A transition between webpages is a given hyperlink that takes you from one to the other. The Page Rank algorithm is built on the idea that pages with many links to them are more popular and important. In the language of Markov chains, they say that pages with a high transition rate to them should be ranked higher. This is also an example of random walks, because they are essentially ranking pages based on how likely you are to visit them if you were traversing the internet by only clicking random hyperlinks.</p>
+<p>Google’s <a class="reference external" href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> algorithm was the first algorithm the search engine used. Today they combine the PageRank algorithm with others to provide a final ranking.</p>
+</section>
+<section id="modelling-ion-channels">
+<h4>Modelling ion channels<a class="headerlink" href="#modelling-ion-channels" title="Permalink to this headline">#</a></h4>
+<p>To understand excitable cells in the body, such as neurons in your brain, or your muscle cells, we need to understand <em>ion channels</em>. Ion channels are macromolecules in the cell wall that can open and close to respond to different stimuli. These channels opening start cascading effects in the cell such as a muscle cell contracting or a neuron firing an <em>action potential</em>.</p>
+<p>These ion channels are huge macromolecules that can shape and distort to enter into different conformational shapes. Some of these shapes allow for ions to pass through, like a tunnel, while other shapes are closed, not allowing any ion transport through. Through a combination of chemistry and physics we can set up elaborate models for how these ion channels open and close. These models are example of Markov models, as the ion channels will be in any number of given states:</p>
+<figure class="align-default" id="ion-channel-markov-model">
+<a class="reference internal image-reference" href="../../../_images/ion_channel_markov_model.jpg"><img alt="ion_channel_markov_model" src="../../../_images/ion_channel_markov_model.jpg" style="width: 600px;" /></a>
+</figure>
+<p>Such models are crucial to understanding how cells work and react to stimuli. If you for example have a good markov model for an ion channel, you can model how different drugs affect the cell, because the primary effect of most drugs is to change the transition rates between the different states of the ion channel markov model. A drug can for example make certain channels open more easily, or remain open for longer.</p>
+<p>Another use for such ion channel markov models is understanding genetic variants and genetic disorder. Brugada syndrome is an example of a genetic disorder leading to abnormal electrical activity in the heart which in turn can lead to sudden death while sleeping. Brugada is especially common among young males in southeast asia. While the cause of the syndrome was unknown for a long time, the genetic cause was discovered in 1998 and is due to a disorder in the cardiac sodium ion channel. This genetic cause can be modelled using markov models, and this has been an important part in understanding the disease and developing treatments for it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">walkers</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">walks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">displacement</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">walks</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">walks</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">walker</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">displacement</span><span class="p">[:,</span> <span class="n">walker</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">displacement</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;b--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)),</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_34_0.png" src="../../../_images/markov_chains_34_0.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="chutes-and-ladders">
+<h2>Chutes and Ladders<a class="headerlink" href="#chutes-and-ladders" title="Permalink to this headline">#</a></h2>
+<p>For the rest of this lecture we will look at the board game <a class="reference external" href="https://en.wikipedia.org/wiki/Snakes_and_Ladders"><em>Chutes and Ladders</em></a>, which was also the theme for this weeks exercises. It is therefore a good idea to take a look at the exercises before reading these lecture notes, as we will go through and cover the solution.</p>
+<figure class="align-default" id="cnl03">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/en/b/ba/Cnl03.jpg"><img alt="Cnl03" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Cnl03.jpg" style="width: 300px;" /></a>
+</figure>
+<section id="the-game-with-no-chutes-or-ladders">
+<h3>The game with no chutes or ladders<a class="headerlink" href="#the-game-with-no-chutes-or-ladders" title="Permalink to this headline">#</a></h3>
+<p>We can start by modelling the game without any chutes and ladders. A normal chutes and ladders board consists of 100 squares. The player starts outside the board, on a virtual square “0”. For each turn, the player throws a six-sided die and moves the number of places up on the board. The player is finished when they reach square 100 or above.</p>
+<p>Note that this problem is completely 1-dimensional, even though the board it self is a 2D grid, this is because the squares on the board just wraps around and loops back. You could simply cut up the board and put it along one long line.</p>
+<p>To model the game as a random walk (Monte Carlo Markov Chain), we use a loop to keep throwing the die until we have reached the goal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">rolls</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">position</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="n">position</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">rolls</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+</pre></div>
+</div>
+</div>
+</div>
+<p>Simulating a single game like this doesn’t tell us much. But we can repeat the process many times, and look at the outcomes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">one_game</span><span class="p">():</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rolls</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">position</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">position</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="n">rolls</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">rolls</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">games</span> <span class="o">=</span> <span class="p">[</span><span class="n">one_game</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lowest number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">games</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Highest number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">games</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">games</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">games</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of rolls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lowest number: 21
+Highest number: 40
+Average number: 29.0859
+</pre></div>
+</div>
+<img alt="../../../_images/markov_chains_38_1.png" src="../../../_images/markov_chains_38_1.png" />
+</div>
+</div>
+<p>Here we have played 10000 games, and plotted the number of rolls needed to get to the finish line as a histogram. We also plot out the minimum number of rolls needed, the maximum rolls taken and the average. Now, if you take a look at the minimum number of rolls, it is 21, but the theoretical best we can do is to only roll sixes, which would take <span class="math notranslate nohighlight">\(100/6 = 16.67 \approx 17\)</span> rolls. However, the probability of getting seventeen sixes in a row is to small to reasonable expect to get it the <span class="math notranslate nohighlight">\(N=10000\)</span> games we play here. The average however, should be close to the theoretical average.</p>
+<p>Let us repeat our analysis with a non-stochastic Markov Chain, then we first have to make the transition matrix. There are 100 squares, plus the virtual “0” squares, so we have 101 states in our model. When standing in square <span class="math notranslate nohighlight">\(i\)</span>, we roll a die with 6 outcomes, and so we are equally likely to move to squares <span class="math notranslate nohighlight">\(i+1\)</span>, <span class="math notranslate nohighlight">\(i+2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(i+6\)</span>. The exception is at the end, where we need to handle the “overshoot” above square 100.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">101</span><span class="p">,</span> <span class="mi">101</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">95</span><span class="p">):</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">7</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span>
+
+<span class="c1"># Handle &quot;overshoot&quot;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">95</span><span class="p">,</span> <span class="mi">99</span><span class="p">):</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span>
+
+<span class="c1"># Handle &quot;overshoot&quot;</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="mi">6</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">96</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">6</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">97</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="o">/</span><span class="mi">6</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">98</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="o">/</span><span class="mi">6</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">M</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Check all columns sum to 1</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">))</span>
+
+<span class="c1"># Plot matrix</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Current board position $j$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Next board position $i$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Transition matrix for plain board&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_40_0.png" src="../../../_images/markov_chains_40_0.png" />
+</div>
+</div>
+<p>With the transition matrix created, we can now model the probability vector <span class="math notranslate nohighlight">\(\bar{p}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">101</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Rolls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_42_0.png" src="../../../_images/markov_chains_42_0.png" />
+</div>
+</div>
+<p>From this plot it is clear that as we carry out more and more rolls, we eventually get to the goal. This Markov chain is an example of an <em>absorbing</em> Markov chain, because square “100” sucks up all the probability. After enough rolls, the probability to be finished is 1, and all other squares are 0.</p>
+<p>Let us look at how the probability of being finished looks. This would be the final element of <span class="math notranslate nohighlight">\(\bar{p}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Rolls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability of being finished&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_44_0.png" src="../../../_images/markov_chains_44_0.png" />
+</div>
+</div>
+<p>This is known as a <em>cumulative probability distribution</em> as it shows us the cumulative probability of being finished. In other words, it shows the probability of finishing in <span class="math notranslate nohighlight">\(N\)</span> <em>or more</em> rolls. If we instead want to figure out the exact number of rolls used, we are looking for the <em>probability density</em>, which we can find by taking the derivative of the cumulative probability. Another word for the probability density is the <em>arrival times</em>, because it denotes when a player arrives at the finish line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arrival</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">arrival</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Rolls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability of arriving at finish&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_46_0.png" src="../../../_images/markov_chains_46_0.png" />
+</div>
+</div>
+<p>This is the same plot as for our monte carlo simulation of the game.</p>
+</section>
+<section id="adding-the-chutes-and-ladders">
+<h3>Adding the Chutes and Ladders<a class="headerlink" href="#adding-the-chutes-and-ladders" title="Permalink to this headline">#</a></h3>
+<p>If, after moving, the player hits the start of a ladder or chute, they should move to a different square. We can implement these chutes and ladders as dictionaries. After rolling and moving the player, we check if they landed at the start of a ladder or chute, and if so, move them to the end of that chute/ladder.</p>
+<p>We use the chutes and ladders of the <em>Milton Bradley</em> version of the game:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ladders</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">38</span><span class="p">,</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+            <span class="mi">9</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span>
+           <span class="mi">21</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+           <span class="mi">28</span><span class="p">:</span> <span class="mi">84</span><span class="p">,</span>
+           <span class="mi">36</span><span class="p">:</span> <span class="mi">44</span><span class="p">,</span>
+           <span class="mi">51</span><span class="p">:</span> <span class="mi">67</span><span class="p">,</span>
+           <span class="mi">71</span><span class="p">:</span> <span class="mi">91</span><span class="p">,</span>
+           <span class="mi">80</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+
+<span class="n">chutes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">16</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="mi">47</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span>
+          <span class="mi">49</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+          <span class="mi">56</span><span class="p">:</span> <span class="mi">53</span><span class="p">,</span>
+          <span class="mi">62</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
+          <span class="mi">64</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+          <span class="mi">87</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+          <span class="mi">93</span><span class="p">:</span> <span class="mi">73</span><span class="p">,</span>
+          <span class="mi">95</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+          <span class="mi">98</span><span class="p">:</span> <span class="mi">78</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="monte-carlo-with-chutes-ladders">
+<h4>Monte Carlo with Chutes/Ladders<a class="headerlink" href="#monte-carlo-with-chutes-ladders" title="Permalink to this headline">#</a></h4>
+<p>To repeat the random walk version of our game with chutes and ladders we simply add an if-test into our for-loop</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">one_game</span><span class="p">():</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rolls</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">position</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">position</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">ladders</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="n">ladders</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">chutes</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="n">chutes</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+        <span class="n">rolls</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">rolls</span>
+
+<span class="n">one_game</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">games</span> <span class="o">=</span> <span class="p">[</span><span class="n">one_game</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lowest number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">games</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Highest number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">games</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">games</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">games</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">180</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of die rolls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lowest number: 7
+Highest number: 247
+Average number: 35.7648
+</pre></div>
+</div>
+<img alt="../../../_images/markov_chains_51_1.png" src="../../../_images/markov_chains_51_1.png" />
+</div>
+</div>
+<p>We see that adding the chutes and ladders has pushed down the lowest number of rolls it takes to get to the finish. But it has also increased the maximum number of rolls it takes.</p>
+</section>
+<section id="markov-chains-with-chutes-ladders">
+<h4>Markov Chains with Chutes/Ladders<a class="headerlink" href="#markov-chains-with-chutes-ladders" title="Permalink to this headline">#</a></h4>
+<p>We now want to repeat our analysis after adding chutes and ladders to our board. The first thing we will need to do is update the propagator matrix.</p>
+<p>First we copy the empty board propagator matrix by using <code class="docutils literal notranslate"><span class="pre">M.copy()</span></code>. Then change it to reflect adding the chutes and ladders. To differentiate the two, we call our new matrix <span class="math notranslate nohighlight">\(L\)</span>.</p>
+<p>Updating <span class="math notranslate nohighlight">\(L\)</span> to add the chutes and ladders is easier than it might seem. As <span class="math notranslate nohighlight">\(L_{i, j}\)</span> denotes the probability of going from <span class="math notranslate nohighlight">\(j\)</span> to <span class="math notranslate nohighlight">\(i\)</span>, simply take any value that would end at the start of a chute and ladder and move that probability to the end of the chute and ladder. For example, let’s say we have a ladder going from 12 to 37, then we would simply do:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">L</span><span class="p">[</span><span class="n">end</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">M</span><span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">29</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">L</span><span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">L</span><span class="p">[</span><span class="n">end</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">M</span><span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="ne">NameError</span>: name &#39;L&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>To add all of our chutes and ladders, we simply loop over them and repeat this process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">chutes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">L</span><span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">L</span><span class="p">[</span><span class="n">end</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">M</span><span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">ladders</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">L</span><span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">L</span><span class="p">[</span><span class="n">end</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">M</span><span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Current board position $j$&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Next board position $i$&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Transition matrix for standard board&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_56_0.png" src="../../../_images/markov_chains_56_0.png" />
+</div>
+</div>
+<p>Now we repeat the process from before to find the probability distribution. This time we call it <span class="math notranslate nohighlight">\(\bar{q}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">101</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">q</span><span class="p">[:,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">q</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">q</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">40</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Rolls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_58_0.png" src="../../../_images/markov_chains_58_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">q</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="p">:],</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of rolls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cumulative probability of finishing&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_59_0.png" src="../../../_images/markov_chains_59_0.png" />
+</div>
+</div>
+<p>And the arrival times become:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arrival_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="p">:])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">arrival_q</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arrival</span><span class="p">)),</span> <span class="n">arrival</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of arrival times&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability of finishing&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_61_0.png" src="../../../_images/markov_chains_61_0.png" />
+</div>
+</div>
+<p>From the plot, we see that the probability function for the empty board is much thinner and higher, while for the normal board it is lower and more spread out. Note that because this is a probability distribution, the sum under the curve must be 1. And so the height and width of the curves are coupled.</p>
+<p>The reason the probability of the normal board is more spread out is that adding the chutes and ladders is adding <em>variance</em> to the game. With the chutes and ladders we can get lucky and finish early, or we can get unlucky and spend longer to finish. This is reflected in the probability distributions.</p>
+<p>In addition to being more spread out, the curve for the normal board has more of its weight towards the left. This means that on <em>average</em> we will tend to finish in a fewer number of rolls on the normal board than on the empty board. This means that there is a benefit to the player for having the chutes and ladders added. This is because the benefit of the ladders outweighs the negative cost of the chutes. This is probably intentional from the game designers, as having more ladders than chutes is probably more fun to those playing the game.</p>
+</section>
+<section id="comparing-the-random-walk-and-the-markov-chain">
+<h4>Comparing the Random walk and the Markov Chain<a class="headerlink" href="#comparing-the-random-walk-and-the-markov-chain" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">arrival_q</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">games</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of die rolls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Markov Chain&#39;</span><span class="p">,</span> <span class="s1">&#39;Random Walk&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/markov_chains_63_0.png" src="../../../_images/markov_chains_63_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="adding-a-new-rule">
+<h3>Adding a new Rule<a class="headerlink" href="#adding-a-new-rule" title="Permalink to this headline">#</a></h3>
+<p>Let us go one step further than we did in the exercises. In many variants of chutes and ladders, a player who rolls a six immediately gets another throw.</p>
+<p>In our Monte Carlo simulation of the game, i.e., the random walk, we can simply add this rule with an extra if-test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">one_game_sixes</span><span class="p">():</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">turns</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="n">position</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">rolls</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
+        <span class="k">while</span> <span class="n">rolls</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">rolls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">rolls</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">+=</span> <span class="n">roll</span>
+            <span class="k">if</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">ladders</span><span class="p">:</span>
+                <span class="n">position</span> <span class="o">=</span> <span class="n">ladders</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">chutes</span><span class="p">:</span>
+                <span class="n">position</span> <span class="o">=</span> <span class="n">chutes</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+
+        <span class="n">turns</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">turns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
+
+<span class="n">games</span> <span class="o">=</span> <span class="p">[</span><span class="n">one_game</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+<span class="n">games_sixes</span> <span class="o">=</span> <span class="p">[</span><span class="n">one_game_sixes</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normal game&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lowest number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">games</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Highest number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">games</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">games</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rolling six gives new roll:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lowest number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">games_sixes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Highest number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">games_sixes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average number: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">games_sixes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">games</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">180</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">games_sixes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">180</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of die rolls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Normal game
+Lowest number: 7
+Highest number: 342
+Average number: 35.87358
+
+Rolling six gives new roll:
+Lowest number: 3
+Highest number: 244
+Average number: 30.10804
+</pre></div>
+</div>
+<img alt="../../../_images/markov_chains_66_1.png" src="../../../_images/markov_chains_66_1.png" />
+</div>
+</div>
+<p>We thus see that adding the re-roll rule reduces the number of rolls we need to get to the finish line by an average of 6. This seems reasonable, as the original average was about 36 throws, and so we would expect about <span class="math notranslate nohighlight">\(36/6\)</span> rolls of six.</p>
+<p>How can we add this rule to our Markov chain? Here things become a lot more complex, as the propagator matrix denotes the probability of moving from state <span class="math notranslate nohighlight">\(j\)</span> to state <span class="math notranslate nohighlight">\(i\)</span> in one turn. However, with the reroll rule, we can suddenly get from the starting square <span class="math notranslate nohighlight">\(j=0\)</span> to literally any other square on the board in one turn. This means constructing the propagator matrix will be a much larger challenge than before.</p>
+<p>We now see that adding a fairly simple rule had little to no impact on the challenge of modeling the problem with Monte Carlo simulation. However, modeling it as a markov chain has been a lot more challenging.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/stochastic_processes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="solving_the_1D_diffusion_equation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Solving the 1D Diffusion Equation using Finite Differences</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../optimization/optimization.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Software optimization and parallelism</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

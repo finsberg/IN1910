@@ -1,0 +1,2454 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Parallel Programming &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Course Summary" href="../summary/course_summary.html" />
+    <link rel="prev" title="Optimization and Mixed Programming" href="optimization_and_mixed_programming.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/optimization/parallel_programming.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/optimization/parallel_programming.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/optimization/parallel_programming.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/optimization/parallel_programming.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#moore-s-law">
+   Moore’s Law
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#frequency-scaling">
+   Frequency Scaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-emergence-of-multi-core-processors">
+   The emergence of multi-core processors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequential-vs-parallel-programs">
+   Sequential vs Parallel programs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-real-parallel-problem">
+   A real parallel problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-sequential-program">
+     The sequential program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#don-t-wait">
+     Don’t wait
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#created-copies-of-magnus">
+     Created copies of Magnus
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-multi-core-multi-threaded-approach">
+     The multi-core + multi-threaded approach
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#i-o-bounded-vs-cpu-bounded-problems">
+   I/O Bounded vs CPU bounded problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multithreading-don-t-wait">
+     Multithreading - Don’t wait
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiprocessing-make-copies">
+     Multiprocessing - Make copies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-checking-if-numbers-are-prime">
+     Example: Checking if numbers are prime
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallelizing-the-for-loop">
+     Parallelizing the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       for
+      </span>
+     </code>
+     loop
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-map-function">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       map
+      </span>
+     </code>
+     function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-problems">
+     Parallel problems
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downsides-of-parallel-programming">
+     Downsides of Parallel Programming
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downside-with-multi-threaded-programs-race-conditions">
+     Downside with multi-threaded programs - Race Conditions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-the-mandelbrot-set">
+   Example: The Mandelbrot Set
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rendering-the-mandelbrot-set">
+     Rendering the Mandelbrot set
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#references">
+       References
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#naive-implementation-in-python">
+   Naive implementation in Python
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#devising-a-benchmark">
+     Devising a Benchmark
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiprocessing">
+     Multiprocessing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vectorized-numpy">
+     Vectorized numpy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jit-compiling-with-numba">
+     JIT-compiling with Numba
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-out-the-benchmark">
+     Plotting out the Benchmark
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#moving-over-to-c">
+     Moving over to C++
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#timing-a-c-program">
+     Timing a C++ program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallelizing-with-openmp">
+     Parallelizing with OpenMP
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parallelizing-the-outer-loops">
+       Parallelizing the outer loops
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-python-bindings-using-cppyy">
+     Create a python bindings using cppyy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallelizing-with-numba">
+     Parallelizing with numba
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bar">
+     Bar
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gpu-parallelization">
+   GPU Parallelization
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Parallel Programming</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#moore-s-law">
+   Moore’s Law
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#frequency-scaling">
+   Frequency Scaling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-emergence-of-multi-core-processors">
+   The emergence of multi-core processors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequential-vs-parallel-programs">
+   Sequential vs Parallel programs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-real-parallel-problem">
+   A real parallel problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-sequential-program">
+     The sequential program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#don-t-wait">
+     Don’t wait
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#created-copies-of-magnus">
+     Created copies of Magnus
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-multi-core-multi-threaded-approach">
+     The multi-core + multi-threaded approach
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#i-o-bounded-vs-cpu-bounded-problems">
+   I/O Bounded vs CPU bounded problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multithreading-don-t-wait">
+     Multithreading - Don’t wait
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiprocessing-make-copies">
+     Multiprocessing - Make copies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-checking-if-numbers-are-prime">
+     Example: Checking if numbers are prime
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallelizing-the-for-loop">
+     Parallelizing the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       for
+      </span>
+     </code>
+     loop
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-map-function">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       map
+      </span>
+     </code>
+     function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-problems">
+     Parallel problems
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downsides-of-parallel-programming">
+     Downsides of Parallel Programming
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downside-with-multi-threaded-programs-race-conditions">
+     Downside with multi-threaded programs - Race Conditions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-the-mandelbrot-set">
+   Example: The Mandelbrot Set
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rendering-the-mandelbrot-set">
+     Rendering the Mandelbrot set
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#references">
+       References
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#naive-implementation-in-python">
+   Naive implementation in Python
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#devising-a-benchmark">
+     Devising a Benchmark
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiprocessing">
+     Multiprocessing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vectorized-numpy">
+     Vectorized numpy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jit-compiling-with-numba">
+     JIT-compiling with Numba
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-out-the-benchmark">
+     Plotting out the Benchmark
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#moving-over-to-c">
+     Moving over to C++
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#timing-a-c-program">
+     Timing a C++ program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallelizing-with-openmp">
+     Parallelizing with OpenMP
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parallelizing-the-outer-loops">
+       Parallelizing the outer loops
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-python-bindings-using-cppyy">
+     Create a python bindings using cppyy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallelizing-with-numba">
+     Parallelizing with numba
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bar">
+     Bar
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gpu-parallelization">
+   GPU Parallelization
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="parallel-programming">
+<h1>Parallel Programming<a class="headerlink" href="#parallel-programming" title="Permalink to this headline">#</a></h1>
+<p>So far we have discussed how to make programs faster by <em>optimizing</em> them. But there is an even simpler solution to making things run faster: simply run them on a faster computer! While this suggestion is made half in jest, there is  no doubt that the computational power of computer hardware has grown exponentially over the last 30 years, and these new, faster computers allow us to do computations that were impossible to even conceive of in the past.</p>
+<p>Today, for reasons we will explain shortly, running large computations require splitting the computations up into many small computations that can be carried out in parallel on a large network of computers. This process is known as <em>parallel computing</em>. With the advent of powerful <a class="reference external" href="https://en.wikipedia.org/wiki/Supercomputer">supercomputers</a>, parallel computing is vital, because a supercomputer is really only a large number of individual computers coupled together. Uploading a script you have written to a supercomputer and running it there probably won’t make it run much faster, because your script isn’t ready to be run in parallel. To get access to the speed and power of a supercomputer, you would need to do <em>parallel programming</em>.</p>
+<p>While we won’t have time to teach you too much parallel programming in this course, we will try to give you a sense of the importance and an appreciation of some of the possibilities. We will also show you some small tools you can use to improve your Python and C++ programs using parallelization without it being too much of a hazel.</p>
+<section id="moore-s-law">
+<h2>Moore’s Law<a class="headerlink" href="#moore-s-law" title="Permalink to this headline">#</a></h2>
+<p>Moore’s law is the name given to a statement by Gordon Moore in a 1965 paper, that observed that the number of transistors on dense integrated chips like a computer central processing unit (CPU) seemed to be doubling each every second year.</p>
+<p>The CPU is the brain of the computer and the unit that performs most of the computations underlying our programs. It is built up of transistors that form logic gates. As the number of transistors in a CPU grow, the computational capacity of the CPU grows and we get more powerful and faster machines. While Moore’s law specifically talks about the number of transistors on chips, it is often quoted as referring to computational capacity.</p>
+<p>Moore predicted that this trend would continue for at least 10 years. His prediction came true, and in 1975 he revised his estimate, saying it would continue to until at least 2000. The trend held true to almost 2012, and has started to slow a bit, now doubling every 2.5 or 3 years. Moore said in 2015 that he thought the trend would reach saturation, saying: “I see Moore’s law dying here in the next decade.”</p>
+<figure class="align-default" id="figures-transistor-count-over-time-png">
+<a class="reference internal image-reference" href="../../../_images/transistor_count_over_time.png"><img alt="../../figures/transistor_count_over_time.png" src="../../../_images/transistor_count_over_time.png" style="width: 800px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Moore’s law states that the number of transistors in a dense integrated chip, such as a computer CPU, doubles roughly every second year. This Figure shows the transistor count of representative CPUs over the years from 1970 to today. Note the logarithmic y-axis, indicating exponential growth.</span><a class="headerlink" href="#figures-transistor-count-over-time-png" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="transistors-log">
+<a class="reference internal image-reference" href="../../../_images/transistors_log.png"><img alt="transistors_log" src="../../../_images/transistors_log.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 61 </span><span class="caption-text">The average transistor count of CPU’s over time shows a straight line when plotted in a logarithmic plot, indicating that the law holds up well.</span><a class="headerlink" href="#transistors-log" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="transistors-linear">
+<a class="reference internal image-reference" href="../../../_images/transistors_linear.png"><img alt="transistors_linear" src="../../../_images/transistors_linear.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">A straight line in a logarithmic plot is an exponential curve. This becomes readily apparent when plotting out the same data as in Figure 2 in a linear plot.</span><a class="headerlink" href="#transistors-linear" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>(the abo../../figures/ are taken from <a class="reference external" href="https://ourworldindata.org/technological-progress">OurWorldinData.org</a> and used under a <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en_US">CC BY-SA 4.0</a> license.)</p>
+<p>The exponential growth seen in Moore’s law means we have seen an incredible growth in computational capacity in the last 50 years.</p>
+</section>
+<section id="frequency-scaling">
+<h2>Frequency Scaling<a class="headerlink" href="#frequency-scaling" title="Permalink to this headline">#</a></h2>
+<p>In addition to the transistor count, the <em>clock rate</em> of a CPU is important. To run a program, a computer needs to finish a set of instructions or computations. The faster the rate it does those computations, the faster the program finishes. This can be written out as</p>
+<div class="math notranslate nohighlight">
+\[{\displaystyle \mathrm {Runtime} ={\frac {\mathrm {Instructions} }{\mathrm {Program} }}\times {\frac {\mathrm {Cycles} }{\mathrm {Instruction} }}\times {\frac {\mathrm {Time} }{\mathrm {Cycle} }},}\]</div>
+<p>Here, the final fraction, the time per cycle, is just the inverse of the frequency:</p>
+<div class="math notranslate nohighlight">
+\[{\displaystyle \mathrm {Runtime} ={\frac {\mathrm {Instructions} }{\mathrm {Program} }}\times {\frac {\mathrm {Cycles} }{\mathrm {Instruction} }}\times {\frac {\mathrm {1} }{\mathrm {Frequency} }},}\]</div>
+<p>By improving the <em>frequency</em> of the CPU, we therefore reduce the runtime of the program.</p>
+<p>Making CPUs faster by increasing their frequency is known as <em>frequency scaling</em> and hardware manufacturers worked hard to increase their CPU frequencies at a dramatic rate from the 1970s into the 2000s.The first personal computer, the Altair 8800 had a clock speed of about 2 MHz. The first CPU to reach 1 GHz was the AMD Athlon in 1999, and in 2002 a Intel Pentium 4 was the first to reach 3 Ghz.</p>
+<p>The importance of CPU frequency also lead to what is commonly referred to as the <em>Megahertz myth</em>. Because a higher frequency means a lower run-time, it became common to use the frequency of a CPU as a marker of it’s performance. The reason this is referred to as a “myth” is because the clock rate is only one indicator of it’s performance, and the clock rates of two CPUs can only be compared if all others things are equal.  However, because the frequency gave such a succinct number, it was heavily pushed in marketing, even by the hardware producers themselves.</p>
+<p>The era of <em>frequency scaling</em> ended in 2004. Before this, Intel had outlined their goals to get to 10 and 20 GHz processors in the near future, but in 2004 these plans were officially cancelled. The reason is that while frequency gives higher speeds, it also increases the <em>power consumption</em> of a CPU. A CPU consumes power at a rate of
+$<span class="math notranslate nohighlight">\({\displaystyle P = C\times V^{2}\times F,}\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(P\)</span> is power consumption, <span class="math notranslate nohighlight">\(C\)</span> is the capacitance being switched per clock cycle, <span class="math notranslate nohighlight">\(V\)</span> is voltage, and <span class="math notranslate nohighlight">\(F\)</span> is the processor frequency. Any power consumed by the CPU will be converted to heat, and will lead to overheating if it isn’t removed from the system.</p>
+<p>Traditionally CPUs are cooled by a metal <em>heat sink</em> connected to a fan or liquid cooling system. What hardware producers were seeing was that if they desired to increase the frequencies of processors even more then would need to radically change how CPUs were cooled. It simply isn’t physically possible to ramp much higher on the current designs.</p>
+</section>
+<section id="the-emergence-of-multi-core-processors">
+<h2>The emergence of multi-core processors<a class="headerlink" href="#the-emergence-of-multi-core-processors" title="Permalink to this headline">#</a></h2>
+<p>So over at least the last 40 years, processors have gotten exponentially more powerful due to higher transistor counts (Moore’s law) and due to frequency scaling. In 2004, frequency scaling of processors more or less stopped, but Moore’s law is still going strong, although it is starting to slow down a bit and is expected to end in the last decade or so.</p>
+<p>Due to frequency scaling dying, there has been a paradigm shift away from focusing on higher and higher frequencies in processors, to having <em>multiple cores</em>. Put simply, modern CPU’s consist of several, distinct, CPU’s on the same chip.</p>
+<p>The figure below shows the historical trend of machine CPU’s (and GPU’s as well). The orange markers for the transistors are going in a straight line. This is a logarithmic plot, so the growth is exponential. This trend has not slowed down considerably yet. What has flattened out and plateaued is the processor frequency, shown in green. This has also flattened out the power consumption and almost the “single thread” performance. The number of cores in a CPU is on the rise however.</p>
+<figure class="align-default" id="trend-data">
+<a class="reference internal image-reference" href="../../../_images/trend_data.png"><img alt="trend_data" src="../../../_images/trend_data.png" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Image created by <a class="reference external" href="https://www.karlrupp.net/2018/02/42-years-of-microprocessor-trend-data">Karl Rupp</a></span><a class="headerlink" href="#trend-data" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>What this means is that while single processors have gotten exponentially more powerful over the last 40 years, this trend is stopping. The increased performance we see out of new hardware emerging now is due to having multiple cores. This means, if we want to capitalize on new, faster hardware, we need to effectively use multiple CPU’s.</p>
+</section>
+<section id="sequential-vs-parallel-programs">
+<h2>Sequential vs Parallel programs<a class="headerlink" href="#sequential-vs-parallel-programs" title="Permalink to this headline">#</a></h2>
+<p>Normal code you are used to write, be it in Python or C++, is <em>sequential</em>. This means that all the statements you write occur after each other, one by one. This is the way we are used to write and think about programs, and there is an inherent logic to the <em>order</em> of the statements. In some cases a few lines can be swapped around without changing the behavior of the code, but this is definitely not true in general.</p>
+<p>Because of this, when we run a normal C++ or Python program, our computer will only ever use a <em>single</em> core to run the program. We say that the program is sequential, or <em>serial</em>. The operating system of your computer might swap which core it uses to run the program, and if there are many jobs running, the program might be put on halt, and then restart later. But it will still only be tackled by a single core, running instruction after instruction.</p>
+<p>If we want to have multiple cores running our code, we need to write our code in a fundamentally different way to create a <em>parallel</em> program where the problem itself can be split among different cores, or “workers”. Writing parallel code is a big topic that we don’t have time to tackle properly, but we will briefly discuss some issues and show some simple examples of how we can parallelize C++ and Python code.</p>
+</section>
+<section id="a-real-parallel-problem">
+<h2>A real parallel problem<a class="headerlink" href="#a-real-parallel-problem" title="Permalink to this headline">#</a></h2>
+<p>In 2016 the world champion in chess, Magnus Carlsen played against 70 opponents simultaneously in Hamburg. We can imagine that we have been told to write a computer program that will instruct Magnus on how he should play in order to finish within the least amount of time. Suppose the following</p>
+<ul class="simple">
+<li><p>Magnus uses 10 seconds to make a move</p></li>
+<li><p>His opponents uses 50 seconds to make a move</p></li>
+<li><p>In an average game there are 30 moves</p></li>
+</ul>
+<figure class="align-default" id="figures-magnus-carlsen-jpg">
+<a class="reference internal image-reference" href="../../../_images/magnus_carlsen.jpg"><img alt="../../figures/magnus_carlsen.jpg" src="../../../_images/magnus_carlsen.jpg" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 64 </span><span class="caption-text"><strong>Source:</strong> <a class="reference external" href="https://en.chessbase.com/post/carlsen-s-70-board-simul-in-hamburg/">chessbase.com</a></span><a class="headerlink" href="#figures-magnus-carlsen-jpg" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We will now go through different solution strategies which illustrates different ways parallelism.</p>
+<section id="the-sequential-program">
+<h3>The sequential program<a class="headerlink" href="#the-sequential-program" title="Permalink to this headline">#</a></h3>
+<p>Before you took this course you didn’t know anything about the parallel programming, and there you wrote a sequential program, where Magnus plays against one opponent at the time and when the game is over he moves to the next opponent. In this case Magnus would use <span class="math notranslate nohighlight">\((10 + 50)\)</span> seconds <span class="math notranslate nohighlight">\(\times \)</span> <span class="math notranslate nohighlight">\(30\)</span> moves <span class="math notranslate nohighlight">\(\times\)</span> <span class="math notranslate nohighlight">\(70\)</span> opponents <span class="math notranslate nohighlight">\(= 126000 \)</span> seconds = <span class="math notranslate nohighlight">\(35\)</span> hours.</p>
+</section>
+<section id="don-t-wait">
+<h3>Don’t wait<a class="headerlink" href="#don-t-wait" title="Permalink to this headline">#</a></h3>
+<p>Of course, Magnus Carlsen didn’t spend 35 hours on this game. The way Magnus Carlsen would play is as follows: He goes to the first opponent, use 10 seconds to make his move and goes directly to the next opponent. After making a move against all the 70 opponents there is <span class="math notranslate nohighlight">\(10 \times 70 = 700\)</span> seconds <span class="math notranslate nohighlight">\(=\)</span> <span class="math notranslate nohighlight">\(11.67\)</span> minutes since he started at the first opponents. The first opponent only used 50 seconds to make his/her move so Magnus doesn’t need to wait and can therefore continue in the same manner. In total he would now spend <span class="math notranslate nohighlight">\(10\)</span> seconds <span class="math notranslate nohighlight">\(\times \)</span> <span class="math notranslate nohighlight">\(70\)</span> opponents <span class="math notranslate nohighlight">\(\times\)</span>  <span class="math notranslate nohighlight">\(30\)</span> moves  <span class="math notranslate nohighlight">\(= 21000 \)</span> seconds = <span class="math notranslate nohighlight">\(5\)</span> hours and <span class="math notranslate nohighlight">\(50\)</span> minutes.</p>
+</section>
+<section id="created-copies-of-magnus">
+<h3>Created copies of Magnus<a class="headerlink" href="#created-copies-of-magnus" title="Permalink to this headline">#</a></h3>
+<p>Now say that you want utilize all the processors you have on your computer to solve this problem, and imagine that we have a 7 core machine available. This would be analogous to make 7 copies of Magnus Carlsen, each running the sequential program. Now we can distribute 10 opponents to each copy and therefore solve the problem in <span class="math notranslate nohighlight">\(\frac{35}{7} = 5\)</span> hours.</p>
+</section>
+<section id="the-multi-core-multi-threaded-approach">
+<h3>The multi-core + multi-threaded approach<a class="headerlink" href="#the-multi-core-multi-threaded-approach" title="Permalink to this headline">#</a></h3>
+<p>At this point you might realize that by combining the multi-threaded and multi-core approach we could event go faster. In fact, by running each core multithreaded Magnus can finish all the 70 games in only <span class="math notranslate nohighlight">\(50\)</span> minutes.</p>
+</section>
+</section>
+<section id="i-o-bounded-vs-cpu-bounded-problems">
+<h2>I/O Bounded vs CPU bounded problems<a class="headerlink" href="#i-o-bounded-vs-cpu-bounded-problems" title="Permalink to this headline">#</a></h2>
+<p>Depending of the type of problem you want to solve you might want to apply different techniques to speed up your program. In the example with Magnus Carlsen playing against multiple opponents, there are two ways we can reduce the total time</p>
+<ol class="simple">
+<li><p>Use the time that Magnus has to wait for the opponent to move, to do other work</p></li>
+<li><p>Create copies of Magnus that does the same work</p></li>
+</ol>
+<section id="multithreading-don-t-wait">
+<h3>Multithreading - Don’t wait<a class="headerlink" href="#multithreading-don-t-wait" title="Permalink to this headline">#</a></h3>
+<p>The first approach would be analogous to run a the program across 70 threads. At any time, there is only one process (i.e Magnus Carlsen), but as soon as he has to wait for an opponent, another thread takes over. These types of problems are I/O-bounded problems. I/O bounded problems are problems where you spend a lot of time waiting for input / output (I/O) from some external source that is slower than the CPU. Examples of this is when you want to download content from the web or if you want to write a file.</p>
+<p>Note that if the opponents playing against Magnus would make their move instantaneously, we would not gain any speedup by running Magnus along multiple threads.</p>
+<p>Technically speaking, a multi-threaded program is not a parallel program, since it is not running multiple things at the same time. Instead the operating system determines which task are performed when, so that the program spend the least amount of time waiting. Notice that it is the operating system that decides which thread is being run.</p>
+</section>
+<section id="multiprocessing-make-copies">
+<h3>Multiprocessing - Make copies<a class="headerlink" href="#multiprocessing-make-copies" title="Permalink to this headline">#</a></h3>
+<p>The other approach would be analogous to run the program on multiple cores. Here we make copies of Magnus, with each copy representing one processor executing the work independent on the other processors. This is the only time Magnus is playing in parallel.</p>
+<p>The example with Magnus Carlsen playing chess is an example where the tasks (i.e the chess games) are completely independent. However, in scientific computing one would often like to exploit multiprocessing also where there are some dependence across the cores. For example, when solving equations on a large domain, one approach is to split the domain into smaller subdomains and then solve the equation on each subdomain on a separate core. In Figure 4 we show an example with a heart geometry that has been partitioned into 6 subdomains.</p>
+<figure class="align-default" id="parallel-mesh">
+<a class="reference internal image-reference" href="../../../_images/parallel_mesh.png"><img alt="parallel_mesh" src="../../../_images/parallel_mesh.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 65 </span><span class="caption-text">A heart geometry partitioned into 6 subdomains to exploit parallelism</span><a class="headerlink" href="#parallel-mesh" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Introducing multiprocessing with dependencies across cores, requires additional communication between the cores using a <a class="reference external" href="https://en.wikipedia.org/wiki/Message_Passing_Interface">Message Passing Interface (MPI)</a>. This is beyond the scope of this course, but this is covered in e.g <a class="reference external" href="https://www.uio.no/studier/emner/matnat/ifi/IN3200/index-eng.html">IN3200</a>.</p>
+</section>
+<section id="example-checking-if-numbers-are-prime">
+<h3>Example: Checking if numbers are prime<a class="headerlink" href="#example-checking-if-numbers-are-prime" title="Permalink to this headline">#</a></h3>
+<p>Say that we have a list numbers that we want to check which of them are prime. Since each number is completely independent of the others, the problem is perfect for parallel execution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">concurrent.futures</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">PRIMES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mi">13466917</span><span class="p">,</span>
+    <span class="mi">20996011</span><span class="p">,</span>
+    <span class="mi">24036583</span><span class="p">,</span>
+    <span class="mi">25964951</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In serial we would simply loop over all the prime numbers and call the function <code class="docutils literal notranslate"><span class="pre">is_prime</span></code> on each element in the list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">PRIMES</span><span class="p">:</span>
+    <span class="n">prime</span> <span class="o">=</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s1"> is prime: </span><span class="si">{</span><span class="n">prime</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Elapsed time: </span><span class="si">{</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13466917 is prime: True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20996011 is prime: True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24036583 is prime: True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25964951 is prime: True
+Elapsed time: 6.661482334136963
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="parallelizing-the-for-loop">
+<h3>Parallelizing the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop<a class="headerlink" href="#parallelizing-the-for-loop" title="Permalink to this headline">#</a></h3>
+<p>One thing to notice is that when we loop over the list of primes, the code that is executed at every iterations is the same, i.e the function <code class="docutils literal notranslate"><span class="pre">is_prime</span></code>. The only thing that is changing is the input to that function.</p>
+<p>If you have a loop where the code that is executed in each iteration can be refactored into a separate function and the only thing that is changing is the input, chances are high that the for loop can be parallelized.</p>
+</section>
+<section id="the-map-function">
+<h3>The <code class="docutils literal notranslate"><span class="pre">map</span></code> function<a class="headerlink" href="#the-map-function" title="Permalink to this headline">#</a></h3>
+<p>When you are in a situation where you have a for loop and everything inside the loop can be refactored out to a function, there is another function called <code class="docutils literal notranslate"><span class="pre">map</span></code> which be used instead of the loop. <code class="docutils literal notranslate"><span class="pre">map</span></code> takes a function as the first argument, and a list with arguments to the function as the second argument and applies the function to each element in the list.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">map</span></code> function is central in many functional programming languages such as <a class="reference external" href="https://www.haskell.org">Haskell</a>, where loops does not exists.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">prime</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">is_prime</span><span class="p">,</span> <span class="n">PRIMES</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2"> is prime: </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">PRIMES</span><span class="p">,</span> <span class="n">prime</span><span class="p">)]))</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Elapsed time: </span><span class="si">{</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13466917 is prime: True
+20996011 is prime: True
+24036583 is prime: True
+25964951 is prime: True
+
+Elapsed time: 6.705280065536499
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will use a parallel version the <code class="docutils literal notranslate"><span class="pre">map</span></code> function to run this code in parallel. This <code class="docutils literal notranslate"><span class="pre">map</span></code> function is an instance-method on object from a module called <code class="docutils literal notranslate"><span class="pre">concurrent.futures</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hack to make it run in the notebook</span>
+<span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;is_prime.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dedent</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    def is_prime(n):</span>
+<span class="s2">        if n % 2 == 0:</span>
+<span class="s2">            return False</span>
+<span class="s2">        for i in range(3, n):</span>
+<span class="s2">            if n </span><span class="si">% i</span><span class="s2"> == 0:</span>
+<span class="s2">                return False</span>
+<span class="s2">        return True&quot;&quot;&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">is_prime</span> <span class="kn">import</span> <span class="n">is_prime</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">prime</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">PRIMES</span><span class="p">,</span> <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">is_prime</span><span class="p">,</span> <span class="n">PRIMES</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s1"> is prime: </span><span class="si">{</span><span class="n">prime</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Elapsed time: </span><span class="si">{</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13466917 is prime: True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20996011 is prime: True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24036583 is prime: True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25964951 is prime: True
+
+Elapsed time: 3.9606337547302246
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, the code ran about 3-4 times faster in parallel. Since some primes are faster to check for primality it is difficult to distribute the work equally across the different processes.</p>
+<p>The nice thing about the <code class="docutils literal notranslate"><span class="pre">concurrent.futures</span></code> module is that the API for the multiprocessing and threading is very similar. If we want use threading in stead of multiprocessing the only thing we need to do in this case is to use a change <code class="docutils literal notranslate"><span class="pre">ProcessPoolExecutor</span></code> with <code class="docutils literal notranslate"><span class="pre">ThreadPoolExecutor</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">prime</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">PRIMES</span><span class="p">,</span> <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">is_prime</span><span class="p">,</span> <span class="n">PRIMES</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s1"> is prime: </span><span class="si">{</span><span class="n">prime</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Elapsed time: </span><span class="si">{</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13466917 is prime: True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20996011 is prime: True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24036583 is prime: True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25964951 is prime: True
+
+Elapsed time: 6.859272241592407
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since this is a CPU-bounded problem we will not gain any speedup by using more threads, which is evident when we look at the elapsed time. We will not cover any examples of I/O bounded problems, but the if you are interested in learning more you can check out the article <a class="reference external" href="https://realpython.com/python-concurrency/">Speed Up Your Python Program With Concurrency</a>.</p>
+<p>Another possible optimization to this code would be to use <code class="docutils literal notranslate"><span class="pre">numba</span></code>, which would give an even greater speedup. However, the speedup here mainly comes from the just-in-time (jit) compilation which basically turns the python loops into C-loops.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numba</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">is_prime_numba</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">prime</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">prime</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prime</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">prime</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">primes</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">numba</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)):</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">prime</span> <span class="o">=</span> <span class="n">is_prime_numba</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+        <span class="c1">#print(f&#39;{number} is prime: {prime}&#39;)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">fun</span><span class="p">(</span><span class="n">PRIMES</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Elapsed time: </span><span class="si">{</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Elapsed time: 1.174947738647461
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="parallel-problems">
+<h3>Parallel problems<a class="headerlink" href="#parallel-problems" title="Permalink to this headline">#</a></h3>
+<p>As mentioned before, parallelizing problems can be tricky, because in many algorithms, there is an inherent order in which operations must be carried out for things to make sense. Because of this, some problems simply cannot be parallelized, because the problem itself is inherently sequential. An example of this is solving an ODE system like the one we did in Project 1. Because we solve the ODEs by stepping one step forward in time, it is hard to split the job among different workers, because they would just have to end up waiting for each other.</p>
+<p>In other cases, a problem is <em>perfectly parallelizable</em>, because the problem itself consists of many small tasks that basically have little or nothing to do with each other. Such problems are often called <a class="reference external" href="https://en.wikipedia.org/wiki/Embarrassingly_parallel"><em>embarrassingly parallel</em></a>. Testing numbers for primality is a good example of such a problem. Another example is rendering computer animations, because each frame in an animation can be rendered independently of each other, and each pixel in a frame can also be rendered individually.</p>
+<p>Most problems are somewhere in between completely these two extremes. Often they have some setup that is purely sequential, and then some part of the problem which can easily be split up, and then some serial part again. When writing code that is parallel, it is important to understand which parts of the code should be carried out in parallel, and which parts are serial. That way, the code progresses serially, until it reaches a parallel section, here it “splits” up into different “threads” that can be given to different processor cores. After the parallel section, these threads merge back together into the “master thread” and the program continues serially.</p>
+<p>Writing out the process of splitting up into threads and merging them together manually can be a hazel and take some time to learn. Luckily, there are tools to automate this process. You have now seen the <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html">concurrent.futures module</a> which is that standard way of running multiple threads and processors in python.</p>
+<p>In python you also have other packages such as <a class="reference external" href="https://numba.pydata.org/">numba</a> and <a class="reference external" href="https://cython.readthedocs.io/en/latest/">Cython</a>, and if you want to run really large scale program then <a class="reference external" href="https://dask.org">dask</a> is a good solution.</p>
+<p>For C and C++, the most popular and important tool is called <a class="reference external" href="https://www.openmp.org/">OpenMP</a>. OpenMP is a tool that allows us to compile C and C++ programs with automatic branching into threads with parallel execution. The only thing we really need to do is indicate what parts of the code it should try to run in parallel. We can also use OpenMP on our JIT-compiled Python code through Cython/numba.</p>
+</section>
+<section id="downsides-of-parallel-programming">
+<h3>Downsides of Parallel Programming<a class="headerlink" href="#downsides-of-parallel-programming" title="Permalink to this headline">#</a></h3>
+<p>Just like optimization, parallelizing code has certain downsides and should be thought of as an investment. For one thing parallel problems usually take longer to tackle, and so will take time to implement. More important however, is that parallel problems can be tricker to understand than sequential programs, and so there is also the added downside of less readable and maintainable code.</p>
+<p>When parallelizing code, the goal is to divide the work over multiple cores. If we divide a job over <span class="math notranslate nohighlight">\(n\)</span> cores, we would ideally hope to divide the runtime by <span class="math notranslate nohighlight">\(n\)</span>, i.e., give us a speed up of <span class="math notranslate nohighlight">\(n\)</span>. If we divide a job over 2 cores, we would hope to halve the running time. This is the ideal case, but will not be realistic in practice. The reason is that there will <em>always</em> be some <em>overhead</em> when parallelizing. This “overhead” is the extra logistical work the computer needs to use to actually split up the work among several processes and to keep communication between different workers to make sure they are solving the problem correctly.</p>
+<p>An analogy often used for overhead is the task of <em>painting a house</em>. If a single person paints a huge mansion, it will take a long time. To make it go faster, they can get some friends to help. Painting a house is an example of a perfectly parallelizable job. One person can paint one side of the house, while the other person paints the other side, the task is easy to divvy up. However, even in this case, where the problem itself is easy to split up, there will be some overhead. For one, the two people need to agree on who paints what. They will both need access to equipment. What if there is just one ladder, and they both want to use it at the same time, and so on. Similar problems will arise on a computer.</p>
+<p>Due to overhead, dividing a problem over <span class="math notranslate nohighlight">\(n\)</span> processes will give a speedup of <em>at most</em> <span class="math notranslate nohighlight">\(n\)</span>, but often slightly less than this. If we are not thinking carefully at how we parallelize our code, trying to split the task among more threads can in some cases actually <em>slow things down</em>. Imagine you need to paint a house and try to split this task among 10,000 workers. The job of giving each person a task, and having the needed equipment, and just making sure nobody crashes into each other, is a bigger job than the original task itself!</p>
+</section>
+<section id="downside-with-multi-threaded-programs-race-conditions">
+<h3>Downside with multi-threaded programs - Race Conditions<a class="headerlink" href="#downside-with-multi-threaded-programs-race-conditions" title="Permalink to this headline">#</a></h3>
+<p>The major downside to running your code on multiple threads is that it can lead to entirely new bugs. The most important class of bugs associated with multi-threaded programming is <em>race conditions</em>. These are bugs that occur because things happen in the wrong order.</p>
+<p>Imagine for example we have a fairly simple code trying to increment a variable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>When running this code sequentially, the final result should of course be <span class="math notranslate nohighlight">\(0+1+1 = 2\)</span>. If we try to divide the work over several threads however, the two threads can get in each other’s way.</p>
+<p>To increment <code class="docutils literal notranslate"><span class="pre">x</span></code> by one, the computer needs to carry out three operations:</p>
+<ol class="simple">
+<li><p>First read the current value of <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p>Increment this value by adding 1</p></li>
+<li><p>Store the result of the computation to <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+</ol>
+<p>Now say two threads have divided this problem among them, so both threads are trying to increment <code class="docutils literal notranslate"><span class="pre">x</span></code> once each. What happens? Well, it happens in what order the threads try to accomplish their jobs. The figure below summarizes the situation.</p>
+<figure class="align-default" id="race-condition">
+<a class="reference internal image-reference" href="../../../_images/race_condition.png"><img alt="race_condition" src="../../../_images/race_condition.png" style="width: 600px;" /></a>
+</figure>
+<p>In the left table thread 1 finishes its incrementing before thread 2 starts. Thread 2 therefor reads <code class="docutils literal notranslate"><span class="pre">x</span></code> as 1 and increments it to 2, as expected. In the right case however, thread 2 reads <code class="docutils literal notranslate"><span class="pre">x</span></code> before 1 has managed to update it, meaning it reads a 0. After thread 1 finishes updating <code class="docutils literal notranslate"><span class="pre">x</span></code> from 0 to 1, thread 2 does the same! Meaning <code class="docutils literal notranslate"><span class="pre">x</span></code> is 1 at the end of the run.</p>
+<p>This kind of a bug is called a “race” condition, because the behavior of the program depends on which thread “wins the race”. The operating system decides when we switch from one thread to another, and this  In general we cannot predict which thread will reach a certain part of the code first, so we should program in a way where it does not matter which order threads finish their tasks in. However, this is not always easy, leading to these kinds of bugs.</p>
+<p>The annoying part about race conditions is that the behavior of the program can become non-deterministic. Sometimes thread 1 finishes first, and then thread 2, meaning the behavior is correct. But sometimes the reverse happens, revealing the bug. Such non-deterministic bugs can be annoying and difficult to track down, as when one tries to narrow them down, they can stop occurring! These type of bugs are therefore sometimes humorously referred to as <a class="reference external" href="https://en.wikipedia.org/wiki/Heisenbug"><em>Heisenbugs</em></a>.</p>
+<p>To illustrate the race conduction we make a fake database and let different threads update the same value. In order to make the race condition happen we will let the program sleep between</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">concurrent.futures</span>
+
+<span class="k">class</span> <span class="nc">Database</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sleep_time</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sleep_time</span> <span class="o">=</span> <span class="n">sleep_time</span>
+
+    <span class="k">def</span> <span class="nf">update_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thread_index</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thread </span><span class="si">{</span><span class="n">thread_index</span><span class="si">}</span><span class="s2">: updating value&quot;</span><span class="p">)</span>
+        <span class="n">value_copy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">value_copy</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Here we sleep so that we are &quot;sure&quot; that we switch thread</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sleep_time</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value_copy</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thread </span><span class="si">{</span><span class="n">thread_index</span><span class="si">}</span><span class="s2">: updating value&quot;</span><span class="p">)</span>
+
+
+<span class="n">num_threads</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">Database</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Update value using </span><span class="si">{</span><span class="n">num_threads</span><span class="si">}</span><span class="s2"> threads. &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting value is </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">num_threads</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">thread_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_threads</span><span class="p">):</span>
+        <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">update_value</span><span class="p">,</span> <span class="n">thread_index</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Update finished. Ending value is </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Update value using 2 threads. 
+Starting value is 0
+Thread 0: updating value
+Thread 1: updating value
+Thread 0: updating value
+Thread 1: updating value
+Update finished. Ending value is 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, lets see what happens if we reduce the amount of time we sleep</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">sleep_time</span><span class="o">=</span><span class="mf">0.00001</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Update value using </span><span class="si">{</span><span class="n">num_threads</span><span class="si">}</span><span class="s2"> threads. &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting value is </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">num_threads</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">thread_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_threads</span><span class="p">):</span>
+        <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">update_value</span><span class="p">,</span> <span class="n">thread_index</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Update finished. Ending value is </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Update value using 2 threads. 
+Starting value is 0
+Thread 0: updating value
+Thread 0: updating value
+Thread 1: updating value
+Thread 1: updating value
+Update finished. Ending value is 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, the time for waiting was so low that my operating system decided to wait instead of switching thread.</p>
+<p>Note that race conditions happens because the two threads are sharing the same variable. This would not happen if we try to run this using a process pool. Why?</p>
+<p>While we won’t spend too much time focusing on how to parallelize code itself in this course, let us look at at least one example. We will first cover the problem itself, and then start to optimize it, finally we turn to parallelization.</p>
+</section>
+</section>
+<section id="example-the-mandelbrot-set">
+<h2>Example: The Mandelbrot Set<a class="headerlink" href="#example-the-mandelbrot-set" title="Permalink to this headline">#</a></h2>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Mandelbrot_set">Mandelbrot set</a> is perhaps one of the worlds most famous fractals. We will use computing an image of the Mandelbrot set as a Benchmark of an optimization problem.</p>
+<p>To compute the Mandelbrot set, we start with a number <span class="math notranslate nohighlight">\(z = 0\)</span>, and then repeatedly iterate this number according to the function</p>
+<div class="math notranslate nohighlight">
+\[f_c(z) = z^2 + c,\]</div>
+<p>So if c is 1 for example, we would have
+$<span class="math notranslate nohighlight">\(z = 0,\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(f(0) = 0^2 + 1 = 1,\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(f(f(0)) = 1^2 + 1 = 2,\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(f(f(f(0))) = 2^2 + 1 = 5,\)</span>$</p>
+<p>and so on. This point clearly diverges.</p>
+<p>The mandelbrot set is defined as <em>all points</em> <span class="math notranslate nohighlight">\(c\)</span>, such that <span class="math notranslate nohighlight">\(f_c(z) = z^2 + c\)</span> does not diverges if we start at <span class="math notranslate nohighlight">\(z=0\)</span>. If <span class="math notranslate nohighlight">\(c\)</span> was a real number, this wouldn’t be a terribly exciting problem, as the Mandelbrot set would simply be</p>
+<div class="math notranslate nohighlight">
+\[c \in [-2, 0.25]\]</div>
+<p>Any smaller or larger than this, and repeated iteration would blow up <span class="math notranslate nohighlight">\(z\)</span>.</p>
+<p>However, the Mandelbrot set is defined as any <span class="math notranslate nohighlight">\(c \in \mathcal{C}\)</span>, i.e., for any complex number. It turns out that this makes the whole problem a lot more interesting, as it leads to chaotic and fractal behavior at the boundary, meaning we can zoom in “infinitely” and still see a large amount of complexity.</p>
+<p>The experiments below are run on and IFI machine through ssh.</p>
+<section id="rendering-the-mandelbrot-set">
+<h3>Rendering the Mandelbrot set<a class="headerlink" href="#rendering-the-mandelbrot-set" title="Permalink to this headline">#</a></h3>
+<p>The Mandelbrot set is a mathematical set, and finding it is a mathematical challenge. However, if we want to render an image of it, we can simplify it considerably.</p>
+<p>To produce an image, we must find the values at each pixel in the image. Any pixel in the image will have coordinates <span class="math notranslate nohighlight">\((x, y)\)</span> in the complex plane, which we will associate with the value <span class="math notranslate nohighlight">\(c = x + iy\)</span>.</p>
+<p>To now compute the image, or <em>render it</em> as it is normally called, we must check wether each value <span class="math notranslate nohighlight">\(c\)</span> diverges or not. To do so, we simply iterate the function a large number of times. It can be shown that any number that grows larger than <span class="math notranslate nohighlight">\(|z| &gt; 2\)</span> will diverge. Any point that does not grow beyond <span class="math notranslate nohighlight">\(|z| &gt; 2\)</span> can still diverge, but if we repeatedly iterate for a long time and we have not diverged, we simply assume the function will not diverge. Here we have a parameter in our rendering, the <em>max number of iterations</em> to perform before declaring a point as non-divergent.</p>
+<p>To render the image, we give any non-divergent point the value 0, and then any other point the number of iterations before the point “escapes” the set, i.e., it grows beyond <span class="math notranslate nohighlight">\(|z| &gt; 2\)</span>.</p>
+<section id="references">
+<h4>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h4>
+<p>We are now ready to render the Mandelbrot fractal. If this is going a little too fast, you can read the following blogposts for more information and a softer walkthrough:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://levelup.gitconnected.com/mandelbrot-set-with-python-983e9fc47f56">Mandelbrot Set with Python
+</a></p></li>
+</ul>
+<p>The follow up blogpost is all about optimizing the computation with Python as well as implementation with c/c++:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://martin-ueding.de/posts/mandelbrot-performance/">Performance in Mandelbrot Set Computation
+</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="naive-implementation-in-python">
+<h2>Naive implementation in Python<a class="headerlink" href="#naive-implementation-in-python" title="Permalink to this headline">#</a></h2>
+<p>Let us start with a naive implementation in Python. We first write a function that checks wether a given complex point <span class="math notranslate nohighlight">\(c\)</span> diverges:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">mandelbrot_pixel</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check wether a single pixel diverges&quot;&quot;&quot;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">c</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span>
+
+    <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here the input <span class="math notranslate nohighlight">\(c\)</span> can be a complex number. Python supports a complex type built in.</p>
+<p>We start by saying <span class="math notranslate nohighlight">\(z=0\)</span>, because this is where we start iterating, for any <span class="math notranslate nohighlight">\(c\)</span>. Then we repeatedly compute <span class="math notranslate nohighlight">\(f_c(z) = z^2 + c\)</span> and check if <span class="math notranslate nohighlight">\(|z| &gt; 2\)</span>. If it is, the point has “escaped”, and we return the number of iterations. If we have performed all iterations and the point is still bounded, we return 0.</p>
+<p>Next we turn to computing the entire image. We need to specify the number of pixels in either direction (the width and height of the image), as well as the “zoom”, i.e., what ranges to focus on.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mandelbrot_image</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Render an image of the Mandelbrot set&quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">xi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">yj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">xi</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">yj</span>
+            <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">mandelbrot_pixel</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we first use <code class="docutils literal notranslate"><span class="pre">np.linspace</span></code> to find the values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> for each pixel. Then we loop over each pixel in the image and iterate each point <span class="math notranslate nohighlight">\(c = x + i\cdot y\)</span>. To define a complex value in Python you can write <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">1j*b</span></code>, where <code class="docutils literal notranslate"><span class="pre">1j</span></code> denotes the imaginary unit.</p>
+<p>Let us now call and plot out an image to see how it looks. To plot out the entire Mandelbrot, we want to plot out <span class="math notranslate nohighlight">\(x\in[-2, 0.5]\)</span> and <span class="math notranslate nohighlight">\(y\in[-1.25, 1.25]\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This took 12 seconds</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">mandelbrot_image</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/parallel_programming_25_0.png" src="../../../_images/parallel_programming_25_0.png" />
+</div>
+</div>
+<p>We can make the plot a little nicer. For one thing, <code class="docutils literal notranslate"><span class="pre">imshow</span></code> uses a different axis convention from math.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/parallel_programming_27_0.png" src="../../../_images/parallel_programming_27_0.png" />
+</div>
+</div>
+<p>The image can be further improved by rendering a longer <em>horizon</em>, but this is unimportant detail at the moment.  For now, we want to optimize and parallelize our code.</p>
+<section id="devising-a-benchmark">
+<h3>Devising a Benchmark<a class="headerlink" href="#devising-a-benchmark" title="Permalink to this headline">#</a></h3>
+<p>Now we want to start optimizing our Mandelbrot render. We therefore need to devise a benchmark we can use to time our program as we make changes.</p>
+<p>Here, we’ll render an image of
+<span class="math notranslate nohighlight">\(1000\times1000\)</span> pixels, i.e., 1 megapixel, at the coordinates
+$<span class="math notranslate nohighlight">\(x \in [-0.74877, -0.74872]\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(y \in [0.065053, 0.065103]\)</span>$
+with a maximum of 2048 iterations.</p>
+<p>We write our benchmark out as a function, so that we can simply call it when we want to time our program.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">benchmark</span><span class="p">(</span><span class="n">mandelbrot</span><span class="p">):</span>
+    <span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.74877</span>
+    <span class="n">xmax</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.74872</span>
+    <span class="n">ymin</span> <span class="o">=</span> <span class="mf">0.065053</span>
+    <span class="n">ymax</span> <span class="o">=</span> <span class="mf">0.065103</span>
+    <span class="n">pixels</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">maxiter</span> <span class="o">=</span> <span class="mi">2048</span>
+    <span class="k">return</span> <span class="n">mandelbrot</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">pixels</span><span class="p">,</span> <span class="n">pixels</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">1</span> <span class="o">-</span><span class="n">r</span> <span class="mi">1</span> <span class="n">benchmark</span><span class="p">(</span><span class="n">mandelbrot_image</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(This took 3 minutes 36 seconds)</p>
+</section>
+<section id="multiprocessing">
+<h3>Multiprocessing<a class="headerlink" href="#multiprocessing" title="Permalink to this headline">#</a></h3>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">concurrent.futures</span></code> module we can parallelize the outer loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hack to make it run in the notebook</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;mandelbrot_mp.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dedent</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    def mandelbrot_pixel(c, maxiter):</span>
+<span class="s2">        z = 0</span>
+
+<span class="s2">        for n in range(maxiter):</span>
+<span class="s2">            z = z*z + c</span>
+<span class="s2">            if abs(z) &gt; 2:</span>
+<span class="s2">                return n</span>
+
+<span class="s2">        return 0</span>
+
+<span class="s2">    def compute(yj, x, maxiter):</span>
+<span class="s2">        c = [xi + 1j*yj for xi in x]</span>
+<span class="s2">        return list(map(mandelbrot_pixel, c, [maxiter]*len(c)))&quot;&quot;&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mandelbrot_mp</span> <span class="kn">import</span> <span class="n">compute</span>
+
+<span class="k">def</span> <span class="nf">mandelbrot_image_mp</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Render an image of the Mandelbrot set&quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+
+    <span class="n">maxiters</span> <span class="o">=</span> <span class="p">[</span><span class="n">maxiter</span><span class="p">]</span> <span class="o">*</span> <span class="n">height</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">*</span> <span class="n">height</span>
+
+    <span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">compute</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">maxiters</span><span class="p">)):</span>
+                <span class="n">img</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psutil</span>
+<span class="n">psutil</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">1</span> <span class="o">-</span><span class="n">r</span> <span class="mi">1</span> <span class="n">benchmark</span><span class="p">(</span><span class="n">mandelbrot_image_mp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(This took 9.7 seconds on the IFI machine which have 24 cores)</p>
+<p>However, in this case we see a speed up of
+$<span class="math notranslate nohighlight">\(\frac{206 {\rm\ s}}{9.7 {\rm\ s}} = 21.23\)</span>$
+which is almost a perfect speed up.</p>
+</section>
+<section id="vectorized-numpy">
+<h3>Vectorized numpy<a class="headerlink" href="#vectorized-numpy" title="Permalink to this headline">#</a></h3>
+<p>As we saw last week, one easy way to optimize the code is to use numpy vectorization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mandelbrot_numpy</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">width</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">width</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">height</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">width</span><span class="p">))</span>
+
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">M_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="n">Z</span><span class="p">[</span><span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">M</span><span class="p">]</span> <span class="o">*</span> <span class="n">Z</span><span class="p">[</span><span class="n">M</span><span class="p">]</span> <span class="o">+</span> <span class="n">C</span><span class="p">[</span><span class="n">M</span><span class="p">]</span>
+        <span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">M_tmp</span> <span class="o">=</span> <span class="o">~</span><span class="n">M</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">M_tmp</span>
+        <span class="n">img</span><span class="p">[</span><span class="o">~</span><span class="n">M_tmp</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">M_tmp</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[:]</span>
+
+    <span class="n">img</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">img</span> <span class="o">==</span> <span class="n">maxiter</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">img</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">benchmark</span><span class="p">(</span><span class="n">mandelbrot_numpy</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(This took 34.5 seconds on my laptop)</p>
+<p>We see that vectorization is about 6 times as fast as the native python implementation.</p>
+</section>
+<section id="jit-compiling-with-numba">
+<h3>JIT-compiling with Numba<a class="headerlink" href="#jit-compiling-with-numba" title="Permalink to this headline">#</a></h3>
+<p>From last weeks lecture, we also learnt that <a class="reference external" href="http://numba.pydata.org/">numba</a> is a tool that can automatically just-in-time compile code in Python to make it surprisingly fast. Let us try it with out code. We simply add the <code class="docutils literal notranslate"><span class="pre">numba.jit</span></code> decorators to our two function, and make no other changes to them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numba</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">mandelbrot_pixel_numba</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">c</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">mandelbrot_numba</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">mandelbrot_pixel_numba</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">benchmark</span><span class="p">(</span><span class="n">mandelbrot_numba</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(This look 7.34 seconds)</p>
+<p>JIT compiling with numba gives a quite amazing speed up. However, let us see if we can’t improve the code itself inside the functions a bit as well.</p>
+<p>For one thing, starting at <span class="math notranslate nohighlight">\(z=0\)</span>, we <em>know</em> that the first iteration will just give <span class="math notranslate nohighlight">\(z=c\)</span>. So we might as well start there, with <span class="math notranslate nohighlight">\(z=c\)</span> as the first value.</p>
+<p>Much more importantly: computing <span class="math notranslate nohighlight">\(|z|\)</span> requires first squaring to compute <span class="math notranslate nohighlight">\(|z|^2\)</span> and then taking the square root (this happens inside <code class="docutils literal notranslate"><span class="pre">abs</span></code>. This process is expensive, because taking square roots is a costly operation. However, we only do this because we want to check if <span class="math notranslate nohighlight">\(|z| &gt; 2\)</span>, so we could just as easily check if <span class="math notranslate nohighlight">\(|z^2| &gt; 4\)</span>.</p>
+<p>In addition, it turns out that avoiding the built-in complex type is better for speed, so we instead want to send in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> components separately. To iterate, we then have
+$<span class="math notranslate nohighlight">\(z^2 + c = (x + i\cdot y)^2 + (c_x + y\cdot c_y) = (x^2 - y^2 + c_x) + i\cdot(2xy + c_y).\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numba</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">mandelbrot_pixel_numba</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">cx</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">cy</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+        <span class="n">y2</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span>
+        <span class="k">if</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">y2</span> <span class="o">&gt;</span> <span class="mf">4.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">cy</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">cx</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">mandelbrot_numba</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+            <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">mandelbrot_pixel_numba</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">maxiter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">benchmark</span><span class="p">(</span><span class="n">mandelbrot_numba</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(This took about 2.91 seconds)</p>
+</section>
+<section id="plotting-out-the-benchmark">
+<h3>Plotting out the Benchmark<a class="headerlink" href="#plotting-out-the-benchmark" title="Permalink to this headline">#</a></h3>
+<p>So far vi have gotten a considerable speed-up by going from a naive solution to JIT compiling with numba. We have gone from 3 minutes 36 seconds, to 7.34 seconds, which was a speed up of
+$<span class="math notranslate nohighlight">\(\frac{206 {\rm\ s}}{7.34 {\rm\ s}} = 28.1\)</span>$</p>
+<p>And further optimizing some of our lines reduced this further down to 2.91 seconds. For a total speedup of</p>
+<div class="math notranslate nohighlight">
+\[\frac{206 {\rm\ s}}{2.91 {\rm\ s}} = 70.8\]</div>
+<p>We could also have tried optimizing with Cython, but we ignore this for now. You can read about using Cython in the blogpost.</p>
+<p>Let us plot out the benchmark image rendered by our final numba variant:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">benchmark</span><span class="p">(</span><span class="n">mandelbrot_numba</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/parallel_programming_41_0.png" src="../../../_images/parallel_programming_41_0.png" />
+</div>
+</div>
+</section>
+<section id="moving-over-to-c">
+<h3>Moving over to C++<a class="headerlink" href="#moving-over-to-c" title="Permalink to this headline">#</a></h3>
+<p>To make things even faster, and to parallelize our problem, we want to move over to C++.</p>
+<p>We can simply take our latest numba code, and “translate” it to C++.</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">mandelbrot_pixel</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">cx</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">cy</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxiter</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cx</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cy</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxiter</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">4.0</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cy</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cx</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mandelbrot</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxiter</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">output</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">cx</span><span class="p">,</span><span class="w"> </span><span class="n">cy</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">xmax</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xmin</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ymax</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ymin</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">cx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xmin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">cy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ymin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dy</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mandelbrot_pixel</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span><span class="w"> </span><span class="n">cy</span><span class="p">,</span><span class="w"> </span><span class="n">maxiter</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now we need to define our benchmark</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">benchmark</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-0.74877</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-0.74872</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">ymin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.065053</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">ymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.065103</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">maxiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mandelbrot</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="n">maxiter</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>And then we define a main-function running our benchmark</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">benchmark</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="timing-a-c-program">
+<h3>Timing a C++ program<a class="headerlink" href="#timing-a-c-program" title="Permalink to this headline">#</a></h3>
+<p>So far we have only used <code class="docutils literal notranslate"><span class="pre">%timeit</span></code> to do timing experiments. But our C++ program compiles to an executable, so how can we time it? We have a few different options. We can either look for a C++ tool or library that does timing experiments for us, most IDEs should have one for example, or we could use the built in <code class="docutils literal notranslate"><span class="pre">time</span></code> command-line tool, or lastly: we can run the executable from Jupyter, and time it that way.</p>
+<p>We ignore the specific C++ tools for now. But the command-line tool <code class="docutils literal notranslate"><span class="pre">time</span></code> is useful to know about. When running a program in the command-line, if you write <code class="docutils literal notranslate"><span class="pre">time</span></code> before the actual name of the program, you get the time it takes to execute the program:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">./</span><span class="n">mandelbrot</span>
+</pre></div>
+</div>
+<p>Gives</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">real</span>    <span class="mi">0</span><span class="n">m5</span><span class="mf">.131</span><span class="n">s</span>
+<span class="n">user</span>    <span class="mi">0</span><span class="n">m5</span><span class="mf">.111</span><span class="n">s</span>
+<span class="n">sys</span>     <span class="mi">0</span><span class="n">m0</span><span class="mf">.006</span><span class="n">s</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">real</span></code> is the “real” time that has elapsed from we click go to the program ends up finishing. This is also known as “wall time”, because it is the same time as a clock on the wall would take. The <code class="docutils literal notranslate"><span class="pre">user</span></code> is the time the program has spent in “user” mode. This means, the time the actual CPU of the computer has spent running the code. Finally, the <code class="docutils literal notranslate"><span class="pre">sys</span></code> is the amount of time the system call used outside our actual C++ code.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">time</span></code> gives only the time of a single execution. But what if we want to do multiple runs and average them, like we do for timeit? One possibility is simply running our benchmark many times inside our function:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">benchmark</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We can now use <code class="docutils literal notranslate"><span class="pre">time</span></code> to take the time of 10 executions of our benchmark, and divide by 10 to get the average. We could also build this into our main function.</p>
+<p>An alternative is to use the standard Python library <code class="docutils literal notranslate"><span class="pre">os</span></code> (for operating system) to call our executable for oss. The benefit of this approach is that we can use <code class="docutils literal notranslate"><span class="pre">%timeit</span></code> like normal. Note that now <code class="docutils literal notranslate"><span class="pre">timeit</span></code> will also include the time it takes for <code class="docutils literal notranslate"><span class="pre">os</span></code> to call the code, so there is some overhead here. However, this likely won’t make much for a difference unless we are timing things at the nanosecond range. For these measurements, this approach is solid.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;c++ -std=c++14 mandelbrot.cpp -o mandelbrot&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">1</span> <span class="o">-</span><span class="n">r</span> <span class="mi">2</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;./mandelbrot&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(Took about 5.2 seconds)</p>
+<p>Our naive C++ solution is the same order of magnitude as our fastest numba solution, but slightly slower.</p>
+<p>Before we move on to parallelizing our code. Let us first <em>compile it with optimization</em>. Much like we can turn of certain error checking in Cython, we can do the same with our C++ compiler. This is done using compiler flags.</p>
+<p>Instead of picking compiler flags manually, we can compile with the flags <code class="docutils literal notranslate"><span class="pre">O1</span></code>, <code class="docutils literal notranslate"><span class="pre">O2</span></code> and <code class="docutils literal notranslate"><span class="pre">O3</span></code>, where the number gives the degree of optimization. Here, <code class="docutils literal notranslate"><span class="pre">O3</span></code>, should give the biggest speed up, but will also turn of most warnings and error handling. In the need for speed we are sacrificing some things, but using the flag <code class="docutils literal notranslate"><span class="pre">-O3</span></code> tells the compiler this is OK.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;c++ -std=c++14 mandelbrot.cpp -o mandelbrot_optimized -O3&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;./mandelbrot_optimized&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(Took about 2.81 s)</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">O3</span></code> compiling, our code runs in 2.81 seconds which is comparable to the numba solution.</p>
+<p>With gcc at least, there is one more degree of optimization, called <code class="docutils literal notranslate"><span class="pre">-Ofast</span></code>. This does the exact same as <code class="docutils literal notranslate"><span class="pre">O3</span></code> but it also adds the flag <code class="docutils literal notranslate"><span class="pre">-ffast-math</span></code>. This flag makes floating point operations much faster, but it does so by switching around these operations in a way that can change their round-off errors. Using <code class="docutils literal notranslate"><span class="pre">-Ofast</span></code> might therefore produce a different outcome, which can sometimes be very important. Strictly speaking, <code class="docutils literal notranslate"><span class="pre">-Ofast</span></code> is not IEEE compliant, so beware.</p>
+<p>With that said, let’s try it!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;c++ -std=c++14 mandelbrot.cpp -o mandelbrot_optimized -Ofast&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;./mandelbrot_optimized&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(Took about 2.79 s)</p>
+<p>In this case, <code class="docutils literal notranslate"><span class="pre">Ofast</span></code> did not improve much on the <code class="docutils literal notranslate"><span class="pre">O3</span></code> optimized solution much.</p>
+</section>
+<section id="parallelizing-with-openmp">
+<h3>Parallelizing with OpenMP<a class="headerlink" href="#parallelizing-with-openmp" title="Permalink to this headline">#</a></h3>
+<p>We are now ready to make our C++ code parallel. Luckily, rendering the Mandelbrot set is a process that is <em>highly parallelizable</em>, because each pixel in the image is independent of each other. So different cores can render the different pixels.</p>
+<p>To parallelize our code, we will use <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code>, which can automatically decide how to split up the problem and how many cores to use. To add OpenMP to our code, we need to tell the compiler where to try to parallelize the code. This would be in the for-loop over the pixels.</p>
+<p>We can use a <em>compiler-directive</em> to give information to the compiler, this is done with the keyword <code class="docutils literal notranslate"><span class="pre">#pragma</span></code>.</p>
+<p>Above the loop over the pixels, we add our OpenMP directive:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma omp parallel for</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">cx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xmin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">cy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ymin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dy</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mandelbrot_pixel</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span><span class="w"> </span><span class="n">cy</span><span class="p">,</span><span class="w"> </span><span class="n">maxiter</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This tells the compiler to try to use OpenMP to parallelize our for loop.</p>
+<p>When compiling with OpenMP, we also need to add the flag <code class="docutils literal notranslate"><span class="pre">-fopenmp</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;c++ -std=c++14 mandelbrot_parallel.cpp -o mandelbrot_parallel -O3 -fopenmp&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;./mandelbrot_parallel&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(This took 264 ms)</p>
+<p>So with OpenMP, our code has gone from 2.79 seconds to 264 ms seconds, a speed-up of about about 10. We can get more information about the CPU usage with the <code class="docutils literal notranslate"><span class="pre">time</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">./</span><span class="n">mandelbrot_parallel</span>
+
+<span class="n">real</span>    <span class="mi">0</span><span class="n">m0</span><span class="mf">.247</span><span class="n">s</span>
+<span class="n">user</span>    <span class="mi">0</span><span class="n">m3</span><span class="mf">.307</span><span class="n">s</span>
+<span class="n">sys</span>     <span class="mi">0</span><span class="n">m0</span><span class="mf">.025</span><span class="n">s</span>
+</pre></div>
+</div>
+<p>Here the interesting thing is that the “real” time is 0.247 seconds, which is the time we need to wait for the program to finish running, but the “user” time is about 3.307 seconds. Here the “user” time is the time used by a CPU. How can the time used by the CPU be more than the time we wait? This is because there are multiple CPU’s running simultaneously, and both are racking up “user” time.</p>
+<p>We can use the different program <code class="docutils literal notranslate"><span class="pre">/usr/bin/time</span> <span class="pre">-v</span></code> to get more information out</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">time</span> <span class="o">-</span><span class="n">v</span> <span class="o">./</span><span class="n">mandelbrot_parallel</span>
+    <span class="n">Command</span> <span class="n">being</span> <span class="n">timed</span><span class="p">:</span> <span class="s2">&quot;./mandelbrot_parallel&quot;</span>
+	<span class="n">User</span> <span class="n">time</span> <span class="p">(</span><span class="n">seconds</span><span class="p">):</span> <span class="mf">3.30</span>
+	<span class="n">System</span> <span class="n">time</span> <span class="p">(</span><span class="n">seconds</span><span class="p">):</span> <span class="mf">0.00</span>
+	<span class="n">Percent</span> <span class="n">of</span> <span class="n">CPU</span> <span class="n">this</span> <span class="n">job</span> <span class="n">got</span><span class="p">:</span> <span class="mi">1379</span><span class="o">%</span>
+	<span class="n">Elapsed</span> <span class="p">(</span><span class="n">wall</span> <span class="n">clock</span><span class="p">)</span> <span class="n">time</span> <span class="p">(</span><span class="n">h</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span> <span class="ow">or</span> <span class="n">m</span><span class="p">:</span><span class="n">ss</span><span class="p">):</span> <span class="mi">0</span><span class="p">:</span><span class="mf">00.24</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>On Mac you can use the command <code class="docutils literal notranslate"><span class="pre">gtime</span></code> instead after installing <code class="docutils literal notranslate"><span class="pre">gnu-time</span></code> through brew (<code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">gnu-time</span></code>).
+We have removed the next 10 or so lines because they are uninteresting. In this execution we see the job used 1379% of the computers CPU, meaning it used about 14 cores.</p>
+<section id="parallelizing-the-outer-loops">
+<h4>Parallelizing the outer loops<a class="headerlink" href="#parallelizing-the-outer-loops" title="Permalink to this headline">#</a></h4>
+<p>You might wonder why we tell OpenMP to parallelize the outer loop (the <code class="docutils literal notranslate"><span class="pre">i</span></code>-loop), and not the inner loop instead, or in addition. The reason is that we want the code to spend as little time as possible on the actual branching and merging of threads, because this adds overhead. To minimize overhead we therefore ideally want to parallelize at the highest level possible. In this case, it is much better to parallelize the <code class="docutils literal notranslate"><span class="pre">i</span></code>-loop, because then each thread will take parts of this loop, and create their own <code class="docutils literal notranslate"><span class="pre">j</span></code>-loops. If we instead parallelized the <code class="docutils literal notranslate"><span class="pre">j</span></code>-loops, then threads would need to be created and merged for each iteration of the <code class="docutils literal notranslate"><span class="pre">i</span></code>-loop.</p>
+<p>The important point being: The higher the level we parallelize at, the better it will be.</p>
+</section>
+</section>
+<section id="create-a-python-bindings-using-cppyy">
+<h3>Create a python bindings using cppyy<a class="headerlink" href="#create-a-python-bindings-using-cppyy" title="Permalink to this headline">#</a></h3>
+<p>When learning about mixed programming we also learned that we can create bindings between python and C++ using <code class="docutils literal notranslate"><span class="pre">cppyy</span></code>, and that once you have the C++ code in place it is fairly simple to write the binding. In this case we could write something like</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cppyy</span>
+
+<span class="n">cppyy</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="s2">&quot;vector&quot;</span><span class="p">)</span>
+<span class="n">cppyy</span><span class="o">.</span><span class="n">cppdef</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">int mandelbrot_pixel(double cx, double cy, int maxiter)</span>
+<span class="s2">{</span>
+<span class="s2">    double x = cx;</span>
+<span class="s2">    double y = cy;</span>
+
+<span class="s2">    for (int n = 0; n &lt; maxiter; n++) {</span>
+<span class="s2">        double x2 = x * x;</span>
+<span class="s2">        double y2 = y * y;</span>
+
+<span class="s2">        if (x2 + y2 &gt; 4.0) {</span>
+<span class="s2">            return n;</span>
+<span class="s2">        }</span>
+
+<span class="s2">        y = 2 * x * y + cy;</span>
+<span class="s2">        x = x2 - y2 + cx;</span>
+<span class="s2">    }</span>
+<span class="s2">    return 0;</span>
+<span class="s2">}</span>
+
+<span class="s2">std::vector&lt;int&gt; mandelbrot(double xmin, double xmax, double ymin, double ymax, int width, int height,</span>
+<span class="s2">                int maxiter)</span>
+<span class="s2">{</span>
+<span class="s2">    std::vector&lt;int&gt; output(width * height);</span>
+<span class="s2">    int i, j;</span>
+<span class="s2">    double cx, cy;</span>
+
+<span class="s2">    double dx = (xmax - xmin) / width;</span>
+<span class="s2">    double dy = (ymax - ymin) / width;</span>
+
+<span class="s2">    for (i = 0; i &lt; width; i++) {</span>
+<span class="s2">        for (j = 0; j &lt; height; j++) {</span>
+<span class="s2">            cx = xmin + i * dx;</span>
+<span class="s2">            cy = ymin + j * dy;</span>
+<span class="s2">            output[i * height + j] = mandelbrot_pixel(cx, cy, maxiter);</span>
+<span class="s2">        }</span>
+<span class="s2">    }</span>
+<span class="s2">    return output;</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the mandelbrot function returns a vector and <code class="docutils literal notranslate"><span class="pre">cppyy</span></code> will automatically convert this to a python list. We thus need to convert this list in to a numpy array and reshape it to have the correct shape. We do this by wrapping the method coming from <code class="docutils literal notranslate"><span class="pre">cppyy</span></code> into another function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cppyy.gbl</span> <span class="kn">import</span> <span class="n">mandelbrot</span> <span class="k">as</span> <span class="n">_mandelbrot_cppyy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mandelbrot_cppyy</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">_mandelbrot_cppyy</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When using <code class="docutils literal notranslate"><span class="pre">cppyy</span></code> is is also easy to verify that the implementation of the mandelbrot function is correct by plotting it with matplotlib.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">benchmark</span><span class="p">(</span><span class="n">mandelbrot_cppyy</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f3d6c1f6f20&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/parallel_programming_48_1.png" src="../../../_images/parallel_programming_48_1.png" />
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">benchmark</span><span class="p">(</span><span class="n">mandelbrot_cppyy</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(This took about 3 seconds which is similar to the naive C++ implementation)</p>
+<p>And we see that it is more or less identical to the first version in C++ which is what we expect. If you think this was a bit tricky, no worries. This example was meant to show that it is indeed possible, but there is a cost to be payed in terms of code complexity</p>
+</section>
+<section id="parallelizing-with-numba">
+<h3>Parallelizing with numba<a class="headerlink" href="#parallelizing-with-numba" title="Permalink to this headline">#</a></h3>
+<p>Numba and Cython can also use OpenMP to parallelize their JIT compiled code. To do so for a for-loop, you can use the function <code class="docutils literal notranslate"><span class="pre">prange</span></code> (for “parallel range”). We also need to set the keyword <code class="docutils literal notranslate"><span class="pre">parallel</span></code> in <code class="docutils literal notranslate"><span class="pre">jit</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>. Let us try this with our fastest numba code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numba</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">mandelbrot_pixel_numba</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">cx</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">cy</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+        <span class="n">y2</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span>
+        <span class="k">if</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">y2</span> <span class="o">&gt;</span> <span class="mf">4.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">cy</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">cx</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mandelbrot_parallel_numba</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">numba</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+            <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">mandelbrot_pixel_numba</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">maxiter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">benchmark</span><span class="p">(</span><span class="n">mandelbrot_parallel_numba</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(This took 230 ms)</p>
+<p>As with the C++ code, it makes more sense to parallelize the <code class="docutils literal notranslate"><span class="pre">i</span></code> loop with <code class="docutils literal notranslate"><span class="pre">prange</span></code> than the <code class="docutils literal notranslate"><span class="pre">j</span></code>-loop.</p>
+</section>
+<section id="bar">
+<h3>Bar<a class="headerlink" href="#bar" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">times</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Naive Python&quot;</span><span class="p">:</span> <span class="mi">206</span><span class="p">,</span>
+    <span class="s2">&quot;MP&quot;</span><span class="p">:</span> <span class="mf">9.7</span><span class="p">,</span>
+    <span class="s2">&quot;Numpy&quot;</span><span class="p">:</span> <span class="mf">34.5</span><span class="p">,</span>
+    <span class="s2">&quot;Numba&quot;</span><span class="p">:</span> <span class="mf">7.34</span><span class="p">,</span>
+    <span class="s2">&quot;Numba (opt&quot;</span><span class="p">:</span> <span class="mf">2.91</span><span class="p">,</span>
+    <span class="s2">&quot;C++&quot;</span><span class="p">:</span> <span class="mf">5.2</span><span class="p">,</span>
+    <span class="s2">&quot;C++ -03&quot;</span><span class="p">:</span> <span class="mf">2.81</span><span class="p">,</span>
+    <span class="s2">&quot;C++ OMP&quot;</span><span class="p">:</span> <span class="mf">0.264</span><span class="p">,</span>
+    <span class="s2">&quot;cppyy&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="s2">&quot;Numba OMP&quot;</span><span class="p">:</span> <span class="mf">0.230</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">times</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time (seconds)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/parallel_programming_52_0.png" src="../../../_images/parallel_programming_52_0.png" />
+</div>
+</div>
+<p>Or replotted with logarithmic axis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">times</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time (seconds)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/parallel_programming_54_0.png" src="../../../_images/parallel_programming_54_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="gpu-parallelization">
+<h2>GPU Parallelization<a class="headerlink" href="#gpu-parallelization" title="Permalink to this headline">#</a></h2>
+<p>We started this lecture with talking about CPU’s, and how the end of frequency scaling lead to a paradigm shift leading to multi-core processors. However, even long before this paradigm shift, there was another component of the computer already running things in parallel: the GPU.</p>
+<p>GPU stands for “graphics processing unit”, and this is a component that, like the CPU, is good at crunching numbers and computing things. Unlike the CPU, it is specialized to dealing with computing graphics to be shown on the screen. Because it is specialized, we cannot talk about GPU “cores” in the same way as CPU’s, but GPU’s have been specialized to parallelize their tasks since the beginning. This is because GPU’s work on making the graphics to be shown on the screen, and computing the pixels to show on the screen is a very parallel problem. Because we also need sufficient <em>frames per second</em> to be computed in real time, we need to be able to parallelize our code sufficiently so that it runs fast enough to create smooth graphics.</p>
+<p>While writing code that can be split among the 4 or 8 cores of a normal CPU can give us a speed-up of at most 4, or 8, on a GPU there are usually thousands of threads that can be run in parallel. The real speed-up of parallelization is therefore achieved on GPU’s (or supercomputers with many, many CPU’s).</p>
+<p>However, writing parallel code on GPU’s is especially challenging, because it is such a specialized piece of hardware. Only certain problems are therefore well suited to being run on GPU’s. While graphics computing and rendering animations is a natural example (because that’s what GPUs are made for in the first place), in scientific computing, especially solving PDE’s and machine learning are good use cases.</p>
+<p>Our Mandelbrot example is also a well suited problem for a GPU to tackle. If you are curious how this can be done, the blog post we referenced shows a few different ways to go about doing this, including one using numba. Using these techniques, they mange to get the computation down to sub 20 milliseconds. That’s quite the speed up from the original 3+ minutes!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/optimization"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="optimization_and_mixed_programming.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Optimization and Mixed Programming</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../summary/course_summary.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Course Summary</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

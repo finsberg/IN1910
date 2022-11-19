@@ -1,0 +1,2290 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Using Random Numbers &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Random Walks" href="random_walks_and_markov_processes.html" />
+    <link rel="prev" title="Random Number Generators and Seeding" href="random_number_generators.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/stochastic_processes/using_random_numbers.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/stochastic_processes/using_random_numbers.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/stochastic_processes/using_random_numbers.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/stochastic_processes/using_random_numbers.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-references">
+   Other References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-in-python">
+   Random in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seeding">
+   Seeding
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       random()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flipping-coins-with-randint">
+     Flipping coins with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       randint()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rolling-dice-with-randint">
+     Rolling dice with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       randint()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normally-distributed-numbers">
+     Normally-distributed numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#drawing-random-elements">
+     Drawing Random Elements
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-drawing-balls-from-a-bag">
+     Example: Drawing Balls from a Bag
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shuffling-lists">
+     Shuffling lists
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-randomness">
+   Testing Randomness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-of-randomness">
+   Use of Randomness
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mathematical-modeling">
+     Mathematical Modeling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-techniques">
+     Numerical Techniques
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimating-probabilities">
+     Estimating probabilities
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-rolling-20-or-more-on-5-dice">
+       Example Rolling 20 or more on 5 dice
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-the-monty-hall-problem">
+     Example: The Monty Hall Problem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-pi-by-throwing-darts">
+     Finding Pi by Throwing Darts
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-integration">
+   Monte Carlo Integration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-formalities">
+     Some Formalities
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-monte-carlo-integration">
+     Implementing Monte Carlo integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-is-monte-carlo-integration-useful">
+     Why is Monte Carlo Integration useful?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Using Random Numbers</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-references">
+   Other References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-in-python">
+   Random in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seeding">
+   Seeding
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       random()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flipping-coins-with-randint">
+     Flipping coins with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       randint()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rolling-dice-with-randint">
+     Rolling dice with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       randint()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normally-distributed-numbers">
+     Normally-distributed numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#drawing-random-elements">
+     Drawing Random Elements
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-drawing-balls-from-a-bag">
+     Example: Drawing Balls from a Bag
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shuffling-lists">
+     Shuffling lists
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-randomness">
+   Testing Randomness
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-of-randomness">
+   Use of Randomness
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mathematical-modeling">
+     Mathematical Modeling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numerical-techniques">
+     Numerical Techniques
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimating-probabilities">
+     Estimating probabilities
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-rolling-20-or-more-on-5-dice">
+       Example Rolling 20 or more on 5 dice
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-the-monty-hall-problem">
+     Example: The Monty Hall Problem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-pi-by-throwing-darts">
+     Finding Pi by Throwing Darts
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-integration">
+   Monte Carlo Integration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-formalities">
+     Some Formalities
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-monte-carlo-integration">
+     Implementing Monte Carlo integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-is-monte-carlo-integration-useful">
+     Why is Monte Carlo Integration useful?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="using-random-numbers">
+<h1>Using Random Numbers<a class="headerlink" href="#using-random-numbers" title="Permalink to this headline">#</a></h1>
+<p>In the previous lecture, we looked at how we can use a pseudorandom number generator (pRNG) to generate numbers that are statistically random. We will now start looking at how we can actually use these random numbers.</p>
+<section id="other-references">
+<h2>Other References<a class="headerlink" href="#other-references" title="Permalink to this headline">#</a></h2>
+<p>Note that in <a class="reference external" href="https://link.springer.com/chapter/10.1007/978-3-662-49887-3_8">A primer on scientific programming with Python</a><span id="id1">[<a class="reference internal" href="#id3" title="Hans Petter Langtangen and Hans Petter Langtangen. A primer on scientific programming with Python. Volume 1. Springer, 2011.">LL11</a>]</span> by Langtangen covers the use of random numbers in Python in <em>Chapter 8: Random numbers and Simple Games</em>. Some of our examples are borrowed directly from this chapter.</p>
+</section>
+<section id="random-in-python">
+<h2>Random in Python<a class="headerlink" href="#random-in-python" title="Permalink to this headline">#</a></h2>
+<p>In the previous lecture we explored how computers can use pseudorandom number generators to produce sequences of numbers that are <em>statistically</em> random. There we saw some simple examples of how such pRNGs can be made. However, in practice, when you need access to random numbers in your scripts, the easiest thing is to rely on well made packages to do this. In Python, you have access to the standard library <code class="docutils literal notranslate"><span class="pre">random</span></code>, and NumPy has its own <code class="docutils literal notranslate"><span class="pre">numpy.random</span></code> package for vectorized generation of random numbers. Both of these rely on the Mersenne Twister algorithm. As mentioned in the previous lecture, this is the gold standard for pRNGs, and quite decent for most scientific applications.</p>
+</section>
+<section id="seeding">
+<h2>Seeding<a class="headerlink" href="#seeding" title="Permalink to this headline">#</a></h2>
+<p>Like any pRNG, you can seed the Python pRNG with the function <code class="docutils literal notranslate"><span class="pre">seed</span></code>. If you do not do so, a seed is chosen for you. If you are going to be testing your code, or you are looking for bugs, fixing the seed is a good idea</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9664535356921388
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4545</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.10816512939267264
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both of these packages have a function called <code class="docutils literal notranslate"><span class="pre">random()</span></code>, which returns a pseudorandom floating point in the range <span class="math notranslate nohighlight">\([0, 1)\)</span>. We also have access to plenty of other functions, which draw numbers from other distributions. These are mostly implemented as using <code class="docutils literal notranslate"><span class="pre">random()</span></code> behind the scenes. The underlying <em>randomness</em> is always generated by the Mersenne Twister in the same manner.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">random</span></code> and <code class="docutils literal notranslate"><span class="pre">np.random</span></code> packages are very similar, with some slight differences. We won’t go through and show every example with both. The major difference is that the numpy package is <em>vectorized</em>, meaning we can draw a whole set of random numbers at once. Because of this, it is the <code class="docutils literal notranslate"><span class="pre">np.random</span></code> package that is most useful in practice for scientific applications, and the one we will focus on in this lecture.</p>
+<p>Note also that for cryptographic and security purposes, the Mersenne Twister is completely unsuited. In these cases you should not use the <code class="docutils literal notranslate"><span class="pre">random</span></code> libraries. For such purposes, you should instead look at the <a class="reference external" href="https://docs.python.org/3/library/secrets.html">secrets</a> library, which was released with Python 3.6.</p>
+<section id="random">
+<h3><code class="docutils literal notranslate"><span class="pre">random()</span></code><a class="headerlink" href="#random" title="Permalink to this headline">#</a></h3>
+<p>The simplest function, but perhaps also the most important, is <code class="docutils literal notranslate"><span class="pre">random()</span></code>, which returns a number in the range <span class="math notranslate nohighlight">\([0, 1)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.614351942079199
+0.4605892547831276
+0.09490861368747994
+</pre></div>
+</div>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">np.random</span></code>, you can draw multiple numbers at once with the keyword argument <code class="docutils literal notranslate"><span class="pre">size</span></code>. The results are then returned in a numpy array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.22757495 0.93708434 0.87707599 0.62073907 0.94567712 0.98839807
+ 0.12890789 0.19876454 0.17536972 0.10987037 0.45100604 0.46309978
+ 0.08646816 0.00778096 0.68880803 0.08254698 0.77910104 0.05202863
+ 0.06692324 0.59134301 0.37129806 0.85377894 0.96742315 0.09143025
+ 0.06656051 0.13993966 0.95915816 0.99945193 0.28371376 0.23228119]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can plot some of these random numbers and see how they look</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">500</span>  <span class="c1"># no of samples</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_8_0.png" src="../../../_images/using_random_numbers_8_0.png" />
+</div>
+</div>
+<p>We expect a uniform distribution with <code class="docutils literal notranslate"><span class="pre">np.random.random</span></code>. If we want a different uniform distribution, <span class="math notranslate nohighlight">\([a, b]\)</span>, we can use the function <code class="docutils literal notranslate"><span class="pre">np.random.uniform(a,</span> <span class="pre">b)</span></code> to produce this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_10_0.png" src="../../../_images/using_random_numbers_10_0.png" />
+</div>
+</div>
+<p>If these numbers are actually uniformly distributed, we would expect the sample mean and sample standard deviation to approach the expected mean and standard deviation of a uniform distribution. Let us check this.</p>
+<p>The expected mean of a uniform distribution is simply the mean of the interval</p>
+<div class="math notranslate nohighlight">
+\[E(X) = \frac{a + b}{2}\]</div>
+<p>And the variance is given by
+$<span class="math notranslate nohighlight">\(\mbox{V}(x) = \frac{(b-a)^2}{12}.\)</span><span class="math notranslate nohighlight">\(
+And the standard deviation is the square of this \)</span>\sigma = \sqrt{{\rm V}(X)}$.</p>
+<p>For our uniform distribution, we have <span class="math notranslate nohighlight">\(a = -1\)</span>, <span class="math notranslate nohighlight">\(b=1\)</span>. So we expected our random samples to have</p>
+<div class="math notranslate nohighlight">
+\[\mbox{mean} = 0, \qquad \mbox{variance} = \frac{1}{3}, \qquad \mbox{standard deviation} = 0.57735\]</div>
+<p>Let us test if this is the case</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;N&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;mean&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;var&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;std&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N</span><span class="si">:</span><span class="s2">10d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">mean</span><span class="si">:</span><span class="s2">10.5f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">variance</span><span class="si">:</span><span class="s2">10.5f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">std</span><span class="si">:</span><span class="s2">10.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         N       mean        var        std
+==================================================
+        10   -0.03521    0.28530    0.53413
+       100    0.01240    0.34114    0.58407
+      1000    0.01992    0.34044    0.58347
+     10000   -0.00264    0.33539    0.57912
+    100000   -0.00154    0.33278    0.57687
+   1000000   -0.00077    0.33322    0.57725
+==================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we draw more and more uniform samples, we see the sample mean, variance and standard deviation converge towards the expected values for a uniform distribution.</p>
+</section>
+<section id="flipping-coins-with-randint">
+<h3>Flipping coins with <code class="docutils literal notranslate"><span class="pre">randint()</span></code><a class="headerlink" href="#flipping-coins-with-randint" title="Permalink to this headline">#</a></h3>
+<p>If you instead need random integers, you should use the function <code class="docutils literal notranslate"><span class="pre">randint()</span></code>. This function takes either one argument, in which case you get a uniformly distributed random integer on the range <span class="math notranslate nohighlight">\([0, N)\)</span>, or it takes two integers, in which case you get a number on the range <span class="math notranslate nohighlight">\([a, b)\)</span>.</p>
+<p>To flip a coin, we can therefore do</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;heads&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tails&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>heads
+heads
+heads
+</pre></div>
+</div>
+</div>
+</div>
+<p>Say we want to flip a thousand coins, we can do this with a loop:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heads</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tails</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">flip</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">heads</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">flip</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">tails</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Heads:&quot;</span><span class="p">,</span> <span class="n">heads</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tails:&quot;</span><span class="p">,</span> <span class="n">tails</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heads: 490
+Tails: 510
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, using a for-loop combined with an if-test like this is very slow. It would be much faster to draw all the numbers at once. We could for example do it like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">flips</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">flips</span><span class="p">)</span>
+<span class="n">tails</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="n">heads</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Heads:&quot;</span><span class="p">,</span> <span class="n">heads</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tails:&quot;</span><span class="p">,</span> <span class="n">tails</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heads: 506
+Tails: 494
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s do a quick comparison of how fast these two solutions are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">serial_flips</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">heads</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">tails</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">flip</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">heads</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">flip</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">tails</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">heads</span><span class="p">,</span> <span class="n">tails</span>
+
+<span class="k">def</span> <span class="nf">vectorized_flips</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">flips</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">flips</span><span class="p">)</span>
+    <span class="n">tails</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="n">heads</span>
+    <span class="k">return</span> <span class="n">heads</span><span class="p">,</span> <span class="n">tails</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">timeit</span></code> to time how fast certain code is in Python. In Jupyter, we can invoke timeit om a given function with the <em>cell magic</em> <code class="docutils literal notranslate"><span class="pre">%timeit</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> serial_flips(1000)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.94 ms ± 197 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> vectorized_flips(1000)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26 µs ± 327 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> serial_flips(10**5)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>401 ms ± 18.5 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> vectorized_flips(10**5)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>489 µs ± 10.4 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>From these simple trials, it seems the vectorized version is about 100-300 times as fast as the serial version. This is because everything is happening vectorized in low-level C code. Note that we also use <code class="docutils literal notranslate"><span class="pre">np.sum</span></code> to sum the resulting array, which is much faster than using the built-in <code class="docutils literal notranslate"><span class="pre">sum</span></code> function.</p>
+</section>
+<section id="rolling-dice-with-randint">
+<h3>Rolling dice with <code class="docutils literal notranslate"><span class="pre">randint()</span></code><a class="headerlink" href="#rolling-dice-with-randint" title="Permalink to this headline">#</a></h3>
+<p>As we can adjust the boundaries of <code class="docutils literal notranslate"><span class="pre">randint()</span></code>, we can also use it do get other discrete, uniform distributions. Rolling a die for example, should give numbers from 1 through 6, and so we can roll a die with <code class="docutils literal notranslate"><span class="pre">np.random.randint(1,7)</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+2
+2
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now roll two dice, and sum them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+8
+3
+10
+2
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result when summing two dice is a number from 2 through 12. However, these numbers will <em>not</em> be uniformly distributed, and so we could <em>not</em> simply do <code class="docutils literal notranslate"><span class="pre">randint(2,</span> <span class="pre">13)</span></code> to get such a number!</p>
+<p>Say we want to roll 1000 pairs of dice, how could we do so vectorized? Well, the <code class="docutils literal notranslate"><span class="pre">size</span></code> keyword can be a <em>tuple</em> to specify more complex shapes than simply the number of throws. So we could do:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2 6]
+ [4 1]
+ [4 1]
+ ...
+ [3 4]
+ [1 2]
+ [4 6]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have a two dimensional array of shape <span class="math notranslate nohighlight">\(1000\times 2\)</span>. We can sum this array along only one of it’s axis with <code class="docutils literal notranslate"><span class="pre">np.sum</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sums</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sums</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1000,)
+[ 8  5  5  8  5  2  6  5  8  3  5  7  4  8 11  5  6  3  4  8]
+</pre></div>
+</div>
+</div>
+</div>
+<p>So now we have our 1000 summed pair of die-rolls. We can plot it as a histogram:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sums</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;1000 rolled pairs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_35_0.png" src="../../../_images/using_random_numbers_35_0.png" />
+</div>
+</div>
+<p>This distribution didn’t come out looking very nice, did it? For one thing, it looks to be very right-skewed, with considerably more results of 12 than for 2. Isn’t this weird? It of course could be that we are unlucky. But that seems like a <em>serious</em> skew, with almost a twice the rolls of 12! What is going on here?</p>
+<p>Sometimes, the problem does not lie in our sampling, or calculation itself, but simply in the plotting. Let us simplify and simply write out the number each result comes up:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">2</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sums</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 2: 26
+ 3: 47
+ 4: 78
+ 5: 125
+ 6: 116
+ 7: 169
+ 8: 133
+ 9: 124
+10: 85
+11: 71
+12: 26
+</pre></div>
+</div>
+</div>
+</div>
+<p>From simply writing it out, things look a lot more reasonable. For one thing, we actually have less 12’s than we do 2’s! The answer lies simply in how the histogram binning works. To fix it, we can for example explicitly set the bin edges between each number, so we start at 1.5 to 2.5, then 2.5 to 3.5 and so on:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_39_0.png" src="../../../_images/using_random_numbers_39_0.png" />
+</div>
+</div>
+<p>This histogram looks a lot more reasonable. There are still some weird results, such as 6 occurring more than 7, but these seem to be just slightly offsets from the expected distribution, and we are only doing 1000 samples, which is not that much. Let us try again with some more samples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2"> samples&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_41_0.png" src="../../../_images/using_random_numbers_41_0.png" />
+</div>
+</div>
+</section>
+<section id="normally-distributed-numbers">
+<h3>Normally-distributed numbers<a class="headerlink" href="#normally-distributed-numbers" title="Permalink to this headline">#</a></h3>
+<p>To generate normally distributed values, use <code class="docutils literal notranslate"><span class="pre">np.random.normal(mean,</span> <span class="pre">std)</span></code> (or <code class="docutils literal notranslate"><span class="pre">random.normalvariate(mean,</span> <span class="pre">std)</span></code>). Let us produce a histogram:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_43_0.png" src="../../../_images/using_random_numbers_43_0.png" />
+</div>
+</div>
+<p>That does look fairly Normally distributed. If we want to plot the corresponding probability density function, we can use <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm.pdf</span></code>. Then we should also use the <code class="docutils literal notranslate"><span class="pre">density</span></code> keyword to <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code>, to normalize the y-axis so it plots a probability density distribution, and not the number of occurrences.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="mf">2.2</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.5</span>
+
+<span class="c1">#### Drawing Random samples</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#### Drawing the mathematical bell curve</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">),</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_45_0.png" src="../../../_images/using_random_numbers_45_0.png" />
+</div>
+</div>
+</section>
+<section id="drawing-random-elements">
+<h3>Drawing Random Elements<a class="headerlink" href="#drawing-random-elements" title="Permalink to this headline">#</a></h3>
+<p>If we have a set of elements, say for instance, a list, we can draw a sample of random elements using <code class="docutils literal notranslate"><span class="pre">np.random.choice</span></code>. We can for example use this to generate a lottery-winner:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alfred&quot;</span><span class="p">,</span> <span class="s2">&quot;Beatrice&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="s2">&quot;Danielle&quot;</span><span class="p">,</span> <span class="s2">&quot;Elinor&quot;</span><span class="p">,</span> <span class="s2">&quot;Fredrick&quot;</span><span class="p">,</span> <span class="s2">&quot;Gabriel&quot;</span><span class="p">]</span>
+<span class="n">winner</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">candidates</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gabriel
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can of course draw a sample of multiples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">winners</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winners</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Charlie&#39; &#39;Beatrice&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Be a bit careful however, as drawing multiple samples automatically uses replacement. You therefore risk running into drawing the same person twice. Add the optional keyword <code class="docutils literal notranslate"><span class="pre">replace=False</span></code> to turn of this.</p>
+</section>
+<section id="example-drawing-balls-from-a-bag">
+<h3>Example: Drawing Balls from a Bag<a class="headerlink" href="#example-drawing-balls-from-a-bag" title="Permalink to this headline">#</a></h3>
+<p>Let us look at an example. If we have a bag that contains two red, and two blue balls in it. If we draw two balls at random from this bag. What is the chance that we get one of each color?</p>
+<figure class="align-default" id="four-balls">
+<a class="reference internal image-reference" href="../../../_images/four_balls.png"><img alt="four_balls" src="../../../_images/four_balls.png" style="width: 300px;" /></a>
+</figure>
+<p>Instead of analyzing this problem, let’s simply carry out the experiment a bunch of times, and see how often we get one of each. To draw two balls at random we create a list with the contents of the bag, and use <code class="docutils literal notranslate"><span class="pre">choice(2,</span> <span class="pre">replace=False)</span></code> (because we draw two balls at the same time, we are drawing without replacement).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+
+<span class="n">hat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+<span class="n">success</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">hat</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">&#39;red&#39;</span> <span class="ow">in</span> <span class="n">sample</span> <span class="ow">and</span> <span class="s1">&#39;blue&#39;</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+        <span class="n">success</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of experiments: </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of successes:  </span><span class="si">{</span><span class="n">success</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ratio of success:     </span><span class="si">{</span><span class="n">success</span><span class="o">/</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of experiments: 100000
+Number of successes:  66693
+Ratio of success:     0.66693
+</pre></div>
+</div>
+</div>
+</div>
+<p>So we see that we get one ball of each color roughly 2/3 of the time. From this we can conclude that the probability of drawing one of each color ball is 2/3, or 66.7%. This is an example of a <em>stochastic simulation</em>.  And why it doesn’t tell us <em>why</em> the probability is 2/3, it can be a useful tool in exploring and finding probabilities in settings where we are struggling to do so.</p>
+</section>
+<section id="shuffling-lists">
+<h3>Shuffling lists<a class="headerlink" href="#shuffling-lists" title="Permalink to this headline">#</a></h3>
+<p>In this course we have talked quite a bit about sorting lists, but now we can talk about <em>shuffling</em> lists. Shuffling a list means moving the elements around so that they are at random indices. You can use the function <code class="docutils literal notranslate"><span class="pre">np.random.shuffle</span></code> to do this. Note that it shuffles a list <em>in-place</em>, and returns nothing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before Shuffle&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After shuffle&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before Shuffle
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+ 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+ 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+ 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95
+ 96 97 98 99]
+
+After shuffle
+[34 11 23 92  9 52 43 88 87 14  3 26 67 31 24 60 72 98 81 22 63  1 37 68
+  8 51 56 89 97 93 96 90 62 64  0 18 86 85 77 13 95  5 79 66 69 75 28 70
+ 15 65 35 20 49 40 41 46 10 30 39 32 53 59 21 50  2 84  4 73 80 48 54 29
+ 19 78 45 17 12 99 71 82 57 44 94 38 76 61 33 27 16 25 91 36 83  7 74 42
+ 58 47 55  6]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want a shuffled copy of a list or array, but also keep the original, you will need to first copy it, and then shuffle the copy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 5 6 7 8 9]
+[7 0 3 5 1 6 9 8 4 2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that it is not sufficient to write <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code> to make a copy, this will only make <code class="docutils literal notranslate"><span class="pre">y</span></code> a reference to the array, and not an actual copy, and so changing <code class="docutils literal notranslate"><span class="pre">y</span></code> will also change the original:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="c1"># Doesn&#39;t actually copy, just creates a new name binding. x and y will refer to the same object</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7 9 2 6 1 0 4 3 5 8]
+[7 9 2 6 1 0 4 3 5 8]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="testing-randomness">
+<h2>Testing Randomness<a class="headerlink" href="#testing-randomness" title="Permalink to this headline">#</a></h2>
+<p>So far, we have seen plenty of examples of how we can draw random numbers, and how they can be used for simple experiments. But how can we be confident that our random numbers are actually random?</p>
+<p>As we explained last week, what we care about is that our numbers are <em>statistically</em> random. This means they should behave exactly like truly random numbers, in a statistical sense.</p>
+<p>Now, the tricky part of testing wether this is the case, is that randomness is finnicky. We can simply be “unlucky” and end up in a state that has very low probability, and conclude that our numbers are, in fact, not random. For example: if we throw a dice 10 times, and get a 1 each time, we will expect the dice is a fake. But a truly random die will surely get 10 sixes in a row sooner or later, so how can we be sure?</p>
+<p>The way this is handles for RNGs, is that instead of creating <em>one</em> test for an RNG, we create a whole <em>battery</em> of tests that look at different properties and examples. To test an RNG we then run through all the different tests, perhaps multiple times. In this process, we might expect a single failure, or perhaps a couple, but if the RNG is outputting fundamentally non-random numbers, we will see many tests start to fail.</p>
+<p>Creating such test batteries is a tricky process, and requires a good understanding of statistical methods. Therefore, these are often created by professionals to test arbitrary RNGs. A famous such test battery is the <a class="reference external" href="https://en.wikipedia.org/wiki/Diehard_tests"><em>Diehard tests</em></a>. This set of tests was created in 1995 and distributed widely.</p>
+<p>The first test of the Diehard is looking at the spacing of reoccurrences, and is therefore called the birthday spacings test, based on the Birthday problem, as explained in the previous lecture. The other tests are similar in nature. You for example have the <em>parking lot test</em>:</p>
+<blockquote>
+<div><p>Parking lot test: Randomly place unit circles in a 100×100 square. A circle is successfully parked if it does not overlap an existing successfully parked one. After 12,000 tries, the number of successfully parked circles should follow a certain normal distribution.</p>
+</div></blockquote>
+<p>The Wikipedia article on the Diehard tests lists and explains all the tests used.</p>
+<p>While the Diehard tests are very well known. A more recent, and ever stricter test battery is the <a class="reference external" href="https://en.wikipedia.org/wiki/TestU01">TestU01</a> battery, which was released in 2007. Interestingly enough, the Mersenne Twister 19937 passes all of the Diehard tests, and most of, but not all of the TestU01 tests. Perhaps we will see a new pRNG take the place of Mersenne Twister as the de factor default pRNG in the coming years?</p>
+</section>
+<section id="use-of-randomness">
+<h2>Use of Randomness<a class="headerlink" href="#use-of-randomness" title="Permalink to this headline">#</a></h2>
+<p>We have now gone through and shown different function in <code class="docutils literal notranslate"><span class="pre">np.random</span></code> you can use to generate random numbers. For each function, we have shown some simple examples of how we can use these random numbers to explore different phenomenon.</p>
+<section id="mathematical-modeling">
+<h3>Mathematical Modeling<a class="headerlink" href="#mathematical-modeling" title="Permalink to this headline">#</a></h3>
+<p>In mathematical modeling, we are attempting to create some model replicating or describing some physical phenomenon seen in nature. Some of these are deterministic, given a set of initial conditions, and boundary conditions, we expect deterministic outcomes. An example would be throwing a ball through the air.</p>
+<p>Other phenomenon are inherently random. Some of our examples have been of exactly such phenomenon, such as throwing dice, or drawing balls from a hat randomly. While such examples might seem trivial, or non-important, they serve as a good illustration. Nature, at the lowest level, seems to behave randomly, and can at least be well described by random molecular and thermal motion. Modeling such systems requires randomness.</p>
+<p>Even systems that are deterministic in nature, can act <em>chaotic</em>, such as you have seen yourself with the double pendulum. Another example would be weather forecasting. While such systems might be deterministic, we can never perfectly capture the initial conditions and boundary conditions of such a system. In addition, the limited precision of floating points means we cannot perfectly model the system over time, and numerical errors might change the trajectory of such as system. One solution to this can be to model the system stochastically, from a bunch of different initial conditions, and then use statistical techniques to pull out <em>averaged</em> behaviors of the system. This way we can learn a lot about a system, even if we cannot model its trajectory perfectly.</p>
+</section>
+<section id="numerical-techniques">
+<h3>Numerical Techniques<a class="headerlink" href="#numerical-techniques" title="Permalink to this headline">#</a></h3>
+<p>In addition to being used to include actual randomness in simulations. Many numerical techniques are based on using random sampling or random steps in some way. These techniques are used because they can be more effective at solving certain problems, meaning they for example converge towards a solution faster than a deterministic algorithm. Such techniques are usually referred to as <em>Monte Carlo</em> techniques, named from the famous <em>Casino de Monte-Carlo</em> in Monaco.</p>
+<p>For the rest of this lecture, we will look at some more examples of using random numbers.</p>
+</section>
+<section id="estimating-probabilities">
+<h3>Estimating probabilities<a class="headerlink" href="#estimating-probabilities" title="Permalink to this headline">#</a></h3>
+<p>In our example of drawing balls from a bag, we repeated a simple experiment a bunch of times, and simply evaluated the number of times a specific outcome occurred. The ratio of outcomes gives us an <em>estimate</em> of the probability of that outcome.</p>
+<p>This technique is completely general, as long as we can reproduce the random behavior itself, we can simply simulate a large number of experiments, and estimate the probability. Due to the law of large numbers, we know that the more experiments we carry out, the more confident we can be in our probability estimate. If we wanted to be more formal about it, we could use statistics to find a <em>confidence interval</em> of our estimates. For now, we skip this step.</p>
+<section id="example-rolling-20-or-more-on-5-dice">
+<h4>Example Rolling 20 or more on 5 dice<a class="headerlink" href="#example-rolling-20-or-more-on-5-dice" title="Permalink to this headline">#</a></h4>
+<p>If you roll 5 dice, and sum them all up. What is the chance of getting 20 or more? This is a fairly simple question, but analyzing mathematically is a bit more challenging. We could of course write out all the different  possible results, and count up every one that is 20 or more. But with 5 dice the number of possible combinations would be
+$<span class="math notranslate nohighlight">\(6^5 = 7776.\)</span>$</p>
+<p>So writing out <em>all</em> the outcomes would be too much work. Of course, you might be smart about it, and find some nice ways to categorize outcomes and such, but that would of course need some work as well, to think up all these clever tricks.</p>
+<p>Let us instead simply <em>simulate</em> and estimate the probability:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">success</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="n">success</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulations: </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nr of &gt;=20:  </span><span class="si">{</span><span class="n">success</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ratio:       </span><span class="si">{</span><span class="n">success</span><span class="o">/</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulations: 100000
+Nr of &gt;=20:  30646
+Ratio:       0.30646
+</pre></div>
+</div>
+</div>
+</div>
+<p>So from <span class="math notranslate nohighlight">\(N=10^5\)</span> trials, it seems that the probability is at least close to 30.4%. If we want to do even more simulations, we might want to vectorize our example fully, so that we avoid the Python for-loop altogether.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">7</span>
+<span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rolls</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rolls</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulations: </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated prob.: </span><span class="si">{</span><span class="n">success</span><span class="o">/</span><span class="n">N</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulations: 10000000
+Estimated prob.: 30.48%
+</pre></div>
+</div>
+</div>
+</div>
+<p>So we can say with high confidence that the probability of rolling 20 or more in total is about 30.5%. If we wanted to be more precise in our statement, we could use some statistics to formulate a confidence interval for this estimate.</p>
+<p>While this example is fairly simple, it illustrates how <em>easy</em> it is to get to the probability estimate, it is only a few lines of code that runs in a few seconds. Finding the probability analytically is a much bigger challenge. And while that is possible in this case, many cases are simply to complex to find an analytic expression for a probability at all, in which case estimates from Monte Carlo simulations might be all we have.</p>
+</section>
+</section>
+<section id="example-the-monty-hall-problem">
+<h3>Example: The Monty Hall Problem<a class="headerlink" href="#example-the-monty-hall-problem" title="Permalink to this headline">#</a></h3>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Monty_Hall_problem"><em>Monty Hall Problem</em></a> is a famous brain teaser that lead to a huge public debate in the US in 1990. The  problem, as it was originally states, is as follows:</p>
+<figure class="align-default" id="doors">
+<a class="reference internal image-reference" href="../../../_images/doors.png"><img alt="doors" src="../../../_images/doors.png" style="width: 400px;" /></a>
+</figure>
+<blockquote>
+<div><p>Suppose you’re on a game show, and you’re given the choice of three doors. Behind one door is a car, behind the others, goats. You pick a door, say #1, and the host, who knows what’s behind the doors, opens another door, say #3, which has a goat. He says to you, “Do you want to pick door #2?” Is it to your advantage to switch your choice of doors?</p>
+</div></blockquote>
+<figure class="align-default" id="doors-open">
+<a class="reference internal image-reference" href="../../../_images/doors_open.png"><img alt="doors_open" src="../../../_images/doors_open.png" style="width: 500px;" /></a>
+</figure>
+<p>The reason this problem became so popular, is that it was sent in to the column <em>Ask Marilyn</em> in Parade Magazine. In <em>Ask Marilyn</em>, Marilyn vos Savant answered questions on logical puzzles and brain teasers. It was a popular column, for among other things, Marilyn was in the Guinness book of world records for having the World’s highest IQ.</p>
+<p>Now. In Marilyn’s response in her column. She said that the right strategy is that you should switch to door number 2. And this is where the trouble started. In the coming week, there were thousands of mailed replies to Parade magazine, claiming Marilyn got this wrong. And this was not just from lay people, but many Ph.Ds. in mathematics, and several mathematics professors got into the fray. Declaring that Marilyn was not only dead wrong, but was in fact responsible for the poor level of math education in the US. Pretty harsh stuff.</p>
+<p>In the coming weeks, Marilyn would not budge on her answer, instead writing different explanations and rationals in her answer. However, likewise, the mathematicians would not agree with her, calling her stubborn and ignorant.</p>
+<p>The whole debacle ended when Marilyn proposed a challenge to the primary schools of the US. Simply perform the experiment in your classroom with some paper cups and a die. And this put the whole debate to an end, as more and more classrooms performed the experiment, the results were tallied up, and showed that Marilyn was in fact right all along, you <em>should</em> switch.</p>
+<p>And lo and behold, after this empirical proof of her answer, the academics came around, and now took the time to analyze the problem properly. And of course her answer was correct, it was only logical they declared.</p>
+<p>Now. The Monty Hall problem is not just an excellent example of how probability theory can be highly counter-intuitive, and a good warning on the dangers of academic hubris. But it is also an excellent example of Monte Carlo Simulation! Marilyn’s challenge to the primary schools of the US is actually just a clever way of racking up the number of simulations, to get a good probability estimate.</p>
+<p>Let us recreate the experiment in Python. For each simulation, we carry out the same steps:</p>
+<ol class="simple">
+<li><p>Place the prize between one of the three doors at random</p></li>
+<li><p>Select one of the three doors as our initial guess</p></li>
+<li><p>The host now opens one of the remaining doors that has a goat behind it</p></li>
+<li><p>Depending on the strategy, we stay or switch</p></li>
+<li><p>We check our final prize</p></li>
+</ol>
+<p>Let us first simulate a single game:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">strategy</span> <span class="o">=</span> <span class="s2">&quot;switch&quot;</span>
+
+<span class="n">prize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">host</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="n">nr</span> <span class="k">for</span> <span class="n">nr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">if</span> <span class="n">nr</span> <span class="o">!=</span> <span class="n">initial</span> <span class="ow">and</span> <span class="n">nr</span> <span class="o">!=</span> <span class="n">prize</span><span class="p">])</span>
+<span class="n">final</span> <span class="o">=</span> <span class="n">initial</span> <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;stay&quot;</span> <span class="k">else</span> <span class="p">[</span><span class="n">nr</span> <span class="k">for</span> <span class="n">nr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">if</span> <span class="n">nr</span> <span class="o">!=</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">nr</span> <span class="o">!=</span> <span class="n">initial</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">win</span> <span class="o">=</span> <span class="n">final</span> <span class="o">==</span> <span class="n">prize</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The prize is behind door:&quot;</span><span class="p">,</span> <span class="n">prize</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We guess door: &quot;</span><span class="p">,</span> <span class="n">initial</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The host reveals a goat behind door&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We are playing:&quot;</span><span class="p">,</span> <span class="n">strategy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final door selected:&quot;</span><span class="p">,</span> <span class="n">final</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You win!&quot;</span> <span class="k">if</span> <span class="n">win</span> <span class="k">else</span> <span class="s2">&quot;You lose!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The prize is behind door: 0
+We guess door:  2
+The host reveals a goat behind door 1
+We are playing: switch
+Final door selected: 0
+You win!
+</pre></div>
+</div>
+</div>
+</div>
+<p>After verifying that one game works, we can simulate a large number of them</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">strategy</span> <span class="o">=</span> <span class="s2">&quot;switch&quot;</span>
+<span class="n">wins</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">prize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="n">nr</span> <span class="k">for</span> <span class="n">nr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">if</span> <span class="n">nr</span> <span class="o">!=</span> <span class="n">initial</span> <span class="ow">and</span> <span class="n">nr</span> <span class="o">!=</span> <span class="n">prize</span><span class="p">])</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">initial</span> <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;stay&quot;</span> <span class="k">else</span> <span class="p">[</span><span class="n">nr</span> <span class="k">for</span> <span class="n">nr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">if</span> <span class="n">nr</span> <span class="o">!=</span> <span class="n">host</span> <span class="ow">and</span> <span class="n">nr</span> <span class="o">!=</span> <span class="n">initial</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">win</span> <span class="o">=</span> <span class="n">final</span> <span class="o">==</span> <span class="n">prize</span>
+    <span class="n">wins</span> <span class="o">+=</span> <span class="n">win</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2"> Games Played with strategy: </span><span class="si">{</span><span class="n">strategy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Won </span><span class="si">{</span><span class="n">wins</span><span class="si">}</span><span class="s2"> games (</span><span class="si">{</span><span class="n">wins</span><span class="o">/</span><span class="n">N</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100000 Games Played with strategy: switch
+Won 66708 games (66.7%)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="finding-pi-by-throwing-darts">
+<h3>Finding Pi by Throwing Darts<a class="headerlink" href="#finding-pi-by-throwing-darts" title="Permalink to this headline">#</a></h3>
+<p>Imagine we are blindly throwing darts at the following dartboard</p>
+<figure class="align-default" id="dartboard">
+<a class="reference internal image-reference" href="../../../_images/dartboard.png"><img alt="dartboard" src="../../../_images/dartboard.png" style="width: 300px;" /></a>
+</figure>
+<p>What are the chances a dart, thrown blindly, lands within the board itself (the circle), and not outside it (the corners)? Well, the probability should be proportional to the area of the target:
+$<span class="math notranslate nohighlight">\(P(\text{hit}) = \frac{\text{area of circle}}{\text{total area}} = \frac{\pi r^2}{2r\cdot 2r} = \frac{\pi}{4}.\)</span>$</p>
+<p>This expression is fairly simply, we can compute the probability, based on the value of <span class="math notranslate nohighlight">\(\pi\)</span>. However, we can also flip the expression around:</p>
+<div class="math notranslate nohighlight">
+\[\pi = 4\cdot P(\text{hit}).\]</div>
+<p>Meaning we can compute the value of <span class="math notranslate nohighlight">\(\pi\)</span> (assume we don’t know it), if we can find <span class="math notranslate nohighlight">\(P(\text{hit})\)</span>. Now, how can we find <span class="math notranslate nohighlight">\(P(\text{hit})\)</span> without knowing <span class="math notranslate nohighlight">\(\pi\)</span>? Well, we can use Monte Carlo simulations of course.</p>
+<p>The following code draws the board, and throws 10 darts at it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_67_0.png" src="../../../_images/using_random_numbers_67_0.png" />
+</div>
+</div>
+<p>Now, we need some way of <em>checking</em> wether a dart has hit the board or not. We can do this simply by computing the distance to the origin from <span class="math notranslate nohighlight">\(\sqrt{x^2 + y^2}\)</span>, if this distance is <span class="math notranslate nohighlight">\(\leq 1\)</span>, then by definition, we are outside the circle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_69_0.png" src="../../../_images/using_random_numbers_69_0.png" />
+</div>
+</div>
+<p>Now, to find the actual probability, we don’t need to plot, so we can simply draw the numbers and check:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">hits</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">pi_estimate</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">hits</span><span class="o">/</span><span class="n">N</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pi_estimate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.14964
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our program works well, but it is far from optimized. For one thing we can vectorize it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">hits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">pi_estimate</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">hits</span><span class="o">/</span><span class="n">N</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pi_estimate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1386
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we can go even further. For one, we don’t actually need to do <code class="docutils literal notranslate"><span class="pre">uniform(-1,</span> <span class="pre">1)</span></code>. We can simply draw numbers from <span class="math notranslate nohighlight">\([0, 1)\)</span> instead. This is because the geometry is symmetrical, so working only in the upper right corner works just as well. Using <code class="docutils literal notranslate"><span class="pre">random</span></code> is faster than <code class="docutils literal notranslate"><span class="pre">uniform</span></code>. In addition, note that we are checking the square root against 1. But <span class="math notranslate nohighlight">\(\sqrt{1} = 1\)</span>, so we can simply skip the square root. Taking the square is an expensive operation, and so skipping it will give a large speed-boost</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">7</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">hits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">pi_estimate</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">hits</span><span class="o">/</span><span class="n">N</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pi_estimate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.14105
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can compare the non-optimized scaler version, and our fully optimized solutions on speed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_darts</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">hits</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">hits</span><span class="o">/</span><span class="n">N</span>
+
+<span class="k">def</span> <span class="nf">optimized_darts</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">hits</span><span class="o">/</span><span class="n">N</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> simple_darts(10**6)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.76 s ± 183 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> optimized_darts(10**6)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.5 ms ± 784 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="monte-carlo-integration">
+<h2>Monte Carlo Integration<a class="headerlink" href="#monte-carlo-integration" title="Permalink to this headline">#</a></h2>
+<p>The example of throwing darts to find <span class="math notranslate nohighlight">\(\pi\)</span> works because we can estimate the probability of hitting the board. However, this in turn is proportional to the <em>area</em> of the board. Effectively, are throwing darts to find the area under a curve. Integrating a function is actually the process of finding the area under the curve. It therefore turns out that by “throwing darts” in this way, we can integrate more or less <em>any</em> function. This is known as Monte Carlo Integration.</p>
+<section id="some-formalities">
+<h3>Some Formalities<a class="headerlink" href="#some-formalities" title="Permalink to this headline">#</a></h3>
+<p>Let us formalize our statements a bit. For any integral, we can express it in another way using the Mean-Value Theorem:</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f(x)\ {\rm d}x = (b-a)\bar{f}.\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\bar{f}\)</span> denotes the mean value of <span class="math notranslate nohighlight">\(f\)</span> on the interval <span class="math notranslate nohighlight">\([a, b]\)</span>, which is defined as</p>
+<div class="math notranslate nohighlight">
+\[\bar{f} = \frac{1}{b-a}\int_{a}^b f(x)\ {\rm d}x.\]</div>
+<p>This is just a rewriting of the integral. To interpret the area under the curve as a rectangle with a height of <span class="math notranslate nohighlight">\(\bar{f}\)</span> and a width of <span class="math notranslate nohighlight">\(b-a\)</span>.</p>
+<p>In numerical integration we find an approximation to the integral by approximating the mean value of the function by evaluating it in a <em>finite</em> number of points:
+$<span class="math notranslate nohighlight">\(\bar{f} \approx \frac{1}{n}\sum_{i=0}^{n-1} f(x_i).\)</span>$
+Now. Precisely <em>what</em> points you sample your function in, and how many points you use, is adjustable. And depending on how we choose those points, we say we are using different numerical <em>schemes</em>.</p>
+<p>If we for example choose to use uniformly spaced points <span class="math notranslate nohighlight">\(N\)</span> uniformly spaced points in the range <span class="math notranslate nohighlight">\([a, b)\)</span>, i.e., the points</p>
+<div class="math notranslate nohighlight">
+\[x_i = a + i\cdot h, \qquad i=0, \ldots N-1,\]</div>
+<p>we have the left Riemann sum. Or we can do the right Riemann sum, which is just the right-aligned points instead</p>
+<div class="math notranslate nohighlight">
+\[x_i = a + (i+1)\cdot h, \qquad i=0, \ldots N-1,\]</div>
+<p>or we can use the <em>middle</em> of each interval, which gives the famous <em>midpoint</em> method</p>
+<div class="math notranslate nohighlight">
+\[x_i = a + (i+\frac{1}{2})\cdot h, \qquad i=0, \ldots N-1,\]</div>
+<p>The more points <span class="math notranslate nohighlight">\(N\)</span> we use, the better out numerical approximation of the integral will be. And while we won’t prove it here, you might recall from earlier classes, such as MAT-INF1100, that the error of these schemes can be analyzed. It turns out that the left and right Riemann sum both have an error on the order of <span class="math notranslate nohighlight">\(\mathcal{O}(1/N).\)</span> As the number of points used grows, the error decreases. Because the step length <span class="math notranslate nohighlight">\(h\)</span> is inversely proportional to <span class="math notranslate nohighlight">\(N\)</span> we can also formulate the error as <span class="math notranslate nohighlight">\(\mathcal{O}(h)\)</span>, i.e., if the step length is halved, the error should also be halved.</p>
+<p>Now, for the midpoint method however, it turns out to be better, we get <span class="math notranslate nohighlight">\(\mathcal{O}(1/N^2)\)</span> or <span class="math notranslate nohighlight">\(\mathcal{O}(h^2)\)</span>. We therefore say the midpoint method is a <em>second-order</em> method. If reduce the step length by a factor of 10, the error should decrease by a factor of a 100. This gives good scaling and better convergence of the solution.</p>
+<p>In addition to these, many other numerical integration schemes exists, such as the <em>trapezoidal</em> rule, or Simpson’s method. But the idea is the same, we approximate the integral with some finite sum.</p>
+<p>The idea behind Monte Carlo integration is that we do the exact same, but instead of spreading the points out uniformly over the interval <span class="math notranslate nohighlight">\([a, b]\)</span>, we select a set of <em>random</em> points. As long as we draw the points from a uniform distribution, the sampling will tend to be uniform, and so will (given enough points) be a good mean of the function and thus a good integral.</p>
+</section>
+<section id="implementing-monte-carlo-integration">
+<h3>Implementing Monte Carlo integration<a class="headerlink" href="#implementing-monte-carlo-integration" title="Permalink to this headline">#</a></h3>
+<p>The idea behind Monte Carlo integration is quite simple, and implementing a function that carries out the technique to integrate an arbitrary function on the interval <span class="math notranslate nohighlight">\([a, b]\)</span> is therefore not too tricky:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">monte_carlo_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">total</span><span class="o">/</span><span class="n">n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us try to function, by performing the integral
+$<span class="math notranslate nohighlight">\(\int_0^{2} e^{4x} \cos (2x) {\rm\ d}x.\)</span>$</p>
+<p>Plugging this formula into Wolfram Alpha tells us the answer should be</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{10}\bigg(e^{8}\big(sin(4) + 2\cos(4)\big) - 2\bigg).\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">approx</span> <span class="o">=</span> <span class="n">monte_carlo_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">exact</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Approx: &quot;</span><span class="p">,</span> <span class="n">approx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exact: &quot;</span><span class="p">,</span> <span class="n">exact</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Approx:  -630.398172265861
+Exact:  -615.4964787585798
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because Monte Carlo integration is inherently random, we get a slightly different estimate each time we run the function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">monte_carlo_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monte_carlo_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monte_carlo_integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-633.0297704225545
+-656.8898169769027
+-633.2168351593492
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get smaller error, and a better confidence interval, we should use more points. Before we do this, let us make a new version, that is vectorized</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">monte_carlo_int_vectorized</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">total</span><span class="o">/</span><span class="n">n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that this function will only work if the function <code class="docutils literal notranslate"><span class="pre">f</span></code> itself is vectorized. Luckily, all the numpy functions, such as <code class="docutils literal notranslate"><span class="pre">exp</span></code> and <code class="docutils literal notranslate"><span class="pre">cos</span></code> are vectorized, and so our <code class="docutils literal notranslate"><span class="pre">f</span></code> will be too.</p>
+<p>Let us compute a set of estimates, with different <span class="math notranslate nohighlight">\(N\)</span>, and print out the relative error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">n</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">monte_carlo_int_vectorized</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">rel_error</span> <span class="o">=</span> <span class="p">(</span><span class="n">I</span> <span class="o">-</span> <span class="n">exact</span><span class="p">)</span><span class="o">/</span><span class="n">exact</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N</span><span class="si">:</span><span class="s2">6.0e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">rel_error</span><span class="si">:</span><span class="s2">15.5e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1e+03    -3.11578e-02
+ 1e+04     1.15748e-02
+ 1e+05     4.48411e-03
+ 1e+06    -5.78664e-05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1e+07     5.21020e-04
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that as the number of points increase, the error decreases. Now, while our simple experiment here is far for a conclusive proof of anything, it is interesting to note that the error decreases by an order of magnitude , when the number of samples increases by 2 order of magnitude. In fact, it can be shown that the error in Monte Carlo integration goes as <span class="math notranslate nohighlight">\(\mathcal{O}(1/\sqrt{N})\)</span>, so this makes sense. Note that in this case it isn’t possible expressing the scaling in terms of the step length <span class="math notranslate nohighlight">\(h\)</span>, as there is no “step length”.</p>
+</section>
+<section id="why-is-monte-carlo-integration-useful">
+<h3>Why is Monte Carlo Integration useful?<a class="headerlink" href="#why-is-monte-carlo-integration-useful" title="Permalink to this headline">#</a></h3>
+<p>We see that Monte Carlo integration scales as <span class="math notranslate nohighlight">\(\mathcal{O}(N^{-1/2})\)</span>, while the midpoint method (which is more or less just as simple to implement) scales as <span class="math notranslate nohighlight">\(\mathcal{O}(N^{-2})\)</span>, which is much better. Why would we ever use the Monte Carlo method, over the Midpoint method?</p>
+<p>For simple integrals, one-dimensional integrals, such as the one shown here, using the midpoint method makes a lot more sense. It turns out however, if we go to more dimensions, such as a 3- or 4- dimensional integral, then  techniques where you try to cover the whole space quickly become insurmountable, as decreasing halving your step size demands using a lot more points. For such problems, Monte Carlo integration scales better, and start outperforming techniques such as the midpoint rule.</p>
+<p>There is also ways to modify Monte Carlo integration to make it more useful. If we plot the function we integrated above for example, we see that it starts out close to 0, and quickly grows very fast in the negative direction:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/using_random_numbers_91_0.png" src="../../../_images/using_random_numbers_91_0.png" />
+</div>
+</div>
+<p>When we are sampling this integral uniformly (either with the midpoint method or Monte Carlo), we are spending much of our numerical resources in an interval that doesn’t really matter. What we should do, is instead sample with a better resolution closer to the high end of the interval.</p>
+<p>For non-Monte Carlo methods, this can be achieved by selecting mesh points that are not uniformly spread out. For the Monte Carlo method however, we should instead not draw points from a uniform distribution, but from a distribution better suited for our problem. This is known as <em>importance sampling</em>, because we are trying to put more effort into the sampling that is important for the end result. For some problems, adding importance sampling will make Monte Carlo simulation a lot more efficient.</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">LL11</a></span></dt>
+<dd><p>Hans Petter Langtangen and Hans Petter Langtangen. <em>A primer on scientific programming with Python</em>. Volume 1. Springer, 2011.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/stochastic_processes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="random_number_generators.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Random Number Generators and Seeding</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="random_walks_and_markov_processes.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Random Walks</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

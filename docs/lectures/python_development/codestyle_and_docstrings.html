@@ -1,0 +1,1851 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Code Style and Documentation &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Type annotations" href="type_annotations.html" />
+    <link rel="prev" title="Writing Reliable Software" href="writing_functioning_code.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="python_development.html">
+   Python development
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/python_development/codestyle_and_docstrings.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/python_development/codestyle_and_docstrings.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/python_development/codestyle_and_docstrings.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/python_development/codestyle_and_docstrings.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Code Style and Documentation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-readability">
+     Code Readability
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-code-style-and-why-is-it-important">
+     What is code style, and why is it important?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#style-guides">
+     Style Guides
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-pep8-style-guide">
+       The PEP8 Style Guide
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-general-points-from-pep8">
+     Some general points from PEP8
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#indent-by-4-spaces-do-not-use-tabs">
+       Indent by 4 spaces, do not use tabs
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#when-wrapping-long-lines-use-parentheses-to-keep-things-together">
+       When wrapping long lines, use parentheses to keep things together
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#separate-top-level-functions-and-classes-by-two-blank-lines">
+       Separate top-level functions and classes by two blank lines
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#class-methods-should-be-separated-by-one-blank-line">
+       Class methods should be separated by one blank line
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-blank-lines-in-functions-sparingly-to-indicate-logical-sections">
+       Use blank lines in functions, sparingly, to indicate logical sections.
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-utf-8-encoding">
+       Use UTF-8 encoding
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#put-imports-on-separate-lines-at-the-top-of-the-file">
+       Put imports on separate lines at the top of the file
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-conventions">
+     Naming conventions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#white-space">
+     White Space
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#line-length-and-breaking-lines">
+     Line Length and breaking lines
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-use-comments-in-code">
+     How to use comments in code
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comments-that-contradict-the-code-are-worse-than-no-comments">
+       Comments that contradict the code are worse than no comments
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comments-should-be-complete-sentences">
+       Comments should be complete sentences
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-inline-comments-sparingly">
+       Use inline comments sparingly
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-if-test-conventions">
+     Some if-test conventions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-rule-avoid-foolish-consistency">
+     Final rule: Avoid Foolish Consistency
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#auto-formatting-tools-and-linters">
+     Auto-formatting tools and
+     <em>
+      linters
+     </em>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-zen-of-python">
+     The Zen of Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#document-design-and-purpose-not-mechanics">
+     Document Design and Purpose, not mechanics
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#have-a-good-readme-file">
+     Have a good README file
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embed-documentation-within-the-software-itself">
+     Embed documentation within the software itself
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#documentation-strings">
+     Documentation Strings
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#writing-good-docstrings">
+       Writing good docstrings
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#docstring-conventions">
+         Docstring Conventions
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#building-automatic-stand-alone-documentation-through-code-introspection">
+     Building automatic stand-alone documentation through code introspection
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Code Style and Documentation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Code Style and Documentation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-readability">
+     Code Readability
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-code-style-and-why-is-it-important">
+     What is code style, and why is it important?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#style-guides">
+     Style Guides
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-pep8-style-guide">
+       The PEP8 Style Guide
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-general-points-from-pep8">
+     Some general points from PEP8
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#indent-by-4-spaces-do-not-use-tabs">
+       Indent by 4 spaces, do not use tabs
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#when-wrapping-long-lines-use-parentheses-to-keep-things-together">
+       When wrapping long lines, use parentheses to keep things together
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#separate-top-level-functions-and-classes-by-two-blank-lines">
+       Separate top-level functions and classes by two blank lines
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#class-methods-should-be-separated-by-one-blank-line">
+       Class methods should be separated by one blank line
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-blank-lines-in-functions-sparingly-to-indicate-logical-sections">
+       Use blank lines in functions, sparingly, to indicate logical sections.
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-utf-8-encoding">
+       Use UTF-8 encoding
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#put-imports-on-separate-lines-at-the-top-of-the-file">
+       Put imports on separate lines at the top of the file
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-conventions">
+     Naming conventions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#white-space">
+     White Space
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#line-length-and-breaking-lines">
+     Line Length and breaking lines
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-use-comments-in-code">
+     How to use comments in code
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comments-that-contradict-the-code-are-worse-than-no-comments">
+       Comments that contradict the code are worse than no comments
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comments-should-be-complete-sentences">
+       Comments should be complete sentences
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-inline-comments-sparingly">
+       Use inline comments sparingly
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-if-test-conventions">
+     Some if-test conventions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-rule-avoid-foolish-consistency">
+     Final rule: Avoid Foolish Consistency
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#auto-formatting-tools-and-linters">
+     Auto-formatting tools and
+     <em>
+      linters
+     </em>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-zen-of-python">
+     The Zen of Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#document-design-and-purpose-not-mechanics">
+     Document Design and Purpose, not mechanics
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#have-a-good-readme-file">
+     Have a good README file
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embed-documentation-within-the-software-itself">
+     Embed documentation within the software itself
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#documentation-strings">
+     Documentation Strings
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#writing-good-docstrings">
+       Writing good docstrings
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#docstring-conventions">
+         Docstring Conventions
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#building-automatic-stand-alone-documentation-through-code-introspection">
+     Building automatic stand-alone documentation through code introspection
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="code-style-and-documentation">
+<h1>Code Style and Documentation<a class="headerlink" href="#code-style-and-documentation" title="Permalink to this headline">#</a></h1>
+<p>In this lecture we will cover the topics of <em>code style</em> and <em>documentation</em>. Put simply, these are aspects of writing code that doesn’t impact if, or how, the code you write works, but rather how easy it is to read and understand for others. Two weeks ago we discussed how we can write functioning and reliable software, and how we can test our code to verify that it is working as intended. This is another aspect of what we can call <em>code quality</em>.</p>
+<section id="code-readability">
+<h2>Code Readability<a class="headerlink" href="#code-readability" title="Permalink to this headline">#</a></h2>
+<p>The fundamental idea for this entire lecture can be summed up in a single sentence, which is</p>
+<blockquote>
+<div><p>Write programs for people, not computers</p>
+</div></blockquote>
+<p>Just like writing prose, there are many choices one can make when writing code. Some choices we can make are</p>
+<ul class="simple">
+<li><p>How to break down and solve a given problem</p></li>
+<li><p>How to order the steps we take</p></li>
+<li><p>What variables we create (both the number of variables and their data types)</p></li>
+<li><p>What names we choose for our variables</p></li>
+<li><p>How much <em>whitespace</em> we use</p></li>
+<li><p>What comments we add to the code</p></li>
+<li><p>And many other choices…</p></li>
+</ul>
+<p>Some of these choices will directly impact function or speed of the program, what algorithm we use for example.
+However, many of the choices we make will not impact how the final program <em>functions</em>. The best examples are variable names, which from “the outside” has no importance whatsoever.</p>
+<p>It might be easy to assume that the choices that do not impact function are not important, but this is not the case. If we make poor choices, say pick variable names that are confusing or easy to mix, then our code will become cluttered and hard to understand. Why is this a problem? For one, it will make it harder to work with our code, leading to inefficient work and even to errors. If we want to share our code with others or collaborate, things get even worse - as others might not even understand the code you have written or how it should be used or modified.</p>
+<p>This aspect of the code is usually referred to as the <em>readability</em> of the code. We should strive to make our code as <em>readable</em> as possible. A high quality code should be easy for a new developer to read and understand. When you write code, you should therefore think how that code looks to an external pair of eyes. Is it structured, clear and easy to understand? The sentence we started with should be our mantra - write code for people, not computers. This was put a bit more pointedly by Martin Fowler</p>
+<blockquote>
+<div><p><em>Any fool can write code that a computer can understand. Good programmers write code that humans can understand</em> - Martin Fowler</p>
+</div></blockquote>
+</section>
+<section id="what-is-code-style-and-why-is-it-important">
+<h2>What is code style, and why is it important?<a class="headerlink" href="#what-is-code-style-and-why-is-it-important" title="Permalink to this headline">#</a></h2>
+<p>As there are so many choices we can make when coding that will impact how structured and readable our code becomes, we should strive to make consistent choices and stick to a particular set of “rules” for how code should be written - and such a set of rules is called a <em>code style</em>. Code that follows a consistent and good style will be easier to use, troubleshoot, maintain and extend. Code that doesn’t follow a consistent style will be more disordered and can be frustrating to work with.</p>
+<p>The term <em>style</em> comes from traditional writing, where one can also follow a particular <em>writing style</em>. For publications to be more consistent, different contributing authors to a given publication will often be asked to follow and use the same <em>style</em> and there are many different style manuals which lie out a set of principles or rules to follow.</p>
+<p>Like with any writing, there are no hard rules about what constitutes good style, and there are different choices one can make — the important thing is to be consistent in your choices. A piece of code should have the same code style and formatting throughout.</p>
+</section>
+<section id="style-guides">
+<h2>Style Guides<a class="headerlink" href="#style-guides" title="Permalink to this headline">#</a></h2>
+<p>Most software in the real world is developed collaboratively, this means it is important for different programmers to agree on what code style to follow, otherwise they will end up writing code that looks fragmented and messy. Because of this, most software groups agree on a <em>style guide</em>, which guides all the programmers in the project to follow the same style. Because everyone is following the same guidelines, it’s easier to collaborate.</p>
+<p>Put simply, a style guide is a list of <em>dos</em> and <em>don’ts</em> that you will be expected to follow. Because style guidelines is about <em>writing</em> code, they are often specific to a given programming language. Python is a popular programming language, and so many different style guides exist, the most important one to know about is called the PEP8 style guide.</p>
+<section id="the-pep8-style-guide">
+<h3>The PEP8 Style Guide<a class="headerlink" href="#the-pep8-style-guide" title="Permalink to this headline">#</a></h3>
+<p>PEP stands for <em>Python Enhancement Proposal</em>, and these are documents that are proposals for new features or design changes to Python. The PEPs and discussed and reviewed by the community and over time the Python developers incorporate them into the language. One of these, PEP8, is a code style guide for the Python code in Python’s standard library should be written. Put simply: PEP8 is how Python’s developers are writing python code.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">Link to the PEP8 style guide</a></p></li>
+</ul>
+<p>In IN1910 we want you to use a good and consistent code style in the code you write. We recommend you read the PEP8 style guide and stick with these choices. However, we won’t be extremely strict on this point. Python is a popular programming language, and many other style guide exists. Another possible choice is for example <a class="reference external" href="https://github.com/google/styleguide/blob/gh-pages/pyguide.md">Google’s Python style guide</a>.</p>
+<p>Regardless of exactly what style you want to use for your own projects, reading through the PEP8 style guide and trying to reflect around <em>why</em> the rules are as they are is highly recommended and will most likely make you a better programmer.</p>
+<p>We will now go through and cover <em>some</em> of the rules in PEP8, but we don’t cover everything, so reading through the actual style guide is still good. Many of our examples are taken directly from the PEP8 document, while some are taking from other lectures and exercises in IN1910.</p>
+</section>
+</section>
+<section id="some-general-points-from-pep8">
+<h2>Some general points from PEP8<a class="headerlink" href="#some-general-points-from-pep8" title="Permalink to this headline">#</a></h2>
+<section id="indent-by-4-spaces-do-not-use-tabs">
+<h3>Indent by 4 spaces, do not use tabs<a class="headerlink" href="#indent-by-4-spaces-do-not-use-tabs" title="Permalink to this headline">#</a></h3>
+<p>In Python, indentation is very important to decide scopes when defining functions and making loops and tests. However, how long an indentation is optional, as long as each line is indented by the same amount of space. The most common is to use 4 spaces.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In addition, the style guide recommends you use actual <em>spaces</em> in the code instead of <em>tab</em> characters. This is a minor, but important distinction in code. When indenting a code line one can either place a series of space characters, or a single tab character. Either work in most programming languages, but one should stick to one or the other. This has lead to huge “spaces vs tabs” debates among programmers. Usually, it is a setting in your editor how spaces vs tabs are handled.</p>
+<p>Both spaces and tabs also work in Python, but do note that if you mix them inside the same indentation you will get an error</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">TabError</span><span class="p">:</span> <span class="n">inconsistent</span> <span class="n">use</span> <span class="n">of</span> <span class="n">tabs</span> <span class="ow">and</span> <span class="n">spaces</span> <span class="ow">in</span> <span class="n">indentation</span>
+</pre></div>
+</div>
+<p>PEP8 recommends sticking to actual spaces.</p>
+</section>
+<section id="when-wrapping-long-lines-use-parentheses-to-keep-things-together">
+<h3>When wrapping long lines, use parentheses to keep things together<a class="headerlink" href="#when-wrapping-long-lines-use-parentheses-to-keep-things-together" title="Permalink to this headline">#</a></h3>
+<p>When a line of code becomes very long, it will reach the end of the screen/editor. In such cases it is better to break the line yourself, instead of letting it simply run long. This is because you can then split the line in a location where it more structured and orderly.</p>
+<p>As an example we write out the following line of code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">income</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">gross_wages</span>
+    <span class="o">+</span> <span class="n">taxable_interest</span>
+    <span class="o">+</span> <span class="p">(</span><span class="n">dividends</span> <span class="o">-</span> <span class="n">qualified_dividends</span><span class="p">)</span>
+    <span class="o">-</span> <span class="n">ira_deduction</span>
+    <span class="o">-</span> <span class="n">student_loan_interest</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Here we have written out one long code line. In Jupyter this code line will wrap to the next line when it reaches the end of the column. If this happens in your editor will depend on your settings.</p>
+<p>An issue with word wrap is that others might have different settings to you, and so there is little control where the line break will happen. If it happens at a weird location (such as the middle of a variable), the line becomes hard to read.</p>
+<p>Here you should instead split the line yourself. To do so, you can put parenthesis around the entire expression. Python will then automatically see the next line as a continuation from the first</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">income</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">gross_wages</span>
+    <span class="o">+</span> <span class="n">taxable_interest</span>
+    <span class="o">+</span> <span class="p">(</span><span class="n">dividends</span> <span class="o">-</span> <span class="n">qualified_dividends</span><span class="p">)</span>
+    <span class="o">-</span> <span class="n">ira_deduction</span>
+    <span class="o">-</span> <span class="n">student_loan_interest</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The fact that parenthesis let’s you split up your code over multiple lines is very useful also when you have very long function calls, here is an example taken from Project 1</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+
+<span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">init_func</span><span class="o">=</span><span class="n">init</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Here the name of the function we import is long enough to begin with, and then we have many arguments and keyword arguments to use. Here you should split the line, which is easy to do since the arguments are all within a pair of parentheses.</p>
+</section>
+<section id="separate-top-level-functions-and-classes-by-two-blank-lines">
+<h3>Separate top-level functions and classes by two blank lines<a class="headerlink" href="#separate-top-level-functions-and-classes-by-two-blank-lines" title="Permalink to this headline">#</a></h3>
+<p>In the same way blank lines are used to structure a text into different chapters, sections or paragraphs, we can use blank lines in code to create some separation between different components of a larger code. This rules simply states that two blank lines should be put between different functions and classes, as these are different entities in your code.</p>
+</section>
+<section id="class-methods-should-be-separated-by-one-blank-line">
+<h3>Class methods should be separated by one blank line<a class="headerlink" href="#class-methods-should-be-separated-by-one-blank-line" title="Permalink to this headline">#</a></h3>
+<p>As class methods belong to the same class they often are more interconnected than top-level functions, and these can therefore be separated by a single blank line.</p>
+</section>
+<section id="use-blank-lines-in-functions-sparingly-to-indicate-logical-sections">
+<h3>Use blank lines in functions, sparingly, to indicate logical sections.<a class="headerlink" href="#use-blank-lines-in-functions-sparingly-to-indicate-logical-sections" title="Permalink to this headline">#</a></h3>
+<p>Because we use blank lines to separate different functions and methods, we should be a bit wary of using too many blank lines <em>within</em> a function or method definition, as this might make it harder to get an overview of where different function definitions start and stop. In some cases however, if a function or method have several clearly distinct logical sections, these can be separated by a line to make it clearer. In our <code class="docutils literal notranslate"><span class="pre">is_prime</span></code> example from earlier, we added a blank line between checking if 1 is a prime (which is a special case) to the more general trial-division loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="use-utf-8-encoding">
+<h3>Use UTF-8 encoding<a class="headerlink" href="#use-utf-8-encoding" title="Permalink to this headline">#</a></h3>
+<p>This is simply a setting within your editor. Saving your Python-scripts with UTF-8 encoding enables us to use special characters in our Python code, which is nice.</p>
+</section>
+<section id="put-imports-on-separate-lines-at-the-top-of-the-file">
+<h3>Put imports on separate lines at the top of the file<a class="headerlink" href="#put-imports-on-separate-lines-at-the-top-of-the-file" title="Permalink to this headline">#</a></h3>
+<p>We have already discussed how imports should look in a Python-file. For one, you should put them at the top of your file, and you should avoid wildcard imports. In addition, PEP8 says to never import more than one package per line, i.e., don’t write</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">numpy</span><span class="o">,</span> <span class="nn">scipy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>instead write</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When importing specific components from a single package, you can group several imports however, so this is fine:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">exp</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="naming-conventions">
+<h2>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">#</a></h2>
+<p>We now move over from some more general points in PEP8, to the first major topic: naming conventions, i.e., what we should name our variables when we code. The goal with naming conventions is to stick to a specific style, so that whoever is reading or using the code can easily gleam what sort of variable something is, from the name alone.</p>
+<p><strong>Modules</strong></p>
+<p>Modules are what we call Python-files. Module names should be short and written in all lowercase. Underscores are allowed and often used to separate different words. Example from Project 1: <code class="docutils literal notranslate"><span class="pre">double_pendulum.py</span></code> and <code class="docutils literal notranslate"><span class="pre">test_double_pendulum.py</span></code>.</p>
+<p><strong>Functions</strong></p>
+<p>Function names (including methods) should be defined similarly to module names, i.e., all lowercase and with words separated by underscores (<code class="docutils literal notranslate"><span class="pre">count_words()</span></code>, <code class="docutils literal notranslate"><span class="pre">is_prime()</span></code> or <code class="docutils literal notranslate"><span class="pre">save_file()</span></code>).</p>
+<p><strong>Class names</strong></p>
+<p>All classes should normally use the CapWords convention, meaning every word in the name should be capitalized, and no underscores are used (<code class="docutils literal notranslate"><span class="pre">Sphere</span></code>, <code class="docutils literal notranslate"><span class="pre">BankAccount</span></code>, <code class="docutils literal notranslate"><span class="pre">FunctionIntegrator</span></code>, and <code class="docutils literal notranslate"><span class="pre">DoublePendulum</span></code>)</p>
+<p><strong>Variables</strong></p>
+<p>Most variables should be names as we do for functions/modules, i.e., all lowercase and with underscores. As emphasized during our intro to object-oriented programming this convention makes it easy to differentiate classes from instances.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the built-in data types break the class name convention (<code class="docutils literal notranslate"><span class="pre">tuple</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>, etc), but those are special cases.</p>
+<p><strong>Constants</strong></p>
+<p>A <em>constant</em> is a variable that is not expected to change during the execution of the program, and these should be written in all uppercase, parts separated by underscores (<code class="docutils literal notranslate"><span class="pre">MAX_WEIGHT</span></code>, <code class="docutils literal notranslate"><span class="pre">GRAVITATIONAL_CONSTANT</span></code>). An important exception here can be mathematical constants, which you can write on their typical mathematical form you desire, e.g. <code class="docutils literal notranslate"><span class="pre">pi</span></code> or <code class="docutils literal notranslate"><span class="pre">g</span></code> (for gravitational constant).</p>
+<p><strong>In addition: Never use these single-letter names</strong></p>
+<p>Never use <code class="docutils literal notranslate"><span class="pre">l</span></code> (lowercase L), <code class="docutils literal notranslate"><span class="pre">O</span></code> (uppercase O), or <code class="docutils literal notranslate"><span class="pre">I</span></code> (uppercase i) as single-letter names in your code. These can be easily confused for others character or downright indistinguishable in some fonts. Even if you can easily tell them apart in your editor, when you share your code (or print it out), it might look different.</p>
+</section>
+<section id="white-space">
+<h2>White Space<a class="headerlink" href="#white-space" title="Permalink to this headline">#</a></h2>
+<p>In programming, <em>white space</em> refers to the empty space that surrounds the rest of your code. We have already discussed blank lines, which is an example of white space, but space characters within a given code line is also very important for code readability.</p>
+<p>People who are new to programming often skip using white space altogether, or they are inconsistent in using it. Try to stick to a consistent use of blank characters, and be a little detail oriented, it has a huge impact on code readability (especially so in mathematical expressions!)</p>
+<p>Some examples from PEP8:</p>
+<p><strong>Never a space between a function name and its arguments</strong></p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">is_prime(21)</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">is_prime</span> <span class="pre">(21)</span></code></p></li>
+</ul>
+<p><strong>A single space between each element in a list or sequence</strong></p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">primes</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">3,</span> <span class="pre">5]</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">primes</span> <span class="pre">=</span> <span class="pre">[2,3,5]</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">primes</span> <span class="pre">=</span> <span class="pre">[2</span> <span class="pre">,</span> <span class="pre">3</span> <span class="pre">,</span> <span class="pre">5]</span></code></p></li>
+</ul>
+<p><strong>Don’t use spaces when using indices, and use <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> when using dictionaries</strong></p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">spam(ham[1],</span> <span class="pre">{eggs:</span> <span class="pre">2})</span></code></p></li>
+<li><p>No:  <code class="docutils literal notranslate"><span class="pre">spam(</span> <span class="pre">ham[</span> <span class="pre">1</span> <span class="pre">],</span> <span class="pre">{</span> <span class="pre">eggs:</span> <span class="pre">2</span> <span class="pre">}</span> <span class="pre">)</span></code></p></li>
+</ul>
+<p><strong>Never put a space before the colon in <code class="docutils literal notranslate"><span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">def</span></code>/<code class="docutils literal notranslate"><span class="pre">for</span></code>/<code class="docutils literal notranslate"><span class="pre">loop</span></code></strong></p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">x</span> <span class="pre">==</span> <span class="pre">4:</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">x</span> <span class="pre">==</span> <span class="pre">4</span> <span class="pre">:</span></code></p></li>
+</ul>
+<p><strong>Never place a space between a sequence and its indexing</strong></p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">dct['key']</span> <span class="pre">=</span> <span class="pre">lst[index]</span></code></p></li>
+<li><p>No:  <code class="docutils literal notranslate"><span class="pre">dct</span> <span class="pre">['key']</span> <span class="pre">=</span> <span class="pre">lst</span> <span class="pre">[index]</span></code></p></li>
+</ul>
+<p><strong>Use a single space around assignments</strong></p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">i</span> <span class="pre">+</span> <span class="pre">1</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">i=i+1</span></code></p></li>
+</ul>
+<p>and</p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">x,</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">y,</span> <span class="pre">x</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">x,</span> <span class="pre">y=y,</span> <span class="pre">x</span></code></p></li>
+</ul>
+<p>and</p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">submitted</span> <span class="pre">+=</span> <span class="pre">1</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">submitted</span> <span class="pre">+=1</span></code></p></li>
+</ul>
+<p><strong>Whitespace in mathematical expressions</strong></p>
+<p>As a rule of thumb, you should put on each side of binary <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">-</span></code>, as this signifies different terms in mathematics, but you shouldn’t put spaces on either side of <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> (or unary <code class="docutils literal notranslate"><span class="pre">-</span></code>) as this is the same term, e.g.</p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">hypotenuse</span> <span class="pre">=</span> <span class="pre">x*x</span> <span class="pre">+</span> <span class="pre">y*y</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">hypotenuse</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span> <span class="pre">*</span> <span class="pre">y</span></code></p></li>
+</ul>
+<p>or</p>
+<ul class="simple">
+<li><p>Yes:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>No:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+</pre></div>
+</div>
+<p>This rule is actually more about mathematical priority than anything else, so if we add parentheses it can change around. For example</p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">(a+b)</span> <span class="pre">*</span> <span class="pre">(a-b)</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b)</span> <span class="pre">*</span> <span class="pre">(a</span> <span class="pre">-</span> <span class="pre">b)</span></code></p></li>
+</ul>
+<p>Here <span class="math notranslate nohighlight">\((a+b)\)</span> and <span class="math notranslate nohighlight">\((a-b)\)</span> have higher priority than the multiplication, so we only put spaces on each side of the multiplication.</p>
+<p>There are not <em>strict</em> rules on how to use spaces when doing math, so use your own best judgment. However, not that you shouldn’t add more than 1 space around operators, and always put a space on each side of a binary operator.</p>
+<p>In Project 1 we have given you a real tricky mathematical formula to type in, and you should strive to use the correct white space, as it will make it a lot easier for you to avoid mistakes!</p>
+</section>
+<section id="line-length-and-breaking-lines">
+<h2>Line Length and breaking lines<a class="headerlink" href="#line-length-and-breaking-lines" title="Permalink to this headline">#</a></h2>
+<p>PEP8 states that no lines should go beyond 79 characters. This 80-width character limit in code is very common rule in code style guides, across many languages. Historically, some languages simply couldn’t go above 80 characters, as they were made to work with <a class="reference external" href="https://en.wikipedia.org/wiki/Punched_card">punch cards</a>, which had limited physical space.</p>
+<p>In modern times, there are no physical limits to line lengths, and we could in theory use whatever line lengths we want. However, keeping lines from becoming to long helps with readability, as long lines can be tricky to read. There is a reason newspapers and magazines stick to multiple narrow columns instead of very long lines. Another important point is that we have no control over what tools others use to read or write code. They might be working on a small laptop display, or using multiple columns of code on their screen simultaneously. If we write our code with a 130-character width, and they display it in an 80-character editor, many lines will overflow and break at arbitrary places, leading to messy and hard to read code.</p>
+<p>It should be mentioned that the PEP8 guide of 79 characters is a bit on the short side, and many style guides allow for 100 or even 120 characters. The important point is not the specific number of characters, but rather that there should be a (reasonable) maximum line width, and we should manually break the lines when we go over this limit.</p>
+<p>If we get lines that become longer than 79 characters, we need to break the line over several lines, the best way to do this is parentheses, as expressions inside parentheses can be split over multiple lines in Python without any other formatting needed. As it’s mostly long mathematical expressions or function definitions/calls that get very long, parentheses are often already present.</p>
+<p>When splitting a mathematical expression over multiple lines, the natural thing to do is split the lines at the operators, so that different lines contain the different terms.</p>
+<p>Let us return to an example from earlier, where we split the line as follows</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">income</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">gross_wages</span>
+    <span class="o">+</span> <span class="n">taxable_interest</span>
+    <span class="o">+</span> <span class="p">(</span><span class="n">dividends</span> <span class="o">-</span> <span class="n">qualified_dividends</span><span class="p">)</span>
+    <span class="o">-</span> <span class="n">ira_deduction</span>
+    <span class="o">-</span> <span class="n">student_loan_interest</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that we split the expression cleanly between two terms, also place the operator for the next term on the following line. This is easier to illustrate if we split it up further so we have one term per line as follows:</p>
+<p><strong>Yes</strong>-This code is structured, and it is easy to match operator and operand</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">income</span> <span class="o">=</span> <span class="p">(</span><span class="n">gross_wages</span>
+          <span class="o">+</span> <span class="n">taxable_interest</span>
+          <span class="o">+</span> <span class="p">(</span><span class="n">dividends</span> <span class="o">-</span> <span class="n">qualified_dividends</span><span class="p">)</span>
+          <span class="o">-</span> <span class="n">ira_deduction</span>
+          <span class="o">-</span> <span class="n">student_loan_interest</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>No</strong>—operators sit far away from their operands (what is added and what is subtracted?)</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">income</span> <span class="o">=</span> <span class="p">(</span><span class="n">gross_wages</span> <span class="o">+</span>
+          <span class="n">taxable_interest</span> <span class="o">+</span>
+          <span class="p">(</span><span class="n">dividends</span> <span class="o">-</span> <span class="n">qualified_dividends</span><span class="p">)</span> <span class="o">-</span>
+          <span class="n">ira_deduction</span> <span class="o">-</span>
+          <span class="n">student_loan_interest</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note also in these examples that we indent the following terms so that they all line up. This is very important for readability.</p>
+<p><strong>No</strong>-Continued lines start have no indent and are confused for code lines</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">income</span> <span class="o">=</span> <span class="p">(</span><span class="n">gross_wages</span>
+<span class="o">+</span> <span class="n">taxable_interest</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">dividends</span> <span class="o">-</span> <span class="n">qualified_dividends</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">ira_deduction</span>
+<span class="o">-</span> <span class="n">student_loan_interest</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Similarly, if we have a long function call, we should indent the arguments which we move down to the following line. Just make sure they are indented <em>further</em> than the following code line so that they are easier to distinguish!</p>
+<p><strong>Yes</strong> - Args follow from function definition</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">long_function_name</span><span class="p">(</span>
+        <span class="n">long_var_one</span><span class="p">,</span> <span class="n">long_var_two</span><span class="p">,</span>
+        <span class="n">long_var_three</span><span class="p">,</span> <span class="n">long_var_four</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">long_var_one</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>No</strong> - Args are hard to distinguish from function body</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">long_function_name</span><span class="p">(</span>
+    <span class="n">long_var_one</span><span class="p">,</span> <span class="n">long_var_two</span><span class="p">,</span>
+    <span class="n">long_var_three</span><span class="p">,</span> <span class="n">long_var_four</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">long_var_one</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-use-comments-in-code">
+<h2>How to use comments in code<a class="headerlink" href="#how-to-use-comments-in-code" title="Permalink to this headline">#</a></h2>
+<p>Comments are a good tool that can make your code easier to understand. However, they can also be <em>overused</em>, in which case they might clutter your code more than they actually help. PEP8 gives some useful advice to how comments should and shouldn’t be used.</p>
+<section id="comments-that-contradict-the-code-are-worse-than-no-comments">
+<h3>Comments that contradict the code are worse than no comments<a class="headerlink" href="#comments-that-contradict-the-code-are-worse-than-no-comments" title="Permalink to this headline">#</a></h3>
+<p>Comments are meant to describe and explain the code they are written in. For this to be the case it is important that they are actually correct. Therefore, it is vital that you update comments if you change your code.</p>
+</section>
+<section id="comments-should-be-complete-sentences">
+<h3>Comments should be complete sentences<a class="headerlink" href="#comments-should-be-complete-sentences" title="Permalink to this headline">#</a></h3>
+<p>It is best for comments to be complete sentences. If a comment is a single word, they are in fact rarely needed.</p>
+</section>
+<section id="use-inline-comments-sparingly">
+<h3>Use inline comments sparingly<a class="headerlink" href="#use-inline-comments-sparingly" title="Permalink to this headline">#</a></h3>
+<p><em>Inline</em> comments are comments that are placed on the same line as actual code, i.e., the comment appears at the end of the line. Such comments often add clutter, and are rarely needed. One case they can be useful is to state physical units when working in science, but comments explaining code is usually better to place on its own separate line.</p>
+<p>Also, a comment should not state the obvious, or explain <em>what</em> the code is doing. The code itself is already explaining what it is doing, and you can assume your reader knows enough Python to understand that. Instead, a comment should explain <em>why</em> you are doing something. For example</p>
+<p>Don’t do this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increment width</span>
+<span class="n">width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>But this could be useful</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compensate for border</span>
+<span class="n">width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>As a general comment, if you feel you need to write many comments to explain what your code is doing, it might often be better to simply structure your code differently to make it more easier to understand in the first place. Or as explained by Martin Fowler:</p>
+<blockquote>
+<div><p>“When you feel the need to write a comment, first try to refactor the code so that any comment becomes superfluous” - Martin Fowler</p>
+</div></blockquote>
+<p><em>Refactoring</em> code is the activity of changing it without changing its function. So for example changing variable names, moving code into functions or classes, etc.</p>
+</section>
+</section>
+<section id="some-if-test-conventions">
+<h2>Some if-test conventions<a class="headerlink" href="#some-if-test-conventions" title="Permalink to this headline">#</a></h2>
+<p>PEP8 also has some recommendations for making easy to understand <code class="docutils literal notranslate"><span class="pre">if</span></code>-tests.</p>
+<p>When checking if a variable is or is not <code class="docutils literal notranslate"><span class="pre">None</span></code> (as is very common to do with keyword arguments), do so explicitly with <code class="docutils literal notranslate"><span class="pre">is</span></code>:</p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo</span> <span class="pre">is</span> <span class="pre">None:</span></code></p></li>
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo</span> <span class="pre">==</span> <span class="pre">None:</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo</span> <span class="pre">!=</span> <span class="pre">None:</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">foo</span> <span class="pre">is</span> <span class="pre">None:</span></code></p></li>
+</ul>
+<p>Note also that checking if something is <code class="docutils literal notranslate"><span class="pre">None</span></code> is more strict than checking true/false. The following prints only if <code class="docutils literal notranslate"><span class="pre">foo</span></code> is <em>exactly</em> <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">foo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following test however, prints if <code class="docutils literal notranslate"><span class="pre">foo</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code>, 0, <code class="docutils literal notranslate"><span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">''</span></code>, etc.:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">foo</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want to compare two variables using <code class="docutils literal notranslate"><span class="pre">is</span></code>, then these two tests are equivalent</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">a</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">b:</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">is</span> <span class="pre">b:</span></code></p></li>
+</ul>
+<p>Both of these work, but the first is much easier to read and understand, is therefore understandable.</p>
+<p>If you are checking a boolean variable, don’t compare it directly to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
+<ul class="simple">
+<li><p>Yes: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">is_prime(n):</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">is_prime(n)</span> <span class="pre">==</span> <span class="pre">True:</span></code></p></li>
+<li><p>No: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">is_prime(n)</span> <span class="pre">is</span> <span class="pre">True:</span></code></p></li>
+</ul>
+</section>
+<section id="final-rule-avoid-foolish-consistency">
+<h2>Final rule: Avoid Foolish Consistency<a class="headerlink" href="#final-rule-avoid-foolish-consistency" title="Permalink to this headline">#</a></h2>
+<p>As a final note on PEP8, it actually starts of by stating:</p>
+<blockquote>
+<div><p>A Foolish Consistency is the Hobgoblin of Little Minds</p>
+</div></blockquote>
+<p>The goal of a style guide is to improve readability and consistency, but there will always be times were one should break with the rules. This is especially the case when strict adherence to the rule would <em>limit</em> readability.</p>
+<p>In the end, good code is much more than good style. There is a great talk by Raymond Hettinger from PyCon2015 that goes into this:</p>
+<ul class="simple">
+<li><p><em><a class="reference external" href="https://youtu.be/wf-BqAjZb8M">Beyond PEP 8 – Best practices for beautiful intelligible code</a></em></p></li>
+</ul>
+<p>This talk is well worth a watch to understand how to think about writing good and elegant Python code, and points out how focusing too much on code style might make you get lost in unimportant details rather than focus on how to actually design your code in a better way.</p>
+</section>
+<section id="auto-formatting-tools-and-linters">
+<h2>Auto-formatting tools and <em>linters</em><a class="headerlink" href="#auto-formatting-tools-and-linters" title="Permalink to this headline">#</a></h2>
+<p>We have now talked a lot about code style, and as you can see there are many details to consider, and in many cases it might be hard to remember all these little details, especially when working on challenging problems where your focus is on other things!</p>
+<p>Here software developers often rely on tools called <a class="reference external" href="https://en.wikipedia.org/wiki/Lint_(software)"><em>linters</em></a>. Such tools can automatically look over your source code and find errors in errors, code that looks weird or inefficient or double check that you are sticking to your desired code style.</p>
+<p>Some linters will simply tell you if code is breaking your desired style, while others are made to <em>auto-format</em> your code for you. Some examples of such tools for Python are</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/python/black">black</a></p></li>
+<li><p><a class="reference external" href="http://flake8.pycqa.org/en/latest/">flake8</a></p></li>
+<li><p><a class="reference external" href="https://github.com/hhatto/autopep8">autopep8</a></p></li>
+<li><p><a class="reference external" href="https://github.com/klen/pylama">pylama</a></p></li>
+</ul>
+<p>Take for example <em>Black</em>. This is an auto-formatting code tool which you can run on any Python-script, and it will change the code to follow a consistent code style. Black doesn’t follow the PEP8 style guide, but its own defined guide (which does resemble PEP8 quite closely).</p>
+<p>Black can be run through the command line on a given file, e.g.,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>~$ black vector.py
+reformatted vector.py
+All done! ✨ 🍰 ✨
+1 file reformatted.
+</pre></div>
+</div>
+<p>But if you want to use a tool like Black, it is more common to configure your chosen code editor so that it is run automatically for you when you save your file for example. Another option is to configure <code class="docutils literal notranslate"><span class="pre">git</span></code> so that it is run automatically every time you commit your code. In some larger teams, auto-formatters in <code class="docutils literal notranslate"><span class="pre">git</span></code> might be a very nice tool, as it ensures everyone commits code into the project code-base with the same, consistent code style.</p>
+</section>
+<section id="the-zen-of-python">
+<h2>The Zen of Python<a class="headerlink" href="#the-zen-of-python" title="Permalink to this headline">#</a></h2>
+<p>Another PEP that might be useful to know about, in addition to PEP8 (which is the code style), is PEP20, also known as the “Zen of Python”. This is simply a collection of 19 simple “rules” or principles one typically want to follow to write good Python code. You can print the Zen of Python in its entirety by writing <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">this</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">this</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren&#39;t special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you&#39;re Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it&#39;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let&#39;s do more of those!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">#</a></h1>
+<p>Software documentation is a guide that describe how a piece of software is structured, how it works, and how to use and maintain it. Good documentation helps people understand a piece of software, and well documented code can therefore easily be picked up by others for use or extending it. Poorly documented code however, is often usable only by its author, and it is hard for others to help develop, maintain or use it.</p>
+<p>Poorly documented code is sadly quite common in the scientific field, and its a problem when many people who write and develop software are only in temporary positions. Code developed by master students, PhD’s or post-docs will often be used or further developed long after that scientists leaves the group, and so should be well documented. Imagine starting in a lab and being given software consisting of many thousands of lines of code. The person who wrote it is gone, there is no documentation, and you have to figure out how to implement some new feature your advisor. This will lead to frustration and inefficient software development.</p>
+<section id="document-design-and-purpose-not-mechanics">
+<h2>Document Design and Purpose, not mechanics<a class="headerlink" href="#document-design-and-purpose-not-mechanics" title="Permalink to this headline">#</a></h2>
+<p>In a perfect world, we would have time to develop extensive and perfect documentation of all software projects. However, in the real world, there is often not much time to devote to documentation. It is therefore important to spend your documentation time effectively, focus on the parts somebody <em>needs</em> to understand, namely the design and purpose of the code, as well as its inputs, outputs and adjustable parameters.</p>
+<p>Also remember that people can always read the source code itself. So the documentation doesn’t need to cover what is actually happening in the code down to the smallest detail. What they need is the big-picture view of the project, some tips on how the code is used and helpful pointers on what assumptions or restrictions the code might have.</p>
+</section>
+<section id="have-a-good-readme-file">
+<h2>Have a good README file<a class="headerlink" href="#have-a-good-readme-file" title="Permalink to this headline">#</a></h2>
+<p>The first tip we have for good documentation, is to have a proper README file in your projects code file. If you are using <code class="docutils literal notranslate"><span class="pre">git</span></code> for example, having a <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file in your git repository will fulfill several important roles</p>
+<ul class="simple">
+<li><p>Anyone you share the code with should start by reading your README and get an overview of your code</p></li>
+<li><p>Your README can contain information about requirements of the code, how it is installed or run and how to interpret or use the results</p></li>
+<li><p>Having a <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file in your repo will also automatically create a nice landing page if you have you repo on GitHub. This means it is easy to set up a nice web page to share your code with others if you need to do so.</p></li>
+</ul>
+<p>A good starting point for writing a README file i <a class="reference external" href="https://readme.so/editor">https://readme.so/editor</a>. This page provides a template README file with several suggested sections.</p>
+</section>
+<section id="embed-documentation-within-the-software-itself">
+<h2>Embed documentation within the software itself<a class="headerlink" href="#embed-documentation-within-the-software-itself" title="Permalink to this headline">#</a></h2>
+<p>When we think of documentation, it might be common to think of a separate user manual, text document or a website explaining the code, such as the README-file just mentioned. However, developing the documentation separate from the code itself is not generally recommended. For one thing, when someone updates the code, it is important the documentation is updated as well. It is more likely that this happens if the two are contained in the same piece of software. This way, we are also guaranteed somebody that gets the code gets the documentation. Because of these points, it is generally better to embed the documentation of the code directly into that code. This might sound a bit weird, but in Python there is a standard way to do this, which we will cover now.</p>
+</section>
+<section id="documentation-strings">
+<h2>Documentation Strings<a class="headerlink" href="#documentation-strings" title="Permalink to this headline">#</a></h2>
+<p>In Python, the most important thing to have good documentation is to write good <em>docstrings</em>. Docstrings are string literals you put as the first thing in modules or function definitions. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">factor</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the prime factorization of an integer.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">factors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">factors</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example code, the second line is the <em>docstring</em> of the function. It sort of acts like a comment, but note that it is not a comment line, as we do not use the comment symbol (<code class="docutils literal notranslate"><span class="pre">#</span></code>). It is instead a <em>string</em> which is written directly into the code (not saved to a variable). Docstrings are always placed where they are relevant, in this case immediately after a function (or method) definition. They are also common to put in the top of a module. When placed like this, they give the reader a good understanding of what the purpose is of a given module, class, function or method.</p>
+<p>As mentioned. Docstrings are <em>not</em> comments, but strings. They do fulfill the same role as a comment, but they will also be automatically stored as a special attribute on the object called <code class="docutils literal notranslate"><span class="pre">__doc__</span></code>. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">factor</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Return the prime factorization of an integer.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Similarly, when we place a docstring at the top of a module (a file), and we then import that module as a package in Python, the string will be stored as a <code class="docutils literal notranslate"><span class="pre">__doc__</span></code> attribute:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vector</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vector</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This module contains a class for representing 3-dimensional cartesian
+vectors. We made this module in L6 as an example of Object-Oriented
+programming.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fact that docstrings can be accessed directly as attributes means it is very easy for editors and other tools to use <em>code introspection</em> to give us more information. For example in an iPython shell, we can use <code class="docutils literal notranslate"><span class="pre">help()</span></code> or write <code class="docutils literal notranslate"><span class="pre">??</span></code> immediately behind a function or class method to read that methods docstring. Similarly, in Jupyter you can also call <code class="docutils literal notranslate"><span class="pre">help</span></code>, or press <code class="docutils literal notranslate"><span class="pre">Shift+Tab</span></code> to read the docstring of the variable your cursor is located.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">vector</span><span class="o">.</span><span class="n">Vector3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="n">help</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on method unit in module vector:
+
+unit() method of vector.Vector3D instance
+    Return a unit vector with the same orientation.
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the same way that there is a <code class="docutils literal notranslate"><span class="pre">help</span></code> function that can be used to access the docstrings of code, there are tools that go through entire codes and compile automatic documentation. We will get back to this at the end of the lecture. For now, let us focus how these docstrings should be written.</p>
+<section id="writing-good-docstrings">
+<h3>Writing good docstrings<a class="headerlink" href="#writing-good-docstrings" title="Permalink to this headline">#</a></h3>
+<p>There is a segment in <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> on docstrings, but there is an even more important PEP here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">PEP257—Docstring Conventions</a></p></li>
+</ul>
+<p>This PEP is very short, and it will take you a few minutes to read. In your project work, we expect you to try to follow PEP8 and PEP257.</p>
+<p>We now go through and show some of the important points of good docstring conventions.</p>
+<section id="docstring-conventions">
+<h4>Docstring Conventions<a class="headerlink" href="#docstring-conventions" title="Permalink to this headline">#</a></h4>
+<p>Always use triple double quotes (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;This</span> <span class="pre">is</span> <span class="pre">an</span> <span class="pre">example.&quot;&quot;&quot;</span></code>) to define your docstrings, even if they are single lines. This is both to give them a consistent style in your code, but also to make it easy to extend them to multiple lines later.</p>
+<p>Docstrings should always be full sentences, starting with a capital letter and ending with a period. For simple functions or obvious cases, docstrings can be kept short and put on a single line.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check if an integer is a prime number.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>We put everything on single line, even the quotes. Don’t leave blank lines above or below docstrings, they aren’t needed. Also note that the docstring should prescribe the function or method’s effect as a command (“Do this”, “Calculate the gradient”, “Return the …”). Not as a description; e.g. don’t write “Returns the pathname”, “Computes the derivative…”, and so on.</p>
+<p>For simpler functions or methods, a single line docstring is great. For more complicated cases, we might want to write a longer docstring. As the string literal is already marked in triple quotes, you can easily split the string over multiple lines. Here, the convention is that you should still have the single sentence describing the function at the top - after this you put a blank line, then you can have a more extensive description spanning multiple lines. This longer comment can describe more in detail how the function works, and you can also write in what arguments and optional arguments the function takes.</p>
+<p>Here is an example taken and considerably simplified from <code class="docutils literal notranslate"><span class="pre">numpy.gradient</span></code></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the gradient of an N-dimensional array.</span>
+
+<span class="sd">    The gradient is computed using second order accurate central differences</span>
+<span class="sd">    in the interior points and either first or second order accurate one-sides</span>
+<span class="sd">    (forward or backwards) differences at the boundaries.</span>
+<span class="sd">    The returned gradient hence has the same shape as the input array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Note that if the docstring spans multiple lines, we put the opening quotes on the same line as the summarizing sentence, but the ending quotes are put on a separate line.</p>
+<p>Useful information for a docstring to contain</p>
+<ul class="simple">
+<li><p>summarize behavior of a function or method</p></li>
+<li><p>what argument it takes</p></li>
+<li><p>what output(s) it returns</p></li>
+<li><p>side effects</p></li>
+<li><p>what exceptions might be raised</p></li>
+<li><p>any restrictions on when it can be called</p></li>
+<li><p>optional keyword arguments should be indicated and explained</p></li>
+</ul>
+<p>Just like for code style, there exists different <em>docstring styles</em>, you can find some examples <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/">here</a>. Personally I like the <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">Numpy style</a>, but there are also many other good ones. In IN1910 we don’t expect you to follow a specific style like this to the letter, but reading <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">PEP257</a> is a very good idea.</p>
+</section>
+</section>
+</section>
+<section id="building-automatic-stand-alone-documentation-through-code-introspection">
+<h2>Building automatic stand-alone documentation through code introspection<a class="headerlink" href="#building-automatic-stand-alone-documentation-through-code-introspection" title="Permalink to this headline">#</a></h2>
+<p>One very nice detail about defining good docstrings is that there are plenty of tools that will parse complete codebases and compile the docstrings into nice-looking, indexable and searchable documentation in the form of a PDF, a website or similar.</p>
+<p>One of the most popular tools for doing this in Python is <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a>, which was originally made to be used on Python’s own documentation, and is thus used by all packages in the standard library and the scipy stack. So if you are looking up documentation of <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> or <code class="docutils literal notranslate"><span class="pre">scipy</span></code>, you are actually reading automatically compiled documentation based on the actual source code of these packages. In C++ there is an alternative tool that is possible to do the same as Sphinx, called Doxygen.</p>
+<p>Setting up <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a> takes a little work, and makes the most sense for larger projects, so we do not expect you to do this in IN1910, but it can be a very nice little project to test out for yourself.</p>
+<p>To get an understanding of how powerful such automatic documentation is, take a look at the numpy reference pages, for example the reference for <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.gradient.html">numpy.gradient</a>. This is an example of good reference documentation. It shows what the function does, lists what inputs and optional inputs it takes, lists references and shows example. All of this documentation is automatically generated by Sphinx based on the the function’s docstring, you can check this yourself by clicking the “Source” button in the top right, which gives you the source code of <code class="docutils literal notranslate"><span class="pre">numpy.gradient</span></code> where you can see directly the docstring. Note that in this case, the documentation is very extensive, because <code class="docutils literal notranslate"><span class="pre">numpy</span></code> is a standard library that is very well documented. When you make docstrings, they rarely have to be this extensive.</p>
+<p>As with other tools, we can also integrate Sphinx with our Git repository. One example of this is the website <a class="reference external" href="https://readthedocs.org/">readthedocs.org</a>. You can create a user on this site, and set up so that it automatically pulls from your Git repository every time you make changes, and readthedocs then re-compiles the autogenerated documentation through Sphinx and hosts it. This way anyone who wants to use the code you share through git can find up-to-date documentation in a searchable, indexable manner. But you don’t have to do anything other than write good docstrings to update this documentation.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/python_development"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="writing_functioning_code.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Writing Reliable Software</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="type_annotations.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Type annotations</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

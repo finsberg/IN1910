@@ -1,0 +1,1880 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>An introduction to C++ &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Arrays, Memory and Pointers" href="arrays_and_pointers.html" />
+    <link rel="prev" title="C++" href="cpp.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="cpp.html">
+   C++
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/cpp/intro_to_cpp.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/cpp/intro_to_cpp.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/cpp/intro_to_cpp.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/cpp/intro_to_cpp.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-python-to-c-transition-guide">
+   A Python to C++ transition guide
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-definitive-c-book-guide-and-list">
+     The definitive C++ book guide and list
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-c">
+   Why C++?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-write-compile-and-run-c-programs">
+   How to write, compile and run C++ programs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#your-first-c-program">
+   Your first C++ program
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compiling-and-running-c-programs">
+   Compiling and Running C++ programs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpreted-vs-compiled-languages">
+     Interpreted vs Compiled Languages
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-compile-your-program">
+     How to compile your program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#executing-your-program">
+     Executing your program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-executables">
+     Naming executables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-compiler-flags">
+     Other compiler flags
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#static-vs-dynamic-typing">
+   Static vs Dynamic Typing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-and-types">
+   Functions and Types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loops-and-if-tests">
+   Loops and if-tests
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#if-tests">
+     If-tests
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#boolean-operators-in-c">
+   Boolean Operators in C++
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-is-prime">
+     Example:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       is_prime
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-note-on-bracket-style">
+   A note on bracket style
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-statement-loops-and-tests">
+   Single-statement loops and tests
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#while-loops">
+   While-loops
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vectors">
+   Vectors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interacting-with-c-vectors">
+     Interacting with C++ vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-finding-primes">
+     Example: Finding primes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strings">
+   Strings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#type-inference">
+   Type inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comments">
+   Comments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-input-and-output">
+   Standard input and output
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-streams">
+     File streams
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>An introduction to C++</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-python-to-c-transition-guide">
+   A Python to C++ transition guide
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-definitive-c-book-guide-and-list">
+     The definitive C++ book guide and list
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-c">
+   Why C++?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-write-compile-and-run-c-programs">
+   How to write, compile and run C++ programs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#your-first-c-program">
+   Your first C++ program
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compiling-and-running-c-programs">
+   Compiling and Running C++ programs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpreted-vs-compiled-languages">
+     Interpreted vs Compiled Languages
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-compile-your-program">
+     How to compile your program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#executing-your-program">
+     Executing your program
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-executables">
+     Naming executables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-compiler-flags">
+     Other compiler flags
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#static-vs-dynamic-typing">
+   Static vs Dynamic Typing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-and-types">
+   Functions and Types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loops-and-if-tests">
+   Loops and if-tests
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#if-tests">
+     If-tests
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#boolean-operators-in-c">
+   Boolean Operators in C++
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-is-prime">
+     Example:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       is_prime
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-note-on-bracket-style">
+   A note on bracket style
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-statement-loops-and-tests">
+   Single-statement loops and tests
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#while-loops">
+   While-loops
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vectors">
+   Vectors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interacting-with-c-vectors">
+     Interacting with C++ vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-finding-primes">
+     Example: Finding primes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strings">
+   Strings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#type-inference">
+   Type inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comments">
+   Comments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-input-and-output">
+   Standard input and output
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-streams">
+     File streams
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="an-introduction-to-c">
+<h1>An introduction to C++<a class="headerlink" href="#an-introduction-to-c" title="Permalink to this headline">#</a></h1>
+<p>This week we will start to turn to a new programming language, C++. We will use this language, in combination with Python, for the rest of the course. You will learn how to read and write short C++ programs, and how to compile and run them. Our goal is to make you at least somewhat familiar with C-style code, and also to make you aware of the major differences between Python and C++. Note however, that the world of C++ is big, and to get proficient at C++ one has to dedicate a lot of time and effort to it, certainly more than we have time for in IN1910. The goal is therefore to give you a taste of the language and an overview that can come in handy down the road.</p>
+<p>C++ is a hard language to learn, and also a hard language to use. There is a joke in the programming world, that everyone should learn C++ as their first language, because after that any other language will seem easy. While that might be an exaggeration, it is definitely a more technical language than Python. The best piece of advice we can give you before we start is simply: <em>don’t panic</em>. We don’t expect you to become experts in this course, and so the goal is more that you can write some cool programs, rather than take away all the fundamentals.</p>
+<section id="a-python-to-c-transition-guide">
+<h2>A Python to C++ transition guide<a class="headerlink" href="#a-python-to-c-transition-guide" title="Permalink to this headline">#</a></h2>
+<p>The book <em>Object-Oriented Programming in Python</em>, written by by Michael H. Goldwasser and David Letscher has a supplemental document called <em>A Transition Guide from Python 2.x to C++</em>. Both the book and supplement are freely available as pdf-files on the <a class="reference external" href="http://cs.slu.edu/~goldwamh/oopp/">book’s website</a>. The supplement is <span class="math notranslate nohighlight">\(\~90\)</span> pages, and covers most of what we will use in this course. It can be a good document to work through if you prefer reading on your own above lectures. The supplement is written for Python 2, but the differences are so small, this should be of no big concern.</p>
+<p><a class="reference external" href="http://cs.slu.edu/~goldwamh/publications/python2cpp.pdf">Direct link to <em>A Transition Guide from Python 2.x to C++</em> by Goldwasser and Letscher</a></p>
+<p>Another great resource is <a class="reference external" href="https://cs.berea.edu/cpp4python/">C++ for python programmers guide</a> which contain interactive code sample and quizzes.</p>
+<section id="the-definitive-c-book-guide-and-list">
+<h3>The definitive C++ book guide and list<a class="headerlink" href="#the-definitive-c-book-guide-and-list" title="Permalink to this headline">#</a></h3>
+<p>If you want a dedicated C++ book, there exist many out there. I would recommend reading through StackOverflow’s <a class="reference external" href="https://stackoverflow.com/questions/388242/the-definitive-c-book-guide-and-list">Definitive C++ Book Guide and List</a> to find one that is worthy of both your time and money.</p>
+</section>
+</section>
+<section id="why-c">
+<h2>Why C++?<a class="headerlink" href="#why-c" title="Permalink to this headline">#</a></h2>
+<p>So why are we learning C++ as our second language?</p>
+<p>C++, like many other languages, is based on C. C is an old language, created in 1972, but still sees wide use today. It is a low-level language that compiles into highly efficient machine code—put simply, C is blazing fast. While C is important historically, it is still one of the most used languages today. A lot of much used software, such as UNIX and the main implementation of Python, is written mainly in C.</p>
+<p>C++ is a direct extension of the C programming language, with the motivation of adding classes to the language. The syntax and semantics of the two languages are therefore nearly identical. The major difference is that C++ has larger standard libraries and more support for higher level constructs, such as object-oriented programming. C++ still retains most of the low-level features of C however, and if implemented correctly, will be highly efficient and fast.</p>
+<p>Several other popular languages are also, at least partially, based on C, such as C# and Objective-C. Other languages, like Java, borrow most of their syntax from C. While Java is very different “under the hood”, and runs quite different from C, the code itself looks quite a bit alike. In short, many, many languages today have a strong “C-flavor” to them, and dedicated programmers are more or less expected to know some C-style language.</p>
+<p>So to summarize: We want to learn a C-style language, because it is extremely useful for any programmer to know one of these languages, as it makes learning any of the others a lot easier. We also want to have a highly efficient language, to be capable of making fast and large computations. This requirement means we prefer to choose C or C++ over Java. Lastly, as we are learning object-oriented programming in this course, C++ is the natural choice over C.</p>
+<p>Ok. Enough talk, let’s get to learning some actual C++!</p>
+</section>
+<section id="how-to-write-compile-and-run-c-programs">
+<h2>How to write, compile and run C++ programs<a class="headerlink" href="#how-to-write-compile-and-run-c-programs" title="Permalink to this headline">#</a></h2>
+<p>As our first introduction to the language, let us write a <em>Hello, World</em> program. Open your favorite text editor and create a new file called <code class="docutils literal notranslate"><span class="pre">hello_world.cpp</span></code>.</p>
+<p>Here, you can already note that <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> is a file extension for C++ source code, i.e., the file we write the code itself. This is only one possible file extension, and other common ones are <code class="docutils literal notranslate"><span class="pre">.cc</span></code>, <code class="docutils literal notranslate"><span class="pre">.cxx</span></code>, or <code class="docutils literal notranslate"><span class="pre">.c++</span></code>. We stick with <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> in this course.</p>
+<p>Also note that some people advocate using IDEs for C++ (such as Qt Creator), and for larger projects, this can be very helpful, as we need to link many different files, which an IDE can help with. In this course however, we will stick mainly to single file C++ programs, and so getting a dedicated C++ IDE is not necessary.</p>
+</section>
+<section id="your-first-c-program">
+<h2>Your first C++ program<a class="headerlink" href="#your-first-c-program" title="Permalink to this headline">#</a></h2>
+<p>Before you start writing any C++ code and try to compile and run it, make sure that you have read through the <a class="reference internal" href="../../setup/cpp_compiler.html"><span class="doc std std-doc">C++ installation guide</span></a>.</p>
+<p>In our fresh file, we enter our <em>Hello world</em> code. Which will look something like the following:</p>
+<hr class="docutils" />
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">C++</label><div class="tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello world&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Python</label><div class="tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>Here you can also compare with the <code class="docutils literal notranslate"><span class="pre">python</span></code> <em>Hello world</em> example. An <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></code> block is included to make the two examples look a bit more similar.</p>
+<p>Before we cover how to compile and run this code, let us read through and analyze what is happening in the C++ version.</p>
+<p>The program starts out with an <code class="docutils literal notranslate"><span class="pre">#include</span></code> statement, which is like importing files in Python. This statement means we are including a so-called <em>header file</em> (more on headers later). Here we include the standard header <code class="docutils literal notranslate"><span class="pre">iostream</span></code> (input-output stream). We need to include this header to be able to output our message.</p>
+<p>Next we define a function named <code class="docutils literal notranslate"><span class="pre">main</span></code>. In C++, we have to define a <em>main function</em>. Executing the program is the same as calling this function. It has to be specifically named <code class="docutils literal notranslate"><span class="pre">main</span></code>, or you will get an error. You can think of this function as the starting point of our program which will be executed if you run the program directly. In fact this is not too different from python, which does this using an <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></code> block instead. The main-block in Python is however far less restrictive.</p>
+<p>We write <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">main()</span></code> because our function <em>returns an integer</em> (i.e an exit code see <a class="reference internal" href="../python_development/writing_functioning_code.html#python-exit-codes"><span class="std std-ref">Exit codes</span></a>), is named <em>main</em>, and takes no input. The contents of our function go between two curly braces (<code class="docutils literal notranslate"><span class="pre">{</span></code> <code class="docutils literal notranslate"><span class="pre">}</span></code>).</p>
+<figure class="align-default" id="function-declaration">
+<a class="reference internal image-reference" href="../../../_images/function_declaration.png"><img alt="function_declaration" src="../../../_images/function_declaration.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Declaring the <em>main</em> function of a C++ program.</span><a class="headerlink" href="#function-declaration" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Inside our main function, we do two things:</p>
+<ol class="simple">
+<li><p>we write out our message,</p></li>
+<li><p>we return the integer 0.</p></li>
+</ol>
+<p>When we write out our message we use <code class="docutils literal notranslate"><span class="pre">std::cout</span></code>, this isn’t the only way to print in C++, but it is the recommended way. Here, <code class="docutils literal notranslate"><span class="pre">std::cout</span></code> is an <em>output stream</em>, and anything we insert into this stream will be written out. We insert things using double angel brackets (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>). We then write out our message as a text string, using <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> as delimiters. In Python we use <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">'</span></code> interchangeably, but in C++ <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> denote string literals, while <code class="docutils literal notranslate"><span class="pre">'</span></code> denote single character literals. We also have to end each statement in C++ with a semicolon (<code class="docutils literal notranslate"><span class="pre">;</span></code>), so we end our output line with a semicolon.</p>
+<p>Writing <code class="docutils literal notranslate"><span class="pre">cout</span> <span class="pre">&lt;&lt; a</span> <span class="pre">&lt;&lt;</span> <span class="pre">b</span></code> just outputs the two things in order, so here we first insert our message, and then <code class="docutils literal notranslate"><span class="pre">std::endl</span></code>. Here <em>endl</em> stands for <em>end line</em>, and is basically just a newline character. An alternative to inserting <code class="docutils literal notranslate"><span class="pre">std::endl</span></code> would have been to just write in a newline character in our string: <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">world!\n&quot;</span></code>. (There is a subtle difference between using <code class="docutils literal notranslate"><span class="pre">endl</span></code> and <code class="docutils literal notranslate"><span class="pre">\n</span></code>, you can read about it on <a class="reference external" href="https://stackoverflow.com/questions/213907/c-stdendl-vs-n">StackOverflow</a> if you are curious).</p>
+<p>We write <code class="docutils literal notranslate"><span class="pre">std::</span></code> because we are using variables that come from the <code class="docutils literal notranslate"><span class="pre">iostream</span></code> header, and this is a <em>standard</em> header, and so <code class="docutils literal notranslate"><span class="pre">std::</span></code> means we are accessing something contained in the <code class="docutils literal notranslate"><span class="pre">std</span></code> namespace. If we import from other packages, we would need a different namespace, such as <code class="docutils literal notranslate"><span class="pre">arma::</span></code> (for the <a class="reference external" href="http://arma.sourceforge.net/">Armadillo libraries</a>) or <code class="docutils literal notranslate"><span class="pre">boost::</span></code> (for the <a class="reference external" href="https://www.boost.org">Boost libraries</a>). In most of our programs, we won’t use that many packages, and we will mostly stick to standard headers, which in turn means we will write a <em>lot</em> of <code class="docutils literal notranslate"><span class="pre">std::</span></code>, which is a bit annoying. What we can do to avoid this is to declare <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">namespace</span> <span class="pre">std;</span></code> at the top of our program. This tells the compiler that when we call a function, it will look for the given function in the <code class="docutils literal notranslate"><span class="pre">std</span></code> namespace, and so we can replace <code class="docutils literal notranslate"><span class="pre">std::cout</span></code> with just <code class="docutils literal notranslate"><span class="pre">cout</span></code>, and so on. For our <code class="docutils literal notranslate"><span class="pre">hello_world.cpp</span></code> script, this doesn’t help that much on tidiness, but in larger codes, having a single declaration instead of dozens of <code class="docutils literal notranslate"><span class="pre">std::</span></code> can be preferable.</p>
+<p>Finally, we return <code class="docutils literal notranslate"><span class="pre">0</span></code> from our main function by writing <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">0;</span></code>, the same as in Python except for the fact that we need to end our statement with a semicolon. After returning, we are done with our function declaration, so we include our closing curly brace (<code class="docutils literal notranslate"><span class="pre">}</span></code>). Why do we return 0? Recall that our main function is the function that is called by the system when we want to execute our program. When the program finishes, we should return something to the system so that it knows the program is finished. It is customary to return an integer, and we return 0 if the program terminated successfully. If the program aborted or crashed, we return any other integer. Depending on what caused the erroneous termination, we can return a different number, which would be an <em>error code</em>, that can tell the system something about what went wrong. We won’t use these much in this course, simply put, we always return 0 at the end of our main function, and if something goes wrong, we will instead throw an exception.</p>
+</section>
+<section id="compiling-and-running-c-programs">
+<h2>Compiling and Running C++ programs<a class="headerlink" href="#compiling-and-running-c-programs" title="Permalink to this headline">#</a></h2>
+<p>We have now written and analyzed our C++ code, but how do we actually run it? Here, things will be quite different from Python, because C++ code first needs to be <em>compiled</em> before we can run it.</p>
+<section id="interpreted-vs-compiled-languages">
+<h3>Interpreted vs Compiled Languages<a class="headerlink" href="#interpreted-vs-compiled-languages" title="Permalink to this headline">#</a></h3>
+<p>One of the major differences between Python and C++ is that Python is an <em>interpreted</em> language, while C++ is a <em>compiled</em> language. When we write a Python program, our source code, and our program, is one and the same. To run our program we invoke the Python interpreter, which reads our code and executes it as it goes.</p>
+<p>For C++ programs however, we write our code to a file, but this file cannot be executed directly. Instead we have to turn our source code into an executable program, and this step is known as <em>compiling the code</em>. We compile code by invoking a C++ compiler that reads our code. However, unlike the Python interpreter, the compiler doesn’t execute our code, instead it translates it into low-level executable machine code, making sure to specialize our code to the system we are compiling on. What we end up with is an <em>executable</em>, a program we can execute to run. This program is now executed directly by our machine, and we don’t need to invoke a separate “C++ interpreter”, as the code has already been translated to codes the machine can understand.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Python does also perform a compilation step where the source code (the text you write in the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file) is compiled to something called bytecode which are files with the suffix <code class="docutils literal notranslate"><span class="pre">.pyc</span></code>. You will see them appear in a folder called <code class="docutils literal notranslate"><span class="pre">__pycache__</span></code>. So in that regard python is also a compiled language, but we typically think of compiled languages as languages that compile the code into machine instructions such as C++. You can read more one this topic if interested <a class="reference external" href="https://stackoverflow.com/questions/6889747/is-python-interpreted-or-compiled-or-both">here</a>.</p>
+</div>
+<p>Most editors and IDE’s have some functionality to compile (also called building) C++ source code into executables. And learning these could be good for your workflow. However, it is still important to learn how to do it “manually” in the command line as well.</p>
+<p>If you are using Linux, then you will most likely use the GNU compiler (called GCC). This is one of the main C++ compilers. On Windows, you can also use GNU (through for example Cygwin), but perhaps more common is to use Visual C++. Many other C++ compilers exist. On MacOS the default compiler is called Clang which is also very popular.</p>
+<p>This week’s exercises will tell you more about installing a C++ compiler if you do not already have one installed.</p>
+</section>
+<section id="how-to-compile-your-program">
+<h3>How to compile your program<a class="headerlink" href="#how-to-compile-your-program" title="Permalink to this headline">#</a></h3>
+<p>We will now compile our C++ code by invoking our compiler in the terminal. For our examples, we will be using the GCC compiler, if you are using a different compiler, the commands will change slightly, but it should largely be the same.</p>
+<p>If you haven’t installed a compiler yet, please checkout the <a class="reference internal" href="../../setup/cpp_compiler.html"><span class="doc std std-doc">installation instructions</span></a> before moving on.</p>
+<p>If you are using GCC or Clang, you invoke the C++ compiler in the terminal by writing <code class="docutils literal notranslate"><span class="pre">c++</span></code>, we must also supply it with what source code that should be compiled, so we write:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">hello_world</span><span class="o">.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+</section>
+<section id="executing-your-program">
+<h3>Executing your program<a class="headerlink" href="#executing-your-program" title="Permalink to this headline">#</a></h3>
+<p>When we run <code class="docutils literal notranslate"><span class="pre">c++</span></code> to compile our code, the compiler tries to analyze the code and creates an executable. However, we have given no name for our executable, and so it defaults to the filename <code class="docutils literal notranslate"><span class="pre">a.out</span></code>, which is the name of our program.</p>
+<p>To run the <code class="docutils literal notranslate"><span class="pre">a.out</span></code> executable, we simply invoke it directly</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">a</span><span class="o">.</span><span class="n">out</span>
+</pre></div>
+</div>
+<p>Running this program, if everything is done correctly, gives us the expected <em>“Hello world”</em> output.</p>
+<p>Note that you can get errors in both the <em>compilation</em> of the program, and in <em>the execution</em>. The compiler might protest and abort when compiling the source code, in which case we get no executable. Or the compiler might execute without any issue, but when running the source code, we get some error. This is because the compiler tries to catch errors, and will catch syntax errors and the like. However, some errors are not found by the compiler, and these might sneak into our executable.</p>
+</section>
+<section id="naming-executables">
+<h3>Naming executables<a class="headerlink" href="#naming-executables" title="Permalink to this headline">#</a></h3>
+<p>The name <code class="docutils literal notranslate"><span class="pre">a.out</span></code> is generic and not very descriptive. To improve this, we should compile our program into an executable with a specific name. We do this by adding an output-flag: <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">name</span></code>, where you can name the executable whatever you want: so for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">hello_world</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">hello</span>
+</pre></div>
+</div>
+<p>Would create an executable called <code class="docutils literal notranslate"><span class="pre">hello</span></code>, which we would run directly in the terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">hello</span>
+</pre></div>
+</div>
+<p>Note that we don’t give this executable any file ending. This is very common for executables on UNIX machines. On windows, they are often given the ending of <code class="docutils literal notranslate"><span class="pre">.exe</span></code>, short for <em>executable</em>.</p>
+<p>Note also that the output name can also be put before the source code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="o">-</span><span class="n">o</span> <span class="n">hello</span> <span class="n">hello_world</span><span class="o">.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+<p>The order is just personal preference.</p>
+</section>
+<section id="other-compiler-flags">
+<h3>Other compiler flags<a class="headerlink" href="#other-compiler-flags" title="Permalink to this headline">#</a></h3>
+<p>We can also add other flags to the compiler to give it special instructs or extra information, and we will return to this later. A common one to include is <code class="docutils literal notranslate"><span class="pre">-Wall</span></code> (for “Warning all”) that tells the compiler to give us warnings if it sees things it is skeptical about. So we would do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">hello_world</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">hello</span> <span class="o">-</span><span class="n">Wall</span>
+</pre></div>
+</div>
+<p>Note that <em>warnings</em> in this context is not the same as an <em>error</em>. An error causes our compilation to terminate, while with warnings, we do get an executable, but the compiler believes we are doing something that is inefficient or error prone. Ironically, <code class="docutils literal notranslate"><span class="pre">-Wall</span></code> doesn’t give all possible warnings, so you could add <code class="docutils literal notranslate"><span class="pre">-Wextra</span></code> to get some more warnings (and other <code class="docutils literal notranslate"><span class="pre">-W</span></code> flags, there are quite a variety of options for specific purposes).</p>
+<p>If you haven’t, this is a good time to go through and make your <code class="docutils literal notranslate"><span class="pre">hello_world.cpp</span></code> source code, compile it into an executable, and then run the executable.</p>
+</section>
+</section>
+<section id="static-vs-dynamic-typing">
+<h2>Static vs Dynamic Typing<a class="headerlink" href="#static-vs-dynamic-typing" title="Permalink to this headline">#</a></h2>
+<p>One of the major differences in C++ and Python that you will have to learn right away, is that C++ is <em>statically typed</em>, while Python is <em>dynamically typed</em>.</p>
+<p>This means that we have to specifically declare what types our variables are when we define them in C++, and a given variable cannot change it’s type. In Python however, we just declare our variables, and let the interpreter figure out implicitly what types the variable is, and a given variable can change types without any problems.</p>
+<p>For example</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">C++</label><div class="tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">string</span><span class="w"> </span><span class="n">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Oslo&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2018</span><span class="p">;</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">42.3</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Python</label><div class="tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">city</span> <span class="o">=</span> <span class="s2">&quot;Oslo&quot;</span>
+<span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="mf">42.3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note both that we are explicit in our typing in C++. Recall also that we always need semicolons at the end of a statement.</p>
+<p>The common primitive data types in C++ are:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>C++ Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Size in memory</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Boolean</p></td>
+<td><p>1 byte</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">short</span></code></p></td>
+<td><p>16-bit integer</p></td>
+<td><p>2 bytes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>32-bit integer</p></td>
+<td><p>4 bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">long</span> <span class="pre">long</span> <span class="pre">int</span></code></p></td>
+<td><p>64-bit integer</p></td>
+<td><p>8 bytes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>32-bit floating-point</p></td>
+<td><p>4 bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></td>
+<td><p>64-bit floating-point</p></td>
+<td><p>8 bytes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
+<td><p>single character</p></td>
+<td><p>1 byte</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></td>
+<td><p>character sequence</p></td>
+<td><p>1 byte</p></td>
+</tr>
+</tbody>
+</table>
+<p>Note that these types are different from the ones you are used to in Python. In C++ for example, the type <code class="docutils literal notranslate"><span class="pre">float</span></code> has 32-bits precision, while a <code class="docutils literal notranslate"><span class="pre">double</span></code> has twice that (64-bit). As a consequence a <code class="docutils literal notranslate"><span class="pre">double</span></code> value takes up twice as much memory as a <code class="docutils literal notranslate"><span class="pre">float</span></code> value. Notice that 64 bits is the same as 6 bytes (<span class="math notranslate nohighlight">\(2^6 = 64\)</span>).</p>
+<p>For scientific applications, we want the extra precisions of doubles, and will usually only use doubles, and skip the floats altogether. Note that the <code class="docutils literal notranslate"><span class="pre">float</span></code> type in Python is actually a double, as it has 64-bits precision.</p>
+<p>Similarly, the integer type in C++, has a fixed precision of 32 bits, which means it has a built in lower and higher limit to what number it can contain. This is again different from the <code class="docutils literal notranslate"><span class="pre">int</span></code> type in Python, which has no such limit, and can grow larger and larger without any problem.</p>
+<p>Note also that the <code class="docutils literal notranslate"><span class="pre">string</span></code> type in C++ has to be imported from the standard library header by the same name:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Since a single character has size of 1 byte = 8 bits it means that it can hold <span class="math notranslate nohighlight">\(2^8 = 256\)</span> different characters. A 32-bit integer can hold <span class="math notranslate nohighlight">\(2^32 = 4294967296\)</span> different values, and since we include the negative values as well, the typical range of a 32-bit integer is between -2147483648 and +2147483647 (with zero included). This means that if you want to work with larger integers than this, then you need to use a <code class="docutils literal notranslate"><span class="pre">long</span></code> which has a range of <span class="math notranslate nohighlight">\([-2^{63}, 2^{63})\)</span>.</p>
+</section>
+<section id="functions-and-types">
+<h2>Functions and Types<a class="headerlink" href="#functions-and-types" title="Permalink to this headline">#</a></h2>
+<p>It is not just when we are defining variables we need to be explicit in our typing, but also when defining functions. For each function we define, we have to explicitly state what types the input to the function are, and what types the outputs are.</p>
+<p>Say for example we are making a Celsius to Fahrenheit conversion function, it could be done as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">F2C</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">F</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, we write <code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">F2C(...)</span></code> to state that we are creating a function <code class="docutils literal notranslate"><span class="pre">F2C</span></code> that will return a double, and we also specify <code class="docutils literal notranslate"><span class="pre">(double</span> <span class="pre">F)</span></code> to state that it takes a double as an argument. The contents of the function itself is put inside curly braces. To return we use the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword.</p>
+<p>Similarly, if we want to create a function <code class="docutils literal notranslate"><span class="pre">is_prime</span></code>, that takes in an integer, and returns true or false, then we would write</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_prime</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This statement is called the <em>signature</em> of the function, and it tells us quite a bit about how the function works. The combination of a good function name and typed input and output should give the reader a good understanding of what the function does.</p>
+<p>What do we do if we want to make a function that returns nothing? Then we define it as a <code class="docutils literal notranslate"><span class="pre">void</span></code>, which simply means it doesn’t return anything:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello there &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>A full program that defines and uses the <code class="docutils literal notranslate"><span class="pre">F2C</span></code> function can look as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">F2C</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">F</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">110.</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; F&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">F2C</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; C&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we first define our <code class="docutils literal notranslate"><span class="pre">F2C</span></code> function, and then define our <code class="docutils literal notranslate"><span class="pre">main</span></code> function.</p>
+</section>
+<section id="loops-and-if-tests">
+<h2>Loops and if-tests<a class="headerlink" href="#loops-and-if-tests" title="Permalink to this headline">#</a></h2>
+<p>Let’s turn to how to create loops in C++. The most common loops in Python are the loops using <em>range</em>. Let us look at a simple example written out in both languages:</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">C++</label><div class="tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Python</label><div class="tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In both languages, we use the <code class="docutils literal notranslate"><span class="pre">for</span></code>-keyword to define a for-loop. However, we define the loop itself quite differently. In C++ we first state where the loop should start (<code class="docutils literal notranslate"><span class="pre">i=0</span></code>), how long it should keep going (<code class="docutils literal notranslate"><span class="pre">i&lt;10</span></code>) and how it should increment, the step (<code class="docutils literal notranslate"><span class="pre">i++</span></code>). Note that <code class="docutils literal notranslate"><span class="pre">i++</span></code> means an increment, similar to <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">+=</span> <span class="pre">1</span></code>. With this syntax, the for-loop is defined with the same logic as a while-loop. Note also that we have to explicitly type the counting variable <code class="docutils literal notranslate"><span class="pre">i</span></code>, by writing <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">i=0</span></code> for our start of the loop.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You might see the use of <code class="docutils literal notranslate"><span class="pre">++i</span></code> instead of <code class="docutils literal notranslate"><span class="pre">i++</span></code>. There is a small difference between these two notations that are explained in more details <a class="reference external" href="https://stackoverflow.com/questions/24853/what-is-the-difference-between-i-and-i">here</a>.</p>
+</div>
+<p>Like for functions, the contents of the loop itself is put inside curly braces.</p>
+<section id="if-tests">
+<h3>If-tests<a class="headerlink" href="#if-tests" title="Permalink to this headline">#</a></h3>
+<p>If-tests in C++ look exactly like in Python, except for some small differences in what symbols are used:</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">C++</label><div class="tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">Python</label><div class="tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="n">i</span> <span class="o">*=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we: (1) add parentheses around the condition itself, and (2) use curly braces to define the contents of the test (the scope), instead of the colon seen in Python. The indentation is similar in both cases, more on this later.</p>
+</section>
+</section>
+<section id="boolean-operators-in-c">
+<h2>Boolean Operators in C++<a class="headerlink" href="#boolean-operators-in-c" title="Permalink to this headline">#</a></h2>
+<p>While the if-test themselves are very similar to Python, the conditions themselves might be a bit different. For one, in Python, you are used to using the boolean operators <code class="docutils literal notranslate"><span class="pre">and</span></code>/<code class="docutils literal notranslate"><span class="pre">or</span></code>/<code class="docutils literal notranslate"><span class="pre">not</span></code>, while in C++ it is more common to write <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code>/<code class="docutils literal notranslate"><span class="pre">||</span></code>/<code class="docutils literal notranslate"><span class="pre">!</span></code> for these respectively. However, the keywords are defined in C++, so use the ones you prefer.</p>
+<p>However, be careful when combining conditions in C++, in Python we can use nifty shortcuts like <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">lower</span> <span class="pre">&lt;</span> <span class="pre">x &lt;</span> <span class="pre">upper</span></code>, but in C++, such an expression will be evaluated as <code class="docutils literal notranslate"><span class="pre">(lower</span> <span class="pre">&lt;</span> <span class="pre">x)</span> <span class="pre">&lt;</span> <span class="pre">upper</span></code>, with the first condition evaluating to 0 for false and 1 for true, and so for example, you might think the following test would fail:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>but it actually passes! Because “(3 &lt; 10) &lt; 7” is the same as “1 &lt; 7”, which is true.</p>
+<section id="example-is-prime">
+<h3>Example: <code class="docutils literal notranslate"><span class="pre">is_prime</span></code><a class="headerlink" href="#example-is-prime" title="Permalink to this headline">#</a></h3>
+<p>We now combine a for-loop and an if-test to create the <code class="docutils literal notranslate"><span class="pre">is_prime</span></code> function outlined earlier as online a signature.</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_prime</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">d</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, we first check the special case of <span class="math notranslate nohighlight">\(n=1\)</span>, then we see if any of the numbers in the interval <span class="math notranslate nohighlight">\([2, n)\)</span> cleanly divides the candidate, which we do with the modulo operator. Depending on the input, we return either <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>. Note that these are specified with all lower capitalization.</p>
+<p>To test the function, we make a loop checking the numbers 1 through 11:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">11</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_prime</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is prime&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is not prime&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="a-note-on-bracket-style">
+<h2>A note on bracket style<a class="headerlink" href="#a-note-on-bracket-style" title="Permalink to this headline">#</a></h2>
+<p>From Python, you are used to whitespace not mattering much, with the exception of <em>newline</em> characters and <em>leading</em> whitespace, i.e., indentation. In C++, however, whitespace matters even less, and this includes newline characters and indentation. As we always include semicolons at the end of statements in C++, we don’t need to use newlines between different statements, and because we use curly braces to define scopes, we do not need to use indentation.</p>
+<p>However, while newlines and indentation are not strictly necessary for the code to function, we should use them to increase structure and help readability. But if newlines and indentation doesn’t impact the behavior of code, it means we can choose to do these things in different ways, and so it because a style choice. In C and C++ there are many different style choices of indentation, newlines and bracketing, and there is a large <a class="reference external" href="https://en.wikipedia.org/wiki/Indentation_style">Wikipedia article on it</a> you can read if you are curious.</p>
+<p>Without going to much into detail, one major point of contention is whether to place the <em>opening</em> brace of a function definition or a control structure on the same line as the control statement, or on a separate line immediately below it</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="p">...</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="p">...</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>When you are looking at C++ code in books or online, you will see both styles used, it comes down to preference. As always, regardless of what style you want to follow, the most important thing is to be consistent in your style. For example if you prefer the first style, which is called the <em>“One True Brace Style”</em> (OTBS/1TBS), then you should stick to that.</p>
+<div class="tip admonition">
+<p class="admonition-title">Pro tip: Use a formatting tool</p>
+<p>To avoid thinking too much about the bracket style (or coding style in general) a good tip is to use a formatting tool. For python we have seen <code class="docutils literal notranslate"><span class="pre">black</span></code> and <code class="docutils literal notranslate"><span class="pre">autopep8</span></code>. A similar tool exist for <code class="docutils literal notranslate"><span class="pre">C++</span></code> and the most popular one is probably <code class="docutils literal notranslate"><span class="pre">clang-format</span></code> which comes already installed with <code class="docutils literal notranslate"><span class="pre">gcc</span></code> as well as <code class="docutils literal notranslate"><span class="pre">clang</span></code>. You can format you file using the command <code class="docutils literal notranslate"><span class="pre">clang-format</span> <span class="pre">hello.cpp</span> <span class="pre">-i</span></code>, or if you are using VSCode you can make it format on save if you add <code class="docutils literal notranslate"><span class="pre">&quot;editor.formatOnSave&quot;:</span> <span class="pre">true</span></code> in your settings. You can also read more <a class="reference external" href="https://stackoverflow.com/questions/45823734/visual-studio-code-formatting-for">here</a> on the different styles.</p>
+</div>
+</section>
+<section id="single-statement-loops-and-tests">
+<h2>Single-statement loops and tests<a class="headerlink" href="#single-statement-loops-and-tests" title="Permalink to this headline">#</a></h2>
+<p>Another important thing to note about braces in C++ is that in a control structure with a single statement, you can opt to skip the braces altogether. For example:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_prime</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is prime&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is prime&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>could just as well be written</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_prime</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is prime&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is prime&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Some prefer to write the latter, because it looks nicer without the brackets. The OTB style states that this shouldn’t be done however, because it can easily lead to errors.</p>
+<p>If you always use braces, even for single statements, you can always go back and add more statements later, and things will work just as well. If you omit the braces however, when you add the second statement, it actually goes <em>outside</em> the control structure. This means the first style is a lot safer and extendable than the second. We therefore recommend that you <em>always use your braces</em>, it will save you from bugs that can potentially cost you a lot of frustration and time down the road.</p>
+</section>
+<section id="while-loops">
+<h2>While-loops<a class="headerlink" href="#while-loops" title="Permalink to this headline">#</a></h2>
+<p>While-loops in C++ also look a lot like in Python. Just like the if-tests, we put parenthesis around the condition and define the scope using curly braces:</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--4-input--1" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--1">C++</label><div class="tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--4-input--2" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--2">Python</label><div class="tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">n</span> <span class="o">*=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, there is close to no difference.</p>
+</section>
+<section id="vectors">
+<h2>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">#</a></h2>
+<p>From Python, you are used to using the list datatype. This datatype is not built into C++, but there is a similar datatype, called a vector, available from one of the standard libraries. You include it using:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>Note that there is also a datatype called a <em>list</em> in the C++ standard library, we will return to why we say the vectors are equivalent when we discuss data structures.</p>
+<p>One major difference between Python lists and vector objects in C++ is that vector objects must contain elements of the same type. So when we define a vector object, we must not only declare that our variable is of type vector, but we must also define the type of the <em>elements</em>. This is done as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">primes</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, we define a variable <code class="docutils literal notranslate"><span class="pre">primes</span></code>, that is of type <code class="docutils literal notranslate"><span class="pre">vector</span></code> with contents of type <code class="docutils literal notranslate"><span class="pre">int</span></code>. The use of <code class="docutils literal notranslate"><span class="pre">&lt;int&gt;</span></code> is called <em>templating</em>.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">primes</span></code> vector will start out as an empty vector, we do not need to specify it as being empty, this is implied. If however, we wanted to initialize it with given elements, we could do this as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">primes</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where you can drop <code class="docutils literal notranslate"><span class="pre">std::</span></code> if you have declared <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">namespace</span> <span class="pre">std;</span></code>.
+Note that we do not use any <code class="docutils literal notranslate"><span class="pre">=</span></code> for assignment here, this is a minor detail we will return to later, when we turn to OOP in C++.</p>
+<section id="interacting-with-c-vectors">
+<h3>Interacting with C++ vectors<a class="headerlink" href="#interacting-with-c-vectors" title="Permalink to this headline">#</a></h3>
+<p>As stated, the C++ vector objects behaves a lot like a Python lists, and so we can access and change specific elements using square bracket indexing. C++ also starts indexing at 0, so <code class="docutils literal notranslate"><span class="pre">primes[3]</span></code> refers to the integer <code class="docutils literal notranslate"><span class="pre">7</span></code> in the list of primes initialized above. However, note that you cannot index with fancy slicing as in Python.</p>
+<p>To append elements to a vector, use the method <code class="docutils literal notranslate"><span class="pre">.push_back(n)</span></code>, which adds elements to the end of the list. The name comes from “pushing something to the back”. To get the number of elements in the vector, use <code class="docutils literal notranslate"><span class="pre">.size()</span></code>. To see other supported methods, see the <a class="reference external" href="http://www.cplusplus.com/reference/vector/vector/">reference</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Pro tip: Install a C++ extension for you editor</p>
+<p>Most modern editors and IDEs comes with extensions that can make it easier to see which methods that are available and provide documentation for those method. Personally I use the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C/C++</a> extension which provides both intellisense and debugging features.</p>
+</div>
+<p>In Python, we can easily loop over elements in a list:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>A similar syntax is possible with vectors:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">primes</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or alternatively you can simply loop over the indices:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">primes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// do something with primes[i]</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="example-finding-primes">
+<h3>Example: Finding primes<a class="headerlink" href="#example-finding-primes" title="Permalink to this headline">#</a></h3>
+<p>Let us look at an example where we define a function that finds the first <span class="math notranslate nohighlight">\(n\)</span> primes. To do this, we will use our <code class="docutils literal notranslate"><span class="pre">is_prime</span></code> function, which we defined earlier in this lecture.</p>
+<p>First, we need to define the signature of our function. It should return a vector of integers, and take in the number of primes to find, so we write</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">find_primes</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">nr</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now, inside the function, we first need to define an empty vector, where we can push new primes as we find them. We can then use a while-loop to check <code class="docutils literal notranslate"><span class="pre">primes.size()</span> <span class="pre">&lt;</span> <span class="pre">nr</span></code> until we have found enough primes.</p>
+<p>The whole function becomes:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">find_primes</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">nr</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">primes</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">primes</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nr</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">primes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">n</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">primes</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>To test our function, we add the following to the main function:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">primes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">find_primes</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">primes</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Compiling the program and running the executable will now write out the first 100 primes.</p>
+</section>
+</section>
+<section id="strings">
+<h2>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">#</a></h2>
+<p>We now turn to string objects. C has a primitive data type called <code class="docutils literal notranslate"><span class="pre">char</span></code>, that is a single character. Strings are sequences of characters, and so to make strings in C, one creates arrays of characters. We will cover arrays in the next lecture, but for now, let us simply say they are sequences, like a tuple. Thus, C has no primitive string datatype, it instead uses the <code class="docutils literal notranslate"><span class="pre">char[]</span></code> datatype (the square brackets denote an array).</p>
+<p>In C++ however, a string datatype has been added in the standard library, and is the recommended way to work with strings. Note that the datatype is called <code class="docutils literal notranslate"><span class="pre">string</span></code>, and not <code class="docutils literal notranslate"><span class="pre">str</span></code> as in Python.</p>
+<p>To use strings we must include the header from the standard library</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If we do not declare we are using the std namespace, then we can use strings by writing <code class="docutils literal notranslate"><span class="pre">std::string</span></code>.</p>
+<p>See the full reference on strings to see what functionality the string class adds:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.cplusplus.com/reference/string/string/">http://www.cplusplus.com/reference/string/string/</a></p></li>
+</ul>
+</section>
+<section id="type-inference">
+<h2>Type inference<a class="headerlink" href="#type-inference" title="Permalink to this headline">#</a></h2>
+<p>Consider the following lines of code</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>It is clear that both <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are integers, however we can also deduce that <code class="docutils literal notranslate"><span class="pre">y</span></code> has to be an integer because <code class="docutils literal notranslate"><span class="pre">x</span></code> is. Automatic detection of data types is called <em>type inference</em> and since <code class="docutils literal notranslate"><span class="pre">C++11</span></code> standard we can instead write</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>When using <code class="docutils literal notranslate"><span class="pre">auto</span></code>, C++ will figure out which type to use. This is very convenient when you are working with complicated types, however it can make your code less readable.
+An example where I would recommend using <code class="docutils literal notranslate"><span class="pre">auto</span></code> is places where you don’t really care about the type, for example if you are printing out the elements in a vector</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">#</a></h2>
+<p>Comments are often useful to add in places where you need to provide some extra information. In python we use the <code class="docutils literal notranslate"><span class="pre">#</span></code> in front of the line with comments while in C++ we use <code class="docutils literal notranslate"><span class="pre">//</span></code>.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--5-input--1" name="tab-set--5" type="radio"><label class="tab-label" for="tab-set--5-input--1">C++</label><div class="tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Gravity in units m/s^2</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">9.81</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--5-input--2" name="tab-set--5" type="radio"><label class="tab-label" for="tab-set--5-input--2">Python</label><div class="tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gravity in units m/s^2</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In C++ you can also have multiline comments beginning with <code class="docutils literal notranslate"><span class="pre">/*</span></code> and ending with <code class="docutils literal notranslate"><span class="pre">*/</span></code>.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* This is a</span>
+<span class="cm">multiline</span>
+<span class="cm">comment */</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="standard-input-and-output">
+<h2>Standard input and output<a class="headerlink" href="#standard-input-and-output" title="Permalink to this headline">#</a></h2>
+<p>We have already seen that we can write output to the console using <code class="docutils literal notranslate"><span class="pre">cout</span></code> from the <code class="docutils literal notranslate"><span class="pre">iostream</span></code> library. The <code class="docutils literal notranslate"><span class="pre">iostream</span></code> library enable us to print information to the console as well as handling input from the console using the notion of <em>streams</em>. You can think of a stream as a flow of data and the angle brackets <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code> as operators acting on that stream. We use the <em>output operator</em> (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>) with <em>consol output</em> (<code class="docutils literal notranslate"><span class="pre">cout</span></code>) and the <em>input operator</em> (<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>) with <em>consol input</em> (<code class="docutils literal notranslate"><span class="pre">cin</span></code>). Here is an example using <code class="docutils literal notranslate"><span class="pre">cin</span></code>.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Input a number: &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;You entered &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<section id="file-streams">
+<h3>File streams<a class="headerlink" href="#file-streams" title="Permalink to this headline">#</a></h3>
+<p>Working with files is almost the same as working with the console. The following program will write a sequence of the first 10 digits to a file called <code class="docutils literal notranslate"><span class="pre">output.txt</span></code>.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ofstream</span><span class="w"> </span><span class="n">ofs</span><span class="p">{</span><span class="s">&quot;output.txt&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ofs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We see that we need to include the <code class="docutils literal notranslate"><span class="pre">fstream</span></code> library which contains the functionality for working with files. In the line <code class="docutils literal notranslate"><span class="pre">ofstream</span> <span class="pre">ofs{&quot;output.txt&quot;};</span></code> we create a file stream for writing to a file called <code class="docutils literal notranslate"><span class="pre">output.txt</span></code>. If the file does not exist it will be created, and if it already exist it will be overwritten. Next we use the <code class="docutils literal notranslate"><span class="pre">ofs</span></code> object that we created in a similar manner as we do with <code class="docutils literal notranslate"><span class="pre">cout</span></code>.
+A lot of things can go wrong when working with files. It is therefore good practice to check if the file has been open correctly. The following program will throw a runtime error because it tries to write to a file in a folder that does not exist.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ofstream</span><span class="w"> </span><span class="n">ofs</span><span class="p">{</span><span class="s">&quot;fake_folder/output.txt&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ofs</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Unable to open file&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ofs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Similar as with <code class="docutils literal notranslate"><span class="pre">iostream</span></code> it is possible to read from a file using <code class="docutils literal notranslate"><span class="pre">fstream</span></code>. The following program writes to a file and then reads from it and prints the output to the console</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ofstream</span><span class="w"> </span><span class="n">ofs</span><span class="p">{</span><span class="s">&quot;output.txt&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ofs</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Unable to open file&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ofs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">ifstream</span><span class="w"> </span><span class="n">ifs</span><span class="p">{</span><span class="s">&quot;output.txt&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ifs</span><span class="p">.</span><span class="n">eof</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ifs</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">ifs.eof()</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> when you have reached the end of the file.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/cpp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="cpp.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">C++</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="arrays_and_pointers.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Arrays, Memory and Pointers</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

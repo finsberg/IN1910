@@ -1,0 +1,1289 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Algorithm Analysis and Big Oh Notation &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Comparing Linked Lists and Dynamic Arrays" href="linkedlists_vs_dynamicarrays.html" />
+    <link rel="prev" title="Linked Lists" href="linked_lists.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="cpp.html">
+   C++
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/cpp/algorithm_analysis.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/cpp/algorithm_analysis.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/cpp/algorithm_analysis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/cpp/algorithm_analysis.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theoretical-algorithm-analysis">
+   Theoretical Algorithm Analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#counting-operations">
+     Counting Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-finding-the-biggest-element-in-a-list">
+     Example: Finding the biggest element in a list
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-case-average-case-worst-case">
+   Best-case, Average-case, Worst-case
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#asymptotic-analysis-with-big-oh-notation">
+   Asymptotic Analysis with Big Oh Notation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-the-big-oh-cost">
+     Finding the Big Oh cost
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-big-oh-tells-us">
+     What Big Oh Tells Us
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-most-important-big-oh-classifications">
+     The Most Important Big Oh Classifications
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#formal-definition-borrowed-from-the-wikipedia-article">
+     Formal Definition (Borrowed from the Wikipedia Article)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#returning-to-our-example">
+   Returning to our example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example-triangle-numbers">
+     Another example: Triangle Numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example-matrix-matrix-multiplication">
+     Another example: Matrix-Matrix Multiplication
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#looking-to-next-week">
+   Looking to Next Week
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Algorithm Analysis and Big Oh Notation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theoretical-algorithm-analysis">
+   Theoretical Algorithm Analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#counting-operations">
+     Counting Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-finding-the-biggest-element-in-a-list">
+     Example: Finding the biggest element in a list
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-case-average-case-worst-case">
+   Best-case, Average-case, Worst-case
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#asymptotic-analysis-with-big-oh-notation">
+   Asymptotic Analysis with Big Oh Notation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-the-big-oh-cost">
+     Finding the Big Oh cost
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-big-oh-tells-us">
+     What Big Oh Tells Us
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-most-important-big-oh-classifications">
+     The Most Important Big Oh Classifications
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#formal-definition-borrowed-from-the-wikipedia-article">
+     Formal Definition (Borrowed from the Wikipedia Article)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#returning-to-our-example">
+   Returning to our example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example-triangle-numbers">
+     Another example: Triangle Numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example-matrix-matrix-multiplication">
+     Another example: Matrix-Matrix Multiplication
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#looking-to-next-week">
+   Looking to Next Week
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="algorithm-analysis-and-big-oh-notation">
+<h1>Algorithm Analysis and Big Oh Notation<a class="headerlink" href="#algorithm-analysis-and-big-oh-notation" title="Permalink to this headline">#</a></h1>
+<p>We now start to look at the process of <em>algorithm analysis</em>. As the name implies, this topic revolves around analyzing algorithms, mostly with regards to their <em>running time</em>.</p>
+<p>Say we have a specific problem we have to solve, such as sorting a list of integers. There will often be different algorithms to solve the same problem that we can choose from. But which should we choose? Well, if the different algorithms have the same outcome: a sorted list, then one criteria that would be naturally to use, would be how fast the algorithm is, which is also called the <em>running time</em> of the algorithm.</p>
+<p>Let us say we have implemented a specific sorting algorithm. We can now run our algorithm, and simply measure how long it takes to sort some list. This is called <em>profiling</em>, and it is a topic we will return to later in IN1910. However, how long the algorithm takes, will tend to depend on the size of the list it has to sort. We can therefore give it inputs of different sizes <span class="math notranslate nohighlight">\(n\)</span>, and measure the time it takes for each one. Plotting a plot of run time vs number of elements, <span class="math notranslate nohighlight">\(t(n)\)</span>, shows us how the sorting algorithm scales with the input size.</p>
+<p>Now, if we have implemented a few different sorting algorithms. We can make such a curve for each algorithm, and thus compare them. However, this approach has a few major problems:</p>
+<ol class="simple">
+<li><p>To measure the run-time in this manner, we need to actually execute the algorithm. This has two implications: (1) We need to have implemented our algorithm. We would rather analyse different algorithms to find the best one, and then implement the best one for our given use case. Having to implement all of them first, means we don’t save any time. (2) For testing large inputs, executing an algorithm can actually take really long.</p></li>
+<li><p>The concept of <em>running time</em> is strongly dependent on what computer you run it on. A faster computer will have a lower runtime. Thus to compare algorithms we need to do all experiments on the same machine. Even on the same machine, running a program twice in a row is not guaranteed to take equally long, as other processes on the machine might make things slower. Meaning we have to actually perform <em>multiple</em> experiments per input. Taking even longer.</p></li>
+</ol>
+<p>Both of these downsides means comparing algorithms in this manner can take a lot of time, and might not work that well to begin with. We need to find some better way to compare algorithms.</p>
+<section id="theoretical-algorithm-analysis">
+<h2>Theoretical Algorithm Analysis<a class="headerlink" href="#theoretical-algorithm-analysis" title="Permalink to this headline">#</a></h2>
+<p>To get around the points of actually implementing and running our algorithms, we turn instead to analyzing them theoretically. This actually makes sense, because algorithms themselves are <em>abstract</em> concepts that exist only in theory. Thus we turn from <em>testing implementations</em> to <em>analyzing algorithms</em>. This also gets around the second point, because our analysis will no longer be connected to any given machine.</p>
+<section id="counting-operations">
+<h3>Counting Operations<a class="headerlink" href="#counting-operations" title="Permalink to this headline">#</a></h3>
+<p>As we are moving away from the concept of “runtime”, as this is dependent on a given machine, we need to find some other measure of how “long” an algorithm takes to run. What we are actually trying to measure is not how long it takes in time, but how <em>much work</em> an algorithm has to perform.</p>
+<p>To measure how much work we are performing when we perform an algorithm, we have to go through the algorithm and simply count the number of operations we perform. Here we need to be more precise in what we mean by “operation”. An “operation” in this sense, is any of the <em>primitive</em> operations the computer performs. Examples of a primitive operation are:</p>
+<ul class="simple">
+<li><p>assigning a value to a (simple) variable</p></li>
+<li><p>calling a method</p></li>
+<li><p>comparing two numbers</p></li>
+<li><p>indexing into an array</p></li>
+<li><p>following an object reference</p></li>
+<li><p>return from a method
+Now, these operations do not take exactly the same amount of time, but to make algorithm analysis simpler, we assume that they do, and count all into the same lump sum of operations performed.</p></li>
+</ul>
+<p>For numerical algorithms, we often instead count the number of <em>floating point</em> operations, which is addition, subtraction, multiplication or division of two floating point numbers. Different numerical algorithms, say for example the Forward Euler scheme and the Runge-Kutta 4 scheme for solving ODEs, might require very different amount of operations.</p>
+</section>
+<section id="example-finding-the-biggest-element-in-a-list">
+<h3>Example: Finding the biggest element in a list<a class="headerlink" href="#example-finding-the-biggest-element-in-a-list" title="Permalink to this headline">#</a></h3>
+<p>Let us look at a simple algorithm for finding the biggest number in a list of numbers: We write it out in Python, as an alternative to pseudocode. However, note that we are trying to analyze the abstract algorithm itself, and not any given implementation in Python.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_biggest</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">biggest</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">biggest</span><span class="p">:</span>
+            <span class="n">biggest</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">biggest</span>
+</pre></div>
+</div>
+<p>Let us now count the number of operations in this algorithm. The first assignment is two operations, because we assign a value to <code class="docutils literal notranslate"><span class="pre">biggest</span></code>, and read <code class="docutils literal notranslate"><span class="pre">numbers[0]</span></code>, each a single operations. At the end we return a number, which is also a single operation. So independent of the size of the input list, we use 3 operations in addition to the loop.</p>
+<p>Next we turn to the loop, which will run <span class="math notranslate nohighlight">\((n - 1)\)</span> times, because we can skip the first element of the list. For each iteration, we will assign the counter <code class="docutils literal notranslate"><span class="pre">i</span></code> (1 operation), we will perform one comparison between <code class="docutils literal notranslate"><span class="pre">biggest</span></code> and the next element in the list (2 operations, one for the comparison and one for the indexing). And if the new element is actually larger, we assign it (2 operations, one for the indexing, one for the assignment). Thus each iteration will be 3 or 5 operations.</p>
+<p>If the first element of the input array happens to be the biggest, then we never reassign inside the loop, and the total number of operations will be</p>
+<div class="math notranslate nohighlight">
+\[
+    3(n - 1) + 3 = 3n.
+\]</div>
+<p>On the other hand, if the input list is ordered in increasing order, we will reassign every single time, giving a total operations of</p>
+<div class="math notranslate nohighlight">
+\[
+    5(n - 1) + 3 = 5n - 2 .
+\]</div>
+<p>This means that running the <code class="docutils literal notranslate"><span class="pre">find_biggest</span></code> algorithm will take between <span class="math notranslate nohighlight">\(3n\)</span> and <span class="math notranslate nohighlight">\(5n - 2\)</span> operations, depending on the input. As this simple example illustrates, getting the exact count is a bit finicky, what should count as one operation, what should count as two? Also, the input might vary not only in size (<span class="math notranslate nohighlight">\(n\)</span>), but also in layout.</p>
+<p>We will now introduce two concepts to make our analysis easier.</p>
+</section>
+</section>
+<section id="best-case-average-case-worst-case">
+<h2>Best-case, Average-case, Worst-case<a class="headerlink" href="#best-case-average-case-worst-case" title="Permalink to this headline">#</a></h2>
+<p>As we saw in the <code class="docutils literal notranslate"><span class="pre">find_biggest</span></code> example, our algorithm will have a different number of operations depending on exactly what the input is. We can refer to the different cases by calling them the “best-case” and the “worst-case” scenarios. In our example, having the first element be the biggest was the “best-case”, because then we do not have to do any reassignment. Having all elements in increasing order would be the “worst-case”, because it would take the longest. Somewhere in the middle lies the “average-case”, which would be operations we would need on the “average” input.</p>
+<p>Often when analyzing algorithms, we simply stick with analysing worst-case. If there is a best-case that is great, then that is nice, but often we want to have a guarantee about how slow an algorithm can be in the worst-case, and so this is the best to analyze. Analyzing the average-case is even harder, because we would need to find out what the “average” input is, which would depend on the problem setting and the use case.</p>
+<p>Put simply: To avoid having to think to much about different orders of input and such, we simply stick to analyzing the worst-case in most situations. Sometimes we also do the best-case. We rarely analyze the average-case.</p>
+</section>
+<section id="asymptotic-analysis-with-big-oh-notation">
+<h2>Asymptotic Analysis with Big Oh Notation<a class="headerlink" href="#asymptotic-analysis-with-big-oh-notation" title="Permalink to this headline">#</a></h2>
+<p>The other simplification we do is to disregard small details, and instead focus solely on how the algorithm <em>scales</em>. This is known as asymptotic analysis. It is most common to do this through the use of something called <a class="reference external" href="https://en.wikipedia.org/wiki/Big_O_notation">Big Oh notation</a>, sometimes referred to as “big O” instead of “big Oh”. We call it “Big Oh” because we write it out as a function inside a big Oh, for example: <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span>.</p>
+<p>As before, we are still trying to classify how much work an algorithm has to perform, as a function of the problem “input size”, often denoted <span class="math notranslate nohighlight">\(n\)</span>. For array operations, <span class="math notranslate nohighlight">\(n\)</span> will often be the length of an array or list, but it can also for example be an integer: for example, when checking wether <span class="math notranslate nohighlight">\(n\)</span> is prime, or finding the <span class="math notranslate nohighlight">\(n\)</span>’th Fibonacci number. Or it could be the size of a matrix in linear algebra operation: for example, what is the cost of multiplying two <span class="math notranslate nohighlight">\(n \times n\)</span> matrices? Or finding the eigenvalues of a <span class="math notranslate nohighlight">\(n\times n\)</span> matrix?</p>
+<p>Now, we want to classify the <em>cost</em> of the algorithm in terms of the problem size. Note here that the problem size will be non-negative: <span class="math notranslate nohighlight">\(n\geq 0\)</span>. You can for example sort a list of 1, or 0 elements, but saying you are sorting a list with a negative number of elements doesn’t make sense. Also, the cost of the algorithm will tend to either stay flat, or grow with the problem size <span class="math notranslate nohighlight">\(n\)</span>, it would have to be a very strange problem or algorithm to become <em>easier</em> as the problem grows!</p>
+<section id="finding-the-big-oh-cost">
+<h3>Finding the Big Oh cost<a class="headerlink" href="#finding-the-big-oh-cost" title="Permalink to this headline">#</a></h3>
+<p>As we saw an example of earlier, we can go through all the steps in an algorithm, and count the number of <em>primitive operations</em>, and come of with an expression for the cost of the algorithm, say for example:</p>
+<div class="math notranslate nohighlight">
+\[
+    f(n) = 2n^2 + 4n + 1.
+\]</div>
+<p>Big Oh notation is a way to simplify this expression, throwing away unnecessary details, trying only to describe how the whole thing scales as <span class="math notranslate nohighlight">\(n\)</span> grows. The <span class="math notranslate nohighlight">\(+1\)</span> part is definitely unimportant, and when <span class="math notranslate nohighlight">\(n\)</span> grows large, the quadratic term (<span class="math notranslate nohighlight">\(2n^2\)</span>) will outgrow the linear term (<span class="math notranslate nohighlight">\(4n\)</span>) fast. So we therefore first say that, at least for larger <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    f(n) \approx 2n^2.
+\]</div>
+<p>But with big Oh, we go one step further, and disregard the coefficient 2 as well. We would then write</p>
+<div class="math notranslate nohighlight">
+\[
+    f(n) = \mathcal{O}(n^2).
+\]</div>
+<p>We read this out as: <span class="math notranslate nohighlight">\(f\)</span> is big Oh <span class="math notranslate nohighlight">\(n^2\)</span>.</p>
+<p>We can do the same for any function, we simply keep the fastest-growing term, and throw away any coefficients on it. For polynomials, this is nearly trivial, simply check what the highest power is, so a <span class="math notranslate nohighlight">\(k\)</span>-th degree polynomial, would be <span class="math notranslate nohighlight">\(\mathcal{O}(n^k)\)</span>. However, we can also do it for other, more complicated functions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(7n - 2\)</span> would be <span class="math notranslate nohighlight">\(\mathcal{O(n)}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n\log n + 2n + 10^{100}\)</span> would be <span class="math notranslate nohighlight">\(\mathcal{O}(n\log n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(2^n + n^{10}\)</span> would be <span class="math notranslate nohighlight">\(\mathcal{O}(e^n)\)</span>, here we have changed the base from 2 to <span class="math notranslate nohighlight">\(e\)</span>, but this adds a constant coefficient, which we throw away.</p></li>
+</ul>
+<p>Similarly, some algorithms do not increase their cost with <span class="math notranslate nohighlight">\(n\)</span> at all, as we throw away the “coefficients” also in this case, these will be <span class="math notranslate nohighlight">\(\mathcal{O(1)}\)</span>. So for example</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(n) = 1\)</span> gives <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(n) = 1000\)</span> gives <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(n) = 2^{100}\)</span> gives <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></li>
+</ul>
+</section>
+<section id="what-big-oh-tells-us">
+<h3>What Big Oh Tells Us<a class="headerlink" href="#what-big-oh-tells-us" title="Permalink to this headline">#</a></h3>
+<p>What we are trying to capture with the Big Oh is how the function scales with <span class="math notranslate nohighlight">\(n\)</span>. We would for example know that a <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span> does <em>not</em> grow with the problem size, we say that the cost is <em>constant</em>. Knowing just the big Oh of the algorithm doesn’t actually say anything about how big that cost it, it might be small, or it might be big, but we know that it does not depend on the problem size.</p>
+<p>Similarly, if we have an algorithm that is <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>, we say that is scales <em>linearly</em>. We then know that doubling the problem size, will approximately double the cost of the algorithm. We say approximately, because we might have thrown away some terms that mean it doesn’t <em>exactly</em> double, but for larger <span class="math notranslate nohighlight">\(n\)</span>, it will be close to true. An algorithm that is <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span> scales <em>quadratically</em>, meaning that doubling the problem size will quadruple the cost of the algorithm.</p>
+<p>In a way, the big Oh is a way to divide all algorithms into categories of how they scale. If we need to choose an algorithm for a specific problem, and one is <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span> and the other is <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span>, then we know the first scales better than the second. Does this mean that it is the best choice? Not necessarily, because we don’t actually know how costly either of the algorithms is, but because of the scaling, the first option will eventually outperform the second, if <span class="math notranslate nohighlight">\(n\)</span> becomes large enough.</p>
+</section>
+<section id="the-most-important-big-oh-classifications">
+<h3>The Most Important Big Oh Classifications<a class="headerlink" href="#the-most-important-big-oh-classifications" title="Permalink to this headline">#</a></h3>
+<p>As many functions will fall into the same Big Oh classification, there actually aren’t that many categories they can go into. Here are perhaps the most common ones and what we call them:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Big Oh</p></th>
+<th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+<td><p>constant</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(\log n)\)</span></p></td>
+<td><p>logarithmic</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p>linear</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n \log n)\)</span></p></td>
+<td><p>loglinear/quasilinear</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span></p></td>
+<td><p>Quadratic</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span></p></td>
+<td><p>Cubic</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n^k)\)</span></p></td>
+<td><p>Polynomial</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(e^n)\)</span></p></td>
+<td><p>Exponential</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n!)\)</span></p></td>
+<td><p>Factorial</p></td>
+</tr>
+</tbody>
+</table>
+<p>Note that an algorithm can actually have fractional exponent scaling, for example <span class="math notranslate nohighlight">\(\mathcal{O}(n^{1.5})\)</span>, but this is rare.</p>
+</section>
+<section id="formal-definition-borrowed-from-the-wikipedia-article">
+<h3>Formal Definition (<a class="reference external" href="https://en.wikipedia.org/wiki/Big_O_notation">Borrowed from the Wikipedia Article</a>)<a class="headerlink" href="#formal-definition-borrowed-from-the-wikipedia-article" title="Permalink to this headline">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(f\)</span> be a real or complex valued function and <span class="math notranslate nohighlight">\(g\)</span> a real valued function, both defined on some unbounded subset of the real positive numbers, such that <span class="math notranslate nohighlight">\(g(x)\)</span> is strictly positive for all large enough values of <span class="math notranslate nohighlight">\(x\)</span>. One writes</p>
+<div class="math notranslate nohighlight">
+\[{\displaystyle f(x)=O(g(x))}\]</div>
+<p>if and only if for all sufficiently large values of <span class="math notranslate nohighlight">\(x\)</span>, the absolute value of <span class="math notranslate nohighlight">\(f(x)\)</span> is at most a positive constant multiple of <span class="math notranslate nohighlight">\(g(x)\)</span>. That is, <span class="math notranslate nohighlight">\(f(x) = O(g(x))\)</span> if and only if there exists a positive real number <span class="math notranslate nohighlight">\(M\)</span> and a real number <span class="math notranslate nohighlight">\(x_0\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[{\displaystyle |f(x)|\leq \;Mg(x){\text{ for all }}x\geq x_{0}.} \]</div>
+<p>Note that from this definition, we could technically say that for example</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(n) = n + 1\)</span> is <span class="math notranslate nohighlight">\(\mathcal{n^3}\)</span>.</p></li>
+</ul>
+<p>As this actually adheres to the definition. Similarly, we could add coefficients to <span class="math notranslate nohighlight">\(g\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(n) = 4n^2+4\)</span> is <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span>.</p></li>
+</ul>
+<p>However, it is not customary to do so. We basically want to choose a <span class="math notranslate nohighlight">\(g\)</span> that is as simple as possible, and therefore we purposefully select the single, fastest growing term, and avoid coefficients. This still adheres to the definition, because we chan choose an <span class="math notranslate nohighlight">\(M\)</span> freely.</p>
+</section>
+</section>
+<section id="returning-to-our-example">
+<h2>Returning to our example<a class="headerlink" href="#returning-to-our-example" title="Permalink to this headline">#</a></h2>
+<p>Looking back to our <code class="docutils literal notranslate"><span class="pre">find_biggest</span></code> algorithm, we found that it had a best-case of <span class="math notranslate nohighlight">\(3n\)</span> and a worst-case of <span class="math notranslate nohighlight">\(5n-2\)</span>. However, both of these are <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>, so we say that our algorithm is linear. Note that this is true for the worst-, average- and best case scenarios, it is true for all scenarios. And so by using big Oh, we do not have to be so specific about our input, it is generally true.</p>
+<p>Similarly, if we are only interested in the big Oh of our algorithm, then the analysis itself becomes <em>a lot</em> simpler to perform. Looking back at the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_biggest</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">biggest</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">biggest</span><span class="p">:</span>
+            <span class="n">biggest</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">biggest</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that we need to iterate through the list, so we will be performing some steps <span class="math notranslate nohighlight">\(n\)</span> times, but the steps inside the loop do not depend on the size of the list, so we know they will just lead to some coefficient in front of <span class="math notranslate nohighlight">\(n\)</span>, which will be thrown away again. So, as we loop over the whole input list once, we have <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span> operations. Easy and fast.</p>
+<p>We can in fact verify this by timing it for a few input sizes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">times</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Ns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">1_000_000</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">Ns</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="c1"># Start the time</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="c1"># Run the code</span>
+    <span class="n">find_biggest</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1"># Stop the time and append the timing to the list</span>
+    <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">Ns</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Timings&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">Ns</span><span class="p">,</span> <span class="mf">1.1</span> <span class="o">*</span> <span class="mf">1e-7</span> <span class="o">*</span> <span class="n">Ns</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;O(n)&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Size of input ($n$)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/algorithm_analysis_3_0.png" src="../../../_images/algorithm_analysis_3_0.png" />
+</div>
+</div>
+<p>Notice that we plot the timings as a function of the input size in a <code class="docutils literal notranslate"><span class="pre">loglog</span></code> plot. Also note that we also plot the function <span class="math notranslate nohighlight">\(1.1 \times 10^{-7} \times N\)</span> which is <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>. We see that the timings align very well with a function that is <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span> and therefore we can indeed conclude the the function is <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>.</p>
+<section id="another-example-triangle-numbers">
+<h3>Another example: Triangle Numbers<a class="headerlink" href="#another-example-triangle-numbers" title="Permalink to this headline">#</a></h3>
+<p>Let us say we define an algorithm for triangle numbers, i.e., the sum of the numbers</p>
+<div class="math notranslate nohighlight">
+\[1, 2, \ldots, n.\]</div>
+<p>An algorithm for finding these is simply to carry out the sum step by step:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">triangle</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+</div>
+<p>This function loops over <span class="math notranslate nohighlight">\(n\)</span> numbers, and carries out a constant number of steps for each number, meaning the cost of this algorithm will be <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>.</p>
+<p>For the case of triangle numbers however, this is an alternative algorithm we can use, which comes from the fact that there is an analytic expression for the <span class="math notranslate nohighlight">\(n\)</span>’th triangle number, namely: <span class="math notranslate nohighlight">\(n(n+1)/2\)</span>. So we could alternatively do:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">triangle</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>What is the cost of this algorithm? Well, we do one addition, one multiplication, and one division, regardless of what <span class="math notranslate nohighlight">\(n\)</span> is. So this algorithm is <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>. The fact that we found an analytic expression gave us a constant cost function, meaning it scales much better for large <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</section>
+<section id="another-example-matrix-matrix-multiplication">
+<h3>Another example: Matrix-Matrix Multiplication<a class="headerlink" href="#another-example-matrix-matrix-multiplication" title="Permalink to this headline">#</a></h3>
+<p>Say we want to write a function to multiply two <span class="math notranslate nohighlight">\(n\times n\)</span> matrices together. What will be the cost of such a function? Well, if we multiply two <span class="math notranslate nohighlight">\(n\times n\)</span> matrices, our resulting matrix will also be <span class="math notranslate nohighlight">\(n\times n\)</span>. The resulting matrix will thus have <span class="math notranslate nohighlight">\(n^2\)</span> elements we need to compute.</p>
+<p>To compute one element of the resulting matrix, we need to compute the dot product of the row of one matrix with the column of the other, as both have <span class="math notranslate nohighlight">\(n\)</span> elements, we carry out <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span> operations (some products, some summation) to compute one element of the final matrix.</p>
+<p>Thus, we compute <span class="math notranslate nohighlight">\(n^2\)</span> elements at a cost of <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span> each, which means the total cost of matrix-matrix multiplication is <span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span>. This means the cost of multiplying matrices grows very fast as the size of the matrices grow. If the matrices double in size, the cost increases by almost tenfold.</p>
+<p>Now, interestingly enough, the <span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span> cost we find for the “naive” matrix-matrix multiplication algorithm turns out to be sub-optimal. Several clever techniques have been found to optimize this multiplication and make it scale better. This is very important for linear algebra computations involving large matrices, of which many exist.</p>
+<figure class="align-default" id="matrix-mult">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Bound_on_matrix_multiplication_omega_over_time.svg/600px-Bound_on_matrix_multiplication_omega_over_time.svg.png"><img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Bound_on_matrix_multiplication_omega_over_time.svg/600px-Bound_on_matrix_multiplication_omega_over_time.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Bound_on_matrix_multiplication_omega_over_time.svg/600px-Bound_on_matrix_multiplication_omega_over_time.svg.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">This graph shows the best-scaling known algorithm for matrix-matrix multiplication over time. The current best scaling was published in 2014 by François Le Gall, and has a scaling of <span class="math notranslate nohighlight">\(\mathcal{O}(n^{2.3728642...})\)</span>.</span><a class="headerlink" href="#matrix-mult" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Looking at the graph and the improvements found over time, it is easy to start to wonder where it will end, and as of now, the theoretical optimal scaling of matrix-matrix multiplication is unknown. However, we do know that there is a theoretical limit of <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span>, simply due to the fact that two multiply the <span class="math notranslate nohighlight">\(n \times n\)</span> matrices together requires at least reading out the elements of those matrices, which in itself is <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span>. However, wether it is actually possible to make an algorithm that reaches <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span> is not known, no one has been able to prove, or disprove, that this limit is reachable.</p>
+</section>
+</section>
+<section id="looking-to-next-week">
+<h2>Looking to Next Week<a class="headerlink" href="#looking-to-next-week" title="Permalink to this headline">#</a></h2>
+<p>If this short introduction to big Oh confused you a bit, do not worry too much. In the next lecture we will start to analyze and compare the performance of our dynamic array and our linked list using big Oh. And hopefully, analyzing some concrete problems will make things a bit more understandable.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/cpp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="linked_lists.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Linked Lists</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="linkedlists_vs_dynamicarrays.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Comparing Linked Lists and Dynamic Arrays</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

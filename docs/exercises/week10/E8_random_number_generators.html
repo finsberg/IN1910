@@ -1,0 +1,1391 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Week10 &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Week 11" href="../week11/E9_random_walks_and_markov_process.html" />
+    <link rel="prev" title="An introduction to C++" href="../cpp_exercises.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../lectures/python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../lectures/python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../lectures/git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../lectures/summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/exercises/week10/E8_random_number_generators.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/exercises/week10/E8_random_number_generators.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/exercises/week10/E8_random_number_generators.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-number-generators">
+   Random Number Generators
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-linear-congrugential-generators">
+     Exercise 1) Linear Congrugential Generators
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-defining-the-class">
+       1a) Defining the class
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#b-adding-a-call-method">
+       1b) Adding a call method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#c-random-floats">
+       1c) Random floats
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#d-uniform">
+       1d) Uniform
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e-randint">
+       1e) Randint
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#f-normally-distributed-numbers">
+       1f) Normally Distributed Numbers
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2">
+     Exercise 2
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-implementing-randu">
+       2a) Implementing RANDU
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#b-checking-the-mean-of-the-generated-numbers">
+       2b) - Checking the mean of the generated numbers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#c-checking-the-sample-variance">
+       2c) Checking the sample variance
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#d-moments-of-the-pdf-only-for-those-who-have-taken-or-are-taking-stk1100">
+       2d) Moments of the pdf (Only for those who have taken or are taking STK1100)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-correlation-found-in-randu">
+     Plotting the correlation found in RANDU
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e-drawing-random-points">
+       2e) Drawing random points
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#f-a-three-dimensional-scatter-plot">
+       2f) A three dimensional scatter plot
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#g-a-proper-uniformly-unit-cube">
+       2g) A proper uniformly unit cube
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3-randomness-in-c">
+     Exercise 3) Randomness in C++
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise-3a-uniform-numbers">
+       Exercise 3a) Uniform numbers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise-3b-normally-distributed-numbers">
+       Exercise 3b) Normally distributed numbers
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4-the-birthday-problem">
+     Exercise 4) The Birthday Problem
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-drawing-a-random-birthday">
+       4a) Drawing a random birthday
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#b-drawing-n-random-birthdays">
+       4b) Drawing
+       <span class="math notranslate nohighlight">
+        \(n\)
+       </span>
+       random birthdays
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#c-checking-for-duplicates">
+       4c) Checking for duplicates
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#d-repeated-simulation">
+       4d) Repeated Simulation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e-edge-cases">
+       4e) Edge cases
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#drawing-out-the-full-curve">
+     Drawing out the full curve
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#f-drawing-the-curve">
+       4f) Drawing the Curve
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#g-plotting-the-curve">
+       4g) Plotting the curve
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#h-comparing-the-curves">
+       4h) Comparing the curves
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-exercises">
+     More exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Week10</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-number-generators">
+   Random Number Generators
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-linear-congrugential-generators">
+     Exercise 1) Linear Congrugential Generators
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-defining-the-class">
+       1a) Defining the class
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#b-adding-a-call-method">
+       1b) Adding a call method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#c-random-floats">
+       1c) Random floats
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#d-uniform">
+       1d) Uniform
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e-randint">
+       1e) Randint
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#f-normally-distributed-numbers">
+       1f) Normally Distributed Numbers
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2">
+     Exercise 2
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-implementing-randu">
+       2a) Implementing RANDU
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#b-checking-the-mean-of-the-generated-numbers">
+       2b) - Checking the mean of the generated numbers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#c-checking-the-sample-variance">
+       2c) Checking the sample variance
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#d-moments-of-the-pdf-only-for-those-who-have-taken-or-are-taking-stk1100">
+       2d) Moments of the pdf (Only for those who have taken or are taking STK1100)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-correlation-found-in-randu">
+     Plotting the correlation found in RANDU
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e-drawing-random-points">
+       2e) Drawing random points
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#f-a-three-dimensional-scatter-plot">
+       2f) A three dimensional scatter plot
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#g-a-proper-uniformly-unit-cube">
+       2g) A proper uniformly unit cube
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3-randomness-in-c">
+     Exercise 3) Randomness in C++
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise-3a-uniform-numbers">
+       Exercise 3a) Uniform numbers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise-3b-normally-distributed-numbers">
+       Exercise 3b) Normally distributed numbers
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4-the-birthday-problem">
+     Exercise 4) The Birthday Problem
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-drawing-a-random-birthday">
+       4a) Drawing a random birthday
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#b-drawing-n-random-birthdays">
+       4b) Drawing
+       <span class="math notranslate nohighlight">
+        \(n\)
+       </span>
+       random birthdays
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#c-checking-for-duplicates">
+       4c) Checking for duplicates
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#d-repeated-simulation">
+       4d) Repeated Simulation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e-edge-cases">
+       4e) Edge cases
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#drawing-out-the-full-curve">
+     Drawing out the full curve
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#f-drawing-the-curve">
+       4f) Drawing the Curve
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#g-plotting-the-curve">
+       4g) Plotting the curve
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#h-comparing-the-curves">
+       4h) Comparing the curves
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-exercises">
+     More exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="week10">
+<h1>Week10<a class="headerlink" href="#week10" title="Permalink to this headline">#</a></h1>
+<section id="random-number-generators">
+<h2>Random Number Generators<a class="headerlink" href="#random-number-generators" title="Permalink to this headline">#</a></h2>
+<section id="exercise-1-linear-congrugential-generators">
+<h3>Exercise 1) Linear Congrugential Generators<a class="headerlink" href="#exercise-1-linear-congrugential-generators" title="Permalink to this headline">#</a></h3>
+<p>In the lecture notes of L17, we showed several examples of LCGs. You will now be tasked with creating a more general framework for creating and using LCGs in an object-oriented manner.</p>
+<p>Recall that an LCG generates a new pseudorandom number according to the formula</p>
+<div class="math notranslate nohighlight">
+\[ X_{n+1} = a\cdot X_n + c \mod m.\]</div>
+<section id="a-defining-the-class">
+<h4>1a) Defining the class<a class="headerlink" href="#a-defining-the-class" title="Permalink to this headline">#</a></h4>
+<p>(In Python) Define a class <code class="docutils literal notranslate"><span class="pre">LinearCongrugentialGenerator</span></code>. The class should have a constructor that takes the <em>seed</em> as input, and sets the state of the pRNG to be this seed.</p>
+<p>The constructor should also take the parameters <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(m\)</span> as keyword arguments and store these in the class. As the default values, choose one of the LCG commonly used parameters found in this <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_congruential_generator#Parameters_in_common_use">table</a> on wikipedia. You can for example choose the one used by glibc, i.e., the gcc compiler.</p>
+</section>
+<section id="b-adding-a-call-method">
+<h4>1b) Adding a call method<a class="headerlink" href="#b-adding-a-call-method" title="Permalink to this headline">#</a></h4>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">__call__</span></code> special method that advances the state of the pRNG by one number, and returns this new number.</p>
+<p>Test your method by implementing an instance of your pRNG and producing ten numbers.</p>
+</section>
+<section id="c-random-floats">
+<h4>1c) Random floats<a class="headerlink" href="#c-random-floats" title="Permalink to this headline">#</a></h4>
+<p>Add a new method called <code class="docutils literal notranslate"><span class="pre">rand()</span></code> that should be called with no input. The function should return a random floating point number on the interval <span class="math notranslate nohighlight">\([0, 1)\)</span>.</p>
+<p>Hint: To do this, the method should call on the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> special method to advance the state and produce a random integer. This integer then needs to be scaled to a proper float by dividing it by some value.</p>
+</section>
+<section id="d-uniform">
+<h4>1d) Uniform<a class="headerlink" href="#d-uniform" title="Permalink to this headline">#</a></h4>
+<p>Add a new method called <code class="docutils literal notranslate"><span class="pre">uniform(a,</span> <span class="pre">b)</span></code> that takes two numbers in: <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> and returns a uniformly distributed floating point number on the interval <span class="math notranslate nohighlight">\([a, b)\)</span>.</p>
+<p>Hint, you can first call <code class="docutils literal notranslate"><span class="pre">rand()</span></code> to get a number on the range <span class="math notranslate nohighlight">\([0, 1)\)</span>, and then scale this number by multiplying and shifting it.</p>
+</section>
+<section id="e-randint">
+<h4>1e) Randint<a class="headerlink" href="#e-randint" title="Permalink to this headline">#</a></h4>
+<p>Now add a method called <code class="docutils literal notranslate"><span class="pre">randint(a,</span> <span class="pre">b)</span></code> (short for random integer). That should return a uniformly distributed integer on the interval <span class="math notranslate nohighlight">\([a, b]\)</span>.</p>
+<p>Test your function by throwing 1000 dice, and computing the average result, which should be close to 3.5.</p>
+</section>
+<section id="f-normally-distributed-numbers">
+<h4>1f) Normally Distributed Numbers<a class="headerlink" href="#f-normally-distributed-numbers" title="Permalink to this headline">#</a></h4>
+<p>Now add a method <code class="docutils literal notranslate"><span class="pre">normal()</span></code> that should return a normally distributed number with standard deviation 1 and a mean of 0.</p>
+<p>To compute a normally distributed number, use the Box-Muller metho, as described in the lecture notes. To do this, you need two uniformly distributed numbers on the interval <span class="math notranslate nohighlight">\([0, 1)\)</span>: <span class="math notranslate nohighlight">\(U_1\)</span> and <span class="math notranslate nohighlight">\(U_2\)</span>. Then you can compute the two independent normally distributed numbers based on the formulas:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+Z_1 = \sqrt{-2 \ln U_1}\cos (2\pi U_2), \\
+Z_2 = \sqrt{-2 \ln U_1}\sin (2\pi U_2).
+\end{align}\end{split}\]</div>
+<p>Note that to compute and return <em>one</em> normally distributed number, you can simply draw two numbers with <code class="docutils literal notranslate"><span class="pre">rand()</span></code>, and compute <span class="math notranslate nohighlight">\(Z_1\)</span>, and ignore <span class="math notranslate nohighlight">\(Z_2\)</span>.</p>
+<p>However, slightly more efficient, is to compute both values, and then use the other number the next time <code class="docutils literal notranslate"><span class="pre">normal()</span></code> is called.  See if you can find a nice way to do this, and if not, simply implement the simpler solution of only computing <span class="math notranslate nohighlight">\(Z_1\)</span>.</p>
+</section>
+</section>
+<section id="exercise-2">
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">#</a></h3>
+<section id="a-implementing-randu">
+<h4>2a) Implementing RANDU<a class="headerlink" href="#a-implementing-randu" title="Permalink to this headline">#</a></h4>
+<p>Use your <code class="docutils literal notranslate"><span class="pre">LinearCongrugentialGenerator</span></code> class to implement a RANDU pRNG. RANDU is a LCG with <span class="math notranslate nohighlight">\(a = 65539\)</span>, <span class="math notranslate nohighlight">\(c=0\)</span> and <span class="math notranslate nohighlight">\(m=2^{31}.\)</span>$</p>
+</section>
+<section id="b-checking-the-mean-of-the-generated-numbers">
+<h4>2b) - Checking the mean of the generated numbers<a class="headerlink" href="#b-checking-the-mean-of-the-generated-numbers" title="Permalink to this headline">#</a></h4>
+<p>As we have discussed in the lectures. For a pRNG to produce numbers that “look” random, they have to reproduce certain statistical properties. One of these is the <em>mean</em>. If we are drawing numbers on the interval <span class="math notranslate nohighlight">\([0, 1)\)</span>, then the average over a large number of random numbers, i.e., the <em>sample mean</em>, should tend to exactly 0.5.</p>
+<p>Generate <span class="math notranslate nohighlight">\(n=10^6\)</span> samples from your RANDU class and find the sample mean. Does RANDU reproduce the expected mean?</p>
+</section>
+<section id="c-checking-the-sample-variance">
+<h4>2c) Checking the sample variance<a class="headerlink" href="#c-checking-the-sample-variance" title="Permalink to this headline">#</a></h4>
+<p>The random numbers should, in addition to respecting the mean, reproduce the variance of the distribution. For random numbers drawn from a uniform distribution between 0 and 1, this variance should be <span class="math notranslate nohighlight">\(1/12\)</span>.</p>
+<p>Using your <span class="math notranslate nohighlight">\(n=10^6\)</span> generated samples, check that the sample variance is reasonable.</p>
+</section>
+<section id="d-moments-of-the-pdf-only-for-those-who-have-taken-or-are-taking-stk1100">
+<h4>2d) Moments of the pdf (Only for those who have taken or are taking STK1100)<a class="headerlink" href="#d-moments-of-the-pdf-only-for-those-who-have-taken-or-are-taking-stk1100" title="Permalink to this headline">#</a></h4>
+<p>We are attempting to draw random numbers from the probability density function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x) = \begin{cases}
+1 &amp; \mbox{ if } 0 \leq x &lt; 1, \\
+0 &amp; \mbox{else}.
+\end{cases}\end{split}\]</div>
+<p>For any pdf, the <em>moments</em> of the sample are defined as:
+$<span class="math notranslate nohighlight">\(E(x^k) = \int_{-\infty}^\infty x^k \cdot f(x) \ {\rm d}x.\)</span>$</p>
+<p>Show that for our given pdf, that the <span class="math notranslate nohighlight">\(k\)</span>-th moment can be written as
+$<span class="math notranslate nohighlight">\(E(X^k) = \frac{1}{k+1}.\)</span>$</p>
+<p>From this, use that fact that the variance can be written as
+$<span class="math notranslate nohighlight">\({\rm Var}(X) = E(X^2) - E(X)^2,\)</span>$
+to show that the variance of the pdf is 1/12.</p>
+</section>
+</section>
+<section id="plotting-the-correlation-found-in-randu">
+<h3>Plotting the correlation found in RANDU<a class="headerlink" href="#plotting-the-correlation-found-in-randu" title="Permalink to this headline">#</a></h3>
+<p>We have seen that RANDU reproduces the mean and the variance of its distribution, which is good. However, there are other statistical properties it also needs to follow. One of these is that different samples from the distribution, i.e., different generated numbers, should be <em>uncorrelated</em>. It turns out that RANDU breaks this requirement, horribly. This is very briefly shown in L17.</p>
+<p>A common way to show how bad RANDU actually is, is to plot random points within a three dimensional unit cube. A unit cube is a cube with sides that goes from 0 to 1 in all three dimensions. We can place a randomly located point inside the cube by drawing three random numbers in the <span class="math notranslate nohighlight">\([0, 1)\)</span> range, one for each of the three coordinates <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>. If all three coordinates are chosen randomly <em>and</em> independent of each other, the random point will have an equal likelihood of landing anywhere within the cube. For RANDU however, if we plot this out, we see that these “random” points aren’t distributed uniformly throughout the cube at all, but rather all land in specific planes. Let us produce such a plot.</p>
+<section id="e-drawing-random-points">
+<h4>2e) Drawing random points<a class="headerlink" href="#e-drawing-random-points" title="Permalink to this headline">#</a></h4>
+<p>Use your RANDU-generator to generate <span class="math notranslate nohighlight">\(n=1000\)</span> such points. Note that for this to work you need to draw the three coordinates for each point consecutively, you cannot first draw all the x-positions, then all the y-positions for example.</p>
+</section>
+<section id="f-a-three-dimensional-scatter-plot">
+<h4>2f) A three dimensional scatter plot<a class="headerlink" href="#f-a-three-dimensional-scatter-plot" title="Permalink to this headline">#</a></h4>
+<p>Now, plot your <span class="math notranslate nohighlight">\(n=1000\)</span> points in a 3D scatter plot. If you do not know how to draw a 3D scatter plot. Take a look at this <a class="reference external" href="https://matplotlib.org/2.1.1/gallery/mplot3d/scatter3d.html">matplotlib example script</a>.</p>
+<p>Once you have your scatter plot, the points might <em>look</em> uniformly distributed. To properly see that they lie in planes, we need to look at it from the right angle. If you are plotting outside Jupyter, the plot window should be interactive and so you can simply drag the view around untill you find a good angle. If you are plotting inside Jupyter you can use <code class="docutils literal notranslate"><span class="pre">ax.view_init(elevation,</span> <span class="pre">method)</span></code> before you show the plot. For example <code class="docutils literal notranslate"><span class="pre">view_init(30,</span> <span class="pre">60)</span></code> should be a good angle. At least for me.</p>
+<p>Increase the number of points to <span class="math notranslate nohighlight">\(n=10000\)</span> to really make the planes apparent.</p>
+</section>
+<section id="g-a-proper-uniformly-unit-cube">
+<h4>2g) A proper uniformly unit cube<a class="headerlink" href="#g-a-proper-uniformly-unit-cube" title="Permalink to this headline">#</a></h4>
+<p>Repeat the plot, but this time replace your RANDU generater with <code class="docutils literal notranslate"><span class="pre">numpy.random.rand()</span></code> which produces floats in the range <span class="math notranslate nohighlight">\([0, 1)\)</span> based on the Mersenne Twister algorithm. Verify that no planes are visible in the cube in this case.</p>
+</section>
+</section>
+<section id="exercise-3-randomness-in-c">
+<h3>Exercise 3) Randomness in C++<a class="headerlink" href="#exercise-3-randomness-in-c" title="Permalink to this headline">#</a></h3>
+<p>Before you do this exercise, be sure to read about generating random numbers in C++ in the lecture notes, or watch this video:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://channel9.msdn.com/Events/GoingNative/2013/rand-Considered-Harmful">https://channel9.msdn.com/Events/GoingNative/2013/rand-Considered-Harmful</a></p></li>
+</ul>
+<p>For this exercise, the C++ reference is a good resource.</p>
+<section id="exercise-3a-uniform-numbers">
+<h4>Exercise 3a) Uniform numbers<a class="headerlink" href="#exercise-3a-uniform-numbers" title="Permalink to this headline">#</a></h4>
+<p>Create a C++ script that uses the Mersenne Twister algorithm to produce 10 uniformly distributed numbers in the range 0 and 1</p>
+</section>
+<section id="exercise-3b-normally-distributed-numbers">
+<h4>Exercise 3b) Normally distributed numbers<a class="headerlink" href="#exercise-3b-normally-distributed-numbers" title="Permalink to this headline">#</a></h4>
+<p>Use a different distribution to produce normally distributed numbers.</p>
+</section>
+</section>
+<section id="exercise-4-the-birthday-problem">
+<h3>Exercise 4) The Birthday Problem<a class="headerlink" href="#exercise-4-the-birthday-problem" title="Permalink to this headline">#</a></h3>
+<p>The Birthday Problem concerns the probabilty that two or more people share a birthday in a room with <span class="math notranslate nohighlight">\(n\)</span> people. This is also a good test of an RNG, because an RNG of truley uncorrelated numbers should produce duplicates with a given frequency.</p>
+<section id="a-drawing-a-random-birthday">
+<h4>4a) Drawing a random birthday<a class="headerlink" href="#a-drawing-a-random-birthday" title="Permalink to this headline">#</a></h4>
+<p>Use <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.random.randint.html"><code class="docutils literal notranslate"><span class="pre">numpy.random.randint</span></code></a> (click for the offical reference) to draw a birthday as a random integer in the range <span class="math notranslate nohighlight">\([1, 366]\)</span>. We have 366 possibilities because we include leap years.</p>
+</section>
+<section id="b-drawing-n-random-birthdays">
+<h4>4b) Drawing <span class="math notranslate nohighlight">\(n\)</span> random birthdays<a class="headerlink" href="#b-drawing-n-random-birthdays" title="Permalink to this headline">#</a></h4>
+<p>Now use the <code class="docutils literal notranslate"><span class="pre">size</span></code> keyword to draw a whole set of random birthdays, to simulate the birthdays of <span class="math notranslate nohighlight">\(n\)</span> randomly people located in the same room. As an example, let’s say we are <span class="math notranslate nohighlight">\(n=20\)</span> people in the same room.</p>
+</section>
+<section id="c-checking-for-duplicates">
+<h4>4c) Checking for duplicates<a class="headerlink" href="#c-checking-for-duplicates" title="Permalink to this headline">#</a></h4>
+<p>If the array we get from randint contains any <em>duplicate</em> values. Write a function for checking if any duplicates are contained in the array.</p>
+<p>Hint: There are many ways to check for duplicates. You can for example do <code class="docutils literal notranslate"><span class="pre">len(np.unique(birthdays)</span></code> to check how many <em>unique</em> birthdays there are. Or you can use the fact that a Python <em>set</em> cannot contain any duplicates, and so on. Give it a go on your own, and if you cannot figure it out, google is sure to be helpful :)</p>
+</section>
+<section id="d-repeated-simulation">
+<h4>4d) Repeated Simulation<a class="headerlink" href="#d-repeated-simulation" title="Permalink to this headline">#</a></h4>
+<p>Now use a loop to repeat the experiment of drawing <span class="math notranslate nohighlight">\(n=23\)</span> birthdays and checking wether there is a duplicate 1000 times. Count the number of times there is a duplicate, and the number of times there is not.</p>
+<p>The probabilty should be close to 50/50 for 23 people, if the RNG returns the expected number of duplicates. Did you get a value close to 50/50?</p>
+</section>
+<section id="e-edge-cases">
+<h4>4e) Edge cases<a class="headerlink" href="#e-edge-cases" title="Permalink to this headline">#</a></h4>
+<p>For <span class="math notranslate nohighlight">\(n=1\)</span>, the probability of a duplicate is “obivously” 0. And for <span class="math notranslate nohighlight">\(n=366\)</span> it is “obviously” 1. Why is this?</p>
+</section>
+</section>
+<section id="drawing-out-the-full-curve">
+<h3>Drawing out the full curve<a class="headerlink" href="#drawing-out-the-full-curve" title="Permalink to this headline">#</a></h3>
+<p>The probability of a duplicate birthday can be found analytically, and produces the curve shown in this Figure:
+<img src=
+https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Birthday_Paradox.svg/1200px-Birthday_Paradox.svg.png width=400></p>
+<p>Let’s try to produce a similar function ourselves.</p>
+<section id="f-drawing-the-curve">
+<h4>4f) Drawing the Curve<a class="headerlink" href="#f-drawing-the-curve" title="Permalink to this headline">#</a></h4>
+<p>Generalize your answer to 4D so that it instead finds the probability of <span class="math notranslate nohighlight">\(n\)</span> people having a shared birthday.</p>
+</section>
+<section id="g-plotting-the-curve">
+<h4>4g) Plotting the curve<a class="headerlink" href="#g-plotting-the-curve" title="Permalink to this headline">#</a></h4>
+<p>For <span class="math notranslate nohighlight">\(n\)</span> in the range <span class="math notranslate nohighlight">\([0, 100]\)</span>, simulate 1000 cases and count the number of shared birthdays for each case. Divide by the number of simulations, <span class="math notranslate nohighlight">\(1000\)</span>, to find the probability of a shared birthday for each <span class="math notranslate nohighlight">\(n\)</span></p>
+<p>If you have managed to find the probability for each <span class="math notranslate nohighlight">\(n\)</span>, use <code class="docutils literal notranslate"><span class="pre">plt.step</span></code> to plot it. The function <code class="docutils literal notranslate"><span class="pre">plt.step</span></code> works just like <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code>, but plots the data as a discontinous stepwise function, just like in the analytical function above.</p>
+</section>
+<section id="h-comparing-the-curves">
+<h4>4h) Comparing the curves<a class="headerlink" href="#h-comparing-the-curves" title="Permalink to this headline">#</a></h4>
+<p>Does your program look like the analytical function? Should it?</p>
+</section>
+</section>
+<section id="more-exercises">
+<h3>More exercises<a class="headerlink" href="#more-exercises" title="Permalink to this headline">#</a></h3>
+<p>For more exercises, turn to Langtangen Chapter 8. We suggest the following:</p>
+<ul class="simple">
+<li><p>Exercise 8.8</p></li>
+<li><p>Exercise 8.9</p></li>
+<li><p>Exercise 8.19</p></li>
+<li><p>Exercise 8.21</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/exercises/week10"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../cpp_exercises.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">An introduction to C++</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../week11/E9_random_walks_and_markov_process.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 11</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1730 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Random Walks &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Solving the 1D Diffusion Equation using Finite Differences" href="solving_the_1D_diffusion_equation.html" />
+    <link rel="prev" title="Using Random Numbers" href="using_random_numbers.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/stochastic_processes/random_walks_and_markov_processes.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/stochastic_processes/random_walks_and_markov_processes.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/stochastic_processes/random_walks_and_markov_processes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/stochastic_processes/random_walks_and_markov_processes.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Random Walks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-1d-random-walker">
+     The 1D Random Walker
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vectorized-random-walk">
+     Vectorized Random Walk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#many-walkers">
+     Many Walkers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#very-many-walkers">
+     Very Many Walkers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analyzing-the-average-behavior-of-a-walker">
+     Analyzing the average behavior of a walker
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-displacement">
+       Average Displacement
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#averaged-square-displacement">
+       Averaged Square Displacement
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#root-mean-square-displacement">
+       Root Mean Square Displacement
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-rms">
+     Plotting the RMS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flipping-coins-and-the-law-of-large-numbers">
+     Flipping Coins and the Law of Large Numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-random-walk">
+     2D Random Walk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-several-walkers">
+     Plotting several walkers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analyzing-the-mean-displacement">
+     Analyzing the Mean Displacement
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-random-walkers-are-so-interesting">
+   Why Random Walkers are so interesting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuous">
+   continuous
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-the-diffusion-equation">
+     Solving the Diffusion Equation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Random Walks</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Random Walks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-1d-random-walker">
+     The 1D Random Walker
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vectorized-random-walk">
+     Vectorized Random Walk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#many-walkers">
+     Many Walkers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#very-many-walkers">
+     Very Many Walkers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analyzing-the-average-behavior-of-a-walker">
+     Analyzing the average behavior of a walker
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-displacement">
+       Average Displacement
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#averaged-square-displacement">
+       Averaged Square Displacement
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#root-mean-square-displacement">
+       Root Mean Square Displacement
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-rms">
+     Plotting the RMS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flipping-coins-and-the-law-of-large-numbers">
+     Flipping Coins and the Law of Large Numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-random-walk">
+     2D Random Walk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-several-walkers">
+     Plotting several walkers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analyzing-the-mean-displacement">
+     Analyzing the Mean Displacement
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-random-walkers-are-so-interesting">
+   Why Random Walkers are so interesting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuous">
+   continuous
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-the-diffusion-equation">
+     Solving the Diffusion Equation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="random-walks">
+<h1>Random Walks<a class="headerlink" href="#random-walks" title="Permalink to this headline">#</a></h1>
+<p>This week we will discuss a new topic, <em>random walks</em>. Random walks are an example of a markov process, and we will also learn what this means, and how we can analyze the behavior of the random walker using a markov chain.</p>
+<p>The exercises this week are slightly more extensive then other weeks, and is more of a project based work than earlier exercise sets as well. This is because the plan is to cover some of these exercises in L20, i.e., the lecture on Friday November 8th. It it therefore recommended that you work on the exercises before Thursday. If you cannot attend the lecture on Friday, it is strongly recommended to take a good look at the example solutions, which I will upload during Friday’s lecture.</p>
+<section id="id1">
+<h2>Random Walks<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>A random walk is a process where we follow some object taking <em>random steps</em>. The path the object walks then defines a random path, or trajectory. Random walks are powerful mathematical objects with a large number of use cases, but we will return to this point later, for now let us look at some actual random walks.</p>
+<section id="the-1d-random-walker">
+<h3>The 1D Random Walker<a class="headerlink" href="#the-1d-random-walker" title="Permalink to this headline">#</a></h3>
+<p>A random walk can refer to many different processes, but let us start of with perhaps the simplest of them all, a 1D random walk on a regular grid. Assume some walker starts of at <span class="math notranslate nohighlight">\(x=0\)</span>. Now it takes steps to the left or right at random, with equal probability.</p>
+<figure class="align-default" id="d-walk">
+<a class="reference internal image-reference" href="../../../_images/1D_walk.png"><img alt="1D_walk" src="../../../_images/1D_walk.png" style="width: 600px;" /></a>
+</figure>
+<p>We denote the position of the walker after <span class="math notranslate nohighlight">\(N\)</span> steps by <span class="math notranslate nohighlight">\(X_N\)</span>. Because the walker is taking random steps, <span class="math notranslate nohighlight">\(X_N\)</span> is what we call a <em>random</em> or <em>stochastic variable</em>, it won’t have a specific value in general, but be different for each specific random walk, depending on what steps are actually taken.</p>
+<p>For each step the walker takes, we move either 1 step to the left, or 1 step to the right. Thus</p>
+<div class="math notranslate nohighlight">
+\[X_{N+1} = X_{N} + K_N,\]</div>
+<p>where <span class="math notranslate nohighlight">\(K_N\)</span> is the <span class="math notranslate nohighlight">\(N\)</span>’th step taken. We assume that all steps are independent of all others, and that each step has an equal chance of being to the left or to the right, so
+$<span class="math notranslate nohighlight">\(K_N = \begin{cases}
+1 &amp; \mbox{with 50} \% \mbox{ chance} \\
+-1 &amp; \mbox{with 50}\% \mbox{ chance}
+\end{cases}\)</span>$</p>
+<p>Let us look at how a random walk looks. To draw the step <span class="math notranslate nohighlight">\(K_N\)</span> using numpy, we use <code class="docutils literal notranslate"><span class="pre">np.random.randint(2)</span></code>, but this gives us 0 or 1, so we instead use <code class="docutils literal notranslate"><span class="pre">2*np.random.randint(2)</span> <span class="pre">-</span> <span class="pre">1</span></code>, which will then give us -1 or 1 with equal probability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+
+<span class="n">nr_steps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_steps</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nr of steps taken&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$X_N$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_1_0.png" src="../../../_images/random_walks_and_markov_processes_1_0.png" />
+</div>
+</div>
+<p>Simply using <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> here can be a bit misleading, so we can alternatively change the plot style, or we can change to use the <code class="docutils literal notranslate"><span class="pre">plt.step</span></code> function instead:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">X</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nr of steps taken&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$X_N$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_3_0.png" src="../../../_images/random_walks_and_markov_processes_3_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_steps</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">X</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nr of steps taken&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_4_0.png" src="../../../_images/random_walks_and_markov_processes_4_0.png" />
+</div>
+</div>
+</section>
+<section id="vectorized-random-walk">
+<h3>Vectorized Random Walk<a class="headerlink" href="#vectorized-random-walk" title="Permalink to this headline">#</a></h3>
+<p>As we saw last week, if we want to repeatedly draw and use random numbers, <code class="docutils literal notranslate"><span class="pre">np.random</span></code> can be used in a vectorized way to be more efficient. Let us see how we can do this for a random walk.</p>
+<p>Drawing the steps themselves is straight forward:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">nr_steps</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But now we need to combine these steps into the variable <span class="math notranslate nohighlight">\(X_N\)</span>. Now, if we only want to know the final displacement after all the steps, then we could simply do the sum
+$<span class="math notranslate nohighlight">\(X_{1000} = \sum_{i=1}^{1000} K_i.\)</span><span class="math notranslate nohighlight">\(
+However, if we want to plot out the full trajectory of the walk, then we need to compute all the partial sums as well, i.e., find \)</span>X_N<span class="math notranslate nohighlight">\( for \)</span>N=1, 2, 3, \ldots 1000.$</p>
+<p>We can do this with the function <code class="docutils literal notranslate"><span class="pre">np.cumsum</span></code>, which stands for <em>cumulative sum</em>. Taking the cumulative sum of a sequence gives a new sequence where element <span class="math notranslate nohighlight">\(n\)</span> of the new sequence is the sum of the first <span class="math notranslate nohighlight">\(n\)</span> elements of the input. Thus, the cumulative sum of <span class="math notranslate nohighlight">\(K_N\)</span> will give <span class="math notranslate nohighlight">\(X_N\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nr_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we could have simply said <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">np.cumsum(steps)</span></code>, but in that case, <span class="math notranslate nohighlight">\(X_0\)</span> wouldn’t be 0, it would be -1 or 1. That’s not a big deal, but we take the extra step of defining <span class="math notranslate nohighlight">\(X_0 = 0\)</span>, and then finding the rest of <span class="math notranslate nohighlight">\(X_N\)</span> for <span class="math notranslate nohighlight">\(N &gt; 100\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">X</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nr of steps taken&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_10_0.png" src="../../../_images/random_walks_and_markov_processes_10_0.png" />
+</div>
+</div>
+</section>
+<section id="many-walkers">
+<h3>Many Walkers<a class="headerlink" href="#many-walkers" title="Permalink to this headline">#</a></h3>
+<p>Because the walker is completely random, understanding how it behaves from looking at a single walker isn’t that useful. Instead, we can look at a large <em>ensemble</em> of walkers, and then perhaps we can gleam some insight into how they behave.</p>
+<p>We can also use the vectorization of <code class="docutils literal notranslate"><span class="pre">np.random</span></code> to draw the walks of many different walkers in a vectorized manner:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr_steps</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">walkers</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nr_steps</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nr of Steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_12_0.png" src="../../../_images/random_walks_and_markov_processes_12_0.png" />
+</div>
+</div>
+<p>Or with many more steps:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr_steps</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">walkers</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nr_steps</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nr of Steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_14_0.png" src="../../../_images/random_walks_and_markov_processes_14_0.png" />
+</div>
+</div>
+</section>
+<section id="very-many-walkers">
+<h3>Very Many Walkers<a class="headerlink" href="#very-many-walkers" title="Permalink to this headline">#</a></h3>
+<p>We have now seen how we can plot 5 walkers. But if we really want to understand the average behavior, we might want to plot a lot more walkers. With our code, this works just fine, but the output won’t tell us to much, because it will become too chaotic:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">walkers</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nr_steps</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nr of Steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_16_0.png" src="../../../_images/random_walks_and_markov_processes_16_0.png" />
+</div>
+</div>
+<p>This plot shows a thousand random walks overlaying each other, but we cannot really see what is going on, because the different lines simply overlap and hide each other.</p>
+<p>To fix this, instead of plotting all the walks over each other, we plot the <em>density</em> of walkers. We can accomplish this by using the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> keyword to <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code>. This keyword is used to make a line semi-transparent . Here, <code class="docutils literal notranslate"><span class="pre">alpha=1</span></code> is the default, non-transparent line, <code class="docutils literal notranslate"><span class="pre">alpha=0</span></code> is a completely transparent, and thus invisible, line. If we then set for example <code class="docutils literal notranslate"><span class="pre">alpha=0.1</span></code>, we get 10% transparent lines.</p>
+<p>With semi-transparent lines, anywhere many lines overlap will give a strong color, if there are fewer lines, we get a weaker color. To emphasize this, let us also only plot black lines, and ignore colors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">walkers</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nr_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nr_steps</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nr of Steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_18_0.png" src="../../../_images/random_walks_and_markov_processes_18_0.png" />
+</div>
+</div>
+<p>At the beginning, all the walkers are close to the origin, as they simply have not had time to get further away. As time progresses towards the right, the walkers spread out. The highest density of walkers is still found in the middle however, as the net sum of steps will tend towards a mean of 0.</p>
+</section>
+<section id="analyzing-the-average-behavior-of-a-walker">
+<h3>Analyzing the average behavior of a walker<a class="headerlink" href="#analyzing-the-average-behavior-of-a-walker" title="Permalink to this headline">#</a></h3>
+<p>Because the random walk is a random process, predicting how a single walker will move is impossible. However, if we instead look at a lot of walkers, we can analyze their <em>average</em> activity. Because of the law of large numbers, we know that the average behavior for a large number of walkers will converge to a specific behavior.</p>
+<p>Compare for example the first plot of a single walker. If you rerun this code, you will get a dramatically different behavior, because one specific walk looks very different from one specific different walk. For the last Figure we made however, rerunning the code won’t change much, because the average behavior of 1000 walkers will tend to be the same.</p>
+<p>One way to explore the average behavior is of course to do simulation, and then simply taking the sample average. For more complex random walk behaviors, this is the only option. Our random walk however, is quite simple, and so we can also analyze it mathematically. Let us do this.</p>
+<section id="average-displacement">
+<h4>Average Displacement<a class="headerlink" href="#average-displacement" title="Permalink to this headline">#</a></h4>
+<p>First we want to know the average displacement of a large number of walkers? For a single walker, the position of the walker after <span class="math notranslate nohighlight">\(N\)</span> steps was given by
+$<span class="math notranslate nohighlight">\(X_N = X_0 + \sum_{i=1}^N K_i.\)</span><span class="math notranslate nohighlight">\(
+or alternatively:
+\)</span><span class="math notranslate nohighlight">\(X_{N+1} = X_{N} + K_N.\)</span>$</p>
+<p>Now, we want to compute the <em>average</em> of this variable, which we will denote <span class="math notranslate nohighlight">\(\langle X_N \rangle\)</span>, another word for this value is the <em>expected value</em> or <em>expectation</em>. If you have not heard these terms before, simply think of the value as the average of a large number of walkers.</p>
+<p>Taking the average of the <span class="math notranslate nohighlight">\(X_N\)</span> gives:</p>
+<div class="math notranslate nohighlight">
+\[\langle X_{N+1} \rangle = \langle X_N + K_N \rangle.\]</div>
+<p>However, taking an average is a linear operation, and so we can split the right hand side into</p>
+<div class="math notranslate nohighlight">
+\[\langle X_{N+1} \rangle = \langle X_N \rangle + \langle K_N \rangle.\]</div>
+<p>Now, we don’t know <span class="math notranslate nohighlight">\(\langle X_{N} \rangle,\)</span> because this is what we are actually trying to find. However, <span class="math notranslate nohighlight">\(\langle K_N \rangle\)</span>, we know, because it is simply the average of the two outcomes:
+$<span class="math notranslate nohighlight">\(\langle K_N \rangle = \frac{1}{2}\cdot1 +  \frac{1}{2}\cdot (-1) = \frac{1}{2} - \frac{1}{2} = 0.\)</span>$</p>
+<p>Because there is an equal chance of taking a step to the left and the right, the <em>average</em> displacement for a single step will be 0. Inserting this gives</p>
+<div class="math notranslate nohighlight">
+\[\langle X_{N+1} \rangle = \langle X_{N} \rangle.\]</div>
+<p>If the walkers start in <span class="math notranslate nohighlight">\(X_0 = 0\)</span>, then <span class="math notranslate nohighlight">\(\langle X_0 \rangle =0\)</span>, which in turn implies <span class="math notranslate nohighlight">\(\langle X_1 = 0\)</span>, and then <span class="math notranslate nohighlight">\(\langle X_2 \rangle = 0\)</span> and so on. Giving</p>
+<div class="math notranslate nohighlight">
+\[\langle X_{N}\rangle = 0.\]</div>
+<p>This expression tells us that the average displacement of a large number of walkers will be 0, no matter how many steps they take. Is this not surprising? We have seen that the more steps the walkers take, the longer away from the origin they will tend to move, so why is the average 0?</p>
+<p>The average is 0 because we are looking at a completely <em>uniform</em> and symmetric walker. The walkers have an equal chance of moving left, or right, from the origin, and the average will therefore tend to be 0, even if the walkers move away from the origin.</p>
+</section>
+<section id="averaged-square-displacement">
+<h4>Averaged Square Displacement<a class="headerlink" href="#averaged-square-displacement" title="Permalink to this headline">#</a></h4>
+<p>The average displacement became 0 because the problem is completely symmetric. However, if we now instead look at the squared displacement <span class="math notranslate nohighlight">\(X_N^2\)</span>, we get a better feel for how far away from the origin things move, because the square is positive regardless of wether the walker moves away in the positive or negative direction.</p>
+<p>We can write out an expression for <span class="math notranslate nohighlight">\(X_{N+1}^2\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[X_{N+1}^2 = (X_{N} + K_N)^2 = X_{N}^2 + 2X_N \cdot K_N + K_N^2.\]</div>
+<p>Again we care about the average, so we take the average of this expression:</p>
+<div class="math notranslate nohighlight">
+\[\langle X_{N+1}^2 \rangle = \langle X_{N}^2 \rangle + 2\langle X_N \cdot K_N \rangle + \langle K_N^2 \rangle.\]</div>
+<p>Now, the term <span class="math notranslate nohighlight">\(\langle X_N \cdot K_N \rangle\)</span> will again be zero, because <span class="math notranslate nohighlight">\(K_N\)</span> is independent of <span class="math notranslate nohighlight">\(X_N\)</span> and has an equal chance of being positive and negative. So we get
+$<span class="math notranslate nohighlight">\(\langle X_{N+1}^2 \rangle = \langle X_N^2 \rangle + \langle K_N^2 \rangle.\)</span><span class="math notranslate nohighlight">\(
+Let us compute \)</span>\langle K_N^2 \rangle<span class="math notranslate nohighlight">\(:
+\)</span><span class="math notranslate nohighlight">\(\langle K_N^2 \rangle = \frac{1}{2}(1)^2 + \frac{1}{2}(-1)^2 = \frac{1}{2} + \frac{1}{2} = 1.\)</span>$
+Thus we get</p>
+<div class="math notranslate nohighlight">
+\[\langle X_{N+1}^2 \rangle = \langle X_N^2 \rangle + 1.\]</div>
+<p>If we say that <span class="math notranslate nohighlight">\(X_0 = 0\)</span>, we then get that <span class="math notranslate nohighlight">\(\langle X_1 \rangle = 1\)</span>, <span class="math notranslate nohighlight">\(\langle X_2 \rangle = 2\)</span>, and so on:</p>
+<div class="math notranslate nohighlight">
+\[\langle X_N^2 \rangle = N.\]</div>
+<p>So we see that while the average displacement does not change over time: <span class="math notranslate nohighlight">\(\langle X_N \rangle = 0\)</span>, the average squared displacement does! In fact, the squared displacement grows linearly with the number of steps <span class="math notranslate nohighlight">\(N\)</span>. The longer a random walk carries on for, the further away from the origin the walker will tend to move.</p>
+<p>This expression also tells us that the <em>variance</em> of the walkers, because the variance of random variable can always be written as</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}(X_N) = \langle X_N^2 \rangle - \langle X_N \rangle^2,\]</div>
+<p>and so in this case
+$<span class="math notranslate nohighlight">\(\text{Var}(X_N) = N - 0^2 = N.\)</span><span class="math notranslate nohighlight">\(
+So thar variance of \)</span>X_N<span class="math notranslate nohighlight">\( is also \)</span>N$.</p>
+</section>
+<section id="root-mean-square-displacement">
+<h4>Root Mean Square Displacement<a class="headerlink" href="#root-mean-square-displacement" title="Permalink to this headline">#</a></h4>
+<p>While it is clear from the expression
+$<span class="math notranslate nohighlight">\(\langle X_N^2 \rangle = N,\)</span>$</p>
+<p>that the walkers will tend to move further away from the origin, this is the <em>squared</em> displacement. A more intuitive quantity would perhaps be the average absolute <em>displacement</em>, i.e., <span class="math notranslate nohighlight">\(\langle |X_N| \rangle\)</span>. This would be a useful quantity, but it turns out to be a bit tricky to compute.</p>
+<p>As an easier solution, we just take the root of the mean squared displacement:</p>
+<div class="math notranslate nohighlight">
+\[\text{RMS} = \sqrt{\langle X_N^2 \rangle} = \sqrt{N}.\]</div>
+<p>This quantity is known as the <em>root mean square</em> displacement (RMS). It won’t be exactly the same as <span class="math notranslate nohighlight">\(\langle |X_N| \rangle\)</span>, but it will be close to it.</p>
+<p>Because the root mean square displacement grows as <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>, we see that a 1D random walker will tend to be about <span class="math notranslate nohighlight">\(\sqrt{N}\)</span> away from the origin after taking <span class="math notranslate nohighlight">\(N\)</span> steps.</p>
+</section>
+</section>
+<section id="plotting-the-rms">
+<h3>Plotting the RMS<a class="headerlink" href="#plotting-the-rms" title="Permalink to this headline">#</a></h3>
+<p>Let us verify our statement. We repeat our density plot with 1000 walkers, but now we also plot in our expression for the RMS: <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">walkers</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Nr of Steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_20_0.png" src="../../../_images/random_walks_and_markov_processes_20_0.png" />
+</div>
+</div>
+<p>We see that the density of walkers inside the RMS curves is higher than outside it. This makes sense, because the root-mean-square will tend to give outliers more weight. The RMS curves still seem very reasonable, as they clearly indicate the rough region where most walkers will be found. We also see that the scaling seems reasonable.</p>
+<p>Instead of plotting it, we can also compute the actual root-mean-square of our 1000 walkers, which is then a <em>sample mean</em>, and compare it to our analytical expression.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">walkers</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">walkers</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">RMS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)),</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Analytic Mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">RMS</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Sample mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of steps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Root Mean Square Displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_22_0.png" src="../../../_images/random_walks_and_markov_processes_22_0.png" />
+</div>
+</div>
+<p>So we see that our analytic expression looks very reasonable.</p>
+</section>
+<section id="flipping-coins-and-the-law-of-large-numbers">
+<h3>Flipping Coins and the Law of Large Numbers<a class="headerlink" href="#flipping-coins-and-the-law-of-large-numbers" title="Permalink to this headline">#</a></h3>
+<p>So far we have only look at the random walk as a completely theoretical exercise. As an example, let us now couple it to some more concrete situation.</p>
+<p>Our 1D random walk is the sum of a discrete random variable that has 2, equally likely outcomes. An example of this is flipping a coin. Thus, our random walk models the process of flipping a coin many times and keeping track of the total number of heads and tails we get.</p>
+<p>We looked at this example last week as well:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flip_coins</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">flips</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">flips</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">tails</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="n">heads</span>
+    <span class="k">return</span> <span class="n">heads</span><span class="p">,</span> <span class="n">tails</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Flipping 1000 coins:&quot;</span><span class="p">)</span>
+<span class="n">heads</span><span class="p">,</span> <span class="n">tails</span> <span class="o">=</span> <span class="n">flip_coins</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Heads:&quot;</span><span class="p">,</span> <span class="n">heads</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tail:&quot;</span><span class="p">,</span> <span class="n">tails</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flipping 1000 coins:
+Heads: 477
+Tail: 523
+</pre></div>
+</div>
+</div>
+</div>
+<p>When we flip <span class="math notranslate nohighlight">\(N\)</span> coins, we expect close an equal number of heads and tails, i.e., about <span class="math notranslate nohighlight">\(N/2\)</span> of each. But should we expect exactly <span class="math notranslate nohighlight">\(N/2\)</span> heads? The answer is <em>no</em>. The probability of getting a perfectly even distribution goes <em>down</em> with the number of throws <span class="math notranslate nohighlight">\(N\)</span>. Let us look at some numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;N&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Heads&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="s1">&#39;Tails&#39;</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Deviation&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;Ratio&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">heads</span><span class="p">,</span> <span class="n">tails</span> <span class="o">=</span> <span class="n">flip_coins</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">N</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">heads</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="n">tails</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">heads</span><span class="p">)</span><span class="si">:</span><span class="s2">10</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">heads</span><span class="o">/</span><span class="n">N</span><span class="si">:</span><span class="s2">&gt;10.1%</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="n">tails</span><span class="o">/</span><span class="n">N</span><span class="si">:</span><span class="s2">&lt;6.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         N      Heads|Tails     Deviation       Ratio
+============================================================
+        10          6|4             1.0       60.0%|40.0% 
+        10          4|6             1.0       40.0%|60.0% 
+        10          4|6             1.0       40.0%|60.0% 
+
+      1000        507|493           7.0       50.7%|49.3% 
+      1000        503|497           3.0       50.3%|49.7% 
+      1000        503|497           3.0       50.3%|49.7% 
+
+     10000       4977|5023         23.0       49.8%|50.2% 
+     10000       5000|5000          0.0       50.0%|50.0% 
+     10000       4987|5013         13.0       49.9%|50.1% 
+
+    100000      49825|50175       175.0       49.8%|50.2% 
+    100000      49935|50065        65.0       49.9%|50.1% 
+    100000      50048|49952        48.0       50.0%|50.0% 
+
+   1000000     499252|500748      748.0       49.9%|50.1% 
+   1000000     499766|500234      234.0       50.0%|50.0% 
+   1000000     500024|499976       24.0       50.0%|50.0% 
+
+============================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we explore how the <em>deviation</em>, which is the number of flips we are away from a perfectly even split, grows with <span class="math notranslate nohighlight">\(N\)</span>. What we call the deviation here is equivalent to the displacement of one of our random walkers, and as we have seen, the root mean square displacement grows as <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>. The more coins we flip <span class="math notranslate nohighlight">\(N\)</span>, the bigger deviation from the baseline we expect.</p>
+<p>Now, isn’t this contradicting the law of large numbers? No, it isn’t, but it actually highlights an important point about the law of large numbers. The law of large numbers only guarantees that the <em>average</em> of many trials will approach the expected value for large numbers. Thus the law of large numbers states that the <em>ratio</em> of heads and tails will become 50%/50% in the long run, it gives not guarantee that we will have the same number of outcomes.</p>
+<p>In fact ,we see that this is indeed the case for our results too, while the deviation grows with <span class="math notranslate nohighlight">\(N\)</span>, we can see for the exact same random sample that the <em>ratio</em> of heads and tails approaches 50/50! This is because the ratio is computed from</p>
+<div class="math notranslate nohighlight">
+\[P(\text{heads}) \approx \frac{\text{number of heads}}{N},\]</div>
+<p>but we know that the deviation in the number of heads grows as <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>, but that means the deviation in the <em>ratio</em> grows as</p>
+<div class="math notranslate nohighlight">
+\[\frac{\sqrt{N}}{N} = \frac{1}{\sqrt{N}}.\]</div>
+<p>And so our results don’t contradict the law of large numbers, it proves it.</p>
+<p>The law of large numbers only talks about averages, never about single events. However, it is a very common fallacy to think that the number of heads and tails have to <em>even out</em> in the long run. This is known as the <em>Gambler’s Fallacy</em>.</p>
+</section>
+<section id="d-random-walk">
+<h3>2D Random Walk<a class="headerlink" href="#d-random-walk" title="Permalink to this headline">#</a></h3>
+<p>So far we have only looked at a random walk in one dimension. Let us add another dimension, so we are looking at a random walker moving around in a 2D plane. We will still be looking at a random walk on a regular grid or lattice.</p>
+<p>For every step, there are then 4 choices for our walker. If we envision our grid as the streets of a city seen from above, these directions would be <em>north</em>, <em>south</em>, <em>west</em>, and <em>east</em>. We now denote the displacement of the walker as</p>
+<div class="math notranslate nohighlight">
+\[\vec{R}_N = (X_N, Y_N).\]</div>
+<p>Let us jump right into simulating a random walk.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">possible_steps</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">possible_steps</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+    <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">step</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_28_0.png" src="../../../_images/random_walks_and_markov_processes_28_0.png" />
+</div>
+</div>
+<p>Here we specify the possible steps, and then draw one of these at random for every step. Performing this vectorized is slightly tricky. to make things a lot simpler, we simply change the possible steps to saying that the walker takes a step in both dimensions for each step, so instead of</p>
+<div class="math notranslate nohighlight">
+\[(1, 0) \quad (-1, 0) \quad (0, 1) \quad (0, -1),\]</div>
+<p>as our possibilities, we have
+$<span class="math notranslate nohighlight">\((1, 1) \quad (1, -1) \quad (-1, 1) \quad (-1, 1).\)</span>$</p>
+<p>This makes things a lot easier, cause the steps in the <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> direction are now decoupled.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_30_0.png" src="../../../_images/random_walks_and_markov_processes_30_0.png" />
+</div>
+</div>
+<p>The only difference with our change to the steps is that our walker now walks a distance <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> every step, instead of 1. The plot also looks like the diagonal version of the previous plot.</p>
+<p>Let us try to plot many more steps:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">25000</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_32_0.png" src="../../../_images/random_walks_and_markov_processes_32_0.png" />
+</div>
+</div>
+<p>Because our walker is now using 2 spatial dimensions, we cannot plot this walk over time, we can only plot out the total trajectory over time. This has some drawbacks, as it is hard to understand how the walk builds up over time, and how much the walk doubles back over itself.</p>
+<p>A fix to this is to create an animation of the walk over time. We won’t take the time to do this here. But you can click the links under to see such animations:</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/f/f3/Random_walk_2500_animated.svg">Animated random walk in 2D with 2500 steps</a></p></li>
+<li><p><a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/c/cb/Random_walk_25000.svg">Animated random walk in 2D with 25000 steps</a></p></li>
+</ol>
+</section>
+<section id="plotting-several-walkers">
+<h3>Plotting several walkers<a class="headerlink" href="#plotting-several-walkers" title="Permalink to this headline">#</a></h3>
+<p>Again we can plot several walks over each other</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr_steps</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">nr_walkers</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">for</span> <span class="n">walker</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_walkers</span><span class="p">):</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nr_steps</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_34_0.png" src="../../../_images/random_walks_and_markov_processes_34_0.png" />
+</div>
+</div>
+<p>Here, we plot 5 random walks over each other, and mark the origin with a black circle.</p>
+</section>
+<section id="analyzing-the-mean-displacement">
+<h3>Analyzing the Mean Displacement<a class="headerlink" href="#analyzing-the-mean-displacement" title="Permalink to this headline">#</a></h3>
+<p>We can now return to analyze the average behavior of the 2D random walker, just like we did for the 1D case. However, it turns out we don’t need to reinvent the wheel. We know that
+$<span class="math notranslate nohighlight">\(\vec{R}_N   = (X_N, Y_N).\)</span><span class="math notranslate nohighlight">\(
+So to find the mean displacement, we find
+\)</span><span class="math notranslate nohighlight">\(\langle \vec{R}_N \rangle = (\langle X_N \rangle, \langle Y_N \rangle).\)</span>$</p>
+<p>However, both <span class="math notranslate nohighlight">\(X_N\)</span> and <span class="math notranslate nohighlight">\(Y_N\)</span> behave exactly like a 1D-walker in their dimension, as they increase by -1 or 1 every step. So we have</p>
+<div class="math notranslate nohighlight">
+\[\langle \vec{R}_N \rangle = (0, 0).\]</div>
+<p>We could almost have guessed this, because the 2D problem is, just like the 1D problem, completely symmetric. The average will therefore tend to be the exact origin.</p>
+<p>But what about the mean square displacement? In this case, taking the square of the vector means taking the dot product with itself, it is thus the square of the distance to the origin we are computing:
+$<span class="math notranslate nohighlight">\(\langle |\vec{R_N}|^2 \rangle = \langle X_N^2 \rangle + \langle Y_N^2 \rangle.\)</span>$</p>
+<p>So again we can simply insert the values we found earlier for the 1D walker:</p>
+<div class="math notranslate nohighlight">
+\[\langle |\vec{R_N}|^2 \rangle = 2N.\]</div>
+<p>Thus, the root mean square distance of a 2D random walker to the origin is given by</p>
+<div class="math notranslate nohighlight">
+\[\text{RMS} = \sqrt{\langle |\vec{R_N}|^2 \rangle} = \sqrt{2N}.\]</div>
+<p>We can draw this into our 2D plot, to see if this seems reasonable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr_steps</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">nr_walkers</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Plot random walks</span>
+<span class="k">for</span> <span class="n">walker</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr_walkers</span><span class="p">):</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nr_steps</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot origin</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Plot analytic RMS</span>
+<span class="n">rms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">nr_steps</span><span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rms</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">rms</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/random_walks_and_markov_processes_36_0.png" src="../../../_images/random_walks_and_markov_processes_36_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="why-random-walkers-are-so-interesting">
+<h2>Why Random Walkers are so interesting<a class="headerlink" href="#why-random-walkers-are-so-interesting" title="Permalink to this headline">#</a></h2>
+<p>The random walker is an example of a process that is built up of simple, random steps, but whose net behavior can be complex. These kind of processes are found throughout the natural sciences and in mathematics. The list of applications of random walks is therefore very long and varied.</p>
+<p>Some examples of processes that can be modelled with random walks are:</p>
+<ul class="simple">
+<li><p>The price of stocks in economics</p></li>
+<li><p>Modeling of population dynamics in biology</p></li>
+<li><p>The modeling of genetic drift</p></li>
+<li><p>The study of polymers in material science use a special type of self-avoiding random walks</p></li>
+<li><p>In image processing, images can be segmented by using an algorithm that randomly walks over the image</p></li>
+<li><p>Twitter uses a random walk approach to make suggestions of who to follow</p></li>
+</ul>
+<p>These are just <em>some</em> examples, and the list goes on and on. If you want more example, there is a more extensive list <a class="reference external" href="https://en.wikipedia.org/wiki/Random_walk#Applications">here</a>.</p>
+</section>
+<section id="continuous">
+<h2>continuous<a class="headerlink" href="#continuous" title="Permalink to this headline">#</a></h2>
+<p>As a final example, let us show how we can move from a discrete random walk model to a continuous one. As we already have seen some examples of, when we move towards a large number of steps <span class="math notranslate nohighlight">\(N\)</span>, the movement of the random walker doesn’t necessarily look so jagged and force anymore, but <em>seems</em> more like a continuous process. And this is the whole trick to moving to a continuous model, letting <span class="math notranslate nohighlight">\(N\to\infty\)</span>. We obviously cannot do this on a computer, but we can analyze the problem mathematically.</p>
+<p>To keep things as simple as possible, we can consider the uniform 1D random walker. Instead of talking about the displacement <span class="math notranslate nohighlight">\(X_N\)</span>, we now define a function <span class="math notranslate nohighlight">\(P(x, t)\)</span> that denotes the probability of finding the walker at position <span class="math notranslate nohighlight">\(x\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>Because we have a discrete model, we say that the walker moves a length <span class="math notranslate nohighlight">\(\Delta x\)</span> each step, so that the walker will be at a position</p>
+<div class="math notranslate nohighlight">
+\[x_i = i\cdot \Delta x,\]</div>
+<p>In addition, we assume the walker takes one step every <span class="math notranslate nohighlight">\(\Delta t\)</span> time step, so we can denote a given time as</p>
+<div class="math notranslate nohighlight">
+\[t_j = j\cdot \Delta t.\]</div>
+<p>Thus, we are talking about the probability of finding the walker at position <span class="math notranslate nohighlight">\(x_i\)</span> at time <span class="math notranslate nohighlight">\(t_j\)</span>, which is described by the function <span class="math notranslate nohighlight">\(P(x_i, t_j)\)</span>, or simply <span class="math notranslate nohighlight">\(P_{i, j}\)</span> for short.</p>
+<p>Now, our goal isn’t necessarily to find an expression for <span class="math notranslate nohighlight">\(P\)</span>, to find an expression for how it develops over time. Or put more formally, we are trying to find an expression for the time-derivative
+$<span class="math notranslate nohighlight">\(\frac{\partial P(x, t)}{\partial t},\)</span>$</p>
+<p>i.e., we are trying to find a differential equation. To find a time derivative, we want to find an expression on the form:</p>
+<div class="math notranslate nohighlight">
+\[\frac{P(x_i, t_{j+1}) - P(x_i, t_j)}{\Delta t}.\]</div>
+<p>Because then we can take the limit <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span> to get a derivative.</p>
+<p>As we are trying to find the time-derivative of <span class="math notranslate nohighlight">\(P(x, t)\)</span>, let us write out what we know about stepping forward in time with our model. The probability of finding the walker in position <span class="math notranslate nohighlight">\(x_i\)</span> at the <em>next</em> time step, must be given by the chance of finding it at the two neighboring grid points at the current time step, so:
+$<span class="math notranslate nohighlight">\(P(x_i, t_{j+1}) = \frac{1}{2}P(x_{i-1}, t_j) + \frac{1}{2}P(x_{i+1}, t_j).\)</span>$</p>
+<p>The reasons the two terms have a factor 1/2, is because there is only a 50% chance of a walker in those grid points moving the right direction.</p>
+<p>Now, to find an expression for the time derivative, we need to subtract <span class="math notranslate nohighlight">\(P(x_i, t_j)\)</span> from both sides.</p>
+<div class="math notranslate nohighlight">
+\[P(x_i, t_{j+1}) - P(x_i, t_j) = \frac{1}{2}\big(P(x_{i-1}, t_j) - 2P(x_i, t_j) + P(x_{i+1}, t_j)\big).\]</div>
+<p>The next step is then to divide by <span class="math notranslate nohighlight">\(\Delta t\)</span> on both sides</p>
+<div class="math notranslate nohighlight">
+\[\frac{P(x_i, t_{j+1}) - P(x_i, t_j)}{\Delta t}=\frac{1}{2\Delta t}\big(P(x_{i-1}, t_j) - 2P(x_i, t_j) + P(x_{i+1}, t_j)\big).\]</div>
+<p>Now we are getting very close! However, we cannot take the limit <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span> just yet, because then the expression on the right will blow up. However, we can fix this by expanding the fraction by a factor of <span class="math notranslate nohighlight">\(\Delta x^2\)</span></p>
+<div class="math notranslate nohighlight">
+\[\frac{P(x_i, t_{j+1}) - P(x_i, t_j)}{\Delta t}=\frac{\Delta x^2}{2\Delta t}\frac{P(x_{i-1}, t_j) - 2P(x_i, t_j) + P(x_{i+1}, t_j)}{\Delta x^2}.\]</div>
+<p>This helps, because we can now take the limit of <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span> and <span class="math notranslate nohighlight">\(\Delta x^2 \to 0\)</span> at the <em>same</em> time. This way, we can enforce the constraint that we do it in such a manner that
+$<span class="math notranslate nohighlight">\(\frac{\Delta x^2}{2\Delta t} = \text{constant}.\)</span>$</p>
+<p>Because this expression will be a constant, we name it <span class="math notranslate nohighlight">\(D\)</span>. We then have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lim_{\substack{\Delta t \to 0 \\ \Delta x \to 0 \\ D={\rm const.}}}  \bigg[\frac{P(x_i, t_{j+1}) - P(x_i, t_j)}{\Delta t}= D \frac{P(x_{i-1}, t_j) - 2P(x_i, t_j) + P(x_{i+1}, t_j)}{\Delta x^2}\bigg].\end{split}\]</div>
+<p>Now, the term on the left was equal to the time derivative of <span class="math notranslate nohighlight">\(P\)</span>. But the expression on the right is also a derivative, it is the second-order derivative with respect to <span class="math notranslate nohighlight">\(x\)</span>! So we get
+$<span class="math notranslate nohighlight">\(\frac{\partial P}{\partial t} = D\frac{\partial^2 P}{\partial x^2}.\)</span>$</p>
+<p>Let us summarize what we have done, we have said our random walker takes steps of <span class="math notranslate nohighlight">\(\Delta x\)</span> in time <span class="math notranslate nohighlight">\(\Delta t\)</span>, and then taken the limit where both of these go to 0. Effectively, we are saying the walker takes infinitesimally small steps, infinitely fast. This is effectively the same as letting the number of steps taken go to infinity (<span class="math notranslate nohighlight">\(N \to \infty\)</span>). But at the same time, we do this in the manner in which the total displacement of the walker stays bounded.</p>
+<p>Taking the limit of a simple 1D walker has given us a partial differential equation known as the <em>Diffusion Equation</em>, or alternatively the <em>Heat Equation</em>. This is one of the most fundamental and important equations in the natural sciences, so it is quite astonishing that it can be derived from a simple random walker!</p>
+<p>For more information and more detailed derivations, see for example:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.math.hawaii.edu/~xander/Fa06/Kac--Brownian_Motion.pdf">Mark Kac’s classical paper from 1947</a></p></li>
+</ul>
+<p>In practice, one does not use a 1D diffusion equation, but a 3D one:
+$<span class="math notranslate nohighlight">\(\frac{\partial u}{\partial t} = \nabla^2 u.\)</span>$</p>
+<p>But this pde can be found by taking the limit of a 3D random walker in exactly the same manner.</p>
+<section id="solving-the-diffusion-equation">
+<h3>Solving the Diffusion Equation<a class="headerlink" href="#solving-the-diffusion-equation" title="Permalink to this headline">#</a></h3>
+<p>What is very interesting about what we have just done, is that we have gone from a discrete, numerically solvable problem, into a continuous partial differential equation. This is the opposite process of what we are used to dealing with when we are looking at numerics!</p>
+<p>If we want to solve the diffusion equation numerically, we have to discretize the equation again, and move back to the effective 1D walker. If you want to read how that can be done, take a look at this supplemental notebook: <a class="reference internal" href="solving_the_1D_diffusion_equation.html"><span class="doc std std-doc"><em>Solving the 1D Diffusion Equation</em></span></a>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/stochastic_processes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="using_random_numbers.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Using Random Numbers</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="solving_the_1D_diffusion_equation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Solving the 1D Diffusion Equation using Finite Differences</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1665 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Week 3 &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="The Pancake Problem" href="../week4/pancake_sort.html" />
+    <link rel="prev" title="Week 2" href="../week3/E3_testing_and_docstrings.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../lectures/python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../lectures/python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../lectures/git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../lectures/optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../lectures/optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../lectures/summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/exercises/week2/E2_exercises_on_oop.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/exercises/week2/E2_exercises_on_oop.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/exercises/week2/E2_exercises_on_oop.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction-to-object-oriented-programming">
+   Introduction to Object-Oriented Programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-1-quadratic-functions">
+   Exercise 1 — Quadratic functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1a-defining-the-quadratic-class">
+     Exercise 1a) Defining the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Quadratic
+      </span>
+     </code>
+     class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1b-pretty-printing">
+     Exercise 1b) Pretty printing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise-1c-adding-together-polynomials">
+       Exercise 1c) Adding together polynomials
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1d-finding-the-roots">
+     Exercise 1d) Finding the roots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1e-finding-the-intersection-of-two-quadratic-functions">
+     Exercise 1e) Finding the intersection of two quadratic functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-2-a-class-for-general-polynomials">
+   Exercise 2 — A class for general polynomials
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2a-defining-the-polynomial-class">
+     Exercise 2a) Defining the Polynomial class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2b-adding-general-polynomials-together">
+     Exercise 2b): Adding general polynomials together
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2c-defining-a-addabledictionary-class">
+     Exercise 2c) Defining a
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       AddableDictionary
+      </span>
+     </code>
+     class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2d-derivative-of-a-polynomial">
+     Exercise 2d) Derivative of a polynomial
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2e-multiplying-polynomials">
+     Exercise 2e) Multiplying polynomials
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-3-quantum-harmonic-oscillator-in-one-dimension">
+   Exercise 3 - Quantum Harmonic Oscillator in One Dimension
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3a-hermite-polynomials">
+     Exercise 3a) Hermite polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3b-the-quantum-harmonic-wave-function">
+     Exercise 3b) The quantum harmonic wave function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3c-visualising-the-wave-functions">
+     Exercise 3c) Visualising the wave functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-4-fibonnaci-with-memoization">
+   Exercise 4 — Fibonnaci with Memoization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4a-a-fibonacci-function">
+     Exercise 4a) A Fibonacci function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4b-improving-our-algorithm">
+     Exercise 4b) Improving our algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4c-maximum-recursion-depth">
+     Exercise 4c) Maximum Recursion Depth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4d-a-memoized-factorial-class">
+     Exercise 4d) A memoized factorial class
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Week 3</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction-to-object-oriented-programming">
+   Introduction to Object-Oriented Programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-1-quadratic-functions">
+   Exercise 1 — Quadratic functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1a-defining-the-quadratic-class">
+     Exercise 1a) Defining the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Quadratic
+      </span>
+     </code>
+     class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1b-pretty-printing">
+     Exercise 1b) Pretty printing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exercise-1c-adding-together-polynomials">
+       Exercise 1c) Adding together polynomials
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1d-finding-the-roots">
+     Exercise 1d) Finding the roots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1e-finding-the-intersection-of-two-quadratic-functions">
+     Exercise 1e) Finding the intersection of two quadratic functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-2-a-class-for-general-polynomials">
+   Exercise 2 — A class for general polynomials
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2a-defining-the-polynomial-class">
+     Exercise 2a) Defining the Polynomial class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2b-adding-general-polynomials-together">
+     Exercise 2b): Adding general polynomials together
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2c-defining-a-addabledictionary-class">
+     Exercise 2c) Defining a
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       AddableDictionary
+      </span>
+     </code>
+     class
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2d-derivative-of-a-polynomial">
+     Exercise 2d) Derivative of a polynomial
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2e-multiplying-polynomials">
+     Exercise 2e) Multiplying polynomials
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-3-quantum-harmonic-oscillator-in-one-dimension">
+   Exercise 3 - Quantum Harmonic Oscillator in One Dimension
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3a-hermite-polynomials">
+     Exercise 3a) Hermite polynomials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3b-the-quantum-harmonic-wave-function">
+     Exercise 3b) The quantum harmonic wave function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3c-visualising-the-wave-functions">
+     Exercise 3c) Visualising the wave functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-4-fibonnaci-with-memoization">
+   Exercise 4 — Fibonnaci with Memoization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4a-a-fibonacci-function">
+     Exercise 4a) A Fibonacci function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4b-improving-our-algorithm">
+     Exercise 4b) Improving our algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4c-maximum-recursion-depth">
+     Exercise 4c) Maximum Recursion Depth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4d-a-memoized-factorial-class">
+     Exercise 4d) A memoized factorial class
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="week-3">
+<h1>Week 3<a class="headerlink" href="#week-3" title="Permalink to this headline">#</a></h1>
+<section id="introduction-to-object-oriented-programming">
+<h2>Introduction to Object-Oriented Programming<a class="headerlink" href="#introduction-to-object-oriented-programming" title="Permalink to this headline">#</a></h2>
+<p>These weeks exercises starts you working with classes. If you want a gentler introduction, exercises for Chapter 7 in Langtangen is recommended.</p>
+</section>
+<section id="exercise-1-quadratic-functions">
+<h2>Exercise 1 — Quadratic functions<a class="headerlink" href="#exercise-1-quadratic-functions" title="Permalink to this headline">#</a></h2>
+<p>In this exercise, we will build on the example given in the lectures of implementing 2nd degree polynomials as objects of a custom defined class. A general 2nd degree polynomial, aka, quadratic function, can be written as:</p>
+<div class="math notranslate nohighlight">
+\[ f(x) = a_2x^2 + a_1x + a_0,\]</div>
+<p>where the coefficients, <span class="math notranslate nohighlight">\(a_2\)</span>, <span class="math notranslate nohighlight">\(a_1\)</span>, and <span class="math notranslate nohighlight">\(a_0\)</span> uniquely defines the polynomial.</p>
+<section id="exercise-1a-defining-the-quadratic-class">
+<h3>Exercise 1a) Defining the <code class="docutils literal notranslate"><span class="pre">Quadratic</span></code> class<a class="headerlink" href="#exercise-1a-defining-the-quadratic-class" title="Permalink to this headline">#</a></h3>
+<p>Create a class, <code class="docutils literal notranslate"><span class="pre">Quadratic</span></code>, that represents a general 2nd degree polynomial. Define the following methods:</p>
+<ul class="simple">
+<li><p>A constructor (<code class="docutils literal notranslate"><span class="pre">__init__</span></code>)</p></li>
+<li><p>A call method (<code class="docutils literal notranslate"><span class="pre">__call__</span></code>)
+The constructor should take in the three coefficients in order: <code class="docutils literal notranslate"><span class="pre">a_2</span></code>, <code class="docutils literal notranslate"><span class="pre">a_1</span></code>, and <code class="docutils literal notranslate"><span class="pre">a_0</span></code>, and the call method should take the free variable <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+</ul>
+<p>You class should be able to handle the following test script:</p>
+<hr class="docutils" />
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Implement your solution here:</p>
+<p>Use this to test your implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_Quadratic</span><span class="p">():</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span>
+    
+<span class="c1"># test_Quadratic()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-1b-pretty-printing">
+<h3>Exercise 1b) Pretty printing<a class="headerlink" href="#exercise-1b-pretty-printing" title="Permalink to this headline">#</a></h3>
+<p>Extend your <code class="docutils literal notranslate"><span class="pre">Quadratic</span></code> class with a string special method (<code class="docutils literal notranslate"><span class="pre">__str__</span></code>) so that you can print a Polynomial object  and get the polynomial written out on a readable form. Test by creating a polynomial object and printing it out.</p>
+<section id="exercise-1c-adding-together-polynomials">
+<h4>Exercise 1c) Adding together polynomials<a class="headerlink" href="#exercise-1c-adding-together-polynomials" title="Permalink to this headline">#</a></h4>
+<p>Adding together two general quadratic functions:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = a_2x^2 + a_1 x + a_0, \qquad g(x) = b_2x^2 + b_1 x + b_0,\]</div>
+<p>gives a new quadratic function:</p>
+<div class="math notranslate nohighlight">
+\[(f + g)(x) = (a_2 + b_2)x^2 + (a_1 + b_1)x + (a_0 + b_0)\]</div>
+<p>Implement this functionality using the addition special method (<code class="docutils literal notranslate"><span class="pre">__add__</span></code>). This method should return a new Quadratic-object, without changing the two that are added together. Your new class should be able to handle the following test script:</p>
+<hr class="docutils" />
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">f</span> <span class="o">+</span> <span class="n">g</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>(Because <span class="math notranslate nohighlight">\(a_2 + b_2 = 0\)</span>, the resulting plot should be a straight line.)</p>
+<p>Implement your solution here:</p>
+<p>Use this to test your implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_Quadratic_add</span><span class="p">():</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">f</span> <span class="o">+</span> <span class="n">g</span>
+    <span class="n">a2</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a0</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">coeffs</span>
+    <span class="k">assert</span> <span class="n">a2</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="k">assert</span> <span class="n">a1</span> <span class="o">==</span> <span class="mi">4</span>
+    <span class="k">assert</span> <span class="n">a0</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span>
+    
+<span class="c1"># test_Quadratic_add()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-1d-finding-the-roots">
+<h3>Exercise 1d) Finding the roots<a class="headerlink" href="#exercise-1d-finding-the-roots" title="Permalink to this headline">#</a></h3>
+<p>The roots of a general quadratic function,</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = ax^2+bx+c = 0,
+\]</div>
+<p>are given by the quadratic formula
+$<span class="math notranslate nohighlight">\({\displaystyle x={\frac {-b\pm {\sqrt {b^{2}-4ac}}}{2a}}.}\)</span>$</p>
+<p>Extend your <code class="docutils literal notranslate"><span class="pre">Quadratic</span></code> function with a method <code class="docutils literal notranslate"><span class="pre">.roots()</span></code> that finds and returns the real roots of the function (ignore the imaginary ones). Return the result as a tuple with 0, 1, or 2 elements.</p>
+<p>Test your method on the three polynomials:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(2x^2 -2x + 2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x^2 - 2x + 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x^2 -3x + 2\)</span></p></li>
+</ul>
+<p>Implement your solution here:</p>
+<p>Use this to test your implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_Quadratic_root</span><span class="p">():</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">f3</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    
+    <span class="k">assert</span> <span class="n">f1</span><span class="o">.</span><span class="n">roots</span><span class="p">()</span> <span class="o">==</span> <span class="p">()</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">roots</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">roots</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">roots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span>
+    
+<span class="c1"># test_Quadratic_root()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-1e-finding-the-intersection-of-two-quadratic-functions">
+<h3>Exercise 1e) Finding the intersection of two quadratic functions<a class="headerlink" href="#exercise-1e-finding-the-intersection-of-two-quadratic-functions" title="Permalink to this headline">#</a></h3>
+<p>Extend your class with a method that finds and returns the intersection points (if any) between two <code class="docutils literal notranslate"><span class="pre">Quadratic</span></code>-objects. It should work as follows:</p>
+<hr class="docutils" />
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Quadratic</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Hint:</strong> The intersections are all points solving <span class="math notranslate nohighlight">\(f(x) = g(x)\)</span>, which can be written as <span class="math notranslate nohighlight">\((f-g)(x) = 0\)</span>.</p>
+<p>Test your solution by plotting the two functions and their intersections:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = x^2 -2x + 1, \qquad g(x) = 2x^2 + 3x - 2.\]</div>
+</section>
+</section>
+<section id="exercise-2-a-class-for-general-polynomials">
+<h2>Exercise 2 — A class for general polynomials<a class="headerlink" href="#exercise-2-a-class-for-general-polynomials" title="Permalink to this headline">#</a></h2>
+<p>We now turn to looking at general polynomials of degree <span class="math notranslate nohighlight">\(n\)</span>. These can be written as</p>
+<div class="math notranslate nohighlight">
+\[f(x) = a_{n}x^{n}+a_{n-1}x^{n-1}+\dotsb +a_{2}x^{2}+a_{1}x+a_{0},\]</div>
+<p>or more compactly as
+$<span class="math notranslate nohighlight">\({\displaystyle \sum _{k=0}^{n}a_{k}x^{k}}.\)</span>$</p>
+<p>We want to make a class that represents such a polynomial, and can take any number of coefficients in. The constructor of such a class could for example take in a list of the coefficients: <code class="docutils literal notranslate"><span class="pre">[a0,</span> <span class="pre">a1,</span> <span class="pre">...,</span> <span class="pre">aN]</span></code>. However, this list will always have to be of length <span class="math notranslate nohighlight">\(N\)</span>, and say we want to specify the polynomial <span class="math notranslate nohighlight">\(x^{1000} + 1\)</span>, it is highly inefficient to pass in such a long list, as most coefficients are actually 0.</p>
+<p>A better approach is to use a dictionary, where we use the index as the key and the coefficient as the value. Doing this, we can then specify only the non-zero coefficients, and simply skip those that are 0. So defining <span class="math notranslate nohighlight">\(x^{1000} + 1\)</span> would simply be: <code class="docutils literal notranslate"><span class="pre">Polynomial({0:</span> <span class="pre">1,</span> <span class="pre">1000:</span> <span class="pre">1})</span></code>.</p>
+<section id="exercise-2a-defining-the-polynomial-class">
+<h3>Exercise 2a) Defining the Polynomial class<a class="headerlink" href="#exercise-2a-defining-the-polynomial-class" title="Permalink to this headline">#</a></h3>
+<p>Define the <code class="docutils literal notranslate"><span class="pre">Polynomial</span></code> class with the following methods</p>
+<ul class="simple">
+<li><p>A constructor (<code class="docutils literal notranslate"><span class="pre">__init__</span></code>) that takes in the coefficients of the polynomial as a dictionary</p></li>
+<li><p>A call method (<code class="docutils literal notranslate"><span class="pre">__call__</span></code>) that computes f(x) for a given x</p></li>
+<li><p>A string method (<code class="docutils literal notranslate"><span class="pre">__str__</span></code>) for informative printing of the polynomial</p></li>
+</ul>
+<p>Your class should be able to handle the following test script</p>
+<hr class="docutils" />
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">coeffs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Implement your solution here:</p>
+</section>
+<section id="exercise-2b-adding-general-polynomials-together">
+<h3>Exercise 2b): Adding general polynomials together<a class="headerlink" href="#exercise-2b-adding-general-polynomials-together" title="Permalink to this headline">#</a></h3>
+<p>We now want to be able to add together two general polynomial objects, which should produce a new general polynomial object. Mathematically, this is just an extension of the 2nd degree polynomial case which we saw in exercise (1). If we have</p>
+<div class="math notranslate nohighlight">
+\[f(x) = {\displaystyle \sum _{k=0}^{m}a_{k}x^{k}}, \qquad g(x)={\displaystyle \sum _{k=0}^{n}b_{k}x^{k}},\]</div>
+<p>the sum will be defined by</p>
+<div class="math notranslate nohighlight">
+\[
+(f + g)(x) = {\displaystyle \sum _{k=0}^{\max(m, n)}(a_{k} + b_{k})x^{k}}.
+\]</div>
+<p>Thus, if we add together two polynomials of degree <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, then the sum will have degree <span class="math notranslate nohighlight">\(\max(m, n)\)</span>, i.e., the largest of the two.</p>
+<p>Extend your class to add this functionality using the addition special method (<code class="docutils literal notranslate"><span class="pre">__add__</span></code>).</p>
+<p>The class should handle the following test case:</p>
+<hr class="docutils" />
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">({</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">+</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Which should produce the output: <span class="math notranslate nohighlight">\(-3x^{15} + 2x^{10} + 1\)</span></p>
+<p>Implement your solution here:</p>
+<p><strong>Hint:</strong> You will need to create a new coefficient dictionary for the new polynomial and add in the coefficients from the two polynomials. This can be slightly tricky getting the keys right. Here <code class="docutils literal notranslate"><span class="pre">collections.defaultdict</span></code> can be useful, but it isn’t necessary.</p>
+</section>
+<section id="exercise-2c-defining-a-addabledictionary-class">
+<h3>Exercise 2c) Defining a <code class="docutils literal notranslate"><span class="pre">AddableDictionary</span></code> class<a class="headerlink" href="#exercise-2c-defining-a-addabledictionary-class" title="Permalink to this headline">#</a></h3>
+<p>The previous exercise would have been a lot simpler, if we could simply add two dictionary objects together as follows:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>However, if you try to do this, you get an exception:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">unsupported</span> <span class="pre">operand</span> <span class="pre">type(s)</span> <span class="pre">for</span> <span class="pre">+:</span> <span class="pre">'dict'</span> <span class="pre">and</span> <span class="pre">'dict'</span></code></p>
+</div></blockquote>
+<p>This means that there is no addition special method defined for dictionaries. However, we can extend the normal dictionary class to include this by adding a special method as follows</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AddableDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Add the necessary code, so that our new <code class="docutils literal notranslate"><span class="pre">AddableDict</span></code> class can add two dictionaries together as follows:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">AddableDict</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AddableDict</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And give the ouput: <code class="docutils literal notranslate"><span class="pre">{0:</span> <span class="pre">1,</span> <span class="pre">1:</span> <span class="pre">6,</span> <span class="pre">2:</span> <span class="pre">7,</span> <span class="pre">3:</span> <span class="pre">2}</span></code>.</p>
+<p>Implement your solution here:</p>
+<p>Use this to test your implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_AddableDict</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">AddableDict</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">AddableDict</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">assert</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span>
+    <span class="k">assert</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">7</span>
+    <span class="k">assert</span> <span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
+    
+<span class="c1"># test_AddableDict()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Having made the <code class="docutils literal notranslate"><span class="pre">AddableDict</span> <span class="pre">class</span></code>, go back and change the Polynomial constructor, so that even if the user sends in the coefficients as a normal dictionary, it is converted to an <code class="docutils literal notranslate"><span class="pre">AddableDict</span></code> inside the Polynomial. Having done this, rewrite <code class="docutils literal notranslate"><span class="pre">Polynomial.__add__</span></code>, which should be trivial.</p>
+</section>
+<section id="exercise-2d-derivative-of-a-polynomial">
+<h3>Exercise 2d) Derivative of a polynomial<a class="headerlink" href="#exercise-2d-derivative-of-a-polynomial" title="Permalink to this headline">#</a></h3>
+<p>It is also the case that the derivative of a polynomial is a polynomial, if we have</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = {\displaystyle \sum _{k=0}^{m}a_{k}x^{k}},
+\]</div>
+<p>then we get</p>
+<div class="math notranslate nohighlight">
+\[
+f'(x) = {\displaystyle \sum _{k=1}^{m} (a_{k}\cdot k)x^{k-1}},
+\]</div>
+<p>which can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+f'(x) = {\displaystyle \sum _{k=0}^{m-1} b_k x^{k}},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(b_{k} = (k+1)a_{k+1}\)</span>.</p>
+<p>Implement a method, <code class="docutils literal notranslate"><span class="pre">derivative</span></code>, that returns the function <span class="math notranslate nohighlight">\(f'(x)\)</span> as a new Polynomial object. Test your function by finding the derivative of</p>
+<div class="math notranslate nohighlight">
+\[f(x) = x^{10} - 3x^6 + 2x^2 + 1.\]</div>
+<p>Implement your solution here:</p>
+<p>Use this to test your implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_derivative</span><span class="p">():</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">({</span><span class="mi">10</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+    <span class="n">f_deriv</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">derivative</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">f_deriv</span><span class="o">.</span><span class="n">coeffs</span> <span class="o">==</span> <span class="p">{</span><span class="mi">9</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">18</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+    
+<span class="c1"># test_derivative()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-2e-multiplying-polynomials">
+<h3>Exercise 2e) Multiplying polynomials<a class="headerlink" href="#exercise-2e-multiplying-polynomials" title="Permalink to this headline">#</a></h3>
+<p>It is also the case that the <em>product</em> of two polynomials form a new polynomial. If we again define</p>
+<div class="math notranslate nohighlight">
+\[f(x) = {\displaystyle \sum _{k=0}^{m}a_{k}x^{k}}, \qquad g(x)={\displaystyle \sum _{k=0}^{n}b_{k}x^{k}},\]</div>
+<p>then the product is given by</p>
+<div class="math notranslate nohighlight">
+\[(f \cdot g)(x) = \left(\sum _{i = 0}^m a_{i}x^{i}\right) \cdot \left(\sum _{j=0}^{n} b_{j}x^{j}\right) = \sum_{i=0}^m\sum_{j=0}^n a_i b_j x^{i + j}\]</div>
+<p>Implement this functionality using the multiplication special method (<code class="docutils literal notranslate"><span class="pre">__mul__</span></code>). To acomplish this, you will need two nested for-loops over the coefficient dictionaries.</p>
+<p>Test your implementation with the code block</p>
+<hr class="docutils" />
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">({</span><span class="mi">2</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">({</span><span class="mi">3</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">*</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Which should give the output:</p>
+<div class="math notranslate nohighlight">
+\[(4x^2 + x)(3x^3 + 1) = 12x^5 + 3x^4 + 4x^2 + x\]</div>
+<p>Implement your solution here:</p>
+<p>Use this to test your implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_Polynomial_mul</span><span class="p">():</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">({</span><span class="mi">2</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">({</span><span class="mi">3</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">f</span><span class="o">*</span><span class="n">g</span>
+    <span class="k">assert</span> <span class="n">h</span><span class="o">.</span><span class="n">coeffs</span> <span class="o">==</span> <span class="p">{</span><span class="mi">5</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+    
+<span class="c1"># test_Polynomial_mul()   # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-3-quantum-harmonic-oscillator-in-one-dimension">
+<h2>Exercise 3 - Quantum Harmonic Oscillator in One Dimension<a class="headerlink" href="#exercise-3-quantum-harmonic-oscillator-in-one-dimension" title="Permalink to this headline">#</a></h2>
+<p>The quantum harmonic oscillator wave function, <span class="math notranslate nohighlight">\(\psi_n (x)\)</span> is a solution to the time-independent Scrödinger equation</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} \psi_n (x)  = E_n \psi_n (x)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{H}\)</span> is the quantum harmonic oscillator hamiltonian and <span class="math notranslate nohighlight">\(E_n\)</span> is the energy at the <span class="math notranslate nohighlight">\(n\)</span>-th level (<span class="math notranslate nohighlight">\(n\)</span> must be a positive integer, <span class="math notranslate nohighlight">\(n = 0, 1, 2,\)</span>…).</p>
+<p>In this exercise you will implement a <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">HOWF</span></code> which represents a quantum harmonic oscillator wave function in one dimension.</p>
+<section id="exercise-3a-hermite-polynomials">
+<h3>Exercise 3a) Hermite polynomials<a class="headerlink" href="#exercise-3a-hermite-polynomials" title="Permalink to this headline">#</a></h3>
+<p>To implement the harmonic oscillator wave function, a Hermite Polynomial is needed. The Hermite Polynomials are given by the recursive formula</p>
+<div class="math notranslate nohighlight">
+\[
+    H_n(x) = 2 x H_{n - 1}(x) - 2(n - 1) H_{n - 2}(x) ,
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(n = 2, 3, 4, ...\)</span>, and initial conditions are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    H_0(x) = 1 \\
+    H_1(x) = 2 x .
+\end{split}\]</div>
+<p>Make a <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">HOWF</span></code>. Start by implementing the constructor and the recursive private method <code class="docutils literal notranslate"><span class="pre">_compute_Hermite(self,</span> <span class="pre">n)</span></code>.</p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">_compute_Hermite(self,</span> <span class="pre">n)</span></code> should return the hermite polynomial as an object of the class <code class="docutils literal notranslate"><span class="pre">Polynomial</span></code>, which you implemented in the previous exercise. The method should be implemented using recursion.
+*Hint: You will easily get error messages if you try to multiply numbers with your polynomial class. Remember that you can consider a constant as a polynomial of the zero-th degree!</p>
+<p>The constructor must take the level <span class="math notranslate nohighlight">\(n\)</span> as a paramterer. The constructor should make a call the method <code class="docutils literal notranslate"><span class="pre">_compute_Hermite(self,</span> <span class="pre">n)</span></code> to obtain and store the hermite polynomial of the <span class="math notranslate nohighlight">\(n\)</span>-th order. Name the variable of the hermite polynomial <code class="docutils literal notranslate"><span class="pre">H</span></code>.</p>
+<p>Implement your solution here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_Hermite</span><span class="p">():</span>
+    <span class="n">H0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">H1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">H2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span>
+    <span class="n">H3</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">12</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">H4</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">16</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">48</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">12</span>
+    <span class="n">H5</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">32</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">160</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">120</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">H_table</span> <span class="o">=</span> <span class="p">[</span><span class="n">H0</span><span class="p">,</span> <span class="n">H1</span><span class="p">,</span> <span class="n">H2</span><span class="p">,</span> <span class="n">H3</span><span class="p">,</span> <span class="n">H4</span><span class="p">,</span> <span class="n">H5</span><span class="p">]</span>
+    
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-12</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">HOWF</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">H</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+            <span class="n">expected</span> <span class="o">=</span> <span class="n">H_table</span><span class="p">[</span><span class="n">n</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">computed</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The implemented Hermite Polynomial yields unexpected result for n = </span><span class="si">%d</span><span class="se">\</span>
+<span class="s2">            </span><span class="se">\n\t</span><span class="s2">H(</span><span class="si">%.2f</span><span class="s2">) = </span><span class="si">%.13g</span><span class="s2"> != </span><span class="si">%.13g</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">computed</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected</span> <span class="o">-</span> <span class="n">computed</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="n">msg</span>
+            
+<span class="c1"># test_Hermite()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3b-the-quantum-harmonic-wave-function">
+<h3>Exercise 3b) The quantum harmonic wave function<a class="headerlink" href="#exercise-3b-the-quantum-harmonic-wave-function" title="Permalink to this headline">#</a></h3>
+<p>In this exercise you will be asked to implement two functions. The expressions would include the mass of the particle <span class="math notranslate nohighlight">\(m\)</span>, plancks constant <span class="math notranslate nohighlight">\(\hbar\)</span> and the angular frequency <span class="math notranslate nohighlight">\(\omega\)</span>. When computing, it is an advantage to simplify the expressions as much as possible. Therefore we simplifiy the calculations by using dimensionless variables, defined by
+<span class="math notranslate nohighlight">\(\chi = \sqrt{\frac{m \omega}{\hbar}} \cdot x\)</span>. This will make all the calculation dimensionless. Consequently, the dimensionless energy (in this case scale) is then given by <span class="math notranslate nohighlight">\(\epsilon_n = \frac{2 E_n}{\hbar \omega}\)</span>.</p>
+<p>The quantum harmonic wave function of the <span class="math notranslate nohighlight">\(n\)</span>-th energy level is then given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \psi_n (\chi) = \pi^{-\frac{1}{4}} \frac{1}{\sqrt{2^n n!}} H_n(\chi)\exp\left(\frac{-\chi^2}{2}\right)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(H_n\)</span> is the Hermite polynimial of the <span class="math notranslate nohighlight">\(n\)</span>-th order. Let <code class="docutils literal notranslate"><span class="pre">HOWF</span></code> a callable class by implementing the formula above in the special method  <code class="docutils literal notranslate"><span class="pre">__call__(self,</span> <span class="pre">chi)</span></code>.</p>
+<p>The energy of the <span class="math notranslate nohighlight">\(n\)</span>-th level is then given by</p>
+<div class="math notranslate nohighlight">
+\[
+    \epsilon_n = 2n + 1 .
+\]</div>
+<p>Implement a method in <code class="docutils literal notranslate"><span class="pre">HOWF</span></code> which calculates the energy of the wave function. Define this method as a property.</p>
+<p>Implement your solution here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">pi</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span><span class="p">,</span> <span class="n">sqrt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3c-visualising-the-wave-functions">
+<h3>Exercise 3c) Visualising the wave functions<a class="headerlink" href="#exercise-3c-visualising-the-wave-functions" title="Permalink to this headline">#</a></h3>
+<p>You will now reproduce a quite iconic figure of the quantum harmonic oscillator wave function. Plot the wave functions in relative height to their energy, as in plot <span class="math notranslate nohighlight">\(\psi_n(\chi) + \epsilon_n\)</span> for <span class="math notranslate nohighlight">\(n = 0, 1, 2, ..., N\)</span> in the same plot.</p>
+<p>Set <span class="math notranslate nohighlight">\(N\)</span> to be at least 15. A sanity check for your implementation of the wave functions is that the number of nodes of <span class="math notranslate nohighlight">\(\psi_n\)</span> should be <span class="math notranslate nohighlight">\(n\)</span>. (That means that <span class="math notranslate nohighlight">\(\psi_n\)</span> should intersect <span class="math notranslate nohighlight">\(\epsilon_n\)</span> <span class="math notranslate nohighlight">\(n\)</span> times on the y-axis, since the wave function has been lifted by <span class="math notranslate nohighlight">\(\epsilon_n\)</span> on the <span class="math notranslate nohighlight">\(y\)</span>-axis). An appropriate range for <span class="math notranslate nohighlight">\(\chi\)</span> could be <span class="math notranslate nohighlight">\(\chi \in [-8, 8]\)</span>.</p>
+<p>Implement your solution here:</p>
+</section>
+</section>
+<section id="exercise-4-fibonnaci-with-memoization">
+<h2>Exercise 4 — Fibonnaci with Memoization<a class="headerlink" href="#exercise-4-fibonnaci-with-memoization" title="Permalink to this headline">#</a></h2>
+<p>The Fibonnaci sequence is given by the numbers
+$<span class="math notranslate nohighlight">\(1, 1, 2, 3, 5, 8, 13, 21, 34, \ldots\)</span><span class="math notranslate nohighlight">\(
+it is defined by the recursive formula
+\)</span><span class="math notranslate nohighlight">\(F_{i} = F_{i-1} + F_{i-2}.\)</span>$</p>
+<p>For this defintion to make any sense, the sequence has to start somewhere, so we define that</p>
+<div class="math notranslate nohighlight">
+\[F_0 = 0, \qquad F_1 = 1.\]</div>
+<section id="exercise-4a-a-fibonacci-function">
+<h3>Exercise 4a) A Fibonacci function<a class="headerlink" href="#exercise-4a-a-fibonacci-function" title="Permalink to this headline">#</a></h3>
+<p>Write a <em>recursive</em> function <code class="docutils literal notranslate"><span class="pre">fibonacci(n)</span></code>, that returns <span class="math notranslate nohighlight">\(F_n\)</span>. A <em>recursive</em> function is a function that calls itself. To do this, you won’t need any explicit loops. You will however, need to include the <em>base-case</em> of <span class="math notranslate nohighlight">\(F_0=0\)</span> <span class="math notranslate nohighlight">\(F_1=1\)</span>, otherwise the recursion would just continue forever.</p>
+<p>Verify your function by writing out <span class="math notranslate nohighlight">\(F_1, \ldots, F_{10}\)</span> and comparing to the sequence above.</p>
+<p>Implement your solution here:</p>
+<p>Use this to test your implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_fibonacci</span><span class="p">():</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+        <span class="n">computed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">computed</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">55</span><span class="p">]</span>
+
+<span class="c1"># test_fibonacci()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-4b-improving-our-algorithm">
+<h3>Exercise 4b) Improving our algorithm<a class="headerlink" href="#exercise-4b-improving-our-algorithm" title="Permalink to this headline">#</a></h3>
+<p>We have now implemented a function that finds the <span class="math notranslate nohighlight">\(n\)</span>’th Fibonnaci number, which is great. However, it is very inefficient. Imagine for example we want to compute <span class="math notranslate nohighlight">\(F_{100}\)</span>. The first call to the function, creates two new calls: <code class="docutils literal notranslate"><span class="pre">F(99)</span></code> and <code class="docutils literal notranslate"><span class="pre">F(98)</span></code>. Both of these call the function twice again, so we have four function calls there. Each of those four lead to two new ones and so on all the way down to the base case of <span class="math notranslate nohighlight">\(n=1\)</span>. This means we make something on the order of <span class="math notranslate nohighlight">\(2^{100}\)</span> function calls! This means the complexity of calulating <span class="math notranslate nohighlight">\(F(n)\)</span> grows exponentially as <span class="math notranslate nohighlight">\(n\)</span> grows, which is horrible. Try drawing a tree to represent the function calls for <span class="math notranslate nohighlight">\(n=100\)</span> and you quickly see the absurdity of the situation.</p>
+<p>To improve our Fibonnaci algorithm, we will use a dynamic programming technique called <em>memoization</em>. While the name is a bit weird, the idea is fairly simple, we simply make our program remember the answers it has already computed, so that we won’t have to compute them again later.</p>
+<p>Classes are perfect for making memoized functions, as we can use an internal dictionary to remember old solutions.</p>
+<p>Fill in the skeleton code below so that the class computes Fibonacci numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Fibonacci</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+        
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        if n is in memory</span>
+<span class="sd">            - return it</span>
+<span class="sd">        if n is not in memory</span>
+<span class="sd">            - calcuate it recursively</span>
+<span class="sd">            - put it into memory</span>
+<span class="sd">            - return it</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you program your class correctly, you should see a huge speed up. This is because we now avoid repeating the same calculations uneccesarily. For example, if you try computing <span class="math notranslate nohighlight">\(F(100)\)</span> as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fib</span> <span class="o">=</span> <span class="n">Fibonacci</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+<p>The memoized function will only need to compute the numbers <span class="math notranslate nohighlight">\(F(2), \ldots F(100)\)</span> once, meaning the number of function calls needed is now <em>linear</em> instead of exponential!</p>
+<p>Implement your solution here:</p>
+<p>Same test to make sure the code still works:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test_fibonacci()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-4c-maximum-recursion-depth">
+<h3>Exercise 4c) Maximum Recursion Depth<a class="headerlink" href="#exercise-4c-maximum-recursion-depth" title="Permalink to this headline">#</a></h3>
+<p>Try finding an even larger number, like <span class="math notranslate nohighlight">\(F_{100000}\)</span>. Does it work? It will probably fail due to a maximum recursion depth. Try to understand what this means and why it happens. Can you think of a work-around for this problem?</p>
+<p>Hint: You need to build up the memoization dictionary from the ground up, and then it will be able to handle larger inputs. This can be done with a for-loop for example.</p>
+<p>Implement your solution here:</p>
+<p>Same test to make sure the code still works:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_fibonacci</span><span class="p">():</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+        <span class="n">computed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">computed</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">55</span><span class="p">]</span>
+
+<span class="c1"># test_fibonacci()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-4d-a-memoized-factorial-class">
+<h3>Exercise 4d) A memoized factorial class<a class="headerlink" href="#exercise-4d-a-memoized-factorial-class" title="Permalink to this headline">#</a></h3>
+<p>The factorial is also defined recursively</p>
+<div class="math notranslate nohighlight">
+\[N! = N \cdot (N-1)!,\]</div>
+<p>with a base case of <span class="math notranslate nohighlight">\(F(0) = 1\)</span>.</p>
+<p>Repeat the process of the Fibonacci sequence and create a memoized class, <code class="docutils literal notranslate"><span class="pre">Factorial</span></code>, that computes <span class="math notranslate nohighlight">\(N!\)</span>.</p>
+<p>Implement your solution here:</p>
+<p>Use this to test your implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_Factorial</span><span class="p">():</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Factorial</span><span class="p">()</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+        <span class="n">computed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        
+    <span class="k">assert</span> <span class="n">computed</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">120</span><span class="p">]</span>
+
+<span class="c1"># test_Factorial()  # uncomment this line when testing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/exercises/week2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../week3/E3_testing_and_docstrings.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Week 2</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../week4/pancake_sort.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Pancake Problem</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

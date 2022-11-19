@@ -1,0 +1,1338 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>An introduction to C++ &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Week10" href="week10/E8_random_number_generators.html" />
+    <link rel="prev" title="Challenge 2" href="week7/C2_primes_by_sieve.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lectures/python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../lectures/python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lectures/python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lectures/git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../lectures/python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../lectures/cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../lectures/data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../lectures/stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../lectures/optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../lectures/optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lectures/summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/exercises/cpp_exercises.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/exercises/cpp_exercises.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   An introduction to C++
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-1-the-sum-of-two-integers">
+     Exercise 1.1. The sum of two integers
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-2-cooking-an-egg">
+     Exercise 1.2. Cooking an egg
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-3-sum-of-first-n-integers">
+     Exercise 1.3. Sum of first n integers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-1-4-generate-an-approximate-fahrenheit-celsius-conversion-table">
+   Exercise 1.4. Generate an approximate Fahrenheit-Celsius conversion table
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-5-the-sum-of-n-integers">
+     Exercise 1.5. The sum of n integers
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-6-the-sum-of-n-integers-from-command-line">
+     Exercise 1.6. The sum of n integers from command line
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-7-making-a-function-in-c">
+     Exercise 1.7. Making a function in C++
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-8-making-an-array">
+     Exercise 1.8. Making an array
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-9-cooking-more-eggs">
+     Exercise 1.9. Cooking more eggs
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-10-stirlings-approximation">
+     Exercise 1.10. Stirling’s approximation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-11-primality-checker">
+     Exercise 1.11. Primality checker
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-12-euler-s-totient-function">
+     Exercise 1.12. Euler’s totient function
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-13-converting-from-base-n-to-decimal">
+     Exercise 1.13. Converting from base n to decimal
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-14-converting-from-hexadecimal-to-decimal">
+     Exercise 1.14. Converting from hexadecimal to decimal
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-15-add-two-binary-numbers">
+     Exercise 1.15. Add two binary numbers
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-16-adding-fractions">
+     Exercise 1.16. Adding fractions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-17-adding-and-simplifying-fractions">
+     Exercise 1.17. Adding and simplifying fractions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-18-make-a-class-for-rectangles">
+     Exercise 1.18. Make a class for rectangles
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-19-make-a-class-for-cooking-eggs">
+     Exercise 1.19. Make a class for cooking eggs
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-20-make-a-class-for-quadratic-functions">
+     Exercise 1.20. Make a class for quadratic functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-21-points-in-different-coordinate-systems">
+     Exercise 1.21. Points in different coordinate systems
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-22-numerical-approximations-for-the-derivative">
+     Exercise 1.22. Numerical approximations for the derivative
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-23-numerical-approximations-for-integration">
+     Exercise 1.23. Numerical approximations for integration
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-24-newtons-method">
+     Exercise 1.24. Newton’s method
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>An introduction to C++</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   An introduction to C++
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-1-the-sum-of-two-integers">
+     Exercise 1.1. The sum of two integers
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-2-cooking-an-egg">
+     Exercise 1.2. Cooking an egg
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-3-sum-of-first-n-integers">
+     Exercise 1.3. Sum of first n integers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-1-4-generate-an-approximate-fahrenheit-celsius-conversion-table">
+   Exercise 1.4. Generate an approximate Fahrenheit-Celsius conversion table
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-5-the-sum-of-n-integers">
+     Exercise 1.5. The sum of n integers
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-6-the-sum-of-n-integers-from-command-line">
+     Exercise 1.6. The sum of n integers from command line
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-7-making-a-function-in-c">
+     Exercise 1.7. Making a function in C++
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-8-making-an-array">
+     Exercise 1.8. Making an array
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-9-cooking-more-eggs">
+     Exercise 1.9. Cooking more eggs
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-10-stirlings-approximation">
+     Exercise 1.10. Stirling’s approximation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-11-primality-checker">
+     Exercise 1.11. Primality checker
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-12-euler-s-totient-function">
+     Exercise 1.12. Euler’s totient function
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-13-converting-from-base-n-to-decimal">
+     Exercise 1.13. Converting from base n to decimal
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-14-converting-from-hexadecimal-to-decimal">
+     Exercise 1.14. Converting from hexadecimal to decimal
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-15-add-two-binary-numbers">
+     Exercise 1.15. Add two binary numbers
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-16-adding-fractions">
+     Exercise 1.16. Adding fractions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-17-adding-and-simplifying-fractions">
+     Exercise 1.17. Adding and simplifying fractions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-18-make-a-class-for-rectangles">
+     Exercise 1.18. Make a class for rectangles
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-19-make-a-class-for-cooking-eggs">
+     Exercise 1.19. Make a class for cooking eggs
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-20-make-a-class-for-quadratic-functions">
+     Exercise 1.20. Make a class for quadratic functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-21-points-in-different-coordinate-systems">
+     Exercise 1.21. Points in different coordinate systems
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-22-numerical-approximations-for-the-derivative">
+     Exercise 1.22. Numerical approximations for the derivative
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-23-numerical-approximations-for-integration">
+     Exercise 1.23. Numerical approximations for integration
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-24-newtons-method">
+     Exercise 1.24. Newton’s method
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="an-introduction-to-c">
+<h1>An introduction to C++<a class="headerlink" href="#an-introduction-to-c" title="Permalink to this headline">#</a></h1>
+<section id="exercise-1-1-the-sum-of-two-integers">
+<h2>Exercise 1.1. The sum of two integers<a class="headerlink" href="#exercise-1-1-the-sum-of-two-integers" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>a) Write a program that adds two integers a and b and writes out their sum.</p></li>
+<li><p>b) Modify the program from a) so that it prompts the user for the values of the two integers.</p></li>
+</ul>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">sum_of_two.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-2-cooking-an-egg">
+<h2>Exercise 1.2. Cooking an egg<a class="headerlink" href="#exercise-1-2-cooking-an-egg" title="Permalink to this headline">#</a></h2>
+<p>The following expression gives the time it takes (in seconds) for the center of the yolk to reach the
+temperature <span class="math notranslate nohighlight">\(T_y\)</span> (in Celsius degrees):</p>
+<div class="math notranslate nohighlight">
+\[ t= \frac{M^{2/3}c p^{1/3}}{K \pi^{2}(4\pi / 3)^{2/3}} \mathrm{ln} \left[0.76 \frac{T_o - T_w}{T_y - T_w}  \right] \]</div>
+<p>Here <span class="math notranslate nohighlight">\(M\)</span>, <span class="math notranslate nohighlight">\(ρ\)</span>, <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are the mass, density, specific heat capacity and thermal conductivity of the egg respectively. Relevant values are <span class="math notranslate nohighlight">\(M = 47g\)</span> for a small egg and <span class="math notranslate nohighlight">\(M = 67g\)</span> for a large egg, <span class="math notranslate nohighlight">\(ρ = 1.038gcm^{-3}\)</span>, <span class="math notranslate nohighlight">\(c = 3.7Jg^{-1}K^{-1}\)</span>, and <span class="math notranslate nohighlight">\(K = 5.4\cdot10^{-3} Wcm^{-1}K^{-1}\)</span>. Furthermore, <span class="math notranslate nohighlight">\(T_w\)</span> is the temperature of the boiling water, and <span class="math notranslate nohighlight">\(T_o\)</span> is the original temperature of the egg before being put in the water. For a hard boiled egg, the center of the yolk should reach <span class="math notranslate nohighlight">\(T_y = 70^{\circ}C\)</span>. Make a program that calculates the time it takes to make a hard boiled egg when <span class="math notranslate nohighlight">\(T_w = 100^{\circ}C\)</span> and the egg is coming directly from the fridge (<span class="math notranslate nohighlight">\(T_o = 4^{\circ}C\)</span>).</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">egg.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-3-sum-of-first-n-integers">
+<h2>Exercise 1.3. Sum of first n integers<a class="headerlink" href="#exercise-1-3-sum-of-first-n-integers" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>a) Write a program that computes the sum of the integers from 1 up to (and including) <span class="math notranslate nohighlight">\(n\)</span>. Compare with the value of <span class="math notranslate nohighlight">\(n(n+1)/2\)</span>.</p></li>
+<li><p>b) Modify the program so that n is asked for in the terminal.</p></li>
+</ul>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">integers.cpp</span></code></em></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="exercise-1-4-generate-an-approximate-fahrenheit-celsius-conversion-table">
+<h1>Exercise 1.4. Generate an approximate Fahrenheit-Celsius conversion table<a class="headerlink" href="#exercise-1-4-generate-an-approximate-fahrenheit-celsius-conversion-table" title="Permalink to this headline">#</a></h1>
+<p>The formula for converting <span class="math notranslate nohighlight">\(F\)</span> degrees Fahrenheit to <span class="math notranslate nohighlight">\(C\)</span> degrees Celsius is <span class="math notranslate nohighlight">\(C = 5/9(F −32)\)</span>. This can be approximated by <span class="math notranslate nohighlight">\(C \approx \hat{C} = (F −30)/2\)</span>.
+Write a program that prints a nicely formatted table with three columns: <span class="math notranslate nohighlight">\(F\)</span>, <span class="math notranslate nohighlight">\(C\)</span> and the approximate value <span class="math notranslate nohighlight">\(\hat{C}\)</span>. Also write the table to a file.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">f2c_approx.cpp</span></code></em></p>
+<section id="exercise-1-5-the-sum-of-n-integers">
+<h2>Exercise 1.5. The sum of n integers<a class="headerlink" href="#exercise-1-5-the-sum-of-n-integers" title="Permalink to this headline">#</a></h2>
+<p>Write a program that asks the user how many numbers he wants to add and asks for the value of these numbers. Then the program should print the sum of the numbers.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">sum_many.cpp</span></code></em>
+1</p>
+</section>
+<section id="exercise-1-6-the-sum-of-n-integers-from-command-line">
+<h2>Exercise 1.6. The sum of n integers from command line<a class="headerlink" href="#exercise-1-6-the-sum-of-n-integers-from-command-line" title="Permalink to this headline">#</a></h2>
+<p>Write a program that prints the sum of the command line arguments.
+Hint. For converting from <code class="docutils literal notranslate"><span class="pre">char</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code> you can use the function <code class="docutils literal notranslate"><span class="pre">atoi</span></code>.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">sum_command.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-7-making-a-function-in-c">
+<h2>Exercise 1.7. Making a function in C++<a class="headerlink" href="#exercise-1-7-making-a-function-in-c" title="Permalink to this headline">#</a></h2>
+<p>Make a function called <code class="docutils literal notranslate"><span class="pre">half</span></code> that takes an integer argument. The function must print the number it received to the screen, then the program should divide that number by two to make a new number. If the new number is not zero the function then calls the function <code class="docutils literal notranslate"><span class="pre">half</span></code> passing it the new number
+as its argument. If the number is zero then the function exits.
+Call the function <code class="docutils literal notranslate"><span class="pre">half</span></code> with an argument of 100, the screen output should be</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">100</span>
+<span class="mi">50</span>
+<span class="mi">25</span>
+<span class="o">...</span>
+<span class="o">...</span>
+<span class="mi">1</span>
+</pre></div>
+</div>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">half.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-8-making-an-array">
+<h2>Exercise 1.8. Making an array<a class="headerlink" href="#exercise-1-8-making-an-array" title="Permalink to this headline">#</a></h2>
+<p>Make an array with <span class="math notranslate nohighlight">\(N\)</span> uniformly spaced values between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. Begin with declaring the array, then ﬁll it with a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. Print out the elements of the array to check that the result is as wanted.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">array.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-9-cooking-more-eggs">
+<h2>Exercise 1.9. Cooking more eggs<a class="headerlink" href="#exercise-1-9-cooking-more-eggs" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>a) Modify your program from Exercise 1.2 so that you get a function returning the time it takes
+for the center of the yolk to reach a temperature <span class="math notranslate nohighlight">\(T_y\)</span> when the egg had a temperature <span class="math notranslate nohighlight">\(T_o\)</span> before cooking. Check that you get the same result as in Exercise 1.2 for <span class="math notranslate nohighlight">\(T_o = 4^{\circ}C\)</span> and <span class="math notranslate nohighlight">\(T_y = 70^{\circ}C\)</span>.</p></li>
+<li><p>b) Make an array of <span class="math notranslate nohighlight">\(T_y\)</span> values, <span class="math notranslate nohighlight">\(T_y = \{60,62,64,66,68,70,72\}\)</span>. Then declare an array <code class="docutils literal notranslate"><span class="pre">t</span></code> of the same length for time values. Make a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop and fill in the <code class="docutils literal notranslate"><span class="pre">t</span></code> array.</p></li>
+<li><p>c)  Use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to print out a nicely formatted table of <span class="math notranslate nohighlight">\(T_y\)</span> values and the corresponding <code class="docutils literal notranslate"><span class="pre">t</span></code> values.</p></li>
+</ul>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">eggs.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-10-stirlings-approximation">
+<h2>Exercise 1.10. Stirling’s approximation<a class="headerlink" href="#exercise-1-10-stirlings-approximation" title="Permalink to this headline">#</a></h2>
+<p>Stirling’s approximation is</p>
+<div class="math notranslate nohighlight">
+\[ \mathrm{ln} x! \approx x \mathrm{ln}x−x.\]</div>
+<ul class="simple">
+<li><p>a) Write a function taking an integer value <span class="math notranslate nohighlight">\(x\)</span> as argument that returns Stirling’s approximation to <span class="math notranslate nohighlight">\(\mathrm{ln}x!\)</span>.</p></li>
+<li><p>b) Print a nicely formatted table with three columns: <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(\mathrm{ln}x!\)</span> and Stirling’s approximation to <span class="math notranslate nohighlight">\(\mathrm{ln}x!\)</span> for <span class="math notranslate nohighlight">\(x = 2,5,10,50,100,1000\)</span>. Also write this table to a file named stirling.txt.
+Hint. To compute <span class="math notranslate nohighlight">\(\mathrm{ln}x!\)</span> you can use <code class="docutils literal notranslate"><span class="pre">lgamma</span></code> from <code class="docutils literal notranslate"><span class="pre">&lt;cmath&gt;</span></code> Then <span class="math notranslate nohighlight">\(\mathrm{ln}x! = `lgamma`(x+1)\)</span>.</p></li>
+<li><p>c)  Make sure you have stored the <span class="math notranslate nohighlight">\(x\)</span> values in an array <code class="docutils literal notranslate"><span class="pre">x</span></code>. Then declare two arrays <code class="docutils literal notranslate"><span class="pre">exact</span></code> and <code class="docutils literal notranslate"><span class="pre">approx</span></code> of the same length as <code class="docutils literal notranslate"><span class="pre">x</span></code>. Use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to fill these arrays with the exact value and the approximated value of <span class="math notranslate nohighlight">\(\mathrm{ln}x!\)</span> for each value in the array <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+</ul>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">stirling.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-11-primality-checker">
+<h2>Exercise 1.11. Primality checker<a class="headerlink" href="#exercise-1-11-primality-checker" title="Permalink to this headline">#</a></h2>
+<p>Recall that a prime number is a number greater than 1 that has exactly 2 divisors. Said differently, a number greater than one is a prime if it is divisible by only itself and one. Every number <span class="math notranslate nohighlight">\(n\)</span> can be written as a unique product of primes (e.g. <span class="math notranslate nohighlight">\(12 = 2\cdot2\cdot3\)</span>), this is called the prime factorization of <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Make a function that takes a number <span class="math notranslate nohighlight">\(n\)</span>, and returns true if it’s prime, and false if it’s not. Use the program to ﬁnd all prime numbers up to 100.</p>
+<p>Hint: You will only need to check divisibility for numbers up to and including <span class="math notranslate nohighlight">\(\sqrt{n}\)</span>, because any greater divisor will imply that there is a divisor less than this.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">prime.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-12-euler-s-totient-function">
+<h2>Exercise 1.12. Euler’s totient function<a class="headerlink" href="#exercise-1-12-euler-s-totient-function" title="Permalink to this headline">#</a></h2>
+<p>Two numbers <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are called relatively prime if they have no common divisors except for 1. That is, no number greater than one should divide both numbers with no residue.</p>
+<ul>
+<li><p>a) Make a function that takes two numbers and returns true if they’re relatively prime and false if they’re not.</p></li>
+<li><p>b) Euler’s totient function is defined as</p>
+<div class="math notranslate nohighlight">
+\[ \varphi(d) = \#\{\text{Numbers less than d which are relatively prime to d}\}.\]</div>
+</li>
+</ul>
+<p>Implement Euler’s totient function and print <span class="math notranslate nohighlight">\(\varphi(d)\)</span> for <span class="math notranslate nohighlight">\(d = 10,50,100,200\)</span>.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">euler.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-13-converting-from-base-n-to-decimal">
+<h2>Exercise 1.13. Converting from base n to decimal<a class="headerlink" href="#exercise-1-13-converting-from-base-n-to-decimal" title="Permalink to this headline">#</a></h2>
+<p>Make a function <code class="docutils literal notranslate"><span class="pre">long</span> <span class="pre">convert_n(long</span> <span class="pre">number,</span> <span class="pre">int</span> <span class="pre">n)</span></code> that converts a number from base <span class="math notranslate nohighlight">\(n\)</span> to decimal for <span class="math notranslate nohighlight">\(n = 2,3,4,5,6,7,8,9,10\)</span>.</p>
+<p>Hint: Remember that a number <span class="math notranslate nohighlight">\(d_0d_1\cdots d_k\)</span> in base <span class="math notranslate nohighlight">\(n\)</span> is the following in decimal: <span class="math notranslate nohighlight">\(d_0 \cdot n^k + d_1 \cdot n^{k-1} +  \cdots + d_k \cdot n^0\)</span>. Some useful operations: <code class="docutils literal notranslate"><span class="pre">/</span></code> and <code class="docutils literal notranslate"><span class="pre">%</span></code>.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">convert_n.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-14-converting-from-hexadecimal-to-decimal">
+<h2>Exercise 1.14. Converting from hexadecimal to decimal<a class="headerlink" href="#exercise-1-14-converting-from-hexadecimal-to-decimal" title="Permalink to this headline">#</a></h2>
+<p>Make a function <code class="docutils literal notranslate"><span class="pre">long</span> <span class="pre">convert_hex(string</span> <span class="pre">number)</span></code> that converts a number of the type string from hexadecimal to decimal. The answer should be returned as type long.</p>
+<p>Hint: When converting from <code class="docutils literal notranslate"><span class="pre">string</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">long</span></code>, subtract the zero string <code class="docutils literal notranslate"><span class="pre">'0'</span></code> before converting or use the function <code class="docutils literal notranslate"><span class="pre">atoi</span></code>.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">convert_hex.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-15-add-two-binary-numbers">
+<h2>Exercise 1.15. Add two binary numbers<a class="headerlink" href="#exercise-1-15-add-two-binary-numbers" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>a) Make a function <code class="docutils literal notranslate"><span class="pre">long</span> <span class="pre">add_binary(long</span> <span class="pre">a,</span> <span class="pre">long</span> <span class="pre">b)</span></code> that adds two binary numbers <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.</p></li>
+</ul>
+<p>Hint: Add like you do by hand: start with the last digits. You can use a while loop containing</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="kt">long</span><span class="p">(</span><span class="n">a</span><span class="o">%</span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="o">%</span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
+<span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">((</span><span class="n">a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="n">a</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="n">b</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Think about what <code class="docutils literal notranslate"><span class="pre">r</span></code> is. What should you do if <code class="docutils literal notranslate"><span class="pre">r</span></code> is non-zero after you have gone through all the
+digits?</p>
+<ul class="simple">
+<li><p>b) Modify your program from a) so that you can add any two numbers of base <span class="math notranslate nohighlight">\(n\)</span> for <span class="math notranslate nohighlight">\(n = 2,3,4,5,6,7,8,9,10\)</span>.</p></li>
+<li></li>
+</ul>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">add_n.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-16-adding-fractions">
+<h2>Exercise 1.16. Adding fractions<a class="headerlink" href="#exercise-1-16-adding-fractions" title="Permalink to this headline">#</a></h2>
+<p>Write a program to add two fractions and display the resulting fraction. Your program will prompt the user to input the two fractions. The numerator and denominator of each fraction are input
+separately by space, as illustrated below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">fraction</span> <span class="mi">1</span> <span class="p">(</span><span class="n">numerator</span> <span class="n">denominator</span><span class="p">):</span> <span class="mi">1</span> <span class="mi">3</span>
+<span class="n">Enter</span> <span class="n">fraction</span> <span class="mi">2</span> <span class="p">(</span><span class="n">numerator</span> <span class="n">denominator</span><span class="p">):</span> <span class="mi">2</span> <span class="mi">5</span>
+<span class="n">Result</span><span class="p">:</span> <span class="mi">11</span><span class="o">/</span><span class="mi">15</span>
+</pre></div>
+</div>
+<p>Hint: You will need to use a <code class="docutils literal notranslate"><span class="pre">struct</span></code> to define a fraction. The <code class="docutils literal notranslate"><span class="pre">struct</span></code> has two members: <code class="docutils literal notranslate"><span class="pre">numerator</span></code> and <code class="docutils literal notranslate"><span class="pre">denominator</span></code>.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">fraction.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-17-adding-and-simplifying-fractions">
+<h2>Exercise 1.17. Adding and simplifying fractions<a class="headerlink" href="#exercise-1-17-adding-and-simplifying-fractions" title="Permalink to this headline">#</a></h2>
+<p>Modify your program from Exercise 1.16 so that the result is the fraction in it’s simplest form. You should make a function <code class="docutils literal notranslate"><span class="pre">simplify</span></code> that takes in a fraction and simplifies it. Let the function be of
+the type <code class="docutils literal notranslate"><span class="pre">void</span></code>. An example from the terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">fraction</span> <span class="mi">1</span> <span class="p">(</span><span class="n">numerator</span> <span class="n">denominator</span><span class="p">):</span> <span class="mi">1</span> <span class="mi">3</span>
+<span class="n">Enter</span> <span class="n">fraction</span> <span class="mi">2</span> <span class="p">(</span><span class="n">numerator</span> <span class="n">denominator</span><span class="p">):</span> <span class="mi">2</span> <span class="mi">6</span>
+<span class="n">Result</span><span class="p">:</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>Hint: For the function to be able to change the value of the fraction, the argument of the function
+should be a reference variable: <code class="docutils literal notranslate"><span class="pre">simplify(Fraction&amp;</span> <span class="pre">fract)</span></code> where <code class="docutils literal notranslate"><span class="pre">Fraction</span></code> is the name of the <code class="docutils literal notranslate"><span class="pre">struct</span></code> for fractions.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">fraction2.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-18-make-a-class-for-rectangles">
+<h2>Exercise 1.18. Make a class for rectangles<a class="headerlink" href="#exercise-1-18-make-a-class-for-rectangles" title="Permalink to this headline">#</a></h2>
+<p>Make a class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> that has two private variables and one member function which will return the area of the rectangle.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">Rectangle.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-19-make-a-class-for-cooking-eggs">
+<h2>Exercise 1.19. Make a class for cooking eggs<a class="headerlink" href="#exercise-1-19-make-a-class-for-cooking-eggs" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>a) Make a class Cook_egg that has a public function taking no arguments which returns the time it takes for the egg to be cooked.</p></li>
+<li><p>b) Add two different methods for changing the mass of the egg. The first method takes the mass of the egg in grams as argument and reassigns the mass of the egg to this mass. The other method
+takes <code class="docutils literal notranslate"><span class="pre">'S'</span></code>, <code class="docutils literal notranslate"><span class="pre">'M'</span></code> or <code class="docutils literal notranslate"><span class="pre">'L'</span></code> as arguments and changes the mass to 47g, 57g or 67g respectively.</p></li>
+<li><p>c)  Add two new methods: one for changing the initial temperature of the egg and one for changing the desired final temperature of the yolk.</p></li>
+<li></li>
+</ul>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">Cook_egg.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-20-make-a-class-for-quadratic-functions">
+<h2>Exercise 1.20. Make a class for quadratic functions<a class="headerlink" href="#exercise-1-20-make-a-class-for-quadratic-functions" title="Permalink to this headline">#</a></h2>
+<p>Consider a quadratic function <span class="math notranslate nohighlight">\(f(x;a,b,c) = ax +bx+c\)</span>. Make a class <code class="docutils literal notranslate"><span class="pre">Quadratic</span></code> for representing <span class="math notranslate nohighlight">\(f\)</span>, where <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code> are initial arguments. The class should have three methods: <code class="docutils literal notranslate"><span class="pre">value</span></code>, <code class="docutils literal notranslate"><span class="pre">table</span></code> and
+<code class="docutils literal notranslate"><span class="pre">roots</span></code>. The <code class="docutils literal notranslate"><span class="pre">value</span></code> method should compute the value of <span class="math notranslate nohighlight">\(f\)</span> at a point <span class="math notranslate nohighlight">\(x\)</span>. The <code class="docutils literal notranslate"><span class="pre">table</span></code> method should write out a table of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(f\)</span> values for <span class="math notranslate nohighlight">\(n\)</span> uniformly spaced <span class="math notranslate nohighlight">\(x\)</span> values in the interval <span class="math notranslate nohighlight">\([L,R]\)</span>. The <code class="docutils literal notranslate"><span class="pre">roots</span></code>
+method should compute the two roots of the quadratic function. It should accept complex roots.
+Hint. For the <code class="docutils literal notranslate"><span class="pre">roots</span></code> method to be able to return two values consider making a structure <code class="docutils literal notranslate"><span class="pre">Two_vals</span></code> containing two values.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">Quadratic.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-21-points-in-different-coordinate-systems">
+<h2>Exercise 1.21. Points in different coordinate systems<a class="headerlink" href="#exercise-1-21-points-in-different-coordinate-systems" title="Permalink to this headline">#</a></h2>
+<p>Make a class <code class="docutils literal notranslate"><span class="pre">Point</span></code> to represent a point <span class="math notranslate nohighlight">\((x,y,z)\)</span> in space. This class should have methods for getting the value of <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>.
+Make a subclass <code class="docutils literal notranslate"><span class="pre">SphericalPoint</span></code> that inherits from Point. The subclass should take the spherical representation of a point <span class="math notranslate nohighlight">\((r,\varphi,\theta)\)</span> as arguments. Call the superclass constructor with the corresponding <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> values (recall that <span class="math notranslate nohighlight">\(x = r\cos\varphi \sin\theta\)</span>, <span class="math notranslate nohighlight">\(y = r\sin\varphi\sin\theta\)</span> and <span class="math notranslate nohighlight">\(z = r\cos\theta\)</span>).</p>
+<p>Verify the implementation by initializing three points (e.g. the three Cartesian unit vectors) as spherical points and print the corresponding Cartesian coordinates by calling the methods for getting the value of <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">Point.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-22-numerical-approximations-for-the-derivative">
+<h2>Exercise 1.22. Numerical approximations for the derivative<a class="headerlink" href="#exercise-1-22-numerical-approximations-for-the-derivative" title="Permalink to this headline">#</a></h2>
+<p>Let <code class="docutils literal notranslate"><span class="pre">f(x)</span></code> be a function and <code class="docutils literal notranslate"><span class="pre">f'(x)</span></code> its derivative. There are many ways to approximate the derivative, some of which are:</p>
+<div class="math notranslate nohighlight">
+\[ f'(x) \approx \frac{f(x+h)−f(x)}{h}, \]</div>
+<div class="math notranslate nohighlight">
+\[ f'(x) \approx \frac{f(x+h)−f(x−h)}{2h},\]</div>
+<div class="math notranslate nohighlight">
+\[f'(x) \approx \frac{−f(x+2h)+8f(x+h)−8f(x−h)+f(x−2h)}{12h}.\]</div>
+<p>Make a class <code class="docutils literal notranslate"><span class="pre">Diff</span></code> with a function <span class="math notranslate nohighlight">\(f\)</span> as initial argument and implement three methods <code class="docutils literal notranslate"><span class="pre">diff1</span></code>, <code class="docutils literal notranslate"><span class="pre">diff2</span></code>, and <code class="docutils literal notranslate"><span class="pre">diff3</span></code> for approximating the derivative using the above formulas. The class should also have a method <code class="docutils literal notranslate"><span class="pre">set_h</span></code> for changing the value of <span class="math notranslate nohighlight">\(h\)</span>.
+′
+Let <span class="math notranslate nohighlight">\(f(x) = e^x\)</span> and compute <span class="math notranslate nohighlight">\(f'(1)\)</span> with the three different methods for <span class="math notranslate nohighlight">\(h \in \{1, 0.5, 0.2, 0.1,  0.01, 0.001\}\)</span>.</p>
+<p>You should let <span class="math notranslate nohighlight">\(h\)</span> be an array with the different values and loop over it.</p>
+<p>Hint: To send a function as an argument to a class you should use pointers, i.e. let the beginning of the class be</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Diff</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">f</span><span class="p">)(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">Diff</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">_h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">function</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_h</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">Diff.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-23-numerical-approximations-for-integration">
+<h2>Exercise 1.23. Numerical approximations for integration<a class="headerlink" href="#exercise-1-23-numerical-approximations-for-integration" title="Permalink to this headline">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(f(x)\)</span> be a function we want to integrate. The integral <span class="math notranslate nohighlight">\(\int_a^b f(x)dx \)</span> can be approximated in many different ways, some of which are: the midpoint rule, the trapezoidal rule and Simpson’s rule.
+The midpoint rule gives the following approximation to the integral:</p>
+<div class="math notranslate nohighlight">
+\[ \int_a^b f(x)dx \approx \sum_{i=0}^{N-1} f(a+\Delta x(i+1/2)) \cdot \Delta x,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta x = (b−a)/(N)\)</span> and <span class="math notranslate nohighlight">\(N\)</span> is the number of intervals the integral is divided into. The trapezoidal rule gives the following approximation to the integral:</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f(x)dx \approx \frac{1}{2} \left( f(a)+2 \sum_{i=1}^{N-1} f(a+\Delta x \cdot i)+f(b) \right) \Delta x\]</div>
+<p>Simpson’s rule gives the following approximation to the integral:</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f(x)dx \approx \frac{1}{3} (f(a)+4f(x_1)+2f(x_2)+4f(x_3)+2f(x_4)+ \cdots+4f(x_{N-1})) +f(b)) \Delta x,\]</div>
+<p>where <span class="math notranslate nohighlight">\(x = a+\Delta x \cdot i\)</span>.</p>
+<p>Make a class <code class="docutils literal notranslate"><span class="pre">Integration</span></code> where you implement the three different rules. Include also a method for changing the number of intervals <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">Integration.cpp</span></code></em></p>
+</section>
+<section id="exercise-1-24-newtons-method">
+<h2>Exercise 1.24. Newton’s method<a class="headerlink" href="#exercise-1-24-newtons-method" title="Permalink to this headline">#</a></h2>
+<p>Make a class Function which is a subclass of <code class="docutils literal notranslate"><span class="pre">Diff</span></code> from Exercise 1.22. It should take a function <span class="math notranslate nohighlight">\(f(x)\)</span> as an initial variable.
+Make a method <code class="docutils literal notranslate"><span class="pre">call</span></code> that takes <span class="math notranslate nohighlight">\(x\)</span> as an argument and returns the value of the function for that <span class="math notranslate nohighlight">\(x\)</span>.
+We would like the class to give estimated values for roots of <span class="math notranslate nohighlight">\(f\)</span>. That is, points such that <span class="math notranslate nohighlight">\(f(x) = 0\)</span>.
+To do this we implement Newton’s formula. It is given recursively as</p>
+<div class="math notranslate nohighlight">
+\[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\]</div>
+<p>where we give a starting point <span class="math notranslate nohighlight">\(x_0\)</span>. In some cases (not all) x_n will approach a root of <span class="math notranslate nohighlight">\(f\)</span>. Implement this in a method <code class="docutils literal notranslate"><span class="pre">approx_root</span></code> that takes a starting point and a bound <span class="math notranslate nohighlight">\(\epsilon &lt; 1\)</span> as arguments and
+approximates <span class="math notranslate nohighlight">\(x_n\)</span> such that <span class="math notranslate nohighlight">\(f(x_n) &lt; \epsilon\)</span>.</p>
+<p>Hint: Implement a simple convergence test. Check that <span class="math notranslate nohighlight">\(f(x_n) &lt; 1\)</span> after 100 iterations. If not terminate the loop and inform the user that there is no convergence for that starting point. It is still a possibility for convergence, but unlikely.</p>
+<p><em>Filename: <code class="docutils literal notranslate"><span class="pre">Function.cpp</span></code></em></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="week7/C2_primes_by_sieve.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Challenge 2</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="week10/E8_random_number_generators.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week10</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

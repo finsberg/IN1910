@@ -1,0 +1,1597 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Course Summary &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Week 1" href="../../exercises/week1/E1_python_refresh_and_git.html" />
+    <link rel="prev" title="Parallel Programming" href="../optimization/parallel_programming.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/summary/course_summary.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/summary/course_summary.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/summary/course_summary.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/summary/course_summary.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-goal-of-in1910">
+   The Goal of IN1910
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#major-topics-of-in1910">
+   Major Topics of IN1910
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#object-oriented-programming">
+     Object Oriented Programming
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#classes-in-python">
+       Classes in Python
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#classes-in-c">
+       Classes in C++
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#programming-in-c">
+     Programming in C++
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#make-you-familiar-with-a-c-style-language">
+       Make you familiar with a C-style language
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#give-you-an-understanding-between-the-differences-between-python-and-c">
+       Give you an understanding between the differences between Python and C++
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-need-for-speed">
+       The Need for Speed
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-structures-and-algorithms">
+     Data Structures and Algorithms
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-random-numbers-and-stochastic-simulations">
+     Generating Random Numbers and Stochastic Simulations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimization">
+     Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tools-in-in1910">
+   Tools in IN1910
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#version-control-with-git">
+     Version Control with Git
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#unit-testing-with-pytest">
+       Unit Testing with
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         pytest
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#improving-code-style-with-style-guides">
+     Improving Code Style with Style Guides
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-documentation-with-docstrings">
+     Writing Documentation with docstrings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#timing-experiments-and-profiling">
+     Timing Experiments and Profiling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jit-compiling-with-cython-and-numba">
+     JIT Compiling with Cython and numba
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-scipy-stack-ecosystem">
+     The SciPy Stack/Ecosystem
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-practices">
+   Best Practices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-1-write-programs-for-people-not-computers">
+     Rule 1) Write Programs for people, not computers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-2-let-the-computer-do-the-work">
+     Rule 2) Let the computer do the work
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-3-make-incremental-changes">
+     Rule 3) Make incremental changes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-4-don-t-repeat-yourself-or-others">
+     Rule 4) Don’t repeat yourself (or others)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-5-plan-for-mistakes">
+     Rule 5) Plan for mistakes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-6-optimize-software-only-after-it-works-correctly">
+     Rule 6) Optimize software only after it works correctly
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-7-document-design-and-purpose-not-mechanics">
+     Rule 7) Document design and purpose, not mechanics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-8-collaborate">
+     Rule 8) Collaborate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#where-to-go-from-here">
+   Where to go from here?
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Course Summary</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-goal-of-in1910">
+   The Goal of IN1910
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#major-topics-of-in1910">
+   Major Topics of IN1910
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#object-oriented-programming">
+     Object Oriented Programming
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#classes-in-python">
+       Classes in Python
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#classes-in-c">
+       Classes in C++
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#programming-in-c">
+     Programming in C++
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#make-you-familiar-with-a-c-style-language">
+       Make you familiar with a C-style language
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#give-you-an-understanding-between-the-differences-between-python-and-c">
+       Give you an understanding between the differences between Python and C++
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-need-for-speed">
+       The Need for Speed
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-structures-and-algorithms">
+     Data Structures and Algorithms
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-random-numbers-and-stochastic-simulations">
+     Generating Random Numbers and Stochastic Simulations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimization">
+     Optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tools-in-in1910">
+   Tools in IN1910
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#version-control-with-git">
+     Version Control with Git
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#unit-testing-with-pytest">
+       Unit Testing with
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         pytest
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#improving-code-style-with-style-guides">
+     Improving Code Style with Style Guides
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-documentation-with-docstrings">
+     Writing Documentation with docstrings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#timing-experiments-and-profiling">
+     Timing Experiments and Profiling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jit-compiling-with-cython-and-numba">
+     JIT Compiling with Cython and numba
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-scipy-stack-ecosystem">
+     The SciPy Stack/Ecosystem
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#best-practices">
+   Best Practices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-1-write-programs-for-people-not-computers">
+     Rule 1) Write Programs for people, not computers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-2-let-the-computer-do-the-work">
+     Rule 2) Let the computer do the work
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-3-make-incremental-changes">
+     Rule 3) Make incremental changes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-4-don-t-repeat-yourself-or-others">
+     Rule 4) Don’t repeat yourself (or others)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-5-plan-for-mistakes">
+     Rule 5) Plan for mistakes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-6-optimize-software-only-after-it-works-correctly">
+     Rule 6) Optimize software only after it works correctly
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-7-document-design-and-purpose-not-mechanics">
+     Rule 7) Document design and purpose, not mechanics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rule-8-collaborate">
+     Rule 8) Collaborate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#where-to-go-from-here">
+   Where to go from here?
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="course-summary">
+<h1>Course Summary<a class="headerlink" href="#course-summary" title="Permalink to this headline">#</a></h1>
+<p>This lecture marks the end of IN1910, and as such, will mostly be a summary of the topics we have gone through during the semester. We will also try to offer a big picture view of scientific programming, and give some helpful advice along the way.</p>
+<section id="the-goal-of-in1910">
+<h2>The Goal of IN1910<a class="headerlink" href="#the-goal-of-in1910" title="Permalink to this headline">#</a></h2>
+<p>We can start of by repeating what we started the whole course with: the goals of the course itself. The name of the course is <em>Programming with Scientific Applications</em>, and so the goal is to focus on the type of programming scientists use as a tool in their everyday life. This is a tool many scientists have not been formally trained in, but are rather self-taught, occasionally leading to inefficient coding and bad practices. The movement <em>Software Carpentry</em> is trying to rectify this situation somewhat, by giving workshops in good scientific programming.</p>
+<figure class="align-default" id="software-carpentry">
+<a class="reference internal image-reference" href="../../../_images/software_carpentry.png"><img alt="software_carpentry" src="../../../_images/software_carpentry.png" style="width: 400px;" /></a>
+</figure>
+<p>Our goal in IN1910 has not only to teach you programming itself, but also important tools and techniques for developing code more efficiently, and in a way that produces reliable and understandable code.</p>
+</section>
+<section id="major-topics-of-in1910">
+<h2>Major Topics of IN1910<a class="headerlink" href="#major-topics-of-in1910" title="Permalink to this headline">#</a></h2>
+<p>Let us quickly go through the main topics we have been through in this course and say a few words about each.</p>
+<section id="object-oriented-programming">
+<h3>Object Oriented Programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">#</a></h3>
+<p>The biggest topic of IN1910 is object-oriented programming. Not only did we devote many weeks at the start of the course to OOP basics, but it has been a recurring theme also in the other parts of the course.</p>
+<p>Object-oriented programming is a programming <em>paradigm</em> where we break down and solve problems by defining objects and how they interact. The major benefit of OOP is that good use of it can lead to elegant programs that are easy to understand and work with.</p>
+<p>Also recall the four pillars of object-oriented programming:</p>
+<ol class="simple">
+<li><p>Abstraction</p></li>
+<li><p>Encapsulation</p></li>
+<li><p>Inheritance</p></li>
+<li><p>Polymorphism</p></li>
+</ol>
+<section id="classes-in-python">
+<h4>Classes in Python<a class="headerlink" href="#classes-in-python" title="Permalink to this headline">#</a></h4>
+<p>Throughout the course, you have gotten a lot of exercise in defining and using your own classes in Python. Hopefully this has made you more comfortable in the use of classes as a good technique for developing and organizing your code.</p>
+<p>To make really elegant and handy classes, the trick is often to define the <em>special</em> methods we keep returning to. The major ones we keep using in this course are <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, and <code class="docutils literal notranslate"><span class="pre">__call__</span></code>, but we have also seen other examples such as <code class="docutils literal notranslate"><span class="pre">__add__</span></code>, <code class="docutils literal notranslate"><span class="pre">__repr__</span></code>, and many more. We have also extensively used the <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> decorator to easily implement properties for our class that are more advanced than simple data fields.</p>
+<p>There are tons more which we have not covered in this course. The main take away is that it is you, as the developer, who decides how your custom objects should behave, and you can do this for nearly any aspect of your code by implementing good special methods.</p>
+</section>
+<section id="classes-in-c">
+<h4>Classes in C++<a class="headerlink" href="#classes-in-c" title="Permalink to this headline">#</a></h4>
+<p>You have also gotten experience with implementing classes in C++. Recall that C++ is often referred to as “C with Classes”, and object-oriented programming is one of the major differences between C and C++.</p>
+<p>You have seen how you can implement structs and classes in C++, and how things are both quite similar to Python, but also quite different. For one, we can overload operators in C++, in much the same way as special methods work in Python. Unlike Python however, C++ has implicit self-reference, and actually private variables and methods.</p>
+</section>
+</section>
+<section id="programming-in-c">
+<h3>Programming in C++<a class="headerlink" href="#programming-in-c" title="Permalink to this headline">#</a></h3>
+<p>Speaking of C++, this has been a second major topic of the course, devoting four full weeks and a project to purely C++.</p>
+<p>Our main goal hsa not been to make you experts at C++, that is not possible to do in a year, much less four weeks. Rather, our goals have been to:</p>
+<section id="make-you-familiar-with-a-c-style-language">
+<h4>Make you familiar with a C-style language<a class="headerlink" href="#make-you-familiar-with-a-c-style-language" title="Permalink to this headline">#</a></h4>
+<p>Recall that C is the most used programming language ever. It was, and still is, so ubiquitous, that many other languages has borrowed much of their syntax from C. This is true for C++, C#, Java, and many others. Because C, and its descendants are so popular and common, chances are that you will need to work with one of them later on in your studies or future career. This is true both for scientific programming, or if you move into other careers where you use programming. By knowing one C-style language, you are much better suited to reading and understanding code in these other C-style language, because their code is so familiar. For instance, while you might never have written a line of Java code in your life, this Java example will most likely look very familiar:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">total</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">total</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>To show how helpful knowing a C-style language can be, let’s take a quick look again at the <a class="reference external" href="https://spectrum.ieee.org/at-work/innovation/the-2018-top-programming-languages">IEEE Spectrum Ranking for 2018</a>, which tries to rank programming languages by <em>popularity</em>, i.e., how much use they see. We can see that Python is number one, this is probably because Python is high-level language it is quick to prototype in. The next four languages in the list however, are all C-style languages. Knowing Python and some C++ therefore goes a long way.</p>
+<figure class="align-default" id="spectrum-ranking2021">
+<a class="reference internal image-reference" href="../../../_images/spectrum_ranking_2021.png"><img alt="../../../_images/spectrum_ranking_2021.png" src="../../../_images/spectrum_ranking_2021.png" style="width: 500px;" /></a>
+</figure>
+</section>
+<section id="give-you-an-understanding-between-the-differences-between-python-and-c">
+<h4>Give you an understanding between the differences between Python and C++<a class="headerlink" href="#give-you-an-understanding-between-the-differences-between-python-and-c" title="Permalink to this headline">#</a></h4>
+<p>Another important aspect of teaching you some C++, is to give you a better understanding of Python, by showing you how Python differs from a language like C++. Even if you going forward more or less work solely in Python, we believe knowing some C++ will make you a better programmer.</p>
+<p>The biggest difference between C++ and Python is that C++ is a low-level language, while Python is a high-level language. This means that C++ code lies closer to machine code, while Python code contains more abstraction. This reflects in most of the differences between the languages. The major benefit of a low-level language is that it can give very fast code, if programmed correctly. This is also true for C++, as it can become <em>much</em> faster than Python code. While the main benefit of a high-level language is that it is often easier and faster to develop code, and the code can usually be shorter overall and more readable.</p>
+<p>Other differences we have gone through are that C++ is a compiled language, while Python is an interpreted language. C++ is statically typed, while Python is dynamically typed. Python has automatic garbage collection, whereas C++ does not. C++ supports pointers and specific memory management, whereas Python does not.</p>
+<p>All of these differences sum to two programming languages that are good at different tasks, and should be used in different ways. C++ is fast, and good at handling heavy computations and simulations. Python is good for more or less everything else, and is perfect for quick scripting and prototyping, data analysis, data visualization and so on. This categorization is however, perhaps a bit too simple, and personal preference is also not to be understated.</p>
+</section>
+<section id="the-need-for-speed">
+<h4>The Need for Speed<a class="headerlink" href="#the-need-for-speed" title="Permalink to this headline">#</a></h4>
+<p>Put simply, C++ is <em>much faster</em> than Python, if programmed correctly. This is a major reason C/C++ are so much used in scientific programming, which often requires heavy computations. However, as we have seen in the last portion of the course, writing pure C++ code is often not necessary. It might be sufficient to write only the really slow parts in C++, and then use it from Python. This is the way NumPy is built, and so for example, one can make efficient Python programs using numpy, because the slow parts of the code are running in pre-compiled C code. Similarity, we might get away with just-in-time compiling our Python code into auto-generated C or C++ code using tools like Cython or Numba. Knowing C++ will make using these techniques and tools much easier.</p>
+</section>
+</section>
+<section id="data-structures-and-algorithms">
+<h3>Data Structures and Algorithms<a class="headerlink" href="#data-structures-and-algorithms" title="Permalink to this headline">#</a></h3>
+<p>The next topic we moved into was <em>data structures and algorithms</em>, a big field in informatics.</p>
+<p>Data structures are how we organized the data of our programs in memory, and it is what underlies our <em>data types</em>. We have looked at four different data structures in IN1910:</p>
+<ol class="simple">
+<li><p>Arrays</p></li>
+<li><p>Dynamic Arrays, aka, Array Lists</p></li>
+<li><p>Linked Lists, both singly linked, doubly linked and circularly linked</p></li>
+<li><p>Binary Search Trees</p></li>
+</ol>
+<p>These are just some possible data structures, but are usually considered the “classics”. Other classics are heaps, stacks, hash maps and so on. However, the list of data structures and their use cases is near <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_data_structures">endless</a>.</p>
+<p>While we have focused a lot on implementing our own data structures, this is rarely required in practice, as most common data types are either built-in, or available through standard libraries. However, by implementing them ourselves, we have hopefully gotten a better understanding of what data structures actually are, and how choosing the right data structure of the right problem can be crucial.</p>
+<p>We have also compared the performance of our data structures, and look at other algorithms, using <em>algorithm analysis</em>. Here we have focused mostly on Big-Oh analysis, which is mostly concerned with classifying how algorithms scale. Big-Oh is an important tool when analyzing problems and algorithms to solve them.</p>
+</section>
+<section id="generating-random-numbers-and-stochastic-simulations">
+<h3>Generating Random Numbers and Stochastic Simulations<a class="headerlink" href="#generating-random-numbers-and-stochastic-simulations" title="Permalink to this headline">#</a></h3>
+<p>We have looked at how random number generators work, and how we can produce <em>pseudorandom</em> numbers on a computer. These are numbers that are produced in a completely deterministic fashion on a computer, but whose statistically properties are sufficient for scientific experiments and studies.</p>
+<p>The two major benefits of pseudorandom number generation is that (1) the process is extremely fast, much faster than generating <em>true</em> random numbers and reading them in. And (2) because the algorithm is deterministic, we can <em>seed</em> the random number generators. This allows us to reproduce the same sequence of statistical randomness. This is extremely useful, because it means we can make reproducible experiments, and it is also helpful when testing, developing and benchmarking code.</p>
+<p>In practice, we have learned that the gold-standard of random number generators is the Mersenne Twister algorithm. Although this probably won’t be true for all eternity, so make sure to keep up to date with what a good, and suitable, pRNG for your use case is! Luckily, Mersenne Twister is ubiquitous, and available in nearly any programming language. It is for example the engine Python uses by default, and it is also available in C++ through the <code class="docutils literal notranslate"><span class="pre">random</span></code> standard header.</p>
+<p>Using our random numbers, we have looked at some simple types of stochastic simulation, such as random walks and chaos games. This has hopefully given you some insight into how we can use randomness to model stochastic phenomenon, and a little about how such systems can be analyzed and understood.</p>
+</section>
+<section id="optimization">
+<h3>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">#</a></h3>
+<p>The final major topic we went through was optimizing and speeding up code. Here we first took some time to understand that there is a place and a time for optimization. Once should generally try to implement a working solution that is well tested and organized, before one starts trying to speed it up. This was summarized in the three steps:</p>
+<ol class="simple">
+<li><p>First make it work</p></li>
+<li><p>Then make it elegant</p></li>
+<li><p>Then make it fast</p></li>
+</ol>
+<p>When getting to the last step, we want to change things in our code to make it faster. This topic is hard to cover in a general sense, because speeding up an implementation is very problem-dependent. However, a general rule is to <em>not</em> just try to optimize everything, but to identify the <em>bottlenecks</em>, i.e., the slow parts of your program. These parts can be identified using a profiling tool. In Python we have look at two such tools: <code class="docutils literal notranslate"><span class="pre">cProfile</span></code> and <code class="docutils literal notranslate"><span class="pre">line_profiler</span></code>. Recall the 90-10 rule: more than 90% of the runtime of a program is usually spent on less than 10% of the code, and it is those 10% we should focus on. Sometimes the numbers are even more skewed, and we should really focus only a few lines of the code.</p>
+<p>When optimizing, it is important to get a good handle on how fast the code <em>actually is</em>, and this we can do through timing experiments and benchmarks. In Python we did this with the package <code class="docutils literal notranslate"><span class="pre">timeit</span></code>, which is very practical to use in Jupyter.</p>
+<p>When optimizing code itself, we can look for better algorithms to solve our problem in other ways, or we can look for clever tricks to get around slow parts of our computations or ways to do less work. Sometimes however, doing less work doesn’t seem to be an option. To speed things then, we should look to run the slow parts of our code in a lower-level language. In Python, this can be done through using libraries such as <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">scipy</span></code>, which runs pre-compiled C code in the background. Or we can use tools like <code class="docutils literal notranslate"><span class="pre">Cython</span></code> and <code class="docutils literal notranslate"><span class="pre">numba</span></code> to just-in-time compile our own code to make it faster.</p>
+</section>
+</section>
+<section id="tools-in-in1910">
+<h2>Tools in IN1910<a class="headerlink" href="#tools-in-in1910" title="Permalink to this headline">#</a></h2>
+<p>In addition to the topics we have gone through, we have spent plenty of time covering useful tools, techniques and best practices as well. Let us quickly go through the most important ones.</p>
+<section id="version-control-with-git">
+<h3>Version Control with Git<a class="headerlink" href="#version-control-with-git" title="Permalink to this headline">#</a></h3>
+<p>Perhaps the most important tool we have covered in IN1910, although it might not feel like it, is version control. In this course you have used <em>git</em> to carry out your project work and collaborate in different ways. This is a hugely important skill to have when working on larger software projects. Version control makes your life <em>much</em> easier in the long run, and tools like <em>git</em> are more or less universally used.</p>
+<figure class="align-default" id="git">
+<a class="reference internal image-reference" href="../../../_images/git.png"><img alt="../../../_images/git.png" src="../../../_images/git.png" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 66 </span><span class="caption-text"><a class="reference external" href="https://xkcd.com/1597/">XKCD #1597</a></span><a class="headerlink" href="#git" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Here we can also mention a cool tool which we have not covered in IN1910, for <em>visualizing a git repository</em>. Many such tools exist, and they can sometimes be helpful with understanding a large project or its history. Or it can simply be used to create cool graphics. One such tool is <a class="reference external" href="https://gource.io/"><em>gource</em></a>. If you are on Windows, you can download an .exe from the website, otherwise you can install through apt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">gource</span>
+</pre></div>
+</div>
+<p>Now you can run gource from inside a git repo to create a visualization of the repo over time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">IN1910</span>
+<span class="n">gource</span>
+</pre></div>
+</div>
+<p>Now you get up an animation that shows how files are created and changed over time by different people.  The visualization will look cooler for larger project with many people working on them. You might not have many such repositories yet, but you can try to run one of your project repositories through gource, or the IN1910 course repository itself.</p>
+<figure class="align-default" id="gource">
+<a class="reference internal image-reference" href="../../../_images/gource.png"><img alt="../../../_images/gource.png" src="../../../_images/gource.png" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 67 </span><span class="caption-text">A snapshot of an animation of the IN1910 repository visualized with gource</span><a class="headerlink" href="#gource" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="unit-testing-with-pytest">
+<h4>Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#unit-testing-with-pytest" title="Permalink to this headline">#</a></h4>
+<p>We have covered the importance of <em>testing</em> your code and have covered especially the package <code class="docutils literal notranslate"><span class="pre">pytest</span></code> for Python, which makes defining and running tests easier. This can allow us to automate the process of testing our code, which is crucial to producing high-quality and reliable code. Although we have not covered it in detail, running unit tests after each commit can be a real quality assurance for large and long software projects.</p>
+</section>
+</section>
+<section id="improving-code-style-with-style-guides">
+<h3>Improving Code Style with Style Guides<a class="headerlink" href="#improving-code-style-with-style-guides" title="Permalink to this headline">#</a></h3>
+<p>We have discussed how important it is to have a good and consistent code style. What constitutes a <em>good</em> style will always be partially subjective, but the end goal is to produce code that is readable, understandable and structured.</p>
+<p>In Python we have recommended that you follow the style guide <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a>. While this is not the only Python style guide out there, it is the most used, and following it will give you code that is organized and neat. However, the main goal is not to force you to follow a specific style, but to show you that following a consistent style is important.</p>
+</section>
+<section id="writing-documentation-with-docstrings">
+<h3>Writing Documentation with docstrings<a class="headerlink" href="#writing-documentation-with-docstrings" title="Permalink to this headline">#</a></h3>
+<p>While we did not cover any specific tools for working with docstrings, we have covered why docstrings are useful, and how they should be written. Here, especially <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">PEP257</a> is of especial importance, as it describes normal conventions for Python docstrings, which will make it easier for you to know what is supposed to be in your docstrings. And for other people to understand your code and your docstrings.</p>
+</section>
+<section id="timing-experiments-and-profiling">
+<h3>Timing Experiments and Profiling<a class="headerlink" href="#timing-experiments-and-profiling" title="Permalink to this headline">#</a></h3>
+<p>We have looked at the package <code class="docutils literal notranslate"><span class="pre">timeit</span></code> to do timing experiments, and <code class="docutils literal notranslate"><span class="pre">cProfile</span></code> and <code class="docutils literal notranslate"><span class="pre">line_profiler</span></code> to do profiling of code. These tools are important to use if we want to optimize code in a structured, organized and efficient manner. These are however by no means the only ones. Another popular profiling tool is <code class="docutils literal notranslate"><span class="pre">snakeviz</span></code>. Instead of just writing out the results in a table, <code class="docutils literal notranslate"><span class="pre">snakeviz</span></code> profiles the code and shows it in a HTML-based interactive 2D graphic called a <em>sunburst</em>.</p>
+<img src="../../figures/sunburst.png">
+<figure class="align-default" id="sunburst">
+<a class="reference internal image-reference" href="../../../_images/sunburst.png"><img alt="../../../_images/sunburst.png" src="../../../_images/sunburst.png" style="width: 250px;" /></a>
+</figure>
+</section>
+<section id="jit-compiling-with-cython-and-numba">
+<h3>JIT Compiling with Cython and numba<a class="headerlink" href="#jit-compiling-with-cython-and-numba" title="Permalink to this headline">#</a></h3>
+<p>While we have not taken the time to cover either in detail, we have looked at how we can just-in-time compile Python to more efficient and faster code using two tool: <code class="docutils literal notranslate"><span class="pre">Cython</span></code> and <code class="docutils literal notranslate"><span class="pre">numba</span></code>. Both provide tools for automatic JIT compiling, but will do an even better job if we know what we are doing and we can help them along the way.</p>
+</section>
+<section id="the-scipy-stack-ecosystem">
+<h3>The SciPy Stack/Ecosystem<a class="headerlink" href="#the-scipy-stack-ecosystem" title="Permalink to this headline">#</a></h3>
+<p>Lastly, while we have not explicitly mentioned it, we have worked our way through large parts of the <a class="reference external" href="https://www.scipy.org/stackspec.html"><em>SciPy Stack</em></a>. SciPy stands for <em>Scientific Python</em>, and is also the name of a Python library, which we used for Project 1.</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">scipy</span></code> is a library, the name is also used to refer to a larger community developing commonly used tools for scientific python, this includes for example <code class="docutils literal notranslate"><span class="pre">numpy</span></code> (numerical python), and <code class="docutils literal notranslate"><span class="pre">sympy</span></code> (symbolic python).</p>
+<p>A lot of these libraries for scientific programming were collected in something referred to as the [<em>SciPy Stack</em>], which is officially the libraries:</p>
+<ul class="simple">
+<li><p>NumPy, for efficient array computations</p></li>
+<li><p>SciPy, a collection of algorithms and domain-specific tool-boxes</p></li>
+<li><p>Matplotlib, a package for high quality 2D plotting, and basic 3D plotting</p></li>
+<li><p>IPython, an interactive python shell useful for fast testing and data analysis</p></li>
+<li><p>pandas, a library for data analysis and statistics</p></li>
+<li><p>SymPy, a library for symbolic math</p></li>
+</ul>
+<p>Of these, we have extensively used most of them, with exception of <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">SymPy</span></code>. We have used <code class="docutils literal notranslate"><span class="pre">IPython</span></code> through Jupyter notebooks, which were previously known as <code class="docutils literal notranslate"><span class="pre">IPython</span> <span class="pre">notebooks</span></code>.</p>
+<p>The Scipy stack definition has been deprecated, as it is no longer seen as useful. Instead people sometimes refer to the <a class="reference external" href="https://www.scipy.org/about.html">SciPy ecosystem</a>, which encompasses the entire SciPy stack, but even more useful tools, like Cython and Jupyter.</p>
+<p>Put simply, the SciPy ecosystem encompasses many packages that can be crucial and important if you are working with scientific programming in Python. Three packages we have not covered, but which can be helpful for specific tasks are:</p>
+<ul class="simple">
+<li><p>scikit-learn, a package for efficient data fitting and machine learning</p></li>
+<li><p>scikit-image, a package for efficient digital image analysis and manipulation</p></li>
+<li><p>h5py, a package for reading and writing files in the hdf5 binary file format, which is becoming more and more common for storing large amounts of scientific data.</p></li>
+</ul>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">#</a></h2>
+<p>In addition to the major programming topics and the important tools we have covered in IN1910, we wanted to leave you engrained with some good practices for scientific programming. In fact, ideally we would want you to walk away with some <em>best practices</em>.</p>
+<p>It can be hard to narrow down exactly what is the <em>best practices</em> of scientific computing, as asking different people will most likely net you different answers. The main goals however, should be to program in a way that:</p>
+<ol class="simple">
+<li><p>Gives reliable code that produces trustworthy and reproducible results</p></li>
+<li><p>Give understandable and organized code that is easy to work with, maintain and build on</p></li>
+<li><p>To make both development and running of code as efficient as possible, without sacrificing quality</p></li>
+</ol>
+<p>The 2014 paper <a class="reference external" href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745"><em>Best Practices for Scientific Computing</em></a> by Wilson, et al, discusses the need for better practices in the field of scientific computing. They have gone through and identified what they believe are 8 majorly important points to focus on for scientific programming.</p>
+<p>We will now try to go through each of these 8 “rules”, one by one, and explain briefly how they relate to IN1910. Hopefully much of these points have been covered, but perhaps some will sound new. For each rule there are a number of sub-rules, or advice.</p>
+<section id="rule-1-write-programs-for-people-not-computers">
+<h3>Rule 1) Write Programs for people, not computers<a class="headerlink" href="#rule-1-write-programs-for-people-not-computers" title="Permalink to this headline">#</a></h3>
+<p>The first point emphasizes what we have referred to as <em>readability</em> of code. While a program is written to solve a given task, we should not focus solely on solving the task at hand, as this might lead to complicated and hard to read code.</p>
+<p>By keeping your code structured and understandable while developing new software, you make it much easier to read and understand the code for both yourself and others. This will make it easier to catch and fix bugs in the code, improve it or extend it, and is also very useful if you want to optimize your code.</p>
+<p>When writing a code that is structured and understandable, keep in mind that the human mind can only think of so many things at once, and if things become too complicated, it will be hard to understand how different aspects connect together. Therefore:</p>
+<blockquote>
+<div><p>1a) A program should not require its readers to hold more than a handful of facts in memory at once</p>
+</div></blockquote>
+<p>Here, Wilson et al is not referring to keeping things in <em>computer memory</em>, but in human memory. As a program grows in size it starts getting harder to keep the big picture understanding, and so the program needs to be organized in a hierarchical manner. The best way to accomplish this is often to divide a program into small functions or methods that perform a single, well defined, task.</p>
+<p>This point is also strongly connected to object-oriented programming, as one of the main benefits of OOP is that it makes this step easier to accomplish in practice. Basically all 4 pillars of object-oriented programming can be connected to this rule.</p>
+<figure class="align-default" id="goto">
+<a class="reference internal image-reference" href="../../../_images/goto.png"><img alt="../../../_images/goto.png" src="../../../_images/goto.png" style="width: 650px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 68 </span><span class="caption-text"><strong>Comic explained:</strong> The “goto” keyword is an old keyword available in most programming languages, that works a bit like a function call that never returns, we simply jump somewhere different in the code based on line numbers or a function name. The use of “goto“‘s have always been quite controversial, as they are considered to usually lead to less readable code that is hard to debug. Luckily, for this reason they have become unpopular. <a class="reference external" href="https://xkcd.com/292/">XKCD #292</a></span><a class="headerlink" href="#goto" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<blockquote>
+<div><p>1b) Make names consistent, distinctive and meaningful</p>
+</div></blockquote>
+<p>This point is hopefully quite self-explanatory, but good variable names is crucial for readability. From the PEP8 style guide we have also learnt that we should ideally choose variable names differently based on what kind of variable we are dealing with.</p>
+<blockquote>
+<div><p>1c) Make code style and Formatting Consistent</p>
+</div></blockquote>
+<p>The points underlines what we have been saying: code style is important. The best way to ensure consistent style is to decide on a style guide to follow, or to make one for yourself.</p>
+<figure class="align-default" id="code-quality">
+<a class="reference internal image-reference" href="../../../_images/code_quality.png"><img alt="../../../_images/code_quality.png" src="../../../_images/code_quality.png" style="width: 650px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 69 </span><span class="caption-text"><a class="reference external" href="https://xkcd.com/1513/">XKCD #1513</a></span><a class="headerlink" href="#code-quality" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rule-2-let-the-computer-do-the-work">
+<h3>Rule 2) Let the computer do the work<a class="headerlink" href="#rule-2-let-the-computer-do-the-work" title="Permalink to this headline">#</a></h3>
+<p>This is a point we have admittedly not covered in great detail in the course. It is connected to finding efficient workflows, and using a computer as a tool to speed up common tasks. This can for example be connected to writing simple scripts in Python or bash to automate simple tasks.</p>
+<blockquote>
+<div><p>2a) Make the computer repeat tasks</p>
+</div></blockquote>
+<blockquote>
+<div><p>2b) Save recent commands in a file for re-use</p>
+</div></blockquote>
+<blockquote>
+<div><p>2c) Use a build tool to automate workflows</p>
+</div></blockquote>
+<p>We have briefly mentioned the <em>build tools</em> mentioned in point (2c) in IN1910, but have not gone into details. These are tools that automatically re-compiles and reruns our code when we change it, verifying that it works correctly and perhaps updating our results. These tools can also be referred to as <em>continuous integration</em> tools, and are useful to integrate with version control. Good tools here can be <a class="reference external" href="https://travis-ci.org/"><em>Travis CI</em></a> or <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/"><em>Snakemake</em></a>, but many others exists. Which to choose largely depends on your use cases and preferences.</p>
+<p>If you want to learn more about practical automation and making efficient workflows, the course <a class="reference external" href="https://www.uio.no/studier/emner/matnat/ifi/IN3110/index.html">IN3110</a> might be a good option.</p>
+</section>
+<section id="rule-3-make-incremental-changes">
+<h3>Rule 3) Make incremental changes<a class="headerlink" href="#rule-3-make-incremental-changes" title="Permalink to this headline">#</a></h3>
+<p>When solving a new problem, it is important to work in small steps. This is to keep things manageable, and to ensure that the code itself becomes structured and understandable. After solving a small part of a large problem, ensuring that it works with testing and restructuring it is a good idea before continuing.</p>
+<blockquote>
+<div><p>3a) Work in small steps with frequent feedback and course correction</p>
+</div></blockquote>
+<p>When working in a team, working incrementally also means having frequent meetings and feedback from each other. However, this point is still important when working alone, as “feedback” can also come from writing tests or example use cases, as you can get a feel for what works well, and what might need to be restructured or changed.</p>
+<blockquote>
+<div><p>3b) Use a version control system</p>
+</div></blockquote>
+<p>This part is very important, and we have covered it in detail in IN1910 through the use of Git.</p>
+<p>It is important to also work incrementally on Git, meaning you should commit regularly, with good commit messages.</p>
+<figure class="align-default" id="git-commit">
+<a class="reference internal image-reference" href="../../../_images/git_commit.png"><img alt="../../../_images/git_commit.png" src="../../../_images/git_commit.png" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text"><a class="reference external" href="https://xkcd.com/1296/">XKCD #1296</a></span><a class="headerlink" href="#git-commit" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<blockquote>
+<div><p>3c) Put everything that has been created manually in version control</p>
+</div></blockquote>
+<p>We should put everything we create into version control, so that we have a back-up and a revision history. However, things that are not manually created, but come for automatic process, such as compiling a source code, configuration files made by editors, results from running a program etc, might be useful to keep out of the git repository to keep things tidy and neat. The best tool to do this is to make a good <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file. Recall that the website <a class="reference external" href="https://www.gitignore.io/">gitignore.io</a> can be a good resource here.</p>
+</section>
+<section id="rule-4-don-t-repeat-yourself-or-others">
+<h3>Rule 4) Don’t repeat yourself (or others)<a class="headerlink" href="#rule-4-don-t-repeat-yourself-or-others" title="Permalink to this headline">#</a></h3>
+<blockquote>
+<div><p>4a) Every piece of data must have a single authoritative representation in the system</p>
+</div></blockquote>
+<blockquote>
+<div><p>4b) Modularize code rather than copying and pasting</p>
+</div></blockquote>
+<blockquote>
+<div><p>4c) Re-use code, instead of rewrite it</p>
+</div></blockquote>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>  principle is crucial in programming. Not only is it important to efficiently develop code, but it can also be important for readability and maintenance. This is because if a code has “code clones”, i.e., the same code doing the exact same thing multiple places, we quickly end up in situations where we <em>think</em> we fixed a bug, but we only fixed it in one location, and so the bug is still present. Or perhaps we go to modify the code, but do it only in one of multiple locations, leading to new bugs. Having the same code multiple places can also be a sign of unorganized and hard to understand code.</p>
+<p>If you end up with situations where you feel you need to clone your code, try to look for ways to instead reorganize it and modularize it. Perhaps you can implement a general function that does the task, with special parameters to control the behavior. Or perhaps making a class, or using inheritance, is a better way to organize and structure your code?</p>
+<p>Another important point: while studying, writing your own code from the ground up is perhaps the best way to learn. In practice however, most <em>simple</em>, <em>general</em> problems, such as solving ODEs or matrix-matrix multiplication, have probably been extensively looked at in software available out there. When working on actual projects, and the end goal is simply to have a working code, there is no need to reinvent the wheel.</p>
+<p>On a humorous note, because DRY is such a well-known phrase, some also refer to the “WET” principle. This isn’t really a thing, but it would be the opposite of DRY. As a tongue-in-cheek, several acronyms for what WET should stand for have been proposed:</p>
+<ul class="simple">
+<li><p>“We Enjoy Typing”</p></li>
+<li><p>“Write Everything Twice”</p></li>
+<li><p>“Waste Everyone’s Time”</p></li>
+</ul>
+<p>While these are meant mostly for humour, they do quite accurately point out that not following DRY is very inefficient.</p>
+</section>
+<section id="rule-5-plan-for-mistakes">
+<h3>Rule 5) Plan for mistakes<a class="headerlink" href="#rule-5-plan-for-mistakes" title="Permalink to this headline">#</a></h3>
+<p>Planning for mistakes is crucial. Nobody is perfect, and we <em>will</em> make mistakes. We have discussed this multiple times in IN1910, especially so when discussing how to write reliable code.</p>
+<blockquote>
+<div><p>5a) Add assertions to programs to check their operations</p>
+</div></blockquote>
+<p>Recall that assertions are safety-checks we can put into a code to ensure that certain conditions are actually true. These can be important, because a reliable program should <em>fail rather than return the wrong results</em>. An assertion is a good way to halt a program’s execution if something goes awry, making it more trustworthy, but also easier to fix. Using extensive assertions can be referred to as <em>defensive</em> programming.</p>
+<p>An alternative to assertions is raising errors, which we have also discussed. By raising errors when input is wrong, or something is off, is a good alternative to assertions that can also inform the users of what is wrong. Here, defining your own custom errors can also be a good idea.</p>
+<blockquote>
+<div><p>5b) Use an off-the-shelf unit testing library</p>
+</div></blockquote>
+<p>Using an off-the-shelf testing library instead of making everything from scratch is a good idea. For one it is more efficient, as we can both develop and run tests more easily. But it is also helpful when sharing code, as it will be easier for other people to test your code as well.</p>
+<blockquote>
+<div><p>5c) Turn bugs into test cases</p>
+</div></blockquote>
+<p>This is the process of <em>regression testing</em> which we have discussed. When you find a bug in an important software, that bug should become a new unit test. This ensures that the bug remains fixed, and is never reintroduced at a later time.</p>
+<blockquote>
+<div><p>5d) Use a symbolic debugger</p>
+</div></blockquote>
+<p>We have not covered this point in IN1910 sadly, mostly due to time. A <em>debugger</em> is a tool that helps us find bugs in a program by allowing us to execute the program line by line and seeing how variables are created and changed over time. Such tools can make development and fixing bugs much faster. The term “symbolic” debugger doesn’t really mean that it is a graphical tool, but rather that it understands variable names. Most modern debuggers are symbolic, and all Python debuggers are.</p>
+<p>If you want to read about debuggers on your own, you can read about the package <a class="reference external" href="https://docs.python.org/3/library/pdb.html">pdb (Python Debugger)</a>, or you can use <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/reference.html#embedding">IPython embed</a> to run a script, but halt at a crucial moment and open the code in an IPython shell, allowing you to explore variables or test out hypotheses.</p>
+</section>
+<section id="rule-6-optimize-software-only-after-it-works-correctly">
+<h3>Rule 6) Optimize software only after it works correctly<a class="headerlink" href="#rule-6-optimize-software-only-after-it-works-correctly" title="Permalink to this headline">#</a></h3>
+<p>We have tried to emphasize this point strongly in IN1910. First make it work, then make it elegant, then make it fast.</p>
+<blockquote>
+<div><p>6a) Use a profiler to identify bottlenecks</p>
+</div></blockquote>
+<p>Profiling code is crucial, so that we know what parts are actually slow and needs to improve</p>
+<blockquote>
+<div><p>6b) Write code in the highest language possible</p>
+</div></blockquote>
+<p>Writing code in a high-level language like Python has many benefits, and the only major drawback is the speed. If our Python code is too slow, we shouldn’t give up on the entire code, we could perhaps use Mixed programming to only move the slower parts over into something like C++. Here tools like Cython and numba are useful.</p>
+</section>
+<section id="rule-7-document-design-and-purpose-not-mechanics">
+<h3>Rule 7) Document design and purpose, not mechanics<a class="headerlink" href="#rule-7-document-design-and-purpose-not-mechanics" title="Permalink to this headline">#</a></h3>
+<blockquote>
+<div><p>7a) Document interfaces and reasons, not implementations</p>
+</div></blockquote>
+<blockquote>
+<div><p>7b) Refactor code in preference to explaining how it works</p>
+</div></blockquote>
+<blockquote>
+<div><p>7c) Embed the documentation for a piece of software in that software</p>
+</div></blockquote>
+</section>
+<section id="rule-8-collaborate">
+<h3>Rule 8) Collaborate<a class="headerlink" href="#rule-8-collaborate" title="Permalink to this headline">#</a></h3>
+<blockquote>
+<div><ol class="simple">
+<li><p>Use pre-merge code reviews</p></li>
+</ol>
+</div></blockquote>
+<blockquote>
+<div><ol class="simple">
+<li><p>Use pair programming when bringing someone new up to speed and when tackling particularly tricky problems</p></li>
+</ol>
+</div></blockquote>
+<blockquote>
+<div><ol class="simple">
+<li><p>Use an issue tracking tool</p></li>
+</ol>
+</div></blockquote>
+</section>
+</section>
+<section id="where-to-go-from-here">
+<h2>Where to go from here?<a class="headerlink" href="#where-to-go-from-here" title="Permalink to this headline">#</a></h2>
+<p>We hope you have learned a lot from IN1910, and have become all around better programmers that feel more comfortable  and certain in your role as scientific programmers. Of course, it is obvious that we cannot cover <em>everything</em> in a single, fairly introductory, course. If you want to learn even more about scientific programming, there are plenty of options to choose from. Let us present a small selection of them</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.uio.no/studier/emner/matnat/ifi/IN2010/">IN2010</a> — Algorithms and Data Structures</p></li>
+</ul>
+<p>This course starts where we left of, with implementing some simple data structures and analysing them and their behavior. IN2010 however, goes much further, present plenty of different data structures. In addition, you learn more about algorithm analysis, and also learn about graph algorithms. This course is a very fundamental course if you want to grow as a programmer.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.uio.no/studier/emner/matnat/ifi/IN3110/index.html">IN3110</a> — Higher Level Programming</p></li>
+</ul>
+<p>This is a Python course that focuses more on using Python as a scripting language. In addition to using Python, you will also learn some bash scripting. The course will also go more into package python programs, data analysis with pandas, making webpages with flask and machine-learning with Scikit-Learn.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.uio.no/studier/emner/matnat/ifi/IN3200/">IN3200</a> — High-Performance Computing and Numerical Projects</p></li>
+</ul>
+<p>This is the course to take if you want to learn more about optimization and making really fast code. Here you will learn about making high-performance code and more about parallelization.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.uio.no/studier/emner/matnat/ifi/INF2310/">INF2310</a> – Digital image analysis</p></li>
+</ul>
+<p>A course on how 2D digital images are represented and stored on the computer, and how we can manipulate it through filters and similar. Digital image analysis is an interesting topic, and depending on what field you are most interested, it could perhaps be very relevant for you.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.uio.no/studier/emner/matnat/fys/FYS3150/">FYS3150</a> – Computational Physics</p></li>
+</ul>
+<p>A project based course in C++ based on specific examples from the field of physics. While this course is definitely more relevant for physicists, it can be a good course to take from anyone who wants to learn more about the use of C++ for scientific computing, as it is very hands-on.</p>
+<ul class="simple">
+<li><p>(Master level) <a class="reference external" href="https://www.uio.no/studier/emner/matnat/ifi/IN5270/">IN5270</a> – Numerical Method for Partial Differential Equations</p></li>
+</ul>
+<p>If you want to learn more about numerically solving partial differential equations, this is probably the best course to take, although it is at the masters level. This course covers both finite difference methods, but also finite element methods, a highly efficient and much used method for solving PDEs.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/summary"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../optimization/parallel_programming.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Parallel Programming</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../../exercises/week1/E1_python_refresh_and_git.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Week 1</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

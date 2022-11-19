@@ -1,0 +1,1465 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Comparing Linked Lists and Dynamic Arrays &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Sorting Algorithms" href="sorting.html" />
+    <link rel="prev" title="Algorithm Analysis and Big Oh Notation" href="algorithm_analysis.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="cpp.html">
+   C++
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/cpp/linkedlists_vs_dynamicarrays.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/cpp/linkedlists_vs_dynamicarrays.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#big-oh">
+   Big Oh
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-with-big-oh">
+   Computing with Big Oh
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-list-adt">
+   The List ADT
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#appending">
+     Appending
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dynamic-array">
+       Dynamic Array
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#linked-list">
+       Linked List
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comparing-the-two">
+       Comparing the two:
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#amortized-cost">
+     Amortized Cost
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inserting-elements-to-the-front">
+     Inserting elements to the front
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Dynamic Array
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Linked List
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Comparing the two
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-a-tail-pointer-to-the-linked-list">
+     Adding a Tail Pointer to the Linked List
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inserting-into-the-middle">
+     Inserting into the middle
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       Dynamic Array
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       Linked List
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summarizing-so-far">
+     Summarizing so far
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indexing">
+     Indexing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       Dynamic Array
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#linked-lists">
+       Linked Lists
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       Comparing the two
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summarizing">
+   Summarizing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-we-haven-t-analyzed">
+     What we haven’t analyzed
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-recommendation">
+     Final recommendation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-analogies">
+     Some Analogies
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Comparing Linked Lists and Dynamic Arrays</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#big-oh">
+   Big Oh
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-with-big-oh">
+   Computing with Big Oh
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-list-adt">
+   The List ADT
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#appending">
+     Appending
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dynamic-array">
+       Dynamic Array
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#linked-list">
+       Linked List
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comparing-the-two">
+       Comparing the two:
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#amortized-cost">
+     Amortized Cost
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inserting-elements-to-the-front">
+     Inserting elements to the front
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Dynamic Array
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Linked List
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Comparing the two
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-a-tail-pointer-to-the-linked-list">
+     Adding a Tail Pointer to the Linked List
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inserting-into-the-middle">
+     Inserting into the middle
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       Dynamic Array
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       Linked List
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summarizing-so-far">
+     Summarizing so far
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indexing">
+     Indexing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       Dynamic Array
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#linked-lists">
+       Linked Lists
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       Comparing the two
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summarizing">
+   Summarizing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-we-haven-t-analyzed">
+     What we haven’t analyzed
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-recommendation">
+     Final recommendation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-analogies">
+     Some Analogies
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="comparing-linked-lists-and-dynamic-arrays">
+<h1>Comparing Linked Lists and Dynamic Arrays<a class="headerlink" href="#comparing-linked-lists-and-dynamic-arrays" title="Permalink to this headline">#</a></h1>
+<p>In this lecture we will start learning what we briefly covered about algorithm analysis and big Oh notation to two different cases. We will be looking at differences between our linked list data structure, and our dynamic array data structure. And we we look closer at some different sorting algorithms, and how they compare in terms of computational complexity.</p>
+<section id="big-oh">
+<h2>Big Oh<a class="headerlink" href="#big-oh" title="Permalink to this headline">#</a></h2>
+<p>Recall from last time, that we introduced the big Oh notation to classify how much <em>work</em> an algorithm has to carry out to solve some problem, given the size of that problem. For sorting a list for example, the size of the list would be the problem size. We often denote the problem size by <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>The main thing we are interested in, is understanding how our algorithm <em>scales</em> with the problem size, as the problem grows, does the computational cost grow linearly? Quadratically? Exponentially? This is where the big Oh notation comes in.</p>
+<p>We find the big Oh of an algorithm, by finding the number of <em>operations</em> it has to carry out to solve some problem, but we do not care to find the exact number, we care only about the fastest-growing term. We also disregard any coefficients.</p>
+<p>Using big Oh notation, we will end up classifying most algorithms into one of the categories in the list below, which is organized from slowest-growing, to fastest-growing. An algorithm that is <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span> scales perfectly, we can increase the problem size, and the time to solve it won’t change! An algorithm that is <span class="math notranslate nohighlight">\(\mathcal{O(n)}\)</span> scales linearly, if we double the problem size, we will roughly double the computation time. An algorithm that is <span class="math notranslate nohighlight">\(\mathcal{O}(e^n)\)</span> scales horribly, as the problem size grows, the computation time grows exponentially, for larger inputs, the algorithm will stop working as we run out of computational resources.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Big Oh</p></th>
+<th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+<td><p>constant</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(\log n)\)</span></p></td>
+<td><p>logarithmic</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p>linear</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n \log n)\)</span></p></td>
+<td><p>loglinear/quasilinear</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span></p></td>
+<td><p>Quadratic</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span></p></td>
+<td><p>Cubic</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n^k)\)</span></p></td>
+<td><p>Polynomial</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(e^n)\)</span></p></td>
+<td><p>Exponential</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n!)\)</span></p></td>
+<td><p>Factorial</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="computing-with-big-oh">
+<h2>Computing with Big Oh<a class="headerlink" href="#computing-with-big-oh" title="Permalink to this headline">#</a></h2>
+<p>Most algorithms consists of many different steps, which we might analyze independently. The total cost of the algorithm is then the sum of the costs of each step. If we’ve found the big Oh costs of each step, we then need to add big Oh expressions together. For example:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{O}(n) + \mathcal{O}(n^2).\]</div>
+<p>When adding big Oh expressions together, we simply keep the biggest term:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{O}(n) + \mathcal{O}(n^2) = \mathcal{O}(n^2).\]</div>
+<p>If there are multiply of the biggest term, this doesn’t really matter, as adding these expressions together would just give a different coefficient, but we are disregarding that coefficient. So for example:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{O}(1) + \mathcal{n} + \mathcal{n} = \mathcal{O}(n).\]</div>
+<p>Similarly, sometimes we need to carry out an operation many times, for example when iterating or looping. This means multiplying a cost by some number. For example</p>
+<div class="math notranslate nohighlight">
+\[10\mathcal{O}(n^2).\]</div>
+<p>This would also just be a constant coefficient, and so we would simply discard it:</p>
+<div class="math notranslate nohighlight">
+\[10\mathcal{O}(n^2) = \mathcal{O}(n^2).\]</div>
+<p>The exception to this if the number of steps we carry out is itself a function of the problem size <span class="math notranslate nohighlight">\(n\)</span>. For example iterating a list of size <span class="math notranslate nohighlight">\(n\)</span>, or performing <span class="math notranslate nohighlight">\(n\)</span> multiplications, etc. In that case, we need to multiply in the number of repetitions into the big Oh. Performing <span class="math notranslate nohighlight">\(n\)</span> steps that each cost <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span> for example:</p>
+<div class="math notranslate nohighlight">
+\[n \cdot \mathcal{O}(n) = \mathcal{O}(n^2).\]</div>
+<p>Or performing <span class="math notranslate nohighlight">\(n\)</span> steps of an algorithm costing <span class="math notranslate nohighlight">\(\mathcal{O}(n\log n)\)</span> would give a total cost of:</p>
+<div class="math notranslate nohighlight">
+\[n\cdot \mathcal{O}(n\log n) = \mathcal{O}(n^2 \log n).\]</div>
+</section>
+<section id="the-list-adt">
+<h2>The List ADT<a class="headerlink" href="#the-list-adt" title="Permalink to this headline">#</a></h2>
+<p>In the previous lectures, we have created two different list classes: <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> and <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code>. And these are also the topic of project 2, where you are getting more experience with them. These two classes both implement the <em>list</em> abstract data type (ADT), but with two different data structures as their basis:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is built on top of the dynamic array structure</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> is built on top of the linked list structure.</p></li>
+</ul>
+<p>We will now look closer at how the different choice for the basis data structure, affects their performance. To do so, we will go through the different operations of the list ADT, that both classes support, such as insertions, removal, and indexing.</p>
+<p>We will characterize the costs in terms of the <em>length</em> of the list, which we will denote <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<section id="appending">
+<h3>Appending<a class="headerlink" href="#appending" title="Permalink to this headline">#</a></h3>
+<p>Let us start with the operation of appending new elements to the end of the list. Both classes support this method, but what is the <em>cost</em> of appending?</p>
+<section id="dynamic-array">
+<h4>Dynamic Array<a class="headerlink" href="#dynamic-array" title="Permalink to this headline">#</a></h4>
+<p>For a dynamic array, appending an element is the same as assign that value to the first unused element of the underlying storage array. The cost of this operation is not dependent on the length of the list. It doesn’t matter if the list has 100 or 100 million elements, appending a value is simply assigning a value to the next unused space. Thus, the cost of appending an element to our <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>.</p>
+<p>However! Sometimes, there <em>won’t</em> be any free space left in the underlying storage array. In this case we had to do a “resize” operation as we called it. To resize our array, we doubled the size of the underlying array, if the list has <span class="math notranslate nohighlight">\(n\)</span> elements, this means we allocate an array of <span class="math notranslate nohighlight">\(2n\)</span> elements. Then we copy over the <span class="math notranslate nohighlight">\(n\)</span> elements of the array and deallocate the previous storage array. The bigger the list is, the more work it is to do the resizing. The resize operation thus scales as <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>.</p>
+<p>Now, appending to our <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> only <em>sometimes</em> incurs the cost of a resize operation, so how can we include this in our analysis? We will return to this point shortly, for now we simply say that the cost of the <code class="docutils literal notranslate"><span class="pre">ArrayList.append</span></code> method is <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span> with an occasional <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>.</p>
+</section>
+<section id="linked-list">
+<h4>Linked List<a class="headerlink" href="#linked-list" title="Permalink to this headline">#</a></h4>
+<p>Now we turn to the linked list. Recall that appending an element to the linked list required starting at the head of the list, and iterating through to the end of the list. The method looked something like this:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">append</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">head</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">current</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Because we are iterating from the head of the list, all the way to the end, we are doing <span class="math notranslate nohighlight">\(n\)</span> operations. If the list consists of 100 nodes, the loop needs to run 100 times. Once we get to the end, actually attaching the new node is only a few operations. This means that most of the work of appending to the <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> is iterating through to the end, but because of this operation, the whole append method costs <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>.</p>
+<p>We see that because we need to iterate from the start, as the list grows, the cost of appending more elements also grow. If the size of the array itself doubles, then the cost of the array will double.</p>
+</section>
+<section id="comparing-the-two">
+<h4>Comparing the two:<a class="headerlink" href="#comparing-the-two" title="Permalink to this headline">#</a></h4>
+<p>We have seen that appending costs <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span> for the <code class="docutils literal notranslate"><span class="pre">DynamicArray</span></code> and <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span> for the <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code>, this means that while the two might be equally fast for appending a few elements, as the lists grow, appending more elements to the linked list will become slower and slower, while for the <code class="docutils literal notranslate"><span class="pre">DynamicArray</span></code> they will stay the same.</p>
+<p>Now, you might be questioning this comparison as unfair, because the dynamic array also needed to resize every now and then, a costly operation. And that is a good point, so let us look a bit closer at that. Instead of referring to a single append operation, which most likely won’t but could possibly incur a resize. Let us look at a whole set of appends, which definitely will incur a resize. We can then find the “average” cost of an append. This concept of “average cost” is called the <em>amortized</em> cost of an operation.</p>
+</section>
+</section>
+<section id="amortized-cost">
+<h3>Amortized Cost<a class="headerlink" href="#amortized-cost" title="Permalink to this headline">#</a></h3>
+<p>The <em>amortized</em> cost of an operation is the averaged cost of a single operation, if one carries a lot of them. The term itself might be new and cryptic to you, but it comes from the world of finance and economics. A big business might <em>amortize</em> their costs by spreading them evenly throughout the year for example. It is simply a way of averaging costs and payments.</p>
+<p>Instead of analyzing a single append. Let us say we start with an empty dynamic array, and append <span class="math notranslate nohighlight">\(n\)</span> elements to it:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">ArrayList</span><span class="w"> </span><span class="n">example</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">example</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>What is the total cost of this operation, in big Oh, as a function <span class="math notranslate nohighlight">\(n\)</span>? Well, the <span class="math notranslate nohighlight">\(n\)</span> appends themselves each cost <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>, and so <span class="math notranslate nohighlight">\(n\)</span> operations of <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span> will be a total of <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>.</p>
+<p>But what is the total cost of all the resized required to reach <span class="math notranslate nohighlight">\(n\)</span>? To understand this, it is easiest to start from the end, and work back to the start. The final resize needed was to increase the underlying storage from <span class="math notranslate nohighlight">\(n/2\)</span> to <span class="math notranslate nohighlight">\(n\)</span>, which would cost <span class="math notranslate nohighlight">\(n\)</span>. The resize before that would need to take it from <span class="math notranslate nohighlight">\(n/4\)</span> to <span class="math notranslate nohighlight">\(n/2\)</span>, which would cost <span class="math notranslate nohighlight">\(n/2\)</span>. The one before that would need to take it from <span class="math notranslate nohighlight">\(n/8\)</span> to <span class="math notranslate nohighlight">\(n/4\)</span>, which would cost <span class="math notranslate nohighlight">\(n/4\)</span> and so on. So the total cost of all the resizes would be:</p>
+<div class="math notranslate nohighlight">
+\[n + \frac{n}{2} + \frac{n}{4} + \frac{n}{8} + \ldots,\]</div>
+<p>all the way down to the empty list. The exact number of resize operations will depend on what <span class="math notranslate nohighlight">\(n\)</span> is.</p>
+<p>This sum is a geometric progression, which sums out to <span class="math notranslate nohighlight">\(2n\)</span>. The easiest way to see this is simply to draw out the series as a bunch of boxes</p>
+<figure class="align-default" id="geo-prog">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Geometric_progression_convergence_diagram.svg/525px-Geometric_progression_convergence_diagram.svg.png"><img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Geometric_progression_convergence_diagram.svg/525px-Geometric_progression_convergence_diagram.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Geometric_progression_convergence_diagram.svg/525px-Geometric_progression_convergence_diagram.svg.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Geometric progression convergence diagram.</span><a class="headerlink" href="#geo-prog" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>So while each resize might be costly, we carry out so few of them, that the <em>total cost</em> of all the resizes also becomes <span class="math notranslate nohighlight">\(\mathcal{O(n)}\)</span></p>
+<p>So the total cost of appending <span class="math notranslate nohighlight">\(n\)</span> elements to an empty <code class="docutils literal notranslate"><span class="pre">DynamicArray</span></code> is</p>
+<div class="math notranslate nohighlight">
+\[\mbox{(cost of $n$ appends)} = \mathcal{O}(n) + \mathcal{O}(n) = \mathcal{O}(n).\]</div>
+<p>But if the cost of doing <span class="math notranslate nohighlight">\(n\)</span> appends has a total cost of <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>, then the average/amortized cost of a single operations must be</p>
+<div class="math notranslate nohighlight">
+\[\mbox{(amortized cost of 1 append)} = \frac{1}{n}\cdot \mbox{(cost of $n$ appends)} = \frac{1}{n}\cdot \mathcal{O}(n) = \mathcal{O}(1).\]</div>
+<p>So on <em>average</em>, the cost of appending an element to our <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is still not dependent on the size of that list, unlike for the linked lists.</p>
+</section>
+<section id="inserting-elements-to-the-front">
+<h3>Inserting elements to the front<a class="headerlink" href="#inserting-elements-to-the-front" title="Permalink to this headline">#</a></h3>
+<p>We have now look at the cost of appending elements to the back of the list, but what about pushing them to the front? For our <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> we implemented this as a <code class="docutils literal notranslate"><span class="pre">push_front</span></code> method, or alternatively as the <code class="docutils literal notranslate"><span class="pre">insert</span></code> method where we specify the index 0. We did not implement this method for the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> in the lecture, but that is part of project 2. While we have not implemented it, we will still try to analyze what it would cost.</p>
+<section id="id1">
+<h4>Dynamic Array<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
+<p>To insert an element at the front of a dynamic array, we would need to first make space for it, by moving every other element in the list one index up. This operation would require the existing <span class="math notranslate nohighlight">\(n\)</span> elements, which would cost <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>. After this is done, adding the new element would be simple, only requiring a single assignment, which would be <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>. So in total, appending to the front of a dynamic array is</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{O}(n) + \mathcal{O}(1) = \mathcal{O}(n).\]</div>
+</section>
+<section id="id2">
+<h4>Linked List<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
+<p>For the linked list, we did implement the <code class="docutils literal notranslate"><span class="pre">push_front</span></code> method, and to do so was almost trivial because of the <code class="docutils literal notranslate"><span class="pre">head</span></code> pointer of the class pointing at the first element:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">push_front</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">head</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This method is just as simple if there is 0 elements in the list, or 10, or a million. No matter the size of the list it is only a few operations, and so the cost is <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>.</p>
+</section>
+<section id="id3">
+<h4>Comparing the two<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h4>
+<p>First we saw that the cost of appending is constant for a dynamic array: <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>, and scales linearly with the linked list: <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>. And now we have seen that the reverse is true for adding elements to the front, it is constant for the linked list, and linear for the array list!</p>
+</section>
+</section>
+<section id="adding-a-tail-pointer-to-the-linked-list">
+<h3>Adding a Tail Pointer to the Linked List<a class="headerlink" href="#adding-a-tail-pointer-to-the-linked-list" title="Permalink to this headline">#</a></h3>
+<p>In our analysis of the linked list data structures so far, we have seen that adding an element to the front of the linked list is easier, meaning it costs <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>, than than adding it to the back, where the cost is <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>. This is simply because we have the <code class="docutils literal notranslate"><span class="pre">head</span></code> pointer to the first element, but to get to the back of the list, we need to iterate through the whole chain.</p>
+<p>However, there is no reason we cannot also add a pointer to the end of the chain, which we can use as a shortcut to get there. This pointer is often called the <code class="docutils literal notranslate"><span class="pre">tail</span></code> pointer, because it points to the tail of the list. If we have a tail pointer in our class, then we can rewrite the append method as</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">append</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">head</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">tail</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tail</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Which is practically just as easy as the <code class="docutils literal notranslate"><span class="pre">push_front</span></code> method. By adding the tail pointer, we have thus improved the scaling of our append method to <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>, the same as for the <code class="docutils literal notranslate"><span class="pre">DynamicArray</span></code>.</p>
+</section>
+<section id="inserting-into-the-middle">
+<h3>Inserting into the middle<a class="headerlink" href="#inserting-into-the-middle" title="Permalink to this headline">#</a></h3>
+<p>So far we have covered inserting into the back, or to the front, of the list. But what about inserting somewhere in the middle? Here, we do not necessarily mean exactly the middle, but inserting at a given index <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<section id="id4">
+<h4>Dynamic Array<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h4>
+<p>To insert somewhere in the middle of the list, the situation is slightly better than adding to the front, as we only have to move all the elements with indices above it to make room. However, inserting into the middle of the list would still mean moving something like half the elements of the list, i.e., <span class="math notranslate nohighlight">\(n/2\)</span> elements. And so the cost would still increase linearly with <span class="math notranslate nohighlight">\(n\)</span>, so the cost would still be <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>.</p>
+<p>If we instead want to give the cost as a function of both <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(i\)</span>, then the cost would be:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{O}(n-i),\]</div>
+<p>which shows that the further back in the list we want to insert, the bigger the index <span class="math notranslate nohighlight">\(i\)</span>, and the less the operation costs.</p>
+</section>
+<section id="id5">
+<h4>Linked List<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h4>
+<p>For a linked list, the insertion of a new node itself is not very costly, we only need to create a new node and hook it into the chain. The insertion itself would only cost <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>. However, just like appending (before we added the tail pointer), we first need to get to the right nodes to actually carry out this operation, and so this would cost <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>, as we would need to start at the front of the list and iterate to wherever the node was to be connected.</p>
+<p>You might think we can fix this situation by having more reference pointer, just like the tail. But to insert like this at any given index <span class="math notranslate nohighlight">\(i\)</span> is not feasible, as we would literally need to make another list to store all those reference pointers.</p>
+<p>However, as the cost of inserting itself is <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>, we might be able to piggyback of other algorithms and methods that happen to be iterating through the list anyway. For a dynamic array, this won’t be possible, because regardless of how you find the element, the cost comes from having to move all the other elements to make room.</p>
+</section>
+</section>
+<section id="summarizing-so-far">
+<h3>Summarizing so far<a class="headerlink" href="#summarizing-so-far" title="Permalink to this headline">#</a></h3>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Dynamic Array</p></th>
+<th class="head"><p>Linked List</p></th>
+<th class="head"><p>Linked list (w/ tail ref)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Insert at back</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)^*\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Insert at front</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Insert in middle</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>*) This is the amortized cost, i.e., the cost averaged over many operations</p>
+<p>To summarize, we see that the cost of inserting elements into the lists are different, depending on what data structure we use. From the table, it might seem that using a linked list with a tail pointer might be the most efficient, and if we were looking at only insertions, this would indeed be the case. But lists are not only used for insertions.</p>
+</section>
+<section id="indexing">
+<h3>Indexing<a class="headerlink" href="#indexing" title="Permalink to this headline">#</a></h3>
+<p>An important characteristic of using lists is that we can use indexing to read and write to elements of the list. We implemented this operation for both our lists by overloading the square-bracket operator. But what is actually the cost of the operation?</p>
+<section id="id6">
+<h4>Dynamic Array<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h4>
+<p>We implemented our indexing operator something like this:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="k">operator</span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Because our data is actually stored in an underlying storage array (called <code class="docutils literal notranslate"><span class="pre">data</span></code> in this example), indexing our <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is actually just an alias for indexing the underlying array.</p>
+<p>One of the strengths of arrays is that the data lies contiguously in memory, and as we have seen earlier, indexing an array is actually just fancy memory address operations, so if we for example write <code class="docutils literal notranslate"><span class="pre">x[10]</span></code> to get the 10’th element of some array, then <code class="docutils literal notranslate"><span class="pre">x</span></code> is actually just a pointer/memory address, and the indexing operations means <code class="docutils literal notranslate"><span class="pre">*(x</span> <span class="pre">+</span> <span class="pre">10)</span></code>, meaning we do some pointer arithmetic and then look up the value at the right memory address.</p>
+<p>Because arrays are contiguous in memory, accessing any element by index is trivial, because C++ will be able to compute its way to the correct memory address and look up the right value. This is true regardless of the size of the array. Therefore, accessing an element by index in an array is <span class="math notranslate nohighlight">\(\mathcal{O(1)}\)</span>.</p>
+<p>Because our <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is built on top of arrays, our indexing operation will also be <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span>.</p>
+</section>
+<section id="linked-lists">
+<h4>Linked Lists<a class="headerlink" href="#linked-lists" title="Permalink to this headline">#</a></h4>
+<p>For linked lists, the situation is different. The elements, i.e., nodes of a linked list are <em>not</em> stored contiguously in memory. Each node can for all intents and purposes exist somewhere completely different in memory, the important thing is that each node knows where the next one is stored.</p>
+<p>However, this means that to get to an element based on its index <span class="math notranslate nohighlight">\(i\)</span>, we have to start at the front of the list, and iterate all the way to the right element. We implemented this as something like</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="k">operator</span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">current</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>So we start at the head, and move <span class="math notranslate nohighlight">\(i\)</span> steps, where <span class="math notranslate nohighlight">\(i\)</span> is the index. This means accessing an element by index costs <span class="math notranslate nohighlight">\(\mathcal{O}(i)\)</span> in terms of the index. Often we do not express costs in terms of indices, so we simply say that this costs <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>. The bigger the list, the bigger the indices we typically access, the more costly it will be.</p>
+<p>Indexing the final element in the list for example, would require us to iterate through the entire list. If we have a tail reference, getting to the last element is easy, but getting to the second-to-last element is still hard, because while we have a tail reference, we have no way to iterate backwards in our linked list. If we had implemented a <em>doubly</em> linked list, we could iterate in from either side of the array. This would improve things somewhat, but for most indices, we would still need considerable iterating to get to a given index.</p>
+</section>
+<section id="id7">
+<h4>Comparing the two<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h4>
+<p>For arrays and dynamic arrays, indexing is a “free” operation. It does not matter what index we want to access either, they are all equal. This is often referred to as <em>random access</em>. The name implies that it doesn’t matter what order we access the elements of the list in, it might as well be random. A better name for it is <em>direct access</em>, we can directly go in and access any element by index. You might be familiar with the term <em>random access memory</em> (RAM), which refers to the normal memory on the computer, this is also called random access because accessing any part of it should take roughly the same amount of time.</p>
+<p>As we have seen, a linked list is not a direct access data structure. We cannot go into any given index directly, but have to iterate through the sequence from the start. This is known as <em>sequential access</em>.</p>
+<figure class="align-default" id="seq-rand-access">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Random_vs_sequential_access.svg/600px-Random_vs_sequential_access.svg.png"><img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Random_vs_sequential_access.svg/600px-Random_vs_sequential_access.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Random_vs_sequential_access.svg/600px-Random_vs_sequential_access.svg.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Sequential versus random access.</span><a class="headerlink" href="#seq-rand-access" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="summarizing">
+<h2>Summarizing<a class="headerlink" href="#summarizing" title="Permalink to this headline">#</a></h2>
+<p>Our findings are summarized in the table below. By analyzing the costs of the different operations, we can see how the data structures affect the overlying data type. While both data structures can support the same list ADT, the performance will differ.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Array</p></th>
+<th class="head"><p>Dynamic Array</p></th>
+<th class="head"><p>Linked List</p></th>
+<th class="head"><p>Linked list (w/ tail ref)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Insert at back</p></td>
+<td><p>-</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)^*\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Insert at front</p></td>
+<td><p>-</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Insert in middle</p></td>
+<td><p>-</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Get element by index</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>*) This is the amortized cost, i.e., the cost averaged over many operations</p>
+<section id="what-we-haven-t-analyzed">
+<h3>What we haven’t analyzed<a class="headerlink" href="#what-we-haven-t-analyzed" title="Permalink to this headline">#</a></h3>
+<p>Our analysis hasn’t been too extensive, we have simply compared some of the most important operations in term of big Oh. But there are other important differences between the data structures we haven’t covered, such as the difference in memory usage of the two. Or other operations such as removing elements. It also turns out that an important difference in practice is that arrays are often fast, because when elements are contiguous in memory, they can be loaded into the CPU cache <em>faster</em>. Facts such as these are hard to include into our algorithm analysis.</p>
+<p>While our analysis is simplified and theoretical, it is still very useful, and analysis such as the ones we have carried out are an important part for algorithms and data structures.</p>
+</section>
+<section id="final-recommendation">
+<h3>Final recommendation<a class="headerlink" href="#final-recommendation" title="Permalink to this headline">#</a></h3>
+<p>For scientific computing, dynamic arrays usually win out on efficiency, because they are stored contiguously in memory. In practice therefore, you might rarely use, or need to use, linked lists.</p>
+<p>However, knowing about linked lists, and how to implement and analyze them is still a valuable skill, as they are an important introductory data structure and something you might be expected to know about if you every move further into computational science.</p>
+</section>
+<section id="some-analogies">
+<h3>Some Analogies<a class="headerlink" href="#some-analogies" title="Permalink to this headline">#</a></h3>
+<p>The major differences between a linked list and a array list is how elements are added and removed from the list, and how they are read. This can be a very abstract concept, so many people like to make some analogies to understand and remember the differences.</p>
+<p>For example, when it comes to indexing, an example of a linked list would be the alphabet. Most people remember the alphabet as a linked list. You can illustrate this, because few people can answer the question <em>Which letter is the 17th in the alphabet?</em> directly, i.e., most people cannot “index” the alphabet. Instead they have to start at the beginning, and count their way to the 17th letter/element. However, ask someone “which letter comes after P in the alphabet” and most people probably wouldn’t even have to think before answering.</p>
+<p>Indexing an array however, can be thought of like the pages in a book. If someone asks you to open a book to page number 277, you wouldn’t have to start on page 1 and flip each page to get to the right spot. Instead, you could simply go directly to the right page.</p>
+<p>Similarly, we can talk about adding/removing elements. An analogy for adding elements to a dynamic array could be a stack of books lying on a table. Adding a book to the end of the stack is very easy, you just place it on top, where there is room. However, if you want to insert the book into the bottom or middle of the pile, you would have to do a lot more work. The bigger the stack, the more work.</p>
+<figure class="align-default" id="stack-of-books">
+<a class="reference internal image-reference" href="../../../_images/stack_of_books.jpg"><img alt="../../../_images/stack_of_books.jpg" src="../../../_images/stack_of_books.jpg" style="width: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">A dynamic array is like a stack of books.</span><a class="headerlink" href="#stack-of-books" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Adding or removing elements from a linked list can be though of like modifying a chain, such as the one for your bicycle. If you need to lengthen your bike chain, you simply disconnect two of the “nodes” of the chain, add inn some more, and click them back together. It doesn’t matter how long the chain is, adding more chains is just as hard. For our “insert into the middle” we also added the “search time” to get to the right node. This would be like a bike chain with a broken “node”, first you would need to find the broken linker, to do this you first “iterate” through the chain, then you pop the broken one out and a fresh one in.</p>
+<figure class="align-default" id="bike-chain">
+<a class="reference internal image-reference" href="../../../_images/bike_chain.jpg"><img alt="../../../_images/bike_chain.jpg" src="../../../_images/bike_chain.jpg" style="width: 3000px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 39 </span><span class="caption-text">A linked list is like a bike chain.</span><a class="headerlink" href="#bike-chain" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/cpp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="algorithm_analysis.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Algorithm Analysis and Big Oh Notation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="sorting.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sorting Algorithms</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

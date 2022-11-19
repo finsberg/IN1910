@@ -1,0 +1,1741 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>C++ tips and tricks &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Dynamic Arrays aka Array Lists" href="arraylist.html" />
+    <link rel="prev" title="More on pointers and arrays and dynamic allocation" href="dynamic_allocation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/intro_to_oop.html">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python/functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="cpp.html">
+   C++
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/cpp/cpptools.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/cpp/cpptools.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/cpp/cpptools.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/cpp/cpptools.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#c-extension-for-your-editor">
+   C++ extension for your editor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#debugging">
+   Debugging
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debugging-with-gdb-or-lldb">
+     Debugging with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       gdb
+      </span>
+     </code>
+     or
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       lldb
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debugging-memory-leaks-with-valgrind">
+     Debugging memory leaks with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       valgrind
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#header-files-and-compiling-multiple-files">
+   Header files and compiling multiple files
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#declarations-and-definitions">
+     Declarations and definitions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#header-files">
+     Header files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compilation-and-linking">
+     Compilation and linking
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#makefile-managing-the-compilation-and-linking">
+   Makefile - managing the compilation and linking
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cmake-a-modern-version-of-makefile">
+   CMake - a modern version of Makefile
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formatting-your-code-with-clang-format">
+   Formatting your code with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     clang-format
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation-with-doxygen">
+   Documentation with Doxygen
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-documentation">
+     Writing documentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-documentation-with-doxygen">
+     Generating documentation with Doxygen
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing">
+   Testing
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>C++ tips and tricks</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#c-extension-for-your-editor">
+   C++ extension for your editor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#debugging">
+   Debugging
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debugging-with-gdb-or-lldb">
+     Debugging with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       gdb
+      </span>
+     </code>
+     or
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       lldb
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debugging-memory-leaks-with-valgrind">
+     Debugging memory leaks with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       valgrind
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#header-files-and-compiling-multiple-files">
+   Header files and compiling multiple files
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#declarations-and-definitions">
+     Declarations and definitions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#header-files">
+     Header files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compilation-and-linking">
+     Compilation and linking
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#makefile-managing-the-compilation-and-linking">
+   Makefile - managing the compilation and linking
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cmake-a-modern-version-of-makefile">
+   CMake - a modern version of Makefile
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formatting-your-code-with-clang-format">
+   Formatting your code with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     clang-format
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation-with-doxygen">
+   Documentation with Doxygen
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-documentation">
+     Writing documentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-documentation-with-doxygen">
+     Generating documentation with Doxygen
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing">
+   Testing
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="c-tips-and-tricks">
+<h1>C++ tips and tricks<a class="headerlink" href="#c-tips-and-tricks" title="Permalink to this headline">#</a></h1>
+<p>While it is certainly possible to write bug-free C++ in a pure text editor without any tool to guide you, most professional developers depend heavily on tools to help them write, compile and debug the code they are writing. In this document we will go through a few tips and tricks that will help you when developing C++ code.</p>
+<section id="c-extension-for-your-editor">
+<h2>C++ extension for your editor<a class="headerlink" href="#c-extension-for-your-editor" title="Permalink to this headline">#</a></h2>
+<p>Most of the modern editors, or integrated development environments (IDEs) comes the possibility of using extensions. For example in Visual Studio Code you have the <a class="reference external" href="https://code.visualstudio.com/docs/cpp/introvideos-cpp">C++ extension</a> that will give you tab completion, documentation and much more. Spending some time on learning how to use these extension will definitely pay off in the end.</p>
+</section>
+<section id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">#</a></h2>
+<p>Very often your editor or compiler will point out mistakes you have made in the code, but sometimes the code compiles fine even though it contains bugs. For example if you get the following cryptic message when you try to run your program, you know there is something wrong.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Segmentation</span> <span class="n">fault</span> <span class="p">(</span><span class="n">core</span> <span class="n">dumped</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is good practice to compile and run your code often so that you have a better feeling on when the bug was introduced. However, sometimes it can be tricky to know what is causing your program to fail, and in this case it might be helpful to use a debugger.</p>
+<section id="debugging-with-gdb-or-lldb">
+<h3>Debugging with <code class="docutils literal notranslate"><span class="pre">gdb</span></code> or <code class="docutils literal notranslate"><span class="pre">lldb</span></code><a class="headerlink" href="#debugging-with-gdb-or-lldb" title="Permalink to this headline">#</a></h3>
+<p>The standard debugger for <code class="docutils literal notranslate"><span class="pre">GNU</span></code> is called <code class="docutils literal notranslate"><span class="pre">gdb</span></code>, while the debugger for <code class="docutils literal notranslate"><span class="pre">clang</span></code> is called <code class="docutils literal notranslate"><span class="pre">lldb</span></code>. The interface of the two are similar and we will therefore show the commands using <code class="docutils literal notranslate"><span class="pre">gdb</span></code>, but if you are working on a Mac and use <code class="docutils literal notranslate"><span class="pre">clang</span></code> then you can try swapping <code class="docutils literal notranslate"><span class="pre">gdb</span></code> with <code class="docutils literal notranslate"><span class="pre">lldb</span></code> and it should work.</p>
+<p>Using a debugger is an alternative to putting print statements all over your code. A debugger lets you inspect the code in more detail and help you track down the cause of failure.</p>
+<p>Now we will try debugging the following program which we will call <code class="docutils literal notranslate"><span class="pre">nullptr_deref.cpp</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">my_function</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">my_function</span><span class="p">()</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This code compiles fine using the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">nullptr_deref</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">nullptr_deref</span>
+</pre></div>
+</div>
+<p>but when we run it we get the following message</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./nullptr_deref
+Segmentation fault (core dumped)
+</pre></div>
+</div>
+<p>Now we will try to run the program using the debugger. Before using the debugger we should compile our program with debugging information. We can do this by sending in the <code class="docutils literal notranslate"><span class="pre">-g</span></code> flag to the compiler</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">nullptr_deref</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">nullptr_deref</span> <span class="o">-</span><span class="n">g</span>
+</pre></div>
+</div>
+<p>Now, we can use the debugger by executing the following command <code class="docutils literal notranslate"><span class="pre">gdb</span> <span class="pre">&lt;program&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;program&gt;</span></code> is the command to run our program. In our case with would be</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gbd</span> <span class="o">./</span><span class="n">nullptr_deref</span>
+</pre></div>
+</div>
+<p>When you run this it will print a lot of information and throw you into a <code class="docutils literal notranslate"><span class="pre">gdb</span></code> prompt.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb ./nullptr_deref
+GNU gdb (GDB) Red Hat Enterprise Linux 8.2-15.el8
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type &quot;show copying&quot; and &quot;show warranty&quot; for details.
+This GDB was configured as &quot;x86_64-redhat-linux-gnu&quot;.
+Type &quot;show configuration&quot; for configuration details.
+For bug reporting instructions, please see:
+&lt;http://www.gnu.org/software/gdb/bugs/&gt;.
+Find the GDB manual and other documentation resources online at:
+    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+
+For help, type &quot;help&quot;.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+Reading symbols from ./nullptr_deref...done.
+(gdb)
+</pre></div>
+</div>
+<p>You can exit this prompt anytime by hitting <code class="docutils literal notranslate"><span class="pre">q</span></code> and <code class="docutils literal notranslate"><span class="pre">enter</span></code>. To run the debugger, type <code class="docutils literal notranslate"><span class="pre">run</span></code> and hit <code class="docutils literal notranslate"><span class="pre">enter</span></code>. You should then see the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">run</span>
+<span class="n">Starting</span> <span class="n">program</span><span class="p">:</span> <span class="o">/</span><span class="n">uio</span><span class="o">/</span><span class="n">kant</span><span class="o">/</span><span class="n">ifi</span><span class="o">-</span><span class="n">ekstern</span><span class="o">-</span><span class="n">u00</span><span class="o">/</span><span class="n">henrinfi</span><span class="o">/</span><span class="n">nullptr_deref</span>
+<span class="n">Missing</span> <span class="n">separate</span> <span class="n">debuginfos</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">yum</span> <span class="n">debuginfo</span><span class="o">-</span><span class="n">install</span> <span class="n">glibc</span><span class="o">-</span><span class="mf">2.28</span><span class="o">-</span><span class="mf">151.</span><span class="n">el8</span><span class="o">.</span><span class="n">x86_64</span>
+
+<span class="n">Program</span> <span class="n">received</span> <span class="n">signal</span> <span class="n">SIGSEGV</span><span class="p">,</span> <span class="n">Segmentation</span> <span class="n">fault</span><span class="o">.</span>
+<span class="mh">0x000000000040081a</span> <span class="ow">in</span> <span class="n">my_function</span> <span class="p">()</span> <span class="n">at</span> <span class="n">nullptr_deref</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">6</span>
+<span class="mi">6</span>	  <span class="n">double</span> <span class="n">b</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
+<span class="n">Missing</span> <span class="n">separate</span> <span class="n">debuginfos</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="n">yum</span> <span class="n">debuginfo</span><span class="o">-</span><span class="n">install</span> <span class="n">libgcc</span><span class="o">-</span><span class="mf">8.4.1</span><span class="o">-</span><span class="mf">1.</span><span class="n">el8</span><span class="o">.</span><span class="n">x86_64</span> <span class="n">libstdc</span><span class="o">++-</span><span class="mf">8.4.1</span><span class="o">-</span><span class="mf">1.</span><span class="n">el8</span><span class="o">.</span><span class="n">x86_64</span>
+</pre></div>
+</div>
+<p>The important info that we get from the debugger are the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mh">0x000000000040081a</span> <span class="ow">in</span> <span class="n">my_function</span> <span class="p">()</span> <span class="n">at</span> <span class="n">nullptr_deref</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">6</span>
+<span class="mi">6</span>	  <span class="n">double</span> <span class="n">b</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>It tells us that the error occurred in the function called <code class="docutils literal notranslate"><span class="pre">my_function</span></code>, in the file called <code class="docutils literal notranslate"><span class="pre">nullptr_deref.cpp</span></code> and line 6. An it also displays the relevant line.</p>
+<p>You can also print out the values using <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&lt;variable&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;variable&gt;</span></code> is the variable you want to print. If you want to print out the value of <code class="docutils literal notranslate"><span class="pre">a</span></code>, you could type</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(gdb) p a
+$1 = (double *) 0x0
+</pre></div>
+</div>
+<p>You could also try to print out the value that <code class="docutils literal notranslate"><span class="pre">a</span></code> points to by dereferencing it, but this will print and error message</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="o">*</span><span class="n">a</span>
+<span class="n">Cannot</span> <span class="n">access</span> <span class="n">memory</span> <span class="n">at</span> <span class="n">address</span> <span class="mh">0x0</span>
+</pre></div>
+</div>
+<p>Another useful command to know is the backtrace command <code class="docutils literal notranslate"><span class="pre">bt</span></code>, which will show you which functions that are called before the error occurred.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">bt</span>
+<span class="c1">#0  0x000000000040081a in my_function () at nullptr_deref.cpp:6</span>
+<span class="c1">#1  0x000000000040084b in main () at nullptr_deref.cpp:12</span>
+</pre></div>
+</div>
+<p>In this case we see that the error occurs in line 6 in <code class="docutils literal notranslate"><span class="pre">nullptr_deref.cpp</span></code> in the function <code class="docutils literal notranslate"><span class="pre">my_function</span></code> which is called from the function called <code class="docutils literal notranslate"><span class="pre">main</span></code> at line 12 in the file <code class="docutils literal notranslate"><span class="pre">nullptr_deref.cpp</span></code>.</p>
+</section>
+<section id="debugging-memory-leaks-with-valgrind">
+<h3>Debugging memory leaks with <code class="docutils literal notranslate"><span class="pre">valgrind</span></code><a class="headerlink" href="#debugging-memory-leaks-with-valgrind" title="Permalink to this headline">#</a></h3>
+<p>Memory leaks can be difficult to spot, and often you these bug will go unnoticed until they suddenly become a big problem. Fortunately, there are tools that can help you track down memory leaks. The most popular one is called <a class="reference external" href="https://valgrind.org"><code class="docutils literal notranslate"><span class="pre">valgrind</span></code></a>. Consider the following program that we call <code class="docutils literal notranslate"><span class="pre">doomsday.cpp</span></code>:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In line 5 we make a heap allocation that is not freed, and thus we have a memory leak. We first compile the program without errors</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">doomsday</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">doomsday</span> <span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span>
+</pre></div>
+</div>
+<p>Now we can run it through <code class="docutils literal notranslate"><span class="pre">valgrind</span></code> using the following command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ valgrind ./doomsday
+</pre></div>
+</div>
+<p>and it will output the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="mi">2451016</span><span class="o">==</span> <span class="n">Memcheck</span><span class="p">,</span> <span class="n">a</span> <span class="n">memory</span> <span class="n">error</span> <span class="n">detector</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span> <span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2002</span><span class="o">-</span><span class="mi">2017</span><span class="p">,</span> <span class="ow">and</span> <span class="n">GNU</span> <span class="n">GPL</span><span class="s1">&#39;d, by Julian Seward et al.</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span> <span class="n">Using</span> <span class="n">Valgrind</span><span class="o">-</span><span class="mf">3.16.0</span> <span class="ow">and</span> <span class="n">LibVEX</span><span class="p">;</span> <span class="n">rerun</span> <span class="k">with</span> <span class="o">-</span><span class="n">h</span> <span class="k">for</span> <span class="n">copyright</span> <span class="n">info</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span> <span class="n">Command</span><span class="p">:</span> <span class="o">./</span><span class="n">doomsday</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span> <span class="n">HEAP</span> <span class="n">SUMMARY</span><span class="p">:</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>     <span class="ow">in</span> <span class="n">use</span> <span class="n">at</span> <span class="n">exit</span><span class="p">:</span> <span class="mi">40</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">10</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="n">usage</span><span class="p">:</span> <span class="mi">11</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">1</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span><span class="mi">744</span> <span class="nb">bytes</span> <span class="n">allocated</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span> <span class="n">LEAK</span> <span class="n">SUMMARY</span><span class="p">:</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>    <span class="n">definitely</span> <span class="n">lost</span><span class="p">:</span> <span class="mi">40</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">10</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>    <span class="n">indirectly</span> <span class="n">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>      <span class="n">possibly</span> <span class="n">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>    <span class="n">still</span> <span class="n">reachable</span><span class="p">:</span> <span class="mi">0</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>         <span class="n">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span> <span class="n">Rerun</span> <span class="k">with</span> <span class="o">--</span><span class="n">leak</span><span class="o">-</span><span class="n">check</span><span class="o">=</span><span class="n">full</span> <span class="n">to</span> <span class="n">see</span> <span class="n">details</span> <span class="n">of</span> <span class="n">leaked</span> <span class="n">memory</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span> <span class="n">For</span> <span class="n">lists</span> <span class="n">of</span> <span class="n">detected</span> <span class="ow">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="k">with</span><span class="p">:</span> <span class="o">-</span><span class="n">s</span>
+<span class="o">==</span><span class="mi">2451016</span><span class="o">==</span> <span class="n">ERROR</span> <span class="n">SUMMARY</span><span class="p">:</span> <span class="mi">0</span> <span class="n">errors</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">contexts</span> <span class="p">(</span><span class="n">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="kn">from</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It tells us that we have 40 bytes in 10 blocks that are definitely lost. In our program, each <code class="docutils literal notranslate"><span class="pre">int</span></code> we create takes up 4 bytes and there are 10 of them (sine the loop runs 10 times) so these are the same bytes that <code class="docutils literal notranslate"><span class="pre">valgrind</span></code> have detected. We can get even more information if we first compile the executable with debugging information (using the <code class="docutils literal notranslate"><span class="pre">-g</span></code> flag)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">doomsday</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">doomsday</span> <span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">g</span>
+</pre></div>
+</div>
+<p>Now if we run <code class="docutils literal notranslate"><span class="pre">valgrind</span></code> with the <code class="docutils literal notranslate"><span class="pre">--leak-check=full</span></code> flag</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ valgrind --leak-check=full ./doomsday
+</pre></div>
+</div>
+<p>and it will output the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="mi">2452829</span><span class="o">==</span> <span class="n">Memcheck</span><span class="p">,</span> <span class="n">a</span> <span class="n">memory</span> <span class="n">error</span> <span class="n">detector</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span> <span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2002</span><span class="o">-</span><span class="mi">2017</span><span class="p">,</span> <span class="ow">and</span> <span class="n">GNU</span> <span class="n">GPL</span><span class="s1">&#39;d, by Julian Seward et al.</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span> <span class="n">Using</span> <span class="n">Valgrind</span><span class="o">-</span><span class="mf">3.16.0</span> <span class="ow">and</span> <span class="n">LibVEX</span><span class="p">;</span> <span class="n">rerun</span> <span class="k">with</span> <span class="o">-</span><span class="n">h</span> <span class="k">for</span> <span class="n">copyright</span> <span class="n">info</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span> <span class="n">Command</span><span class="p">:</span> <span class="o">./</span><span class="n">doomsday</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span> <span class="n">HEAP</span> <span class="n">SUMMARY</span><span class="p">:</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>     <span class="ow">in</span> <span class="n">use</span> <span class="n">at</span> <span class="n">exit</span><span class="p">:</span> <span class="mi">40</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">10</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="n">usage</span><span class="p">:</span> <span class="mi">11</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">1</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span><span class="mi">744</span> <span class="nb">bytes</span> <span class="n">allocated</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span> <span class="mi">40</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">10</span> <span class="n">blocks</span> <span class="n">are</span> <span class="n">definitely</span> <span class="n">lost</span> <span class="ow">in</span> <span class="n">loss</span> <span class="n">record</span> <span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>    <span class="n">at</span> <span class="mh">0x4C35586</span><span class="p">:</span> <span class="n">operator</span> <span class="n">new</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">long</span><span class="p">)</span> <span class="p">(</span><span class="n">vg_replace_malloc</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">342</span><span class="p">)</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>    <span class="n">by</span> <span class="mh">0x40060A</span><span class="p">:</span> <span class="n">main</span> <span class="p">(</span><span class="n">doomsday</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span> <span class="n">LEAK</span> <span class="n">SUMMARY</span><span class="p">:</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>    <span class="n">definitely</span> <span class="n">lost</span><span class="p">:</span> <span class="mi">40</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">10</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>    <span class="n">indirectly</span> <span class="n">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>      <span class="n">possibly</span> <span class="n">lost</span><span class="p">:</span> <span class="mi">0</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>    <span class="n">still</span> <span class="n">reachable</span><span class="p">:</span> <span class="mi">0</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>         <span class="n">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span> <span class="n">For</span> <span class="n">lists</span> <span class="n">of</span> <span class="n">detected</span> <span class="ow">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="k">with</span><span class="p">:</span> <span class="o">-</span><span class="n">s</span>
+<span class="o">==</span><span class="mi">2452829</span><span class="o">==</span> <span class="n">ERROR</span> <span class="n">SUMMARY</span><span class="p">:</span> <span class="mi">1</span> <span class="n">errors</span> <span class="kn">from</span> <span class="mi">1</span> <span class="n">contexts</span> <span class="p">(</span><span class="n">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="kn">from</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and we see that it found the memory leak in <code class="docutils literal notranslate"><span class="pre">doomsday.cpp:5</span></code>, i.e line 5.
+If we fix the memory leak, i.e write the following instead</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">delete</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>and run it through <code class="docutils literal notranslate"><span class="pre">valgrind</span></code> we now get the following output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="mi">2453475</span><span class="o">==</span> <span class="n">Memcheck</span><span class="p">,</span> <span class="n">a</span> <span class="n">memory</span> <span class="n">error</span> <span class="n">detector</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span> <span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2002</span><span class="o">-</span><span class="mi">2017</span><span class="p">,</span> <span class="ow">and</span> <span class="n">GNU</span> <span class="n">GPL</span><span class="s1">&#39;d, by Julian Seward et al.</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span> <span class="n">Using</span> <span class="n">Valgrind</span><span class="o">-</span><span class="mf">3.16.0</span> <span class="ow">and</span> <span class="n">LibVEX</span><span class="p">;</span> <span class="n">rerun</span> <span class="k">with</span> <span class="o">-</span><span class="n">h</span> <span class="k">for</span> <span class="n">copyright</span> <span class="n">info</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span> <span class="n">Command</span><span class="p">:</span> <span class="o">./</span><span class="n">doomsday</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span> <span class="n">HEAP</span> <span class="n">SUMMARY</span><span class="p">:</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span>     <span class="ow">in</span> <span class="n">use</span> <span class="n">at</span> <span class="n">exit</span><span class="p">:</span> <span class="mi">0</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">0</span> <span class="n">blocks</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span>   <span class="n">total</span> <span class="n">heap</span> <span class="n">usage</span><span class="p">:</span> <span class="mi">11</span> <span class="n">allocs</span><span class="p">,</span> <span class="mi">11</span> <span class="n">frees</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span><span class="mi">744</span> <span class="nb">bytes</span> <span class="n">allocated</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span> <span class="n">All</span> <span class="n">heap</span> <span class="n">blocks</span> <span class="n">were</span> <span class="n">freed</span> <span class="o">--</span> <span class="n">no</span> <span class="n">leaks</span> <span class="n">are</span> <span class="n">possible</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span> <span class="n">For</span> <span class="n">lists</span> <span class="n">of</span> <span class="n">detected</span> <span class="ow">and</span> <span class="n">suppressed</span> <span class="n">errors</span><span class="p">,</span> <span class="n">rerun</span> <span class="k">with</span><span class="p">:</span> <span class="o">-</span><span class="n">s</span>
+<span class="o">==</span><span class="mi">2453475</span><span class="o">==</span> <span class="n">ERROR</span> <span class="n">SUMMARY</span><span class="p">:</span> <span class="mi">0</span> <span class="n">errors</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">contexts</span> <span class="p">(</span><span class="n">suppressed</span><span class="p">:</span> <span class="mi">0</span> <span class="kn">from</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="header-files-and-compiling-multiple-files">
+<span id="cpp-header-files"></span><h2>Header files and compiling multiple files<a class="headerlink" href="#header-files-and-compiling-multiple-files" title="Permalink to this headline">#</a></h2>
+<p>So far in the course we have worked only with a single file, but very often you want to structure your code into separate files which makes more sense. For example you might want to separate the code containing the tests from the code containing the actual implementation.</p>
+<p>Let us illustrate this with an example.
+Say that we have implemented a sorting algorithm in a file called <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code>, and we wanted to write the tests in a file called <code class="docutils literal notranslate"><span class="pre">test_sort.cpp</span></code>.
+Here is an example</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// sort.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bubble_sort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">changed</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">numbers</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>and the testing file:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// test_sort.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">original</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sorted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bubble_sort</span><span class="p">(</span><span class="n">original</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Original&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">original</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Sorted&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">sorted</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>At the moment, this code will not work. The file <code class="docutils literal notranslate"><span class="pre">test_sort.cpp</span></code> does not know about the function called <code class="docutils literal notranslate"><span class="pre">bubble_sort</span></code> so we need to somehow import this into the file.</p>
+<section id="declarations-and-definitions">
+<h3>Declarations and definitions<a class="headerlink" href="#declarations-and-definitions" title="Permalink to this headline">#</a></h3>
+<p>In C++, there is a distinction between <em>declaration</em> and <em>definition</em>. A function declaration specifies the function’s signature, i.e its name and the types of its arguments and the return value. The signature of the <code class="docutils literal notranslate"><span class="pre">bubble_sort</span></code> function for example is</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bubble_sort</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The return type is <code class="docutils literal notranslate"><span class="pre">std::vector&lt;int&gt;</span></code>, the name is <code class="docutils literal notranslate"><span class="pre">bubble_sort</span></code> and the type of the argument is <code class="docutils literal notranslate"><span class="pre">std::vector&lt;int&gt;</span></code>. Note that we excluded the name of the argument to the function (i.e <code class="docutils literal notranslate"><span class="pre">numbers</span></code>) because it is not important in the signature. This distinction becomes important when working with multiple files.</p>
+<p>The definition on the other hand refers to the actual implementation. In order to use function it has to be declared first. We can illustrate this with a single file as well. The following code will not compile</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">print_hello</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_hello</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>It will instead give you the following error</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">error</span><span class="p">:</span> <span class="n">use</span> <span class="n">of</span> <span class="n">undeclared</span> <span class="n">identifier</span> <span class="s1">&#39;print_hello&#39;</span>
+    <span class="n">print_hello</span><span class="p">();</span>
+    <span class="o">^</span>
+<span class="mi">1</span> <span class="n">error</span> <span class="n">generated</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>It says that the function <code class="docutils literal notranslate"><span class="pre">print_hello</span></code> is undeclared. We can fix the code by first declaring the function as follows</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_hello</span><span class="p">();</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">print_hello</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_hello</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="header-files">
+<h3>Header files<a class="headerlink" href="#header-files" title="Permalink to this headline">#</a></h3>
+<p>When working with multiple files we put all the declarations that is needed in something called header files. These files typically ends with <code class="docutils literal notranslate"><span class="pre">.h</span></code> or <code class="docutils literal notranslate"><span class="pre">.hpp</span></code>.</p>
+<p>In our case we will create a header file called <code class="docutils literal notranslate"><span class="pre">sort.hpp</span></code> with declaration of <code class="docutils literal notranslate"><span class="pre">bubble_sort</span></code>.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// sort.hpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bubble_sort</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note that we did not add <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">namespace</span> <span class="pre">std</span></code> in the header file. It is considered bad practice to add <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">namespace</span></code> statements in header files because this will be adopted by all files that include the header files.</p>
+<p>We can now include the header file in both <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code> and <code class="docutils literal notranslate"><span class="pre">test_sort.cpp</span></code> by adding the following line to both files</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;sort.hpp&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>Notice the distinction between including a library from the standard library e.g <code class="docutils literal notranslate"><span class="pre">iostream</span></code> and this file. For the standard library (and any order installed library) you can use the angle brackets e.g <code class="docutils literal notranslate"><span class="pre">&lt;iostream&gt;</span></code>. For files in your working directory like <code class="docutils literal notranslate"><span class="pre">sort.hpp</span></code> you can use quotation marks (<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>) and the relative path to that file. For example if <code class="docutils literal notranslate"><span class="pre">sort.hpp</span></code> where located in a folder called <code class="docutils literal notranslate"><span class="pre">include</span></code>, then you should change your import to</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;include/sort.hpp&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+</section>
+<section id="compilation-and-linking">
+<span id="cpp-compilation-linked"></span><h3>Compilation and linking<a class="headerlink" href="#compilation-and-linking" title="Permalink to this headline">#</a></h3>
+<p>It might be tempting to try to compile <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code> using the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">sort</span><span class="o">.</span><span class="n">cpp</span> <span class="o">--</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">o</span> <span class="n">sort</span>
+</pre></div>
+</div>
+<p>but this will give you an error saying that it is missing a <code class="docutils literal notranslate"><span class="pre">main</span></code> function.</p>
+<p>When we compiling multiple files we can still only have one <code class="docutils literal notranslate"><span class="pre">main</span></code> function, and in this case we put this in the file called <code class="docutils literal notranslate"><span class="pre">test_sort.cpp</span></code>.</p>
+<p>Before moving along we need to talk about the two steps needed to go from a source file (i.e the code we write in the file ending with a <code class="docutils literal notranslate"><span class="pre">.cpp</span></code>) to an executable file (typically a <code class="docutils literal notranslate"><span class="pre">.out</span></code> file or a <code class="docutils literal notranslate"><span class="pre">.exe</span></code> file). These two steps are called <em>compilation</em> and <em>linking</em>. Each source file is first compiled to object files and then the object files are linked together to form the executable.</p>
+<figure class="align-default" id="compilation-linking">
+<a class="reference internal image-reference" href="../../../_images/compilation_linking.png"><img alt="../../../_images/compilation_linking.png" src="../../../_images/compilation_linking.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Several source files are compiled individually into object files. These object files are then linked together to form the final executable file.</span><a class="headerlink" href="#compilation-linking" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">sort</span><span class="o">.</span><span class="n">cpp</span> <span class="o">--</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">o</span> <span class="n">sort</span>
+</pre></div>
+</div>
+<p>can actually be split into two step; the compilation step, where we add the <code class="docutils literal notranslate"><span class="pre">-c</span></code> flag and produces an object file called <code class="docutils literal notranslate"><span class="pre">sort.o</span></code> (or <code class="docutils literal notranslate"><span class="pre">sort.obj</span></code> on windows)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">sort</span><span class="o">.</span><span class="n">cpp</span> <span class="o">--</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">c</span>
+</pre></div>
+</div>
+<p>and the linking step where we create the executable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">sort</span><span class="o">.</span><span class="n">o</span> <span class="o">--</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">o</span> <span class="n">sort</span>
+</pre></div>
+</div>
+<p>In our case, the compilation step finishes without any errors, but the linking step will throw an error because it cannot find the <code class="docutils literal notranslate"><span class="pre">main</span></code> function, because this is found in <code class="docutils literal notranslate"><span class="pre">test_sort.cpp</span></code>. What we need to do to instead is to compile the <code class="docutils literal notranslate"><span class="pre">test_sort.cpp</span></code> file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">test_sort</span><span class="o">.</span><span class="n">cpp</span> <span class="o">--</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">c</span>
+</pre></div>
+</div>
+<p>and then link the two files together</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">++</span> <span class="n">sort</span><span class="o">.</span><span class="n">o</span> <span class="n">test_sort</span><span class="o">.</span><span class="n">o</span> <span class="o">--</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">o</span> <span class="n">sort</span>
+</pre></div>
+</div>
+<figure class="align-default" id="compilation-linking-example">
+<a class="reference internal image-reference" href="../../../_images/compilation_linking_example.png"><img alt="../../../_images/compilation_linking_example.png" src="../../../_images/compilation_linking_example.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Files involved to compile and link our sorting example.</span><a class="headerlink" href="#compilation-linking-example" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now that we have included <code class="docutils literal notranslate"><span class="pre">sort.hpp</span></code> in <code class="docutils literal notranslate"><span class="pre">test_sort.cpp</span></code> the compiler sees that the function <code class="docutils literal notranslate"><span class="pre">bubble_sort</span></code> function is declared. However, during the compilation step, the compiler does not need to know the definition (or implementation) of <code class="docutils literal notranslate"><span class="pre">bubble_sort</span></code>. It is sufficient that it knows the signature. The definition is needed during the linking step, and since <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code> also includes <code class="docutils literal notranslate"><span class="pre">sort.hpp</span></code>, the linker will figure out the definition of <code class="docutils literal notranslate"><span class="pre">bubble_sort</span></code> is found in <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code>.</p>
+</section>
+</section>
+<section id="makefile-managing-the-compilation-and-linking">
+<span id="makefile"></span><h2>Makefile - managing the compilation and linking<a class="headerlink" href="#makefile-managing-the-compilation-and-linking" title="Permalink to this headline">#</a></h2>
+<p>The compilation and linking process can be quite tedious when many files are involved, and typing out all the commands are both time consuming and error prone. Tools like <a class="reference external" href="https://www.gnu.org/software/make/"><code class="docutils literal notranslate"><span class="pre">GNU</span> <span class="pre">make</span></code></a> can help you automate this process.  <code class="docutils literal notranslate"><span class="pre">GNU</span> <span class="pre">make</span></code> is typically already installed if you are using MacOSX or Linux. If you are on Windows, you can consult the <a class="reference external" href="https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows">following stack overflow thread</a>.</p>
+<p>The idea is that you create a file called <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> (with no extension) and inside this you create so called rules which has the following structure</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">target</span><span class="p">:</span>   <span class="n">dependencies</span> <span class="o">...</span>
+          <span class="n">commands</span>
+          <span class="o">...</span>
+</pre></div>
+</div>
+<p>You can then run each rule by using the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;target&gt;</span></code> is the name of the target.</p>
+<p>So for example if want to compile <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code> into an object file (<code class="docutils literal notranslate"><span class="pre">sort.o</span></code>), then the target is <code class="docutils literal notranslate"><span class="pre">sort.o</span></code>, the dependency is <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code> and the command is <code class="docutils literal notranslate"><span class="pre">c++</span> <span class="pre">-std=c++14</span> <span class="pre">-c</span> <span class="pre">sort.cpp</span></code>. Consequently, we can make the following rule</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sort</span><span class="o">.</span><span class="n">o</span><span class="p">:</span> <span class="n">sort</span><span class="o">.</span><span class="n">cpp</span>
+	<span class="n">c</span><span class="o">++</span> <span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">c</span> <span class="n">sort</span><span class="o">.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+<p>If you add this to your <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, and save it, you can compile <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code> into an object file by typing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">sort</span><span class="o">.</span><span class="n">o</span>
+</pre></div>
+</div>
+<p>Notice also that if your dependencies does not change (in this case <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code>) then <code class="docutils literal notranslate"><span class="pre">make</span></code> will not run the command. Instead you will see the following message</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make sort.o
+make: `sort.o&#39; is up to date.
+</pre></div>
+</div>
+<p>Lets look at a bit more complicated example. Consider the following <code class="docutils literal notranslate"><span class="pre">Makefile</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sort</span><span class="p">:</span> <span class="n">sort</span><span class="o">.</span><span class="n">o</span> <span class="n">test_sort</span><span class="o">.</span><span class="n">o</span>
+	<span class="n">c</span><span class="o">++</span> <span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="n">sort</span><span class="o">.</span><span class="n">o</span> <span class="n">test_sort</span><span class="o">.</span><span class="n">o</span> <span class="o">-</span><span class="n">o</span> <span class="n">sort</span>
+
+<span class="n">sort</span><span class="o">.</span><span class="n">o</span><span class="p">:</span> <span class="n">sort</span><span class="o">.</span><span class="n">cpp</span>
+	<span class="n">c</span><span class="o">++</span> <span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">c</span> <span class="n">sort</span><span class="o">.</span><span class="n">cpp</span>
+
+<span class="n">test_sort</span><span class="o">.</span><span class="n">o</span><span class="p">:</span> <span class="n">test_sort</span><span class="o">.</span><span class="n">cpp</span>
+	<span class="n">c</span><span class="o">++</span> <span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">14</span> <span class="o">-</span><span class="n">c</span> <span class="n">test_sort</span><span class="o">.</span><span class="n">cpp</span>
+
+<span class="n">clean</span><span class="p">:</span>
+	<span class="n">rm</span> <span class="o">-</span><span class="n">f</span> <span class="n">sort</span> <span class="o">*.</span><span class="n">o</span>
+</pre></div>
+</div>
+<p>Here we have one rule for compiling <code class="docutils literal notranslate"><span class="pre">sort.cpp</span></code> into <code class="docutils literal notranslate"><span class="pre">sort.o</span></code> and one rule for compiling <code class="docutils literal notranslate"><span class="pre">test_sort.cpp</span></code> into <code class="docutils literal notranslate"><span class="pre">test_sort.o</span></code>. We also added a command with the target <code class="docutils literal notranslate"><span class="pre">clean</span></code> which has no dependencies. Running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> will delete all the object files as well as the executable file called <code class="docutils literal notranslate"><span class="pre">sort</span></code>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Deleting with wildcard *</p>
+<p>The syntax <code class="docutils literal notranslate"><span class="pre">*.o</span></code> simply means all files that ends with <code class="docutils literal notranslate"><span class="pre">.o</span></code>. The asterisk (<code class="docutils literal notranslate"><span class="pre">*</span></code>), commonly referred to as the wildcard character, is a placeholder for any text. When executing the command <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-f</span> <span class="pre">*.o</span></code> it will therefore delete all files that ends with <code class="docutils literal notranslate"><span class="pre">.o</span></code>. The reason we also provide the <code class="docutils literal notranslate"><span class="pre">-f</span></code> flag here is because the command <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-f</span> <span class="pre">*.o</span></code> will raise an error if no files matching the pattern <code class="docutils literal notranslate"><span class="pre">.o</span></code> exists, while if we use the <code class="docutils literal notranslate"><span class="pre">-f</span></code> flag, no error will be shown.</p>
+</div>
+<p>The most complicated rule here is the rule on the top with target <code class="docutils literal notranslate"><span class="pre">sort</span></code>. It has two dependencies, <code class="docutils literal notranslate"><span class="pre">sort.o</span></code> and <code class="docutils literal notranslate"><span class="pre">test_sort.o</span></code>. When executing <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sort</span></code> it will first run the command for <code class="docutils literal notranslate"><span class="pre">sort.o</span></code> then run the command for <code class="docutils literal notranslate"><span class="pre">test_sort.o</span></code> and finally run the command for <code class="docutils literal notranslate"><span class="pre">sort</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make sort
+c++ -std=c++14 -c sort.cpp
+c++ -std=c++14 -c test_sort.cpp
+c++ -std=c++14 sort.o test_sort.o -o sort
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Running make without a target</p>
+<p>If you run <code class="docutils literal notranslate"><span class="pre">make</span></code> without a target, i.e only <code class="docutils literal notranslate"><span class="pre">make</span></code> it will execute the first rule it finds. Since we placed <code class="docutils literal notranslate"><span class="pre">sort</span></code> at the very top, this is the rule that will be run.</p>
+</div>
+</section>
+<section id="cmake-a-modern-version-of-makefile">
+<h2>CMake - a modern version of Makefile<a class="headerlink" href="#cmake-a-modern-version-of-makefile" title="Permalink to this headline">#</a></h2>
+<p>Even though <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> definitely makes the process of compiling and linking easier, modern C++ projects often contains many files and many dependencies that can be difficult to compile. This leads us to a modern version of <code class="docutils literal notranslate"><span class="pre">make</span></code> called <a class="reference external" href="https://cmake.org">CMake</a>.</p>
+<p>CMake allows you to define how to compile your program at a higher abstraction level and therefore it works very well with different compilers and different operating systems. You can install CMake from <a class="reference external" href="https://cmake.org/download/">cmake.org</a> or <a class="reference external" href="https://anaconda.org/anaconda/cmake">using conda</a>.</p>
+<p>Instead of a file called <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> you now write a file called <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>. Let us add the following content to it</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="p">(</span><span class="n">sorting_project</span>
+    <span class="n">LANGUAGES</span> <span class="n">CXX</span>
+<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="n">CMAKE_CXX_STANDARD</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="n">add_executable</span><span class="p">(</span><span class="n">sort</span>
+    <span class="n">sort</span><span class="o">.</span><span class="n">cpp</span>
+    <span class="n">test_sort</span><span class="o">.</span><span class="n">cpp</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>First lines provide a name for the project and which programming languages that are used. Next line set the <code class="docutils literal notranslate"><span class="pre">-std=c++14</span></code> flag but at a higher abstraction level. If you are using a compiler which set the C++ standard differently then using the flag <code class="docutils literal notranslate"><span class="pre">-std=c++14</span></code>, CMake will sort that out for us. The final lines specifies the name of the executable and lists the relevant source files.</p>
+<p>To build the program using <code class="docutils literal notranslate"><span class="pre">CMake</span></code> it is good practice to first create a folder called build and change directory to it</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+</pre></div>
+</div>
+<p>Now we run the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> command and provide the relative path to the location of the file <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>. Since this is now one level up, the relative path is <code class="docutils literal notranslate"><span class="pre">..</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cmake ..
+-- The CXX compiler identification is AppleClang 12.0.0.12000032
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/henriknf/local/src/IN1910_H21/book/docs/lectures/cpp/build
+</pre></div>
+</div>
+<p>We now see that CMake finds the C++ compiler and generates some files for us. You can see this if have a look in the <code class="docutils literal notranslate"><span class="pre">build</span></code> directory</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls
+CMakeCache.txt      CMakeFiles          Makefile            cmake_install.cmake
+</pre></div>
+</div>
+<p>We also see that CMake created a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, which we will use to build the project. Executing <code class="docutils literal notranslate"><span class="pre">make</span></code> will create the executable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make
+[ 33%] Building CXX object CMakeFiles/sort.dir/sort.cpp.o
+[ 66%] Building CXX object CMakeFiles/sort.dir/test_sort.cpp.o
+[100%] Linking CXX executable sort
+[100%] Built target sort
+</pre></div>
+</div>
+<p>And we now see the executable appearing in the same directory</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls
+CMakeCache.txt      CMakeFiles          Makefile            cmake_install.cmake sort
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">CMake GUI for larger project</p>
+<p>For large project you might want to specify additional settings when configuring cmake, for example where you want to install the project. You can do this using <code class="docutils literal notranslate"><span class="pre">ccmake</span></code> (with an extra <code class="docutils literal notranslate"><span class="pre">c</span></code>) which will open an interactive widows where you can specify additional settings.</p>
+</div>
+</section>
+<section id="formatting-your-code-with-clang-format">
+<h2>Formatting your code with <code class="docutils literal notranslate"><span class="pre">clang-format</span></code><a class="headerlink" href="#formatting-your-code-with-clang-format" title="Permalink to this headline">#</a></h2>
+<p>Just like python has the formatting tool <a class="reference external" href="https://github.com/psf/black"><code class="docutils literal notranslate"><span class="pre">black</span></code></a>, C++ has a tool called <code class="docutils literal notranslate"><span class="pre">clang-format</span></code>. <code class="docutils literal notranslate"><span class="pre">clang-format</span></code> comes installed with <code class="docutils literal notranslate"><span class="pre">clang</span></code> as well as with <code class="docutils literal notranslate"><span class="pre">gcc</span></code>.</p>
+<p>To run <code class="docutils literal notranslate"><span class="pre">clang-format</span></code> you need to point at the file you want to format as add the <code class="docutils literal notranslate"><span class="pre">-i</span></code> to apply the changes to the file. For example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clang</span><span class="o">-</span><span class="nb">format</span> <span class="o">-</span><span class="n">i</span> <span class="n">sort</span><span class="o">.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clang</span><span class="o">-</span><span class="nb">format</span> <span class="o">-</span><span class="n">i</span> <span class="o">*.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+<p>to format all source files.
+You can also specify which style you want to use by passing the flag <code class="docutils literal notranslate"><span class="pre">--style</span></code>. For example if you want to use the <code class="docutils literal notranslate"><span class="pre">llvm</span></code> style you can do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clang</span><span class="o">-</span><span class="nb">format</span> <span class="o">-</span><span class="n">i</span> <span class="o">--</span><span class="n">style</span><span class="o">=</span><span class="n">llvm</span> <span class="o">*.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+<p>As mentioned before, you can choose which style you want. What is important is that you are <em>consistent</em>. Using a formatter is a great way to achieve consistency.</p>
+<div class="tip admonition">
+<p class="admonition-title">Run a formatter when saving</p>
+<p>You always want your code to look nice and have a consistent code style. It is therefore a good tip to simply let your editor format your code when saving. In Visual Studio Code you can do this by setting the <a class="reference external" href="https://code.visualstudio.com/updates/v1_6#_format-on-save"><code class="docutils literal notranslate"><span class="pre">formatOnSave</span></code> option to true</a>.</p>
+</div>
+</section>
+<section id="documentation-with-doxygen">
+<h2>Documentation with Doxygen<a class="headerlink" href="#documentation-with-doxygen" title="Permalink to this headline">#</a></h2>
+<section id="writing-documentation">
+<span id="cpp-documentation"></span><h3>Writing documentation<a class="headerlink" href="#writing-documentation" title="Permalink to this headline">#</a></h3>
+<p>In python we write docstrings in order to document our code. In C++ it is common to write multiline comments right above the function definition.</p>
+<p>For example in the <code class="docutils literal notranslate"><span class="pre">bubble_sort</span></code> function we could write something like this</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Sort a vector using the bubble sort algorithm</span>
+<span class="cm"> * Return a new vector with a arguments sorted</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param numbers The vector to be sorted</span>
+<span class="cm"> * @return A sorted vector</span>
+<span class="cm"> **/</span><span class="w"></span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bubble_sort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">changed</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">numbers</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note that we start with <code class="docutils literal notranslate"><span class="pre">/**</span></code> and end with <code class="docutils literal notranslate"><span class="pre">**/</span></code> and at each line in between we add an asterisk, <code class="docutils literal notranslate"><span class="pre">*</span></code>. In the first lines we provide a description of the function, e.g <em>Sort a vector using the bubble sort algorithm. Return a new vector with a arguments sorted</em>. Then we specify the input parameters by first using <code class="docutils literal notranslate"><span class="pre">&#64;param</span></code> followed by the name of the parameter name (in this case <code class="docutils literal notranslate"><span class="pre">numbers</span></code>), and then finally a description of than input parameter. If you have more input parameters you will write these one separate lines. Finally we specify what the function returns using the <code class="docutils literal notranslate"><span class="pre">&#64;return</span></code> syntax.</p>
+</section>
+<section id="generating-documentation-with-doxygen">
+<h3>Generating documentation with Doxygen<a class="headerlink" href="#generating-documentation-with-doxygen" title="Permalink to this headline">#</a></h3>
+<p><a class="reference external" href="https://www.doxygen.nl/index.html">Doxygen</a> is a tool to generate documentation that can be distributed to user of the software, either though the web using HTML or in PDF format. It is similar to <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> but applies to more programming languages (Sphinx is used for Python documentation).</p>
+<p>Once installed you can run the following command in the location where you have your source files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ doxygen -g
+
+Configuration file &#39;Doxyfile&#39; created.
+
+Now edit the configuration file and enter
+
+  doxygen
+
+to generate the documentation for your project
+</pre></div>
+</div>
+<p>This will create a file called <code class="docutils literal notranslate"><span class="pre">Doxyfile</span></code> that can be used to configure the documentation. There is a lot of options here, and in this example I will change the following default settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROJECT_NAME</span> <span class="o">=</span> <span class="s2">&quot;Sorting project&quot;</span>
+<span class="n">EXTRACT_ALL</span> <span class="o">=</span> <span class="n">YES</span>
+<span class="n">HAVE_DOT</span> <span class="o">=</span> <span class="n">YES</span>
+<span class="n">OUTPUT_DIRECTORY</span> <span class="o">=</span> <span class="n">docs</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">PROJECT_NAME</span></code> just specifies the name of the project, which in this case we will name “Sorting project”. The <code class="docutils literal notranslate"><span class="pre">EXTRACT_ALL</span></code> configuration will create documentation for all files even though it cannot find any documentation. This is useful if only parts of your code is documented. We also set <code class="docutils literal notranslate"><span class="pre">HAVE_DOT</span></code> to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. When setting this to <code class="docutils literal notranslate"><span class="pre">YES</span></code> doxygen will create a dependency graphs that shows how your files are related. However, it also requires another package called <a class="reference external" href="http://www.graphviz.org/">Graphviz</a>. Finally we set the <code class="docutils literal notranslate"><span class="pre">OUTPUT_DIRECTORY</span></code> to <code class="docutils literal notranslate"><span class="pre">docs</span></code> which means that the files that are generated from doxygen wil be put in a new folder called <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<p>Now we can run <code class="docutils literal notranslate"><span class="pre">doxygen</span></code> by executing the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">doxygen</span> <span class="n">Doxyfile</span>
+</pre></div>
+</div>
+<p>and you will see that it generates two folders inside the <code class="docutils literal notranslate"><span class="pre">docs</span></code> folder</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docs
+├── html
+└── latex
+</pre></div>
+</div>
+<p>If you open <code class="docutils literal notranslate"><span class="pre">docs/html/index.html</span></code> you can have look at the generated documentation.</p>
+</section>
+</section>
+<section id="testing">
+<span id="cpp-testing"></span><h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">#</a></h2>
+<p>During the beginning of the course we focused a lot on unit testing and test driven development in Python. When moving on the C++, testing is still very important but for the sake of time, we will not spend too much time on this. C++ is a statically typed language, meaning that the compiler will check that the functions we use are called with the correct type, and this is in itself as very good test.</p>
+<p>However, for the sake of completeness we will go through how you can write a simple test in C++ using assert statements, similar to how you would do it in Python. Here is a simple example where we implement a method called <code class="docutils literal notranslate"><span class="pre">add</span></code> and writes two tests for it</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cassert&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">tol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-12</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">test_add_double</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">expected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">expected</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tol</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">test_add_int</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">expected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">expected</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">test_add_double</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">test_add_int</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">assert</span></code> function we need to include the header file called <code class="docutils literal notranslate"><span class="pre">cassert</span></code>. Here we also include the <code class="docutils literal notranslate"><span class="pre">cmath</span></code> header in order to use the <code class="docutils literal notranslate"><span class="pre">abs</span></code> function.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/cpp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="dynamic_allocation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">More on pointers and arrays and dynamic allocation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="arraylist.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dynamic Arrays aka Array Lists</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

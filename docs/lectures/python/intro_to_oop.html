@@ -1,0 +1,1923 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Object-Oriented Programming &#8212; IN1910 - Programming with Scientific Applications</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Methods in Python" href="oop_methods.html" />
+    <link rel="prev" title="Object-oriented programming in Python" href="python_oop.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">IN1910 - Programming with Scientific Applications</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    IN1910 – Programming with Scientific Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/curriculum.html">
+   Curriculum
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/motivation.html">
+   The motivation behind IN1910
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../info/dictionary.html">
+   Dictionary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Setting up your computer for IN1910
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/setup.html">
+   Installation instructions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../setup/cpp_compiler.html">
+   Installing a C++ compiler
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lecture videos
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H22.html">
+   Lecture videos from H22
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H21.html">
+   Lecture videos from H21
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H20.html">
+   Lecture videos from H20
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../videos/videos_H19.html">
+   Lecture videos from H19
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lectures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python_intro.html">
+   A quick Python refresher
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="python_oop.html">
+   Object-oriented programming in Python
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Introduction to Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="oop_methods.html">
+     Methods in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="oop_concepts.html">
+     Designing Object-Oriented Programs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functional_programming.html">
+   Functional programming in python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../git/version_control_with_git.html">
+   Version Control with Git
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_development/python_development.html">
+   Python development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/writing_functioning_code.html">
+     Writing Reliable Software
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/codestyle_and_docstrings.html">
+     Code Style and Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/type_annotations.html">
+     Type annotations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python_development/debugging.html">
+     Debugging in python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/cpp.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/intro_to_cpp.html">
+     An introduction to C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arrays_and_pointers.html">
+     Arrays, Memory and Pointers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/oop_in_cpp.html">
+     Object-oriented Programming in C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/dynamic_allocation.html">
+     More on pointers and arrays and dynamic allocation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/cpptools.html">
+     C++ tips and tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/arraylist.html">
+     Dynamic Arrays aka Array Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linked_lists.html">
+     Linked Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/algorithm_analysis.html">
+     Algorithm Analysis and Big Oh Notation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/linkedlists_vs_dynamicarrays.html">
+     Comparing Linked Lists and Dynamic Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../cpp/sorting.html">
+     Sorting Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data_science/data_science.html">
+   Data science
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/plotting_with_matplotlib.html">
+     Analyzing data with
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pandas
+      </span>
+     </code>
+     and and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       matplotlib
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data_science/streamlit.html">
+     Building a data visualization app with streamlit
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stochastic_processes/stochastic_processes.html">
+   Stochastic processes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_number_generators.html">
+     Random Number Generators and Seeding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/using_random_numbers.html">
+     Using Random Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/random_walks_and_markov_processes.html">
+     Random Walks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/solving_the_1D_diffusion_equation.html">
+     Solving the 1D Diffusion Equation using Finite Differences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stochastic_processes/markov_chains.html">
+     Markov processes and Markov chains
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../optimization/optimization.html">
+   Software optimization and parallelism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/software_optimization.html">
+     Software Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/optimization_and_mixed_programming.html">
+     Optimization and Mixed Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../optimization/parallel_programming.html">
+     Parallel Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary/course_summary.html">
+   Course Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_python_refresh_and_git.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_testing_and_docstrings.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_exercises_on_oop.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week6/E6_intro_to_cpp.html">
+   Week 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/E6_references_and_pointers.html">
+     Week 6, Part 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week6/C1_primes_by_trial_division.html">
+     Challenge 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../exercises/week7/E7_oop_in_cpp.html">
+   Week 7
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../exercises/week7/C2_primes_by_sieve.html">
+     Challenge 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/cpp_exercises.html">
+   An introduction to C++
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week10/E8_random_number_generators.html">
+   Week10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_random_walks_and_markov_process.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/Exercises%20for%20Plotly%20Express.html">
+   Exercises for Plotly Express
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_optimization_and_mixed_programming.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_parallel_programming.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercise solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week1/E1_solutions.html">
+   Week 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week3/E3_solutions.html">
+   Week 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week2/E2_solutions.html">
+   Week 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week4/pancake_sort_solution.html">
+   The Pancake Problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/E6_solutions.html">
+   Week 6 solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week6/week6-challenge.html">
+   Exercises week 6 - challenge solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week7/E7_solutions.html">
+   Week 7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week11/E9_solutions.html">
+   Week 11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week12/E10_solutions.html">
+   Week 12
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../exercises/week13/E11_solutions.html">
+   Week 13
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/finsberg/IN1910/gh-pages?urlpath=tree/_sources/docs/lectures/python/intro_to_oop.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/finsberg/IN1910/issues/new?title=Issue%20on%20page%20%2Fdocs/lectures/python/intro_to_oop.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/docs/lectures/python/intro_to_oop.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../../_sources/docs/lectures/python/intro_to_oop.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-object-oriented-programming">
+   What is Object-Oriented Programming?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-origins-of-oop">
+     The origins of OOP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-are-objects">
+     What are objects?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-a-contact-list">
+     Example: A contact list
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class-vs-instance">
+   Class vs Instance
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-conventions">
+     Naming Conventions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-a-deck-of-cards">
+     Example: A deck of cards
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-use-of-self">
+     The use of
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       self
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interfaces">
+   Interfaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polymorphism">
+   Polymorphism
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-the-derivative-class">
+     Example: The derivative class
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties">
+   Properties
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setters-and-getters">
+     Setters and Getters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avoiding-repeated-computations">
+     Avoiding repeated computations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#private-and-public-variables">
+     Private and Public variables
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataclasses">
+   Dataclasses
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#namedtuple">
+   NamedTuple
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#namedtuple-vs-dataclass-vs-regular-class">
+   NamedTuple vs Dataclass vs Regular Class?
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to Object-Oriented Programming</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-object-oriented-programming">
+   What is Object-Oriented Programming?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-origins-of-oop">
+     The origins of OOP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-are-objects">
+     What are objects?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-a-contact-list">
+     Example: A contact list
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class-vs-instance">
+   Class vs Instance
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-conventions">
+     Naming Conventions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-a-deck-of-cards">
+     Example: A deck of cards
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-use-of-self">
+     The use of
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       self
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interfaces">
+   Interfaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polymorphism">
+   Polymorphism
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-the-derivative-class">
+     Example: The derivative class
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#properties">
+   Properties
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setters-and-getters">
+     Setters and Getters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avoiding-repeated-computations">
+     Avoiding repeated computations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#private-and-public-variables">
+     Private and Public variables
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataclasses">
+   Dataclasses
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#namedtuple">
+   NamedTuple
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#namedtuple-vs-dataclass-vs-regular-class">
+   NamedTuple vs Dataclass vs Regular Class?
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-object-oriented-programming">
+<h1>Introduction to Object-Oriented Programming<a class="headerlink" href="#introduction-to-object-oriented-programming" title="Permalink to this headline">#</a></h1>
+<p>In this section we will start looking at object-oriented programming (OOP for short). This is one of the major components of IN1910. In this lecture we will start to look at what OOP is, and how to program object-oriented in Python. In later lectures we will cover some more theory of object-oriented programming and also touch on object oriented programming in C++.</p>
+<section id="what-is-object-oriented-programming">
+<h2>What is Object-Oriented Programming?<a class="headerlink" href="#what-is-object-oriented-programming" title="Permalink to this headline">#</a></h2>
+<p>Object-oriented programming is a <a class="reference external" href="https://en.wikipedia.org/wiki/Programming_paradigm"><em>programming paradigm</em></a>. Simply put, a paradigm is a way to think about, organize, and write code. Paradigms are used to classify and describe languages and programming styles. Many other paradigms exists, and you might have heard of some of them. Some examples are: procedural programming, functional programming, imperative programming, and symbolic programming. Most programming languages don’t belong to a single, specific paradigm. Instead most languages, including Python and C++, are described as <em>multi-paradigm</em>, meaning it is possible to structure and write your code in different ways.</p>
+<p>Object-oriented programming is a way of solving problems, or building software, by defining data as <em>objects</em>, and specifying how those objects behave and interact. It is one of the most popular programming paradigms, and is often used when developing software. When done correctly, OOP leads to code that is usually quite easy to understand, use and extend.</p>
+<section id="the-origins-of-oop">
+<h3>The origins of OOP<a class="headerlink" href="#the-origins-of-oop" title="Permalink to this headline">#</a></h3>
+<p>Object-oriented programming was invented in Norway by Ole-Johan Dahl and Kristen Nygaard in 1967. They made a new programming language, and called the first object-oriented language <em>Simula</em>. While Simula was revolutionary and historically an important language, it didn’t see widespread adoption. Inspired by Simula, the language <em>Smalltalk</em> came on the scene in 1972 and saw a wider use, pushing the use of OOP. Smalltalk still sees some use today, mainly as a means of teaching OOP and introductory programming. In 1983 <em>C++</em> arrived on the scene, which can be described as the first “industrial” object-oriented language. C++ was invented by Bjarne Stroustrup. He thought Simula had some nice features for large software development, but considered it to be too slow to be practical. He therefore started developing <em>“C with classes”</em>, which would eventually become C++.</p>
+<figure class="align-default" id="oop-drake-meme">
+<a class="reference internal image-reference" href="../../../_images/oop_drake_meme.png"><img alt="oop_drake_meme" src="../../../_images/oop_drake_meme.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">You might have thought the “ostehøvel” was the greatest Norwegian invention, but Simula is where it’s at</span><a class="headerlink" href="#oop-drake-meme" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="what-are-objects">
+<h3>What are objects?<a class="headerlink" href="#what-are-objects" title="Permalink to this headline">#</a></h3>
+<p>So what are <em>objects</em>? You probably already have some intuition around what objects are. In Python, all variables are objects. So in a sense an object is similar to a variable. All objects have a few characteristics we can associate with them.</p>
+<ol class="simple">
+<li><p>All objects have a given object <em>type</em>. We for example have integers, strings, lists and dictionaries. Objects of these types will behave differently, but they are all examples of objects</p></li>
+<li><p>Objects behave in certain pre-defined ways. We can for example perform calculations with numbers, we can sort lists, or we can split a string. The type defines what actions we can perform, and what we can’t do. It wouldn’t make sense to divide a list by another list for example</p></li>
+<li><p>Objects typically have information or data stored in them. For integers and floats this would be their numerical value, for a list it is all the elements, and so on. In certain cases however, we define empty lists/dictionaries</p></li>
+</ol>
+<p>One of the reasons OOP is so popular is that it is quite intuitive, because it mirrors real life. To make sense of the world around us when we think or talk we tend to divide everything into specific concepts or <em>objects</em>. Cars are objects and so are buildings. People are objects too, in the software sense. It isn’t only physical things that are objects either. A given calendar date is an object, defined by its day, month and year. This course is IN1910, which could be described as an abstract object. We can think of a job as an object. In this sense an object is a data abstraction that attempts to capture some important property or feature.</p>
+<p><strong>Everything in Python are objects</strong>. When you are programming in Python, you are defining and using objects all the time. Does this mean you are programming object-oriented? Not necessarily. As we mentioned in the introduction the important thing is <em>thinking</em> and <em>solving problems</em> in an object-oriented manner. Meaning that to do OOP properly one should ask what kind of objects are best for organizing a program and solving problems. Probably the most important task of programming object-oriented is therefore to define new data types, and defining how objects of that type should be represented and interact.</p>
+</section>
+<section id="example-a-contact-list">
+<h3>Example: A contact list<a class="headerlink" href="#example-a-contact-list" title="Permalink to this headline">#</a></h3>
+<p>Think about the contact list on your phone. For each contact, you can store information of different types: name, different phone numbers, emails, etc. Some of your contacts may have many pieces of information, while other contacts only have a single piece of information.</p>
+<p>Let us say we want to implement such a contact list for a new phone system we are making. We might start thinking about how to solve this problem. It makes sense to think of each individual contact as an individual <em>object</em>. Each piece of information belongs to a given contact, so it should be part of that object in the code.</p>
+<p>To begin with, we only want to store information about each contact, and so dictionaries would be a natural choice for this. We can use key-value pairs to store the information we want, and ignore the pieces of information we don’t want. Other parts of the software system can then go in and access information from the contact dictionary as needed</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contact</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Lisa&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;lisa@python.org&quot;</span><span class="p">,</span> <span class="s2">&quot;mobile_number&quot;</span><span class="p">:</span> <span class="s2">&quot;767828292&quot;</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">contact</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lisa@python.org
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, our dictionary can only store information on the contact, we cannot add new functionality. A more general way to do this would instead be to define a custom Contact-<em>class</em>. Classes are way to define new data types. That way we can create variables that are of type <em>contact</em>, instead of dictionary. The upside is that we  can choose exactly how our contact datatype should behave.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Contact</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cellphone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span> <span class="o">=</span> <span class="n">cellphone</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this class defined, we can now create new contact object as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contact</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="s2">&quot;Lisa&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;lisa@python.org&quot;</span><span class="p">,</span> <span class="n">cellphone</span><span class="o">=</span><span class="s2">&quot;767828292&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">contact</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lisa@python.org
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our contact object is no longer a dictionary, but a <code class="docutils literal notranslate"><span class="pre">Contact</span></code>-object, a new data type we defined ourself. We can check this by writing out the type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">contact</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;__main__.Contact&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>So far we have only added the same information as the dictionary, but we could now go ahead and change how this object behaves. We could for example add a method that starts a new call to the person, so that we could do <code class="docutils literal notranslate"><span class="pre">contact.initiate_call()</span></code>, or a button to start an email to the person, and so on.</p>
+</section>
+</section>
+<section id="class-vs-instance">
+<h2>Class vs Instance<a class="headerlink" href="#class-vs-instance" title="Permalink to this headline">#</a></h2>
+<p>When we define a class, we are defining a new data type. To actually use it, we have to define a new object of that type, we call this an <em>instance</em> of the class. In our contact-list example, the <code class="docutils literal notranslate"><span class="pre">Contact</span></code> class is the general class we defined, then we can implement specific instances of the class, one for “Lisa”, one for “Frank” and so on. The class is thus the abstract <em>concept</em> of a contact, and objects are the specific cases of that type. A different example: A Nissan leaf is a given type of car, and can be represented as a class. A specific car with the license plate “EM93277” (courtesy of <a class="reference external" href="http://random.org">random.org</a>) is an <em>instance</em> of the Nissan leaf class. The specific car is an object of the <em>type</em> Nissan leaf. In this sense, the class is like the blue-print, it specifies how objects of that type should be built and how they should behave.</p>
+<section id="naming-conventions">
+<h3>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">#</a></h3>
+<p>According to the <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#class-names">PEP8</a> style-guide class names should use the CapWords convention (aka PascalCase). This means every word in the class name should be capitalized, and the words should <strong>not</strong> be separated by underscores.</p>
+<p>Some examples: <code class="docutils literal notranslate"><span class="pre">Person</span></code>, <code class="docutils literal notranslate"><span class="pre">Polynomial</span></code>, <code class="docutils literal notranslate"><span class="pre">Vector3D</span></code>, <code class="docutils literal notranslate"><span class="pre">BankAccount</span></code>, <code class="docutils literal notranslate"><span class="pre">FileReader</span></code>.</p>
+<p>Specific instances of a class however, should always be lowercase. So when we define a variable of a given class, we would write for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Vector3D</span><span class="p">()</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">()</span>
+<span class="n">acc9302100</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You should be strict about this rule, as it makes it much easier to differentiate the <em>classes</em> themselves (the general datatype) from instances of that class (the specific objects) in your code.</p>
+</section>
+<section id="example-a-deck-of-cards">
+<h3>Example: A deck of cards<a class="headerlink" href="#example-a-deck-of-cards" title="Permalink to this headline">#</a></h3>
+<p>Time for another example. Let us say we are implementing some card games. Now, we can easily represent a deck of cards using lists of strings in Python, no problem. However, for most card games, we need to use the exact same operations: get a new deck, shuffle the deck, draw cards, etc. It would be useful to implement the code to do this one time, and then just use that functionality each time we implement a new card game.</p>
+<p>We do this by implementing a <code class="docutils literal notranslate"><span class="pre">Deck</span></code> class. After having implemented our class, we can then define an instance of this class (<code class="docutils literal notranslate"><span class="pre">deck</span> <span class="pre">=</span> <span class="pre">Deck()</span></code>). Our actual game code will then be much simpler, because we can now simply call <code class="docutils literal notranslate"><span class="pre">deck.shuffle()</span></code> or <code class="docutils literal notranslate"><span class="pre">deck.draw(5)</span></code> and so on. This adds a layer of abstraction to our code, and hides away the ugly implementation details “behind the scenes”. This is called <em>encapsulation</em>, and is one of the motivations for using OOP. We can say we hide the implementation, but expose an easy-to-use and easy-to-understand <em>interface</em> that is used to manipulate the object</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+
+<span class="k">class</span> <span class="nc">Deck</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a standard 52-card deck.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">shuffle_into_deck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we implement a class that has four methods. The first method is the constructor (called <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, we explain why later), this is run every time we create a new object of the class. In this case we initialize a deck of cards by adding all the cards in the deck using a double-loop. We also add a <code class="docutils literal notranslate"><span class="pre">shuffle</span></code> method that shuffles the deck, a <code class="docutils literal notranslate"><span class="pre">draw</span></code> method that draws <span class="math notranslate nohighlight">\(n\)</span> cards from the deck, and a <code class="docutils literal notranslate"><span class="pre">shuffle_into_deck</span></code> for when we want to shuffle cards back into the deck. These are just simple examples of functionality that makes sense for a deck of cards, and we could add plenty more.</p>
+<p>Once we have taken the time to build the <code class="docutils literal notranslate"><span class="pre">Deck</span></code>-class, we can easily create decks of cards, and use them, without having to think too much about the underlying details of the implementation. Implementing a class therefore represents adding a new layer of abstraction to our code. For example, we can now create a random 5-card poker hand as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
+
+<span class="n">hand</span> <span class="o">=</span> <span class="n">deck</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hand</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;H&#39;, 11), (&#39;D&#39;, 13), (&#39;H&#39;, 12), (&#39;S&#39;, 4), (&#39;H&#39;, 9)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-use-of-self">
+<h3>The use of <code class="docutils literal notranslate"><span class="pre">self</span></code><a class="headerlink" href="#the-use-of-self" title="Permalink to this headline">#</a></h3>
+<p>In our class examples so far, we have simply used the <code class="docutils literal notranslate"><span class="pre">self</span></code>-syntax without explaining it. It is a normal point of confusion for those learning Python, and even those who learn how to define the classes and method using <code class="docutils literal notranslate"><span class="pre">self</span></code> might not really understand <em>why</em> it works like it does.</p>
+<p>When we call a method on a given instance of a class, like for example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This is interpreted behind the scenes by Python as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And so the method <code class="docutils literal notranslate"><span class="pre">Deck.shuffle</span></code>, even though it is written inside the class, actually just acts like a stand-alone function, the object is simply passed in and manipulated. And so when we define the function we call the first input-argument <code class="docutils literal notranslate"><span class="pre">self</span></code>, because this is the <em>object itself</em> (in this case <code class="docutils literal notranslate"><span class="pre">self</span> <span class="pre">=</span> <span class="pre">deck</span></code>). Note that you can, technically, call this argument something other than <code class="docutils literal notranslate"><span class="pre">self</span></code>, it is just a function argument, like any other. However, it is considered good code style to always use <code class="docutils literal notranslate"><span class="pre">self</span></code> and it will be confusing for others if you use something else. (Most languages use either “self” or “this”.)</p>
+<p>For most class methods you define, you define the method with <code class="docutils literal notranslate"><span class="pre">self</span></code> as the first argument. And you use <code class="docutils literal notranslate"><span class="pre">self</span></code> inside the method to manipulate the data within the object. Let us look back at the <code class="docutils literal notranslate"><span class="pre">Deck.shuffle</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Deck</span><span class="p">:</span>
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When we intend to use this on a specific deck we simply write <code class="docutils literal notranslate"><span class="pre">deck.shuffle()</span></code>, i.e., without arguments. We still define the function with a <code class="docutils literal notranslate"><span class="pre">self</span></code> argument, and the method shuffles the internal list attribute of the deck, i.e., <code class="docutils literal notranslate"><span class="pre">self.cards</span></code>.</p>
+</section>
+</section>
+<section id="interfaces">
+<h2>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">#</a></h2>
+<p>In our deck of cards example, we have specific methods the user can use to interact with the deck of cards, and we can call this the <em>interface</em> (På norsk: grensesnitt) of the class. To put it simply, the interface is what is “visible” or usable from outside the class. If you build a large and complex class, all anyone really needs in order to interact with it is a good understanding of its interface. In this sense, the interface itself is an abstraction tool. Take a car for example, the interface used for driving that car is the steering wheel, the pedals and the gear stick. However, under the hood there is an engine and lots of complicated machinery.</p>
+<p>The act of hiding dirty implementation or technical details under the hood is called <em>encapsulation</em>. Encapsulation is useful for keeping code nice and tidy and user friendly. Also, it means that the details under the hood can change without issue, as long as the external interface remains the same. A mechanic can replace the engine in your car, but you will still be able to drive it as before, because the interface is the same.</p>
+<p>In some languages, like Java and C++, you can explicitly define interfaces that define what a class must contain.  These are often described as “contracts”, as they state what a given class that follows that interface must contain.</p>
+</section>
+<section id="polymorphism">
+<h2>Polymorphism<a class="headerlink" href="#polymorphism" title="Permalink to this headline">#</a></h2>
+<p>The fact that we can use callable objects as if they were functions is very useful in Python, and it is an example of <a class="reference external" href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)"><em>polymorphism</em></a>. Polymorphism is another of the pillars of OOP, but the concept is a bit tricky to define or understand. The term itself comes from greek and means “many forms”. It is a means of generalizing code, in that we can write different code that behaves the same under given circumstances, and thus we can use those objects as long as they have a given property we need. In this case, we can create objects that acts and feels like functions, and we can use them for any purpose were we need a Python function.</p>
+<p>This is an example of Python’s <a class="reference external" href="https://en.wikipedia.org/wiki/Duck_typing"><em>duck typing</em></a>. This term comes from the saying:</p>
+<ul class="simple">
+<li><p><em>If it looks like a duck, swims like a duck, and quacks like a duck, then it probably is a duck.</em></p></li>
+</ul>
+<p>What we mean by this is that what <em>type</em> a given object is isn’t that important, what is important is how it behaves. In Python we therefore shouldn’t check whether a given input is a Python function, instead we should check whether it is <em>callable</em>. This can be done with the built-in function:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">callable</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the object <code class="docutils literal notranslate"><span class="pre">f</span></code> is callable, and <code class="docutils literal notranslate"><span class="pre">False</span></code> if it is not. It doesn’t care whether <code class="docutils literal notranslate"><span class="pre">f</span></code> is a Python function, a custom class or a given class method. It only cares if <code class="docutils literal notranslate"><span class="pre">f</span></code> quacks like a duck.</p>
+<section id="example-the-derivative-class">
+<h3>Example: The derivative class<a class="headerlink" href="#example-the-derivative-class" title="Permalink to this headline">#</a></h3>
+<p>In mathematics, Newton’s method is a numerical method for finding the roots of a mathematical function (a root is the point where the function is equal to zero). Normally to use Newtons method you need the function itself <span class="math notranslate nohighlight">\(f(x)\)</span>, it’s derivative <span class="math notranslate nohighlight">\(\frac{\rm d}{{\rm d}x} f(x)\)</span> (which also is a function), and an initial guess <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>Let us now assume we are given a function <code class="docutils literal notranslate"><span class="pre">newton(f,</span> <span class="pre">x0,</span> <span class="pre">dfdx)</span></code> that implements Newton’s method. The SciPy library for example has the function <code class="docutils literal notranslate"><span class="pre">scipy.optimize.newton(func,</span> <span class="pre">x0,</span> <span class="pre">dfdx)</span></code>. We want to use this function to find the roots of a function <span class="math notranslate nohighlight">\(f(x)\)</span>. However, say we are lacking a function for the derivative <span class="math notranslate nohighlight">\(\frac{\rm d}{{\rm d}x} f(x)\)</span>, and we cannot find the expression for the derivative analytically. What do we do?</p>
+<p>One solution would be to implement the derivative function numerically. We can approximate the derivative function in any point using the central finite difference</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\rm d}{{\rm d}x} f(x) \approx \frac{f(x+\Delta x) - f(x - \Delta x)}{2\Delta x}.
+\]</div>
+<p>Typically we compute this for a given array of values. However, for <code class="docutils literal notranslate"><span class="pre">newton</span></code> to work, we can’t send in an array of values, we must send in a callable function. To create such a callable function we can create a <code class="docutils literal notranslate"><span class="pre">Derivative</span></code> class that automatically creates a callable object for <span class="math notranslate nohighlight">\(\frac{\rm d}{{\rm d}x} f(x)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Derivative</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">callable</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input must be callable.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="n">dx</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">dx</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we create the class from a given function <code class="docutils literal notranslate"><span class="pre">f</span></code>, which we double check is <em>callable</em>. We store the function as an attribute so we can use it later. We also store the step size <span class="math notranslate nohighlight">\(\Delta x\)</span>, which defaults to <span class="math notranslate nohighlight">\(10^{-6}\)</span> if we do not supply it.</p>
+<p>We can now implement the derivative of any callable function as its own callable object as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span>
+<span class="n">dfdx</span> <span class="o">=</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">f</span></code> represents the function <span class="math notranslate nohighlight">\(f(x) = \sin(x)\)</span>, while <code class="docutils literal notranslate"><span class="pre">dfdx</span></code> will be its derivative. Let us check if it works. As we know the derivative of <span class="math notranslate nohighlight">\(\sin(x)\)</span> is <span class="math notranslate nohighlight">\(\cos(x)\)</span> we can test our implementation as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.8281</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dfdx</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6762766107115681
+0.6762766106824172
+</pre></div>
+</div>
+</div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">Derivative</span></code> class implemented, we can now easily use the <code class="docutils literal notranslate"><span class="pre">newton</span></code> method on any function, simply use  the <code class="docutils literal notranslate"><span class="pre">Derivative</span></code>-class to automatically define the derivative function, and then call Newton, as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">newton</span>
+
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">4</span>
+
+
+<span class="n">dfdx</span> <span class="o">=</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">dfdx</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.9999999845691476
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we simply used Newton’s method as an example, and do note that <code class="docutils literal notranslate"><span class="pre">scipy.optimize.newton</span></code> actually doesn’t need us to supply the derivative function, because if we do not supply it, it does pretty much the same as we have done behind the scenes automatically.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.9999999803073025
+</pre></div>
+</div>
+</div>
+</div>
+<p>Implementing the <code class="docutils literal notranslate"><span class="pre">Derivative</span></code> class ourselves does hopefully make it more apparent how SciPy can use Newton’s method without having the derivative function - it is also a good example of how OOP can be used in scientific computing.</p>
+</section>
+</section>
+<section id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">#</a></h2>
+<p>Another important topic is <em>properties</em>, which is a very handy topic to know about when implementing and using your own custom classes. Consider the following class <code class="docutils literal notranslate"><span class="pre">Sphere</span></code> which is a class that takes a radius as the argument in the constructor and stores the area and volume as attributes on the instance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.141592653589793</span>
+
+<span class="k">class</span> <span class="nc">Sphere</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">3</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Sphere(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="si">}</span><span class="s2">)&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have also implemented a simple <code class="docutils literal notranslate"><span class="pre">__str__</span></code> method so that the sphere is printed nicely when we try to print it, see <a class="reference internal" href="oop_methods.html#python-oop-special-print"><span class="std std-ref">Printing out instances of custom classes</span></a>.
+Here we set the radius of the sphere once we create the object, and the area and volume are automatically computed. This works quite well, but it has a few issues as well. For one thing, there is nothing that prevents us from changing one of these fields directly. If we do this, the other fields do <strong>not</strong> change automatically</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ball</span> <span class="o">=</span> <span class="n">Sphere</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ball</span><span class="si">}</span><span class="s2"> has a volume of </span><span class="si">{</span><span class="n">ball</span><span class="o">.</span><span class="n">volume</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ball</span><span class="o">.</span><span class="n">radius</span> <span class="o">+=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ball</span><span class="si">}</span><span class="s2"> has a volume of </span><span class="si">{</span><span class="n">ball</span><span class="o">.</span><span class="n">volume</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sphere(5) has a volume of 524
+Sphere(10) has a volume of 524
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we created a <code class="docutils literal notranslate"><span class="pre">Sphere</span></code>-object, which we call <code class="docutils literal notranslate"><span class="pre">ball</span></code>. We can update the radius of the ball by changing the <code class="docutils literal notranslate"><span class="pre">ball.radius</span></code> attribute directly. However, when we do this, the volume does not change. This is because the volume is only computed in the constructor (the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method), which is called only when the object is first created.</p>
+<p>How big of a problem this is of course dependent on how the code is to be used. But for now, let us say we want to make the code more intuitive, user-friendly and foolproof. Our goal is therefore to make it possible to change the radius attribute directly, and have the area and volume auto-update.</p>
+<p>A simple solution is to make the <code class="docutils literal notranslate"><span class="pre">area</span></code> and <code class="docutils literal notranslate"><span class="pre">volume</span></code> attributes methods instead of data fields</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sphere</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">3</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Sphere(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="si">}</span><span class="s2">)&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now update the <code class="docutils literal notranslate"><span class="pre">radius</span></code> property, and when we call the <code class="docutils literal notranslate"><span class="pre">area()</span></code> or <code class="docutils literal notranslate"><span class="pre">volume()</span></code> methods, they will recompute using the new radius</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ball</span> <span class="o">=</span> <span class="n">Sphere</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ball</span><span class="si">}</span><span class="s2"> has a volume of </span><span class="si">{</span><span class="n">ball</span><span class="o">.</span><span class="n">volume</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ball</span><span class="o">.</span><span class="n">radius</span> <span class="o">+=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ball</span><span class="si">}</span><span class="s2"> has a volume of </span><span class="si">{</span><span class="n">ball</span><span class="o">.</span><span class="n">volume</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sphere(5) has a volume of 524
+Sphere(10) has a volume of 4189
+</pre></div>
+</div>
+</div>
+</div>
+<p>By making the <code class="docutils literal notranslate"><span class="pre">area</span></code> and <code class="docutils literal notranslate"><span class="pre">volume</span></code> attributes methods, they will always be recomputed as they are needed, which is nice. It will also make it easier for the user to understand that they are derived quantities from <code class="docutils literal notranslate"><span class="pre">Sphere.radius</span></code> and not independent attributes.</p>
+<p>However, this implementation can also be a bit confusing. For one, radius, area and volume are simply all different properties of a Sphere, and all represented as numbers - so why should one be a number variable, and the other methods that must be called?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">ball</span><span class="o">.</span><span class="n">radius</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">ball</span><span class="o">.</span><span class="n">area</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">ball</span><span class="o">.</span><span class="n">volume</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;int&#39;&gt;
+&lt;class &#39;method&#39;&gt;
+&lt;class &#39;method&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us therefore look at a different way to set up this class using <em>properties</em> in Python. To do this, we use the built-in <em>decorator</em> <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code>. A decorator is something you place right before a function/method definition, and it will change the functionality of that function/method in some way. You will (or have) see an example of a decorator in Project 0.</p>
+<p>When we add the <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> decorator to a method in a class, that method will behave from the outside as if it is a data field, and not a method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sphere</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">3</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Sphere(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+
+<span class="n">football</span> <span class="o">=</span> <span class="n">Sphere</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">football</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">football</span><span class="o">.</span><span class="n">area</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1520.53084433746
+&lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, both <code class="docutils literal notranslate"><span class="pre">Sphere.area</span></code> and <code class="docutils literal notranslate"><span class="pre">Sphere.volume</span></code> are defined in the exact same manner as before, but we have added the code <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> right before the method definitions. By adding this decorator we can now treat <code class="docutils literal notranslate"><span class="pre">football.area</span></code> as if it was a data field, i.e., a number variable. This means we can print it right out, without calling it like a method, and if you print out the type, it confirms that it is indeed a float.</p>
+<p>Using the property decorator allows us to implement a method that compiles or computes the data behind the scenes in some way, but allows the user to treat that property as a data field on the outside. We can now change the radius, and the <code class="docutils literal notranslate"><span class="pre">area</span></code> and <code class="docutils literal notranslate"><span class="pre">volume</span></code> properties will also change. The user does not have to think about this themselves.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ball</span> <span class="o">=</span> <span class="n">Sphere</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ball</span><span class="si">}</span><span class="s2"> has a volume of </span><span class="si">{</span><span class="n">ball</span><span class="o">.</span><span class="n">volume</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ball</span><span class="o">.</span><span class="n">radius</span> <span class="o">+=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ball</span><span class="si">}</span><span class="s2"> has a volume of </span><span class="si">{</span><span class="n">ball</span><span class="o">.</span><span class="n">volume</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sphere(5) has a volume of 524
+Sphere(10) has a volume of 4189
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us now look at what happens if we try to change the <code class="docutils literal notranslate"><span class="pre">area</span></code> and <code class="docutils literal notranslate"><span class="pre">volume</span></code> properties directly, instead of changing the radius. If you try this yourself, you will get an error as follows</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">football</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">1200</span>
+</pre></div>
+</div>
+<p>You would get the following error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">AttributeError</span><span class="p">:</span> <span class="n">can</span><span class="s1">&#39;t set attribute</span>
+</pre></div>
+</div>
+<p>Thus, by defining an attribute using <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code>, we have effectively made the attribute “read-only”.</p>
+<section id="setters-and-getters">
+<h3>Setters and Getters<a class="headerlink" href="#setters-and-getters" title="Permalink to this headline">#</a></h3>
+<p>In Python, we can access class attributes directly using the dot notation, e.g., <code class="docutils literal notranslate"><span class="pre">ball.radius</span></code>, and we can also change these directly if we so desire. This is not considered bad practice if the Class is defined to do this. In many other languages however, one either cannot access attributes directly, or it is considered bad practice to access them directly. In such languages, it is often common to define “setter” and “getter” methods. Here we would define a <code class="docutils literal notranslate"><span class="pre">Sphere.get_radius</span></code> method, which would return the value of the radius, and we would define a <code class="docutils literal notranslate"><span class="pre">Sphere.set_radius</span></code> to redefine it.</p>
+<p>In Python, such setters and getters are usually not implement explicitly, but we can use the same logic. In our previous example, we defined</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@property</span>
+<span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And this method is effectively a <em>getter</em> for the area. It isn’t called <code class="docutils literal notranslate"><span class="pre">get_area</span></code>, but that is what the function does.</p>
+<p>Similarly, we can define a <em>setter</em> method for the area property using the decorator <code class="docutils literal notranslate"><span class="pre">&#64;area.setter</span></code>. Let us show with an example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sqrt</span>
+
+
+<span class="k">class</span> <span class="nc">Sphere</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="nd">@area</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">area</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Area cannot be negative&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">area</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Sphere(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="si">}</span><span class="s2">)&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we first define the <code class="docutils literal notranslate"><span class="pre">Sphere.area</span></code> property using <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> which allows us to access <code class="docutils literal notranslate"><span class="pre">Sphere.area</span></code> as if it were a number variable. After this we also define a setter, which allows us to redefine (or “set”) the area. To do this we have to use the area formula in reverse to find the equivalent radius and redefine <code class="docutils literal notranslate"><span class="pre">self.radius</span></code>.</p>
+<p>With the <code class="docutils literal notranslate"><span class="pre">&#64;area.setter</span></code> method defined, we can now both access <code class="docutils literal notranslate"><span class="pre">Sphere.area</span></code> <em>and</em> redefine it if we want. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ball</span> <span class="o">=</span> <span class="n">Sphere</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ball</span><span class="si">}</span><span class="s2"> has an area of </span><span class="si">{</span><span class="n">ball</span><span class="o">.</span><span class="n">area</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ball</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ball</span><span class="si">}</span><span class="s2"> has an area of </span><span class="si">{</span><span class="n">ball</span><span class="o">.</span><span class="n">area</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ball</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ball</span><span class="si">}</span><span class="s2"> has an area of </span><span class="si">{</span><span class="n">ball</span><span class="o">.</span><span class="n">area</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sphere(10) has an area of 1257
+Sphere(5) has an area of 314
+Sphere(8.920620580763856) has an area of 1000
+</pre></div>
+</div>
+</div>
+</div>
+<p>So we now have a <code class="docutils literal notranslate"><span class="pre">Sphere</span></code>-class that allows us to either set the radius, and have the area automatically update, <em>or</em> we can set the surface area, and the radius automatically updates. Hopefully it is apparent why this could be useful. Another nice detail about this is we can build in some controls on the input of the setter function. Note that we in the <code class="docutils literal notranslate"><span class="pre">&#64;area.setter</span></code> method have a check to see if the area is negative. If <code class="docutils literal notranslate"><span class="pre">Sphere.area</span></code> was a simple float attribute, we would have no way of restricting what value it was set to in this manner.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ball</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">ball</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="nn">Cell In [20], line 15,</span> in <span class="ni">Sphere.area</span><span class="nt">(self, area)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="nd">@area</span><span class="o">.</span><span class="n">setter</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="k">if</span> <span class="n">area</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Area cannot be negative&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">area</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span><span class="p">))</span>
+
+<span class="ne">ValueError</span>: Area cannot be negative
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using the setter, attempting to set a negative area now gives throws the exception <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+<p>Note that we haven’t added the volume method in the last example primarily to save some space in the lecture notes, you can now try to define the <code class="docutils literal notranslate"><span class="pre">&#64;volume.setter</span></code> method yourself.</p>
+</section>
+<section id="avoiding-repeated-computations">
+<h3>Avoiding repeated computations<a class="headerlink" href="#avoiding-repeated-computations" title="Permalink to this headline">#</a></h3>
+<p>Our sphere class now works quite well and is user friendly. We can now the radius, surface area and volume as floats, and can set any of them directly and the others change automatically. However, this implementation might not be that efficient, as every time the user accesses <code class="docutils literal notranslate"><span class="pre">.area</span></code> or <code class="docutils literal notranslate"><span class="pre">.volume</span></code>, the actual values are computed from the radius behind the scenes.</p>
+<p>For such a simple computation as this, recomputing the area or volume isn’t a big deal. But say these computations were more complicated and took something like a minute to complete. It would be very inefficient to repeat such computations again and again.</p>
+<p>The way we would get around this would be to store the computed values as <em>internal</em> data in the class that the user should not interact with from outside the class. Such attributes are typically called <em>private attributes</em>. In Python there is no way to implement actual private variables, but you can designate that variables should be considered private by giving them name with a leading underscore.</p>
+<p>Let us show by an example (again we skip the <code class="docutils literal notranslate"><span class="pre">volume</span></code> property, which you can add yourself)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sphere</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_area</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">radius</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span>
+
+    <span class="nd">@radius</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Radius cannot be negative&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_area</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_area</span>
+
+    <span class="nd">@area</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">area</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Area cannot be negative&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">area</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_area</span> <span class="o">=</span> <span class="n">area</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now store the area of the sphere as a private attribute called <code class="docutils literal notranslate"><span class="pre">sphere._area</span></code>. The underscore means this variable should never be accessed from outside the class. In addition we add the property <code class="docutils literal notranslate"><span class="pre">sphere.area</span></code> which can be used from outside.</p>
+<p>The code will now behave exactly the same as before from outside the class, but by using <code class="docutils literal notranslate"><span class="pre">sphere._area</span></code> we avoid unnecessarily recomputing the area many times.</p>
+<p>Note that we have also made the radius into a private variable <code class="docutils literal notranslate"><span class="pre">sphere._radius</span></code> and external property <code class="docutils literal notranslate"><span class="pre">sphere.radius</span></code>. We had to do this do ensure that the <code class="docutils literal notranslate"><span class="pre">sphere._area</span></code> attribute is recomputed if the radius is set (using <code class="docutils literal notranslate"><span class="pre">&#64;radius.setter</span></code>).</p>
+<p>The code is now <em>a lot</em> more complex than what we started out with. And in many simple use cases you wouldn’t go through the hassle of using private internal attributes like this and make properties and setters for these. For the sphere for example, recomputing the area a few times consumes close to no resources and can easily be done to get a simpler code. We simply use this as an example for how to handle cases that would be more complex.</p>
+</section>
+<section id="private-and-public-variables">
+<h3>Private and Public variables<a class="headerlink" href="#private-and-public-variables" title="Permalink to this headline">#</a></h3>
+<p>In our final example, the user has the properties <code class="docutils literal notranslate"><span class="pre">football.radius</span></code> and <code class="docutils literal notranslate"><span class="pre">football.area</span></code> they can interact with, while the class itself stores the internal data in the fields <code class="docutils literal notranslate"><span class="pre">_radius</span></code> and <code class="docutils literal notranslate"><span class="pre">_area</span></code>. We call the first two <em>public</em> properties or variables. Here, public means that they are accessible from outside the class. The latter two variables are <em>private</em>, meaning they should only be accessed from inside the class and are not meant to be used from outside.</p>
+<p>Note that we give the private variables leading underscores in their name, which indicates they are private. In Python, there is no way to enforce private variables however, and the leading underscore is just a convention. Thus the user can go inn and change these directly: <code class="docutils literal notranslate"><span class="pre">football._radius</span> <span class="pre">=</span> <span class="pre">9</span></code>. However, this would be breaking the <em>convention</em> that one should not change a private variable, and if this breaks the object, it is the users fault. Other languages, such as Java and C++, <em>do</em> enforce private and public variables. If you attempt to access a private variable from outside, an error is thrown.</p>
+<figure class="align-default" id="python-private">
+<a class="reference internal image-reference" href="../../../_images/private.jpg"><img alt="../../../_images/private.jpg" src="../../../_images/private.jpg" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Private attributes in python are not really private.</span><a class="headerlink" href="#python-private" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="dataclasses">
+<span id="id1"></span><h2>Dataclasses<a class="headerlink" href="#dataclasses" title="Permalink to this headline">#</a></h2>
+<p>Dataclasses is a fairly new concept that was added in python 3.7. When writing a class we note that there is a lot of boilerplate code that we have to write. Consider the <code class="docutils literal notranslate"><span class="pre">Contact</span></code> class that was introduced in the beginning of this section (here we have changed the default values for <code class="docutils literal notranslate"><span class="pre">email</span></code> and <code class="docutils literal notranslate"><span class="pre">cellphone</span></code> from <code class="docutils literal notranslate"><span class="pre">None</span></code> to an empty string (<code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>). We will see later in this section how to deal with <code class="docutils literal notranslate"><span class="pre">None</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Contact</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">cellphone</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span> <span class="o">=</span> <span class="n">cellphone</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Contact(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, email=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2">, cellphone=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span><span class="si">}</span><span class="s2">)&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we have also added a special method <code class="docutils literal notranslate"><span class="pre">__str__</span></code> which will make sure that an instance is printed nicely, see <a class="reference internal" href="oop_methods.html#python-oop-special-print"><span class="std std-ref">Printing out instances of custom classes</span></a>. We can create an instance and print it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Henrik&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;henriknf@simula.no&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contact(name=Henrik, email=henriknf@simula.no, cellphone=)
+</pre></div>
+</div>
+</div>
+</div>
+<p>What we noticed here is that there is a lot of repetition in the code. First we need to specify the arguments in the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function, then we need to set the attributes on the instance, and finally we need to access the same attributes when we want to make a nice print function. In fact, this is a very common use case for a class in python. You simply create a class that should hold some data. Because this is a very common pattern, python actually introduced a new concept in python3.7 known as <em>dataclasses</em>  that will simplify the process of creating classes that should simply hold some data.</p>
+<p>Before introducing dataclasses we will also add type annotations to the arguments (see <a class="reference internal" href="../python_development/type_annotations.html#type-annotations"><span class="std std-ref">Type annotations</span></a> for more info) and methods since this is required when working with dataclasses. We can add types to the <code class="docutils literal notranslate"><span class="pre">Contact</span></code> class as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Contact</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">cellphone</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span> <span class="o">=</span> <span class="n">cellphone</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Contact(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, email=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2">, cellphone=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span><span class="si">}</span><span class="s2">)&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We are now ready to transform this class into a dataclass, and we do so by import <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> from the <code class="docutils literal notranslate"><span class="pre">dataclasses</span></code> modules and add the <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> decorator to the class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Contact</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">cellphone</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now try to redo the example above and create an instance and print it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Henrik&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;henriknf@simula.no&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contact(name=&#39;Henrik&#39;, email=&#39;henriknf@simula.no&#39;, cellphone=&#39;&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pretty nice, right? The two examples above are equivalent but we see that we can write less code when using dataclasses. We also see that adding type hints not only improves the readability, documentation and IDE integration, but also allow us to write less code using dataclasses. Win win!</p>
+<p>Lets go back to the original <code class="docutils literal notranslate"><span class="pre">Contact</span></code> class where <code class="docutils literal notranslate"><span class="pre">email</span></code> and <code class="docutils literal notranslate"><span class="pre">cellphone</span></code> was set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+In this case <code class="docutils literal notranslate"><span class="pre">email</span></code> and <code class="docutils literal notranslate"><span class="pre">cellphone</span></code> should be strings, but if no value is provided they should have a default value <code class="docutils literal notranslate"><span class="pre">None</span></code>. The type of such an a variable is <code class="docutils literal notranslate"><span class="pre">Optional[str]</span></code> where <code class="docutils literal notranslate"><span class="pre">Optional</span></code> is imported from the <code class="docutils literal notranslate"><span class="pre">typing</span></code> module (again see <a class="reference internal" href="../python_development/type_annotations.html#type-annotations"><span class="std std-ref">Type annotations</span></a> for more info).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="k">class</span> <span class="nc">Contact</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cellphone</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span> <span class="o">=</span> <span class="n">cellphone</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Contact(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, email=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2">, cellphone=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Henrik&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;henriknf@simula.no&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contact(name=Henrik, email=henriknf@simula.no, cellphone=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Translating this to a dataclass would simply be</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Contact</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">cellphone</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Henrik&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;henriknf@simula.no&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contact(name=&#39;Henrik&#39;, email=&#39;henriknf@simula.no&#39;, cellphone=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p>It should noted that dataclasses are just normal classes, but with some extra syntactic sugar to make it simpler and to avoid writing too much boilerplate code.
+Methods can therefore be added to this class as you would with a regular python class e.g</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Contact</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">cellphone</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">has_email</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">has_cellphone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">make_phone_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_cellphone</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot call </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">. No phone number available&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calling </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Henrik&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;henriknf@simula.no&quot;</span><span class="p">)</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">make_phone_call</span><span class="p">()</span>
+
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Elon Musk&quot;</span><span class="p">,</span> <span class="n">cellphone</span><span class="o">=</span><span class="s2">&quot;12345678&quot;</span><span class="p">)</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">make_phone_call</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cannot call Henrik. No phone number available
+Calling Elon Musk at 12345678...
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to learn more about dataclasses, please check out <a class="reference external" href="https://realpython.com/python-data-classes/">Dataclasses guide on realpython.com</a></p>
+</section>
+<section id="namedtuple">
+<span id="named-tuples"></span><h2>NamedTuple<a class="headerlink" href="#namedtuple" title="Permalink to this headline">#</a></h2>
+<p>In the dataclass example above we could also obtain the same result using a <code class="docutils literal notranslate"><span class="pre">NamedTuple</span></code>. In that case the code would as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ContactNamedTuple</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">cellphone</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">has_email</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">has_cellphone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">make_phone_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_cellphone</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot call </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">. No phone number available&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calling </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cellphone</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+<span class="n">p1_named_tuple</span> <span class="o">=</span> <span class="n">ContactNamedTuple</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Henrik&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;henriknf@simula.no&quot;</span><span class="p">)</span>
+<span class="n">p1_named_tuple</span><span class="o">.</span><span class="n">make_phone_call</span><span class="p">()</span>
+
+<span class="n">p2_named_tuple</span> <span class="o">=</span> <span class="n">ContactNamedTuple</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Elon Musk&quot;</span><span class="p">,</span> <span class="n">cellphone</span><span class="o">=</span><span class="s2">&quot;12345678&quot;</span><span class="p">)</span>
+<span class="n">p2_named_tuple</span><span class="o">.</span><span class="n">make_phone_call</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cannot call Henrik. No phone number available
+Calling Elon Musk at 12345678...
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice, that here we inherit from <code class="docutils literal notranslate"><span class="pre">typing.NamedTuple</span></code> (more about inheritance later in the course).</p>
+<p>So what is the difference? The difference is that dataclasses are regular (dynamic) classes. This means that for example, assigning new attributes to the instance is allowed, i.e</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">new_attribute</span> <span class="o">=</span> <span class="mi">42</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When creating a named tuple, you are not creating a regular class, but a “fancy” tuple. As we have have seen tuples are immutable data structures which means that once you have created it, you cannot change it, and the following will raise an error</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1_named_tuple</span><span class="o">.</span><span class="n">new_attribute</span> <span class="o">=</span> <span class="mi">42</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">34</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">p1_named_tuple</span><span class="o">.</span><span class="n">new_attribute</span> <span class="o">=</span> <span class="mi">42</span>
+
+<span class="ne">AttributeError</span>: &#39;ContactNamedTuple&#39; object has no attribute &#39;new_attribute&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="namedtuple-vs-dataclass-vs-regular-class">
+<h2>NamedTuple vs Dataclass vs Regular Class?<a class="headerlink" href="#namedtuple-vs-dataclass-vs-regular-class" title="Permalink to this headline">#</a></h2>
+<p>So which should you choose? My recommendation is to start out with a named tuple, and if you find that it doesn’t work (for example if you need to set attributes dynamically), then you can upgrade to a dataclass. And again if that doesn’t work, for example if you need to do something more advanced in the initializer, then you might be better of just using a regular class. Choosing a regular class also has the benefit that you don’t need to import anything nor do you have to use inheritance (for NamedTuple) or a class decorator (for dataclasses).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "finsberg/IN1910",
+            ref: "gh-pages",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/lectures/python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="python_oop.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Object-oriented programming in Python</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="oop_methods.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Methods in Python</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
