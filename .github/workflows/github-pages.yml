@@ -25,9 +25,6 @@ jobs:
       - name: Build docs
         run: jupyter book build book
 
-      - name: Copy Dockerfile into gh-pages
-        run: cp Dockerfile ${PUBLISH_DIR}/
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
