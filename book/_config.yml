@@ -3,7 +3,7 @@
 title: IN1910 - Programming with Scientific Applications
 author: Jonas van den Brink, Henrik Finsberg, Kristian G. Hustad, Eirill Hauge and Joakim Sundnes
 logo: "_static/logo.png"
-copyright: "2022"
+copyright: "2023"
 only_build_toc_files: true
 
 # Information about where the book exists on the web
@@ -33,8 +33,7 @@ launch_buttons:
 
 repository:
   url: https://github.com/finsberg/IN1910
-  path_to_book: _sources
-  branch: gh-pages
+  branch: main
 
 latex:
   latex_engine: "xelatex"
