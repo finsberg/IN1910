@@ -25,6 +25,15 @@ jobs:
       - name: Build docs
         run: make docs
 
+      - name: Install jupyterlite
+        run: |
+          python3 -m pip install jupyterlite
+      - name: Build the JupyterLite site
+        run: |
+          find book/docs -name '*.md' -exec jupytext --to ipynb {} +
+          find book/docs -name '*.md' -delete
+          jupyter lite build --contents book/docs/ --output-dir ./book/_build/html/lite
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
