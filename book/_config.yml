@@ -22,7 +22,7 @@ execute:
 html:
   home_page_in_navbar: true
   use_issues_button: true
-  extra_navbar: <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910">Course homepage at UiO</a>
+  extra_navbar: <a href="https://www.uio.no/studier/emner/matnat/ifi/IN1910/h22/index.html">Course homepage at UiO</a>
 
 # #######################################################################################
 # Interact link settings
@@ -32,11 +32,12 @@ notebook_interface: "notebook"
 # Launch button settings
 launch_buttons:
   notebook_interface: "classic"
+  jupyterhub_url: "https://hub2.jupyterhub.uio.no"
   binderhub_url: "https://mybinder.org"
   thebe: true
 
 repository:
-  url: https://github.com/finsberg/IN1910
+  url: https://github.com/finsberg/IN1910_H22
   path_to_book: _sources
   branch: gh-pages
 
@@ -48,7 +49,11 @@ latex:
 sphinx:
   config:
     bibtex_bibfiles: ["refs.bib"]
+    suppress_warnings: ["bibtex.duplicate_citation"]
+    html_last_updated_fmt: "%b %d, %Y"
   extra_extensions:
     - sphinx_inline_tabs
     - myst_nb
     - sphinxcontrib.bibtex
+    - sphinx_exercise
+    - sphinx_togglebutton

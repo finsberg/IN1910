@@ -12,22 +12,18 @@ kernelspec:
 
 # Version Control with Git
 
-In this lecture we will cover version control with Git. These lecture notes will go into what Git is, and simple examples of use. The accompanying exercises will require you to use Git to track and store your code.
+In this chapter, we will cover version control with Git. We shall cover what Git is and simple examples of use. The accompanying exercises will require the reader to use Git to track and store their code.
 
 
 ## References
 
-Learning Git, like most aspects of programming, is best learnt by doing it yourself. In this course, you will learn the basics of using Git and GitHub by using it for your assignments and hand-ins. In this lecture, you will learn the basics, and as the course goes on, you will learn more and become more proficient.
+Git, like most aspects of programming, is best learned by doing. Our current approach will be to learn the basics Git and GitHub by using it for assignments and hand-ins. In this chapter, we cover the basics, and as the course goes on, we will learn more and become more proficient.
 
-However, if you want a different introduction to Git than these lecture notes, or you want something in addition, there are *a lot* of resources for learning Git online. And we will list some here.
+It is important to mention that there are *a lot* of resources for learning Git online. Therefore, for readers who decide to have a different introduction than the one contained herein, some external material will be listed here.
 
-Perhaps the best and simplest resource available is the [GitHub guides](https://guides.github.com). Here you will find the [Git Handbook](https://guides.github.com/introduction/git-handbook/) that contains a reference all the basic Git commands as well links to more resources. The [Understanding the GitHub flow](https://guides.github.com/introduction/flow/) section is a short but great read to learn the basic concepts about how developers use GitHub in their workflow. Finally there is a simple [Hello world](https://guides.github.com/activities/hello-world/) project that we recommend all students to check out, if you are a complete newbie to Git or GitHub.
+Perhaps the best and simplest resource available is the [GitHub guides](https://guides.github.com). In this guide, there is a [Git Handbook](https://guides.github.com/introduction/git-handbook/) containing a reference to all the basic Git commands as well as links to more resources. The [Understanding the GitHub flow](https://guides.github.com/introduction/flow/) section is a short but great read to learn the basic concepts about how developers use GitHub in their workflow. Finally, there is a simple [Hello world](https://guides.github.com/activities/hello-world/) project that we recommend all readers check out, especially the ones with no previous contact with Git or GitHub.
 
-Another very good resource is from one for GitHub's competitors [Atlassian](https://www.atlassian.com/git).
-
-If you want a more interactive tool, you can also check out <https://learngitbranching.js.org>.
-
-If you want to go more in depth, or have a more extensive reference work, the book *Pro Git* by Scott Chacon and Ben Straub is released under a [Creative Commons BY-NC-SA3.0 license](https://creativecommons.org/licenses/by-nc-sa/3.0/?utm_source=www.domtail.com), meaning you can download it for free. The 2. edition was released in 2014, and on the book's website you can download it as a pdf as well as some common e-book formats (epub, mobi). The book itself is very extensive, being over 500 pages. However, it starts of fairly easy, and goes into more technical details towards the end, so reading the first few chapters can still be a good introduction to git.
+Another very good resource is from one of GitHub's competitors, [Atlassian](https://www.atlassian.com/git). For a more interactive tool, there is also the [Learn Git branching](https://learngitbranching.js.org) material. If the aim is for more in-depth coverage or more extensive reference work, the book [Pro Git](https://git-scm.com/book/en/v2) by Scott Chacon and Ben Straub is released under a Creative Commons BY-NC-SA3.0 license, meaning it can be downloaded for free. The second edition was released in 2014 and can be downloaded download as a pdf or other common e-book formats under the linked website. The book itself is very extensive, being over 500 pages. It starts off fairly easy, going into more technical details towards the end, so reading the first few chapters can still be a good introduction to Git.
 
 ```{figure} ../../figures/progit.png
 ---
@@ -38,45 +34,35 @@ alt: progit
 Pro Git Book website: https://git-scm.com/book/en/v2
 ```
 
-Another very good alternative it the book called [*Version Control by Example*](https://ericsink.com/vcbe/vcbe_a4_lo.pdf) which also touches upon the history of version control as well as other version control system than git.
+Another excellent alternative is the book [Version Control by Example](https://ericsink.com/vcbe/vcbe_a4_lo.pdf), which also touches upon the history of version control and other version control systems other than Git.
 
-At this point we should stress that these resources are simply offered as an alternative, or in addition, to the lecture notes, and we do not expect you to use them unless you want to.
+Again, these resources are simply offered as an alternative or in addition to the current material.
 
 
 ## Why version control?
 
-Imagine you have a new software assignment, with a three week deadline. You start working and things are progressing nicely, things are working well and you are happy with your code. Entering the last week, all you have left is to refactor your code and add some small final changes. However, in this process, things suddenly *stop* working. What happened, and what do you do? Some change you did while refactoring probably messed something up, but you cannot undo everything you have changed, can you? This is just one case where *version control* would be useful. Giving you the option to "go back in time" in your code.
+Imagine having a new software assignment with a specific deadline. After getting the code to work as intended, it is often necessary to do some code refactoring and final changes, usually as a last step of the project (but even periodically for long-term projects). Suppose that in this refactoring process, the code suddenly stops working. It can be difficult to identify the bug, especially when several parts of the code were changed at once. It is never ideal, in situations like these, to simply start the project again or even spend large amounts of time nitpicking every last change. This is just one case where *version control* would be useful, giving the option to "go back in time" in code in a precise manner.
 
 
-```{figure} ../../figures/phd_final.gif
----
-height: 300px
-name: phd-final
----
-Source: Taken from [www.phdcomics.com](http://phdcomics.com/comics/archive_print.php?comicid=1531). Created by Jorge Cham
-```
+We will first discuss version control systems (VCS) and *Git*, a tool to automate version control. Simply put, VCS is a crucial tool for any software developer, and the bigger the project one is working on, the more crucial it is.
 
-Today we will discuss version control systems (VCS), and *Git*, a tool to automate version control. Simply put, VCS is a crucial tool for any software developer, and the bigger a project you are working on, the more important it is.
-
-
-
-The main idea of VCS is very simple, we make regular "backups" of our code at different times, enabling us to look at how the code looked earlier, or in extreme cases, revert the whole codebase to an earlier time. There are many tools for automatic backup of your machine, and many tools have it built in. Dropbox for example has checkpoints of your files built in, which can be very helpful at times. The tools we will discuss today however, are especially built for software development.
+The main idea of VCS is very simple: we make regular "backups" of the code at different times, enabling us to see how it looked earlier or, in extreme cases, revert the whole codebase to a previous stage. There are many tools for automatic machine backup, and many tools have it built in. Dropbox, for example, has built-in file checkpoints, which can sometimes be very helpful. The tools we will discuss, however, are specially built for software development instead of simple file sharing.
 
 
 ## Benefits of version control
 
 Some benefits of version control are
-* Backup of files in case of computer crashes etc
+* Backup of files in case of computer crashes
 * Make it easier to see which changes introduced an error
-* Let's the user undo bad changes and revert to working copies
-* Great for collaboration, and let's several people contribute to the same project
-* Allows for *branching* of code, to test new ideas or make different versions of the code
-* Accountability. Version control lets you see who did what
+* Lets the user undo bad changes and revert to working copies
+* Great for collaboration and lets several people contribute to the same project
+* Allows for *branching* of code, testing new ideas, or making different versions of the code
+* Accountability: version control tracks who did what in the code
 
 
-### Different Version Control Systems
+### Different version control systems
 
-A VCS is any framework that allows you to keep track of your project over time, and stores revisions. The simplest form is a local one, where the entire file history is stored locally on your computer or network.
+A VCS is any framework that allows keeping track of a project over time and stores revisions. The simplest form is a local one, where the entire file history is stored locally on the user's computer or network.
 
 
 ```{figure} ../../figures/local_vcs.png
@@ -88,9 +74,9 @@ alt: local vcs
 A local VCS. Source: Chacon & Straub, ProGit (2014)
 ```
 
-There are two problems with using a local VCS. The first is that there is no backup in case of a computer crash or failure. In addition, most programmers do not work on projects by themselves, but often need to pass code back and forth, or have the options of several programmers working on the code simultaneously. A local VCS does not handle such collaboration too well.
+There are two problems with using a local VCS. The first is that there is no backup in case of a computer crash or failure. In addition, most programmers do not work on projects by themselves but often need to pass code back and forth or have the option of several programmers working on the code simultaneously. A local VCS does not handle such collaboration too well.
 
-One way to deal with these challenges is to use a *centralized* server to keep track of the version history. Different users can read out specific versions of files, work on the code and upload their changes to the server. This makes collaboration between programmers easy. Admins and team leaders can also monitor the server and give people the rights to alter the code they are working on. It also has the benefit that if any persons laptop or computer crashes, it doesn't impact the whole system, only their last changes they haven't uploaded yet. However, the central server is still a single point of failure, and should be properly backed up—and if the server is down for a while due to maintenance or issues, working becomes hard for the team, and efficiency drops.
+One way to deal with these challenges is to use a *centralized* server to keep track of the version history. Different users can read out specific versions of files, work on the code and upload their changes to the server. This makes collaboration between programmers easy. Admins and team leaders can also monitor the server and give people the right to alter the code they are working on. It also has the benefit that if any person's laptop or computer crashes, it impacts only the last not yet uploaded changes instead of the whole system. However, the central server is still a single point of failure and should be properly backed up. Furthermore, if the server is down due to maintenance or issues, working becomes hard for the team, and efficiency drops.
 
 ```{figure} ../../figures/centralized_vcs.png
 ---
@@ -101,7 +87,7 @@ alt: centralized vcs
 A centralized VCS. Source: Chacon & Straub, ProGit (2014)
 ```
 
-The kind of VCS we will be using is called a *distributed* VCS. Like the centralized system, we will also interact with an external server to do backups and collaboration. The difference is that with the distributed VCS, every user stores a complete copy of the entire project history. This gives additional safety, as every user has a complete backup. It also gives efficiency, as users can access the whole project history, even offline, and only have to push or pull the changes in code. The only downside is use of space, as we are storing the same information multiple places. However, most software projects take little space, and so this is of little issue.
+The kind of VCS we will be using is called a *distributed* VCS. Like the centralized system, we will also interact with an external server for backups and collaboration. The difference is that with the distributed VCS, every user stores a complete copy of the entire project history. This gives additional safety, as every user has a complete backup. It also gives efficiency, as users can access the whole project history, even offline, and only have to push or pull the changes in code. The only downside is the use of space, as it stores the same information in multiple places. Since most software projects take little space, this is of little issue.
 
 ```{figure} ../../figures/distributed_vcs.png
 ---
@@ -115,15 +101,15 @@ A distributed VCS. Source: Chacon & Straub, ProGit (2014)
 
 ## Enter: Git
 
-There are *many* different version control softwares to choose from today. The one we will be using for IN1910 is called *Git*. We choose *Git* because it is highly popular and sees much use, especially in open source development and scientific programming. Secondly, it is open source and free, which is always nice. In the "real world", you might be part of a team or scientific group, in which case you should use the same VCS as them. However, other common VCS, such as Mercurial and Bazaar, also look a lot like Git. So knowing Git, you will most likely be able to pick them up with little issue.
+There are many different version control softwares to choose from today. The one we will be using is called *Git*, chosen by its high popularity in open-source development and scientific programming and because it is open-source and free. When working on a real-world project, however, all collaborators should use the same VCS. Other common VCSs, such as Mercurial and Bazaar, are also very similar to Git, so by knowing Git, one will most likely be able to migrate VCSs with little issue.
 
-So where does Git come from? It was created by Linus Torvalds in 2005 to be used for the development of the Linux kernel. The Linux development team had been using a proprietary software called BitKeeper, but there was a falling out. As a result, Linus decided to develop his own software to take its place. (That was oversimplifying the story considerably).
+Where does Git come from? It was created by Linus Torvalds in 2005 for the development of the Linux kernel. Until then, the Linux development team had been using a proprietary software called BitKeeper, but there was a falling out. As a result, Linus decided to develop his own software to take its place (this is, of course, a big simplification of the story).
 
-One reason Git grew into popularity so fast was that it was precisely that, *fast*. It is so fast you rarely have to wait for it at all, even when working on huge projects (like the Linux kernel).
+One reason Git grew in popularity so fast was because of its unprecedented speed. Even when working on huge projects (like the Linux kernel), it is so fast that the user rarely has to wait for it at all.
 
-### Git Commits
+### Git commits
 
-When you work with Git, you will edit and work with your files as normal. At regular intervals however, you make *commits*. These commits are "snapshots" of your project files that will be stored in the projects history. Over time you get a long chain of these commits. When looking at your project through your normal file tracker or text editor, you only see your current version of the software. To store the history, Git creates a *hidden* `.git`-directory. You should ignore this hidden directory and all its files, and never access or edit them manually, as this will mostly break your version control. If you want to look at or access older commits, you do some simple git-commands.
+When using Git, the work and editing of files can be done as usual. At regular intervals, however, the user should perform *commits*, which are "snapshots" of the user's local project files to be stored in the project's history. Over time the user contribution is resumed to a long chain of these commits, but when looking at a project through a normal file tracker or text editor, only the current local version of the software can be seen. To store the history, Git creates a *hidden* `.git`-directory. This hidden directory and all its files should be ignored and never accessed or edited manually, as this will mostly break the version control. In order to look at or access older commits, some simple Git commands should be performed instead.
 
 
 ```{figure} ../../figures/snapshot_filestream.png
@@ -135,74 +121,75 @@ alt: snapshot filestream
 Source: Chacon & Straub, ProGit (2014)
 ```
 
-The entire project, including the project history stored in the .git folder, is referred to as a *repository*. Typically, we create a new repository for each new software project we do.
+The entire project, including the project history stored in the .git folder, is referred to as a *repository*. Typically, we create a new repository for each new software project.
 
-A *commit* typically includes all changes to your project files since your last commit. This includes edits to files, but also creation and deletion of files. If you delete a file from your project, older commits will still contain that file. Thus, when making new commits, we only ever *add* things to our project, we never remove it. What happens in git, stays in git. In addition, each commit is named after a hash of the complete project history thus far, which makes the project history tamper proof. If you go in and try to change the history, the hashes will no longer match.
+A *commit* usually includes all changes to the local project files since the user's last commit, namely edits, creations, and deletions of files. Despite this, older commits will still contain a file that was deleted from the project's current version. Thus, when making new commits, we only ever *add* things to our project; we never remove them. What happens in Git stays in Git. In addition, each commit is named after a hash of the complete project history thus far, making the project history tamper-proof. If someone changes the project's history, the hashes will no longer match.
 
-In this sense, Git is quite like a [blockchain](https://en.wikipedia.org/wiki/Blockchain). Strictly speaking, Git doesn't really use a blockchain, but it is based on Merkle trees, which also underlies blockchains. You can read [this Stack Overflow question](https://stackoverflow.com/questions/46192377/why-is-git-not-considered-a-block-chain) if you are curious.
-
-
+In this sense, Git resembles a [blockchain](https://www.geeksforgeeks.org/blockchain-technology-introduction/). Indeed, both Git and blockchain use the concept of Merkle trees, but strictly speaking, Git does not use blockchain technology. An informative discussion about this comparison can be read on [this Stack Overflow thread](https://stackoverflow.com/questions/46192377/why-is-git-not-considered-a-block-chain).
 
 
-## Installing and Setting up Git
 
-Please consult the [setup instructions](../../setup/setup.md) for information about how to set up git correctly.
 
-After you have installed Git, you need to configure it before we use it. Specifically we need to add your name and email to git, so that changes you make your and others repositories are marked to you. This is quite simple, just open a terminal and write
+## Installing and setting up Git
+
+Please consult the [setup instructions](../../setup/setup.md) for information about how to set up Git correctly.
+
+After installing Git, the user needs to configure it by adding a name and email. This will serve as identification so that changes to any repositories can be labeled by who the modifier was. This setup can be done by writing the following commands to the terminal
 ```
 git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
 ```
-Once you have run these two commands successfully, you are ready to use Git! You can check out [first time git setup guide](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) for more configurations.
+These two simple commands are all that is required to start using Git! For additional configuration options, check out the [first-time Git setup guide](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup).
 
 ### Choosing a remote server
 
-Git is a piece of software you install on your computer and use through the terminal. You can choose to use Git only locally on your machine, and it will work nicely. However, a major benefit of Git is that it is distributed VCS, and so we will want to also copy our project repository over to an external server as well. Here there are many third party services to choose from, but the two major ones for Git repositories are Github, Bitbucket and Gitlab. All of them provide free accounts, and paid accounts with more functionality. They also provide benefits for students, so signing up with your student email is recommended.
+Git is a piece of software installed on a computer and used through the terminal, so one can use it solely on the local machine if that is desired. However, a major benefit of Git is that it is a *distributed* VCS, so to use its full potential, we want to copy the local project repository over to an external server as well. For that, there are many third-party services to choose from, the three major ones being GitHub, Bitbucket, and GitLab. All of them provide free accounts and paid accounts with more functionality. They also provide benefits for students, so signing in with a student email is recommended.
 
-For this course we will use UiO's own Github server. This will behave and look quite a lot like the official Github server [https://github.com/](https://github.com/). You do not need to create a user for the UiO github, you simply log in with your UiO user and password.
+For this course, we will use UiO's own GitHub server, [https://github.uio.no](https://github.uio.no/), which will behave and look like the official GitHub server [https://github.com/](https://github.com/). Creating a user for the UiO GitHub is unnecessary, as the login can be done with the student's UiO username and password.
 
-* [https://github.uio.no](https://github.uio.no/)
-
-If you also want to create a user on github.com, you are welcome to do so. However, the project work will be carried out and handed in via github.uio.no. Note however that some functionality (which you will see already in project 0) is not available on UiO's own GitHub server yet.
-
+If the reader wants to create a user on github.com, they are welcome to do so, even though the project work will be carried out and handed in via github.uio.no. A point of attention is that some GitHub functionalities are not yet available on UiO's own GitHub server.
 
 ### Getting a repository
 
-Now that you have Git, and a Github user, we need to get our hands on a git repository to play around with. There are two alternatives:
-* Making a brand new one
-* Copying an existing one
+Thus far, we have shown how to install Git and set up a user, but we need to get our hands on a Git repository to explore. For that, there are two alternatives: either we *create* a brand new one or *copy* an existing one.
 
-To copy an existing one, you need to first find one. For example the IN1910 repository. You can then copy the repository to your machine by using the `git clone` command and adding the url of the repository.
+To copy an existing repository, we first need to find one, such as the [IN1910 repository](https://github.uio.no/IN1910/IN1910_H23). This repository can then be copied to the local machine using the `git clone` command and adding the repository's URL.
 ```
-git clone https://github.uio.no/IN1910/IN1910_H21
+git clone https://github.uio.no/IN1910/IN1910_H23
 ```
-This is made easier by using the "Clone" button on any repository website. You now get a local copy of the entire repository on your machine. This is for example one way to download the course material, although we recommend to just use the Github pages directly.
+This is made easier by using the "Clone" button on any repository website. Once this is done, a local copy of the entire repository is created on the local machine. This cloning process is one way to download the course material, although we recommend just using the GitHub pages directly.
 
-When cloning a repository somebody else has made, you get a local copy of it. When the original owner makes a new change to the online repository, you can get these changes into your own copy by doing a `git pull`-command, more on this later. For the IN1910 repo, this means every time we add new lecture notes or assignments, you can pull these changes down to your machine with a simple command.
+Since this cloned repository is just a local copy of someone else's, when the original owner makes a new change to the online repository, the changes do not propagate automatically to the local repository. However, these changes can be *pulled* to the local copy by doing a `git pull` command. For the IN1910 repository, this means that as lecture notes and assignments are added or modified, the changes can be pulled down to the local machine with a simple command.
 
 
 ### Creating a new repository
 
-Playing around with the IN1910 repository isn't the best for learning, so let us instead create a new repository from scratch. This can either be done locally on our machine, or through Github.
+To better learn Git, using someone else's repository is not enough. We should also create a new repository from scratch, either locally or through GitHub.
 
-### Creating a repository locally
+#### Creating a repository locally
 
-To create a new repository locally, first create a new folder for your project, then navigate to it in a terminal, and then run the command `git init`. The name of your repository is the name of the folder, so choose a good one. As an example, let's say we want a repository to track exercises we do on the website [projecteuler.net](https://projecteuler.net/), so we call our project `euler`. We would do as follows
+To create a new repository locally, we first create a new folder for the project, navigate to it in a terminal, and then run the command `git init`. The name of this repository will therefore be the name of the folder. As an example, suppose we want a repository to track solutions of exercises from the website [projecteuler.net](https://projecteuler.net/). In this case, we call our project `euler`, and it can be done as follows
 ```
 mkdir euler
 cd euler
 git init
 ```
-Note that we are creating an empty repository here. If you already have a project folder filled with code, you can start a repository from it using `git init`.
+Note that we are creating an empty repository because the file is empty. If we instead used `git init` from a folder containing previously written code, the repository would start with this project's code already.
 
-### Creating a repository through Github
+```{admonition} Do not use git init inside the Desktop or Documents folder!
+:class: warning
 
-An alternative is to make it through Github. In which case, you just go onto Github. Click the `+` sign and choose "New Repository". You will come to a page that looks like the following:
+Using `git init` in the wrong location can cause unintended changes or loss of data. In particular, using it in the Desktop or Documents folder can lead to accidentally committing or pushing files that were not meant to be version-controlled. This could result in the loss of important data or personal information.
+```
+
+#### Creating a repository through GitHub
+
+An alternative is to make a repository through GitHub. In this case, one can simply click the `+` sign on GitHub's main page and choose "New Repository", after which the page gets redirected to one like the following
 
 
 ```{figure} ../../figures/repo_creation.png
 ---
-width: 500px
+width: 600px
 name: repo-creation
 alt: repo creation
 ---
@@ -210,22 +197,22 @@ Creating a repository at GitHub
 ```
 
 
-Here we need to enter the name of the project, and an optional short description. We can choose to make our repo public, in which case it can be accessed by everyone online (or everyone with a UiO user for github.uio.no), or private, in case only the people we explicitly give access can see it. If you want to get more out of your regular GitHub account you can apply for a [student develop pack](https://help.github.com/articles/applying-for-a-student-developer-pack/).
+Here a name and an optional short description of the project should be provided. We can choose to make this repository public, in which case it can be accessed by everyone online (or everyone with a UiO user for github.uio.no), or private, in case only the people we explicitly give access to can see it. To get more out of the regular GitHub account, students can also apply for a [student develop pack](https://help.github.com/articles/applying-for-a-student-developer-pack/).
 
-Finally we can add a README, a `.gitignore` and a license. For now we do want the README, as it makes things practical. We don't use the `.gitignore` for now, we will talk about it later. We also leave the license blank.
+Finally, we can add a README, a `.gitignore`, and a license. For now, we only want the README, as it makes things practical, while the `.gitignore` will be addressed later. We also leave the license blank.
 
-Once you have made your repo on Github. You can clone it down to your local machine
+Once the repository has been structured on GitHub, we can clone it down to the local machine via
 ```
-git clone https://github.com/jvbrink/euler
+git clone https://github.com/<user_name>/euler
 ```
-In which case, git will make a folder called `euler` which we can access.
+In this case, Git will make a folder called `euler` which we can access.
 
 
-### Adding files to your project
+### Adding files to a project
 
-We now have a folder called `euler`. We can treat this as a completely normal folder on our computer, meaning you can move files into it, or create new files within it. Say we now add a file called `problem1.py`, which solves the [first Project Euler problem](https://projecteuler.net/problem=1).
+We now have a local folder called `euler` which can be treated as a normal folder on the computer, meaning files can be moved or created into it. We could, for example, add a file called `problem1.py` to solve the [first Project Euler problem](https://projecteuler.net/problem=1).
 
-When you want to include new files into your project history through a commit, you first have to *add* them, this is also known as "staging" the files or changes. When you do a commit command, all staged changes are now added to the project history.
+When we want to include new files into a project history through a commit, we first have to *add* them, also known as "staging" the files or changes. When a commit command is performed, all staged changes are added to the project history.
 
 ```{figure} ../../figures/three_states.png
 ---
@@ -236,14 +223,14 @@ alt: repo creation
 Source: Chacon & Straub, ProGit (2014)
 ```
 
-We can at any time check the current status of the git repository by running
+We can at any time check the current status of the Git repository by running
 ```
 git status
 ```
 which now tells us
 ```
-On branch master
-Your branch is up to date with 'origin/master'.
+On branch main
+Your branch is up to date with 'origin/main'.
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
@@ -252,9 +239,11 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
-The first lines tells us there is nothing new on Github that has been added after we cloned our repository (you won't see this if you only have a local repository for now). Next it tells us that there is an *untracked* file, which is the new file we created.
+The first lines tell us there is nothing on the GitHub repository that has been added after we cloned the repository (this will not be displayed if there is only a local repository but not a remote repository yet). Next, it tells us that there is an *untracked* file, namely the new file we created.
 
-If we want to commit our new solution, we will therefore first have to add it
+The `git status` command is a very convenient one and should be used often. Using it frequently ensures that we are working on the changes we think we are. It also helps avoid conflicts by revealing unmerged and unstaged changes and finally guarantees we maintain a clean repository by showing untracked files. Untracked files are files in the current working directory which Git is not yet aware of, either because they are not part of the repository or because we have not specified that they should be tracked. We tell Git to start tracking files via the `git add` command, and until this is done, the files will not be added to any commits.
+
+Therefore, to commit our new solution, we first have to add it via
 ```
 git add problem1.py
 ```
@@ -262,30 +251,28 @@ or simply
 ```
 git add .
 ```
-which adds everything in the folder and sub-folders. Doing this is very practical, but perhaps we are storing files in our folder we don't want to enter into the project history (because they should only be stored locally, and don't need backups), then doing `add .` would add those too. The solution is to add a file called `.gitignore` in our project folder. This file contains a list of files that should not be added into git. There is a website, [gitignore.io](https://www.gitignore.io/), that let's you autogenerate a gitignore file based on your system and programs you used. If you are starting a new repository, it is helpful to take the 30 seconds it takes to make a proper gitignore file. Useful things to add into gitignore.io is your operating system, your text editor, and the programming languages you are using for your project. This will keep your public repo looking nice and clean.
 
-Note that `git add .` will add everything in that is not in your `.gitignore` file. If only want to add the files that have already been added, i.e you only want to update the existing files you can use the command `git add -u .`.
+This last command adds everything in the folder and sub-folders which has been modified and saved instead of adding file by file. Doing this is very practical but requires attention: by using `git add .`, we could be storing undesired files in the project's history (for example, files that should only be stored locally and do not need backups). The solution is to create a file called `.gitignore` in the project folder. This file contains a list of files that should not be added to Git. Ignore files can be autogenerated via websites such as [gitignore.io](https://www.gitignore.io/), adapting the file based on the user's system and used programs. When starting a new repository, it is helpful to take the 30 seconds it takes to make a proper gitignore file. In order for the file to be user-specific, one should feed gitignore.io some useful information, such as the used operating system, text editor, and the project's programming languages. This will keep the repo looking presentable and without user-specific files, which is of special importance for public repositories.
 
+To create a gitignore file, simply create a file called `.gitignore` (exactly that), go to the website [gitignore.io](https://www.gitignore.io/), and fill in information about OS, text editor, Jupyter notebook, and Python. The output given by the website should then be copied into the newly created file and saved. The file should also then be *staged* by doing `git add .gitignore`.
 
-### Your turn: Making a .gitignore file
-
-Create a file called `.gitignore` (exactly that), go to the website [gitignore.io](https://www.gitignore.io/) and fill in your OS, your editor, Jupyter notebook, and Python. Copy the output you get from the website into your newly created file and save it. Then *stage* it by doing `git add .gitignore`.
+If we only want to add changes made to previously created files, we can use the command `git add -u .`. In contrast, `git add .` will add all changes, including created files, unless specified otherwise by the `.gitignore` file.
 
 
 
 ### Making a commit
 
-To make a commit, we simply use the command `git commit`. If you just run that command, it will open a text editor for you to enter a commit *message*. A commit message is a short text, usually a sentence, that describes the changes you have performed since the last commit. All commits should have commit messages, because it allows others, including your future self, track changes to the project over time. A large software project will usually grow to thousands of commits over time, so having some explanations can really help. The messages also makes it easier to see where possible bugs were introduced.
+To make a commit, we use the command `git commit`. This command will open a text editor asking for a commit *message*, which is a short text, usually a sentence, describing the performed changes since the last commit. All commits should have commit messages allowing others (including the user in the future) to track changes to the project over time. A large software project will usually grow to thousands of commits, so gradual explanations can really help project organization and make it easier to trace moments where bugs were introduced.
 
-Instead of letting git open an editor for you, you can write your commit message straight into your commit command using the `-m` flag.
+Instead of inserting a commit message via Git editor, a commit message can also be written straight into the commit command using the `-m` flag, as below
 ```
 git commit -m "Solved problem 1 using Python."
 ```
-And that is it. We have stored a snapshot of our project.
+After this, we have stored a snapshot of the project.
 
 ### A note on adding and editing files
 
-All new files you create will need to be added using `git add`. However, most of the time you are simply editing existing files. We can for example now go in and change our `problem1.py` around a bit. If we have an edited file, this will also show up in `git status`. Let us also add a `problem2.py` for illustration. The status command now gives us (and some additional information we removed for readability)
+All newly created files will need to be added using `git add`. However, most of the time, we are simply editing existing files. We can, for example, go in and change our `problem1.py` slightly. Edits to files will also show up in `git status`, but let us illustrate how the status changes with the addition of a `problem2.py` file. In this case, the status command gives the following (and some additional information removed for readability)
 ```
 Changes not staged for commit:
 	modified:   problem1.py
@@ -293,27 +280,27 @@ Changes not staged for commit:
 Untracked files:
 	problem2.py
 ```
-To stage both the changes, and the new file, we can use `git add .` to include both at once.
+To stage both the changes and the new file, we can use `git add .`.
 ```
 git add .
 git commit -m "Solved problem 2 using Python."
 ```
-This commit will now add `problem2.py` and the changes to `problem1.py` simultaneously.
+This commit has now added `problem2.py` and the changes to `problem1.py` simultaneously.
 
 ### git commit -am
 
-If we only want to include changes to existing files, but we have not made any *new* files. We can use the `-a` flag to the commit. That way, we don't have to keep running the add command for every commit, we only do it when we are actually adding new files. A typical commit command can then look like this:
+If we only want to include changes to existing files and have not made any *new* files, we can use the `-a` flag to the commit. That way, we do not have to keep running the add command for every commit; we only do it when we are actually adding new files. A typical commit command can then look like
 ```
 git commit -am "Added support for reading .png images to the scan module."
 ```
 
-We have now made a repository and made two commits to it. We can use `git log` to get out a report of commits in a chain
+We have now made a repository and made two commits to it. We can also get a report of the commits in a chain by using the command
 ```
 git log
 ```
-Giving
+One example of output for the above command can be seen below.
 ```
-commit 08b79fde10ad4ad7aed89881aa44275c175af509 (HEAD -> master)
+commit 08b79fde10ad4ad7aed89881aa44275c175af509 (HEAD -> main)
 Author: jvbrink <jonasvdbrink@gmail.com>
 Date:   Thu Aug 9 12:04:38 2018 +0200
 
@@ -325,58 +312,74 @@ Date:   Thu Aug 9 11:52:42 2018 +0200
 
     Solved problem 1 using Python
 
-commit 0c2dd72daaa5aa3496a036611d52b57193e83f3a (origin/master, origin/HEAD)
+commit 0c2dd72daaa5aa3496a036611d52b57193e83f3a (origin/main, origin/HEAD)
 Author: Jonas van den Brink <jvbrink@users.noreply.github.com>
 Date:   Thu Aug 9 11:17:56 2018 +0200
 
     Initial commit
 ```
-The most recent commit comes first, and then older ones below it. The time of the commit, and the person commit is also given. Each commit is named by its *hash*. In addition we have some info, `HEAD` is a concept in Git, it is pointing at the latest commit (but can be moved around if needed). Note that the `origin/HEAD` is still at our initial commit, this is because our changes so far have only been local, and `origin` is the name of our copy of the repository on github. Let us see how to fix this.
+The most recent commit comes first, followed by older ones below it. The time of the commit and the commit author is also given, and each commit is named by its *hash*. Note that the log above contains something called `HEAD`, which is a reference to a commit object. More specifically, it points to the latest commit in the current branch. Despite that, the `origin/HEAD` is still at our initial commit because our changes so far have only been local, and `origin` is the name of the copy of the repository on GitHub. Let us see how to change this.
 
 ```{admonition} Pro tip: Committing only a part of a file
 :class: tip
-Sometimes you may have multiple changes to a file, but the changes might belong in different commits. To add only part of the file to the staging area you can use `git add -p`. This will
-open and interactive window and show you the `git diff` of a section with a question `(1/2) Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]?`. In this case you see that there are two sections (or hunks) and you are looking are the first one. Type `y` to include it `n` to not include it or `?` to see more info.
+Sometimes there are multiple changes to a file, with different changes belonging to different commits. It is possible to add only part of the file to the staging area by using `git add -p`. This will open an interactive window showing the `git diff` of a section with a question `(1/2) Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]?`. In this example, there are two sections (or hunks), and we decide if we stage or not the first one by typing `y` or `n` respectively. It is also possible to type `?` to see more info.
 
-Similarly, if you want to discard changes to only parts of a file you can use `git checkout -p`
+Similarly, it is possible to discard changes to only parts of a file via `git restore -p <filename>`, but more on that later.
 ```
 
-## Interacting with Github
+## Interacting with GitHub
 
-We will now start interacting between our local repo and Github. The server (be it Github, or something else) is called the *origin* in Git-lingo. And so as you might have already seen in your `git status` messages, we see references to *origin* quite often.
+We now start interacting between the local repository and GitHub. The server (be it GitHub or something else) is called the *origin* in Git-lingo. References to *origin* are often seen and might have already been encountered in the `git status` messages.
 
-To do the next steps, our repo must be coupled to Github. If you created your repo via the website and cloned it, they are already linked. If you created it locally using `git init`. You need to couple them together manually. To do this, first go to Github and create a new repository there as normal, but do *not* include a README, gitignore or license.
+The next steps require our local repo to be linked to GitHub. This is already the case if the local repo was created by cloning the website's version of it. However, if the repository was created locally using `git init`, this coupling has to be done manually. First, the GitHub repository needs to be created, as normal, but *without* a README, gitignore, or license files.
 
-Then you can run the following command to couple it to the online repo
+Subsequently, running the following commands will couple both repositories
 ```
 git remote add origin <URL>
 ```
-You can verify the new remote URL using
+Where `<URL>` is the URL of the remote repository we want to connect to. One can also verify the new remote URL using
 ```
 git remote -v
 ```
-Then finally, push everything up using
+
+Here, `-v` stands for "verbose", and the above command then outputs
 ```
-git push origin master
+origin  <URL> (fetch)
+origin  <URL> (push)
 ```
-I prefer starting new repos on the website, then cloning them down, to avoid having to set the origin manually. But this is just personal preference.
+
+The above output means that the remote, named `origin`, is currently added to the local repository, with both fetch and push URLs set to `<URL>`.
+Finally, we push all the changes made in the local repository to the remote repository using the following command
+```
+git push origin main
+```
+
+Whether to start new repositories on the website, then clone them down, or start locally and set the origin manually is just a matter of preference. Nonetheless, most people prefer the former rather than the latter.
 
 
 ### Pushing and Pulling
 
-The two main commands you need to interact between your locally copy of the repository and the online one, are `push` and `pull`. Here `push` means you are copying commits you made locally up to the origin. While `pull` means you are copying commits that have been pushed to the online repo down to your local machine.
+The two main commands to interact between the local copy of the repository and the online one are `push` and `pull`. Here `push` means copying commits made locally up to the origin, while `pull` means copying commits that have been pushed to the online repo down to the local machine.
 
-When we write `git status` in our euler project now, we get a message (unless you already pushed your commits)
+By following the previous Git commands, and unless the reader has already pushed commits, the `git status` command for the `euler` project now should return
 ```
-Your branch is ahead of 'origin/master' by 2 commits.
+Your branch is ahead of 'origin/main' by 2 commits.
 ```
-This message is telling us we (meaning our local repo), is two commits ahead of the version on Github. To remedy this we push our latest changes. Run the command
+This message tells us our local repository is two commits ahead of the version on GitHub. To remedy this, we push our latest changes via the command
 ```
 git push
 ```
-And you will be prompted for your username and password. This ensures no one else can push things to your repository. If you find it tiring to write your username and password all the time you can [cache your GitHub credentials in Git](https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git). An alternative to this is to [set up SSH authentication ](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
+At this point, the user might be prompted to supply a username and password. This ensures no one else can push content to the repository, but it can also become repetitive. In order to avoid constant authentication requirements, it is possible to [cache GitHub credentials in Git](https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git) or to [set up SSH authentication](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
 
-Pushing is important, because it is what ensures there is an external backup of your project. If you only do commits, and no pushing, and your computer is lost or broken, there goes all your hard work. If you have committed *and* pushed it, then you have a backup you can clone to a different machine. In addition, if you are sharing your code with others, then they will only get the changes you have made once you have pushed it. Because of these two things, we push often. You don't have to push after every single commit, but it is a good habit to push at least at the end of every coding session.
+In the above example, we could directly use `git push` because we were at main. However, this does not work for new branches, as they do not have what is called a remote-tracking branch yet. To set such a tracking, one can perform the first push as
+
+```
+git push -u <remote> <branch>
+```
+
+where `-u` is short for `--set-upstream`. As mentioned, the convention is to have remote named origin. After this is done for the first time, one can simply use `git push` normally without additional arguments.
+
+Pushing is paramount because it is what ensures there is an external backup of the project. Solely doing commits that are not followed by pushes does not prevent the work from being lost in case of compromise to the computer. On the other hand, commits *and* pushes of the project modifications guarantee a backup that can be cloned to a different machine. In addition, when sharing code, other developers will only be able to check local changes once they are pushed. Because of these two factors, frequent pushing is encouraged, although not necessary for every single commit. A good habit is to push code at least at the end of every coding session.
 
 
 ```{figure} ../../figures/in_case_of_fire.png
@@ -385,148 +388,250 @@ width: 250px
 name: in-case-of-fire
 alt: in case of fire
 ---
-A common joke in the Git world. Getting your work to safety requires first a commit to store your last changes, and then a push to get your newest commits to the external sever
+A common joke in the Git world. Getting the work to safety requires first a commit to store the last local changes, and then a push to get the newest commits to the external sever.
 ```
 
-Pulling is not as much used if you are working on software alone, as it is used for copying changes others have contributed to a repository down to your local machine. But say for instance you are collaborating on a project with a friend, and your friend pushes a new piece of code you want to work on. Then you would do a
+Pulling when working alone on software is not used as much as when working with others. Indeed, its purpose is to copy changes others have contributed to a repository down to the local machine. Suppose that, while in a project, a collaborator has pushed a new piece of code we want to work on. In order to get these changes to our local version of the repository, we do a git pull
 ```
 git pull
 ```
-and the changes would be entered into your local repository.
 
 ```{admonition} Pro tip: Pull = Fetch + Merge
 :class: tip
-If you work on a project where your partner have pushed out changes to GitHub and you execute the command `git pull` (or `git pull origin master`), the changes from your partner will first be fetched (downloaded) from GitHub and then merged into the branch you are working on. In other words, `git pull origin master` consist of first executing the command `git fetch origin master` and then `git merge origin/master`. If you only want to view your partners changes without merging you can do `git fetch` (or `git fetch origin master`).
+In the above example, executing the command `git pull` (or `git pull origin main`) will first fetch (download) the collaborator contributions from GitHub and then merge them into the branch we are working on. In other words, `git pull origin main` consists of first executing the command `git fetch origin main` and then `git merge origin/main`. If only a visualization of the partner's changes is desired, that can be done without the merging step via `git fetch` (or `git fetch origin main`).
 ```
 
 
-### How to test pushing and pulling on your own
+### How to test pushing and pulling
 
-We will go more in detail on collaborating through Git at a later time. But for now, let us show you an easy way you can "fake" being to two people collaborating just to learn some git—this is not something you will actually do when working with *git*. It is just a way to illustrate how it would work. To do this I simply clone my repository from Github once again, but place it in a different location on my machine.
+We will go more in detail on collaborating through Git at a later time, but for now, we show an easy example of collaboration between two people in a project. For this part, it is useful to test the following steps with a colleague. The best way to learn how to collaborate in Git is to find a partner and try it out!
+
+After one person has created the previously mentioned euler repository and set it up to Github, the next step is for the second person to clone the repository by doing
 ```
 mkdir git_collab_example
 cd git_collab_example
-git clone https://github.com/jvbrink/euler
+git clone https://github.com/user_name/euler
 ```
-I now have to copies of the same repository. One stored in my home directory, and one stored in a subfolder of my home directory. These two copies do not know the other one exists, and so for all intents and purposes they could just as well be on two different machines.
 
-If I make changes to one of them and commit it, it won't show up in the other one by itself. However, I can do a *git push* in the one with the changes, and a *git pull* in the other, and they will both be up to date. This is because the push command sends the changes to the github server, and the pull command pulls down the new changes to the other repo. Imagine that these two repos were located on different machines, this would be a way for two colleague could work on the same code together.
-
-The best way to *actually* learn how to collaborate in git is to find a partner and just try it out, and this is what we will be doing in the project work of the course.
-
+We now have three copies of the same repository: the ones on each person's machine plus the remote one. These two local copies do not know the other one exists, and so making changes and commits to one of the repositories will not affect or show up in the other one. Still, doing *git push* with the changes in one repository followed by a *git pull* in the other will bring them both up to date. This is because the push command sends the changes to the GitHub server, and the pull command pulls down the new changes to the other repository.
 
 ### Git Forking
 
-So far we have seen how we can *clone* a repository from Github. When we do this we get a local copy of it, and you can do this with any public repository found on Github, Bitbucket and similar pages. This means for most open source code projects, you can clone their repo and instantly have access to the source code, documentation and the like. In fact, many open source code projects share their code this way, making you first clone the repo and then build or install the software through some additional steps.
+So far, we have seen how to *clone* a repository from GitHub. This generates a local copy of it and can be done with any public repository on GitHub, Bitbucket, and similar pages. For most open-source code projects, for example, one can clone their repo and instantly have access to the source code and documentation. In fact, many open-source code projects share their code this way, requiring first a repository clone and then a build or installation of the software through some additional steps.
 
-When you clone somebody else's repository, you can make local changes to it, but you won't be able to push any of those changes back to their online repository. This makes sense, it wouldn't work very well sharing code openly, if anybody could start messing with that code. However, you can instead link your local repository to a new public repository which you own. We call this process *forking*, and it works quite well. If you find some openly available software project you want to build on or modify in some way, you just make your own personal fork of it. Github makes it very easy to fork any repository, if you are logged in and looking at a repository, there is a "Fork" button, which automatically creates a new repository on your user from the other one, which you can then clone down to your local machine.
+When cloning somebody else's repository, local changes can be made to it, but those changes cannot be pushed back to their online repository. Indeed, it would not be reasonable to share code openly and in an unsupervised way: in this case, anybody could start messing with the whole project. What should instead be done is something called a fork. Forking consists of linking this local repository to a new public repository different from the cloned one and which we own. If we find some openly available software project we want to build on or modify in some way, we just make a personal fork of it. GitHub makes it very easy to fork any repository. When logged in and looking at a repository, there is a "Fork" button, which automatically creates a new repository, now under our user and which can be cloned down to the local machine.
 
 ```{figure} ../../figures/github_forking.png
 ---
-width: 400px
+width: 600px
 name: forking
 alt: forking
 ---
-You can easily Fork existing projects to build on, extend or modifying existing code
+Forking projects to build on, extend or modifying existing code
 ```
 
 ### Git Branching
 
-Another crucial feature of git, at least for large projects. Is that you can make *branches* in your code. A branch is exactly what the name implies, a diverging version of the code. We can make branches for several reasons:
+Another crucial feature of Git, at least for large projects, is that code can be organized into *branches*. A branch is exactly what the name implies: a diverging version of the code. We can make branches for several reasons
 * For testing purposes
 * Supporting different versions of the same code at the time
 * For developing new features without disrupting the main code
-* Doing crazy things that might break the code
+* Doing things that might break the code
 * Bug fixing
 
-To make a new branch you can do the command
+To make a new branch, simply run the command
 ```
 git branch <new_branch_name>
 ```
-Let's say we make one called `testing` for example. The situation is now as shown below:
+Suppose we make one branch called `testing`. The situation is now as shown below
 
 ```{figure} ../../figures/making_a_branch.png
 ---
-width: 300px
+width: 400px
 name: making-a-branch
 alt: making a branch
 ---
 Source: Chacon & Straub, ProGit (2014)
 ```
 
-Note that our original branch is called *master* (although it should actually be called [main](https://github.com/github/renaming)). When we start a new repo it only has the master branch. The new branch is called testing, and "HEAD" is where we are currently at. Because the HEAD is at master, if we make a new commit, it will be entered into the master branch, not the testing branch. If we instead want to change the testing branch, we have to move the head with
+In the image above, we notice that the primary branch of the repository is labeled as *master*, while in the repository that we just created, the primary branch is labeled as *main*. Indeed, before 2020, the convention was to use the label master for the primary branch of a repository and, because of that, some projects still use master as label. Since then, platforms like GitHub are gradually moving towards using main instead. More about this renaming can be seen [in this guidance material](https://github.com/github/renaming).
+
+
+### Git switch
+
+When starting a new repository, it only has the main (or master) branch. If the reader is following the previous commands, the newly created branch is called "testing", and the HEAD points to the main branch. Because the HEAD is currently at main, if we make a new commit, it will be inserted into the main branch instead of the testing branch. If we want to change the testing branch, we have to move the HEAD with
 ```
-git checkout <branch_name>
+git switch <branch_name>
 ```
-Note that branches can diverge in commits, this is sort of the whole point of branches. We can then jump between the branches using `checkout` as needed.
+Note that branches can diverge in commits (this is basically the whole point of branches). We can then jump between the branches using `switch` as needed.
+
+
+```{admonition} Pro tip: creating and switching to a branch at the same time
+:class: tip
+It is convenient to create a branch and switch branches at the same time. In this case, instead of using `git branch <branch_name>` followed by `git switch <branch_name>`, one might simply do `git switch -c <branch_name>`. To help memorize these command flags notice the `-c` stands for "create".
+```
 
 ```{figure} ../../figures/branching.png
 ---
-width: 300px
+width: 400px
 name: branch
 alt: branch
 ---
 Source: Chacon & Straub, ProGit (2014)
 ```
 
-Say we have made a branch to develop a cool new feature without disrupting the master branch others are also working on. Once we are happy with our code, we need to *merge* our branch back into the master branch.
+
+### Git restore
+
+Another useful idea is that of restoring files (or directories) in a current branch to their state on a previous commit. The state of the files can be restored either to the previous commit or to a specific one, passing a commit hash. In the example below, we restore a specific file to the state it had in the previous commit, as no hash was passed.
+
+```
+git restore <filename>
+```
+
+In this case, all unstaged changes made to the file would be gone. One important caveat is that while the changes subsequent to a specific commit are undone, the current branch is not updated.
+
+```{note}
+`git restore <filename>` restores files that have not yet been staged. If the objective is to restore the state of files that have already been staged, that can be addressed by adding a staged flag as in `git restore --staged <filename>`.
+```
+
+### Git reset
+
+The previously mentioned restore command is similar to the useful `git reset`. While both are used to undo changes in a repository, `git reset` also updates the branch we are working on - it *erases* the commits and the git history after a specified commit hash. For our use cases, understanding the git reset command is sufficient: its objective is to *reset* the current state of the repository - or files thereof- to the state of a previous commit. This reset undoes the changes made from the point of a specified commit onwards, and there are different ways of doing so, depending on how robust this undoing process is. One example of a reset use can be seen bellow
+
+```
+git reset <commit-hash>
+```
+
+Notice that after this, all changes from later commits are added to the “staging area”. In this case, we are returning the repository to the state it had in the specified commit, but the same could be done only to a single file by adding a filename after the commit hash. It is clear that there are different ways of undoing changes to repositories and files in Git. For our purposes, the discussed strategies are sufficient. For a more extensive description, we refer to the supplementary material [Git Basics - Undoing Things](https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things).
+
+
+### Git checkout
+
+The `git checkout` command is also a fundamental one. One particular example of its use is to look at the state of the repository at previous commits - such as looking at a snapshot of the codebase at the time. This can be done via
+
+```
+git checkout <hash>
+```
+
+As usual, hash refers to the commit hash and can be obtained with `git log`. Each commit represents a different snapshot of the project's history with its own set of changes, so the differences between commits can then be examined and the changes can be experimented with, without affecting the rest of the project. As the Git story is left unchanged, we can always go back to the latest commit afterward.
+
+#### Detached HEAD state
+
+As discussed, when we create a new commit, the HEAD pointer is moved automatically so that we are always at the latest commit of a given branch. When we instead check out a specific commit via `git checkout <hash>`, Git does not do this automatically. This means that after performing this command, we are in a "detached HEAD state". As a consequence, if we make changes while we are checking out a previous commit, these do not belong to any branch. That is why `git checkout <hash>` is often used as an exploration tool only. In this case, after exploring the specific commit, if there are no uncommitted changes left, we can simply `git switch` to any branch, and HEAD will be attached once again.
+
+If there are uncommitted changes, we can either commit them or discard them. Shall we decide to commit them, a new branch should be created and switched to, as follows
+```
+git switch -c <new_branch_name>
+git add .                 # if we want to add every change
+git commit -m 'Commit message'
+
+git push origin HEAD      # push the current branch to remote
+git switch main           # back to main branch now
+```
+
+If we need not keep the changes made while checking the specific commit, we can reset, then switch back to main, or any other branch
+
+```
+git reset --hard HEAD
+git switch main
+```
+
+#### Additional comments on `git checkout``
+
+We have already mentioned that the `git switch` command is used to switch between different branches of a repository. Nonetheless, it is important to mention that previous to Git 2.23, released in 2019, `git checkout` was the command used for this functionality. The creation of the switch command has an important reason: checkout had three main unrelated uses, making it too loaded with functionalities. From version 2.23 onwards, two of these functionalities have been replaced.
+
+For instance, the command `git checkout <filename>` can be used to reverse modifications that have not been staged while remaining in the same branch. Similarly, but with a totally different use, `git checkout <branch-name>` serves as a way to change to another branch we want to work on. For this reason, Git 2.23 [addresses both these uses](https://www.infoq.com/news/2019/08/git-2-23-switch-restore/) by separating them into `git restore` and `git switch`, respectively.
+
+One of the key improvements with switch is that it is more careful about preventing us from accidentally losing work. For example, if one tries to switch to a new branch with `git switch` without committing the changes, Git will prompt us to either commit the changes or stash them before switching branches. In contrast, `git checkout` allows the switch of branches without checking for uncommitted changes, potentially overwriting the work.
+
+Despite this creation of the switch and restore commands, there are still exclusive uses for `git checkout`, as we demonstrated. Furthermore, it can still be employed in all the contexts for which we introduced restore and switch. While we encourage the use of the modern commands in these scenarios, checkout will likely be found when searching for solutions to problems online, given their history.
+
+
+### More about the merge command
+
+Imagine we have made a branch to develop a new feature without disrupting the main branch others are also working on. Once we are happy with the code, we need to *merge* our branch back into the main branch.
 
 ```{figure} ../../figures/merging.png
 ---
-width: 300px
+width: 400px
 name: merge
 alt: merge
 ---
 Source: Chacon & Straub, ProGit (2014)
 ```
 
-To merge branches we want to be on the branch we want to keep (typically the master branch), and do the command
+To merge branches, we want to be on the branch we want to keep (typically the main branch) and do the command
 ```
 git merge <branch_name>
 ```
-So once we manage to solve issue 53 in the image, we would do
+So once we manage to solve issue 53 in the image, we do
 ```
-git checkout master
+git switch main
 git merge iss53
 ```
-and that would be that.
 
-Note that to merge branches, git tries to automatically understand what code to keep. If both branches that are to be merged has performed changes to the *same code*, this can be a bit tricky. In this case we get what is called a *merge conflict*. Which we have to resolve manually, meaning we need to choose which parts of the code to keep, and which to discard. Your first proper merge conflict will probably be a stressful situation, but just remember to keep calm and ask for help from your local git guru if needed.
+```{admonition} Pro tip: switching and merging at the same time
+:class: tip
+Another convenient shorthand is to switch to a branch and merge it into the main branch in one step. This can be achieved via `git switch -m main <branch_name>`.
+```
+
+Note that to merge branches, Git tries to automatically understand what code to keep. If both branches that are to be merged have performed changes to the *same code*, we get what is called a *merge conflict*. These conflicts have to be resolved manually, meaning we choose which parts of the code to keep and which to discard. The first proper merge conflict can be a stressful situation, but just remember to keep calm and ask for help from a local Git guru if needed.
+
+Finally, a branch can also be deleted via Git commands. At this point, the reader might have noticed the letter in the command flags holds meaning. In this case, we add the flag `-d` which stands for "delete" and can be seen below
+```
+git branch -d <branch_name>
+```
+
+If the branch has not been merged and the changes have not yet been committed, Git will give a warning and refuse the action. It is possible to overcome this refusal by using the -D flag (instead of -d), implying we want to force the deletion nonetheless. **This should be done with caution!** It is important to be careful when deleting branches, as it is a permanent action: in case the changes have not been committed, they will be lost forever. In spite of that, it is good practice to delete branches *after* they have been successfully merged to avoid accumulating useless branches in the repository.
+
+#### Merge vs. Rebase
+
+We have mentioned the `git merge` command, which is used to combine changes from one branch into another (in most cases, we merge into main). There is another widely used command for this same purpose, called *rebase*. Despite their similarities, these commands use different approaches to accomplish this combination of branches and can have different effects on the repository history. A simplified comparison is that `git merge` is convenient for merging changes from a shared branch or a long-running development branch such as the main branch. On the other hand, `git rebase` is useful for creating a clean and linear history when working on branches that are not shared with others.
+
+This main difference comes because merge can handle multiple concurrent changes to the same branch with a "merge commit" that has one parent commit from each branch. In contrast, rebase allows us to apply changes from the target branch to the feature branch before merging, creating a more linear history with no merge commits. In this last case, the resulting commits are placed after the target branch's latest commit. Rebase often avoids what is called "spaghetti history."
+
+Git merge makes it more explicit to understand the development history of the codebase but it can also look complex by including multiple merge commits. On the other hand, `git rebase` creates a linear history with a simpler structure, but it can obscure the original relationship between the two branches.
+
+```{figure} ../../figures/merge-rebase-git.png
+---
+width: 500px
+name: merge-rebase-git
+alt: merge-rebase-git
+---
+Source: [Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
+```
+
+A more extensive discussion about when to use each of these commands can be found in [this article from Atlassian](https://www.atlassian.com/git/tutorials/merging-vs-rebasing).
 
 
-### Merge requests and Pull requests
+```{admonition} Pro tip: Visualizing Git Operations In Our Repositories
+:class: tip
+The above images representing branches and their histories can be useful in understanding what Git commands will do to our working repository. To help with that, there is a tool called Git-Sim which creates a simulated repository and performs Git operations on it, showing the resulting changes in a visual way. This enables experimentation with different Git commands without affecting our current repository. For a more in-depth explanation of how to use it, we refer to the article [Git-Sim: Visually Simulate Git Operations In Your Own Repos](https://initialcommit.com/blog/git-sim).
+```
 
-Another useful feature are merge and pull *requests*. Often when working in a software team, there is a team leader that is responsible for managing the big picture view of the whole codebase. The different developers on the team handle different tasks, and often do their development in separate branches of the main code. Once they finish a task, instead of simply merging it into the master branch, they make a *merge request*. This request is automatically sent to the team leader, who can then review the changes to be merged. After reviewing they can either accept the request, in which case the merge happens, make additional comments or requests to be carried out before the merge is acceptable, or they can outright deny the request. Pull requests are basically the same thing, but for pulling a commit into a repository. If you for example find and solve a big in an open source project you find online, you don't have *write access* to that repository, so you cannot actually push your changes. Instead you can make a pull request for the owner of the repo, and they can either accept or deny. If they accept, they get the changes you made into their project.
+### Merge requests and pull requests
 
-Linus Torvalds, the original creator, and currently principle developer of the Linux kernel, is sort of notorious for being quite harsh when it comes to pull requests—he will only accept good code, and if you produce a pull request of bad code he will let you hear it. This makes him a bit unpopular in some circles.
+Two other useful features are "merge" and "pull" *requests*. Often when working in a software team, there is a team leader that is responsible for managing the big-picture view of the whole codebase. The different developers on the team handle different tasks and often do their development in separate branches of the main code. Once they finish a task, instead of simply merging it into the main branch, they make a *merge request*. This request is automatically sent to the team leader, who can then review the changes to be merged. After reviewing, they can either accept the request, make additional comments or requests to be carried out before the merge is acceptable or deny the request.
 
+Pull requests are similar to merge requests: both are ways of requesting that changes from one branch are integrated into another. The two terms are often used interchangeably, as they are different ways of looking a the same situation. Pull requests are typically used in a distributed development workflow, where each developer has their own fork of the repository. In this case, a pull request is used to request the owner of the original repository to pull changes made in a forked repository into the original repository. If we, for example, find and solve a bug in an open-source project, we will not have *write access* to that repository. In this case, changes cannot be pushed immediately. Instead, we make a fork of that repository, add our changes and then open a pull request for the repository owner.
 
-## Taking a step back
-
-We have just covered a lot of different aspects of Git, and mentioned a lot of things you might not even use that much in IN1910. If it is all a bit overwhelming right now, don't worry. You will get hands on experience doing the weekly assignment.
-
-The most important commands are
-* `git clone <URL>`
-* `git add .`
-* `git commit -m "..."`
-* `git push`
-* `git pull`
-
-If you know how to use these commands, you can probably get through IN1910 just fine. Other commands that are useful in the "real world", are branching, merging and tagging.
+In addition to the similarity between the terms, GitHub's "pull request" feature is equivalent to GitLab's "merge request". Quoting a [GitLab article](https://docs.gitlab.com/ee/topics/gitlab_flow.html),
+> "Merge or pull requests are created in a Git management application. They ask an assigned person to merge two branches. Tools such as GitHub and Bitbucket choose the name “pull request”, because the first manual action is to pull the feature branch. Tools such as GitLab and others choose the name “merge request”, because the final action is to merge the feature branch."
 
 
 ### Commit often!
 
-For Git to be useful as a version control system, and not just a online backup, it is important to commit often. The more often you commit (within reason), the easier it is for both others and your future self to understand how the project changed over time, and exactly where potential errors occurred.
+For Git to be useful as a version control system and not just an online backup, it is important to commit often. The more often (within reason), the easier it is for others and even the same developer in the future to understand how the project changed over time, facilitating knowing where potential errors occurred.
 
-Each commit should also also have a *commit message* that explains the changes made. The commit message should be a single sentence, and should explain exactly what you did in the code itself, to see that people can always check out the commit log. Instead, your commit should explain the big-picture of what you were trying to accomplish. Did you write a new module? Add new functionality? Fix a bug? And so on.
+Each commit should also have a *commit message* that explains the changes made. The commit message should be a single sentence explaining what changed in the code, and that can always be traced back by looking at the commit log. This message should explain the big-picture of what was done instead of super specific changes. Was a new module or maybe a new functionality implemented? Did a bug get fixed?
 
-In an ideal word, a commit should revolve around a single concept, sort of like a paragraph in a text. This means you should commit once you finish tackling a given problem, and started working on something else. If you are writing a commit message and see you are writing "Did A and B and C" and these are completely different tasks, then you should probably have made three separate commits. If you have already commit and done some more changes you feel should be part of that commit, you can *amend* that commit by doing
+In an ideal world, a commit should revolve around a single concept, similar to a paragraph in a text, which addresses one specific argument in a whole narrative. This means we should commit once we finish tackling a given problem and start working on something else. When writing a commit message, if the desire is to write "Did A and B and C" where these are completely different tasks, maybe there should be three separate commits. Note also that changes can still be added to a previous commit in case we forget to add a modification. This can be achieved via the *amend* command as follows
 ```
 git commit --amend
 ```
 
-The bigger a software project, the more important good commits and messages are. For assignments in this course, they are probably not that important, but we are trying to learn good practices, and so you should strive to make at least decent commits.
+The bigger a software project, the more important good commits and messages are. For small assignments, making incredible commit messages is not paramount, but still, as we try to lear good practices, we should strive to make at least decent ones.
 
 
 ```{figure} ../../figures/xkcd1296_commit_messages.png
@@ -538,21 +643,42 @@ alt: xdcd-git
 Source: [XKCD #1296](https://xkcd.com/1296/)
 ```
 
+### Deleting files from Git
 
-## Best Practices for Scientific Computing
+Sometimes it can be necessary to remove files from a repository. This can be obtained by removing it from the local machine and the staging area and then committing this removal. To remove the file from the local machine and the staging area at the same time, we must use the command
 
-Let us wrap up this lecture by looking back at the paper mentioned during the first lecture, [*Best Practices for Scientific Computing*](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745) by Wilson, et al. Many of them cover good use of Git.
+```
+git rm <filename>
+```
 
-The most relevant point, which explicitly talks about using VCS in the first place
+Another possibility is to remove the file only from the staging area but not from the local machine, in which case we perform only `git rm --cached <filename>`.
 
-3. Make incremental changes
+## Taking a step back
+
+We have just covered a lot of different aspects of Git and mentioned several things that might not even apply immediately in the following materials, so do not worry if those concepts seem overwhelming. Hands-on experience with Git is something that will come gradually by doing exercises and contributing to projects.
+
+The most important commands are
+* `git clone <URL>`
+* `git add .`
+* `git commit -m "..."`
+* `git push`
+* `git pull`
+
+## Best practices for scientific computing
+
+We now conclude by looking back at the previously mentioned paper [*Best Practices for Scientific Computing*](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745) by Wilson et al.
+
+The most relevant points which explicitly address VCSs use are the following
+
+* Make incremental changes
     * (a) Work in small steps with frequent feedback and course correction
     * (b) Use a version control system
     * (c) Put everything that has been manually created in version control
 
-In addition, the following points are very relevant:
-5. Plan for mistakes
-6. Optimize software only after it works correctly
-8. Collaborate
+In addition, the following points are also very relevant:
 
-Using VCS is, by its very nature, planning for mistakes. When optimizing code, it is very easy to break some functionality, and so having good revision control is crucial to refactoring and optimizing code effectively. Lastly, collaboration on code should be, and very often is, done through *git* or similar tools. By collaborating through git, it is a lot easier to track changes over time, see who made what changes, and all revisions are accessible. This is *a lot* better than just emailing code back and forth—which many scientists do!
+* Plan for mistakes
+* Optimize software only after it works correctly
+* Collaborate.
+
+Using VCS is, by its very nature, planning for mistakes. When optimizing code, it is very easy to break some functionality, so having good revision control is crucial to refactoring and optimizing code effectively. Lastly, collaboration on code should be, and very often is, done through *Git* or similar tools. By collaborating through Git, it is significantly easier to track changes over time, see who made what changes, and all revisions are accessible. This is *a lot* better than just emailing code back and forth—which some scientists still do!

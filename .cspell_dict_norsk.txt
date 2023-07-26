@@ -115,10 +115,12 @@ grensesnitt
 gruppelærer
 gruppelærere
 guttag
+hastighet
 heapsort
 heltall
 henriknf
 henrinfi
+hente
 Hettinger
 hjemme
 hurtiglager
@@ -233,6 +235,7 @@ nøkkel
 norsk
 nullptr
 numba
+numerikk
 numpy
 Nygaard
 objekt
@@ -248,6 +251,7 @@ Ordliste
 ostehøvel
 OTBS
 overrideable
+oversettelse
 oversetter
 parallellkjøring
 parameter
@@ -343,6 +347,7 @@ tilgangsspesifikasjon
 Timsort
 Toolchains
 Traceback
+treghetssystem
 tråd
 tuppel
 type

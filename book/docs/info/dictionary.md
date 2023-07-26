@@ -77,11 +77,11 @@ Contributions to this dictionary are more than welcomed. Please submit a pull re
 | increment                      | øke                          |
 | incremental                    | økende                       |
 | indent                         | innrykk                      |
+| inertial frame of reference    | treghetssystem               |
 | inheritance                    | arv                          |
 | input                          | inndata                      |
 | instance                       | instans                      |
 | integer                        | heltall                      |
-| interface                      | grensesnitt                  |
 | interface                      | grensesnitt                  |
 | interpreter                    | oversetter                   |
 | interval                       | intervall                    |
@@ -90,6 +90,7 @@ Contributions to this dictionary are more than welcomed. Please submit a pull re
 | iterate                        | iterere                      |
 | iteration                      | gjentakelse                  |
 | iterative                      | gjentakende                  |
+| just-in-time compilation       | dynamisk oversettelse        |
 | key                            | nøkkel                       |
 | label                          | merkelapp                    |
 | library                        | bibliotek                    |
@@ -107,6 +108,7 @@ Contributions to this dictionary are more than welcomed. Please submit a pull re
 | mixed programming              | blandet programmering        |
 | multiprocessing                | parallellkjøring             |
 | namespace                      | navnerom                     |
+| numerics                       | numerikk                     |
 | object                         | objekt                       |
 | parameter                      | parameter                    |
 | parent                         | foreldre                     |
@@ -153,6 +155,7 @@ Contributions to this dictionary are more than welcomed. Please submit a pull re
 | value                          | verdi                        |
 | variable                       | variabel                     |
 | vector                         | vektor                       |
+| velocity                       | hastighet                    |
 | verify                         | verifisere                   |
 | version control system         | versjon kontroll system      |
 | working directory              | arbeidsmappe                 |
@@ -177,11 +180,12 @@ Contributions to this dictionary are more than welcomed. Please submit a pull re
 | datavitenskap                | computer science               |
 | deallokere                   | deallocate                     |
 | dereferere                   | dereference                    |
+| dynamisk oversettelse        | just-in-time compilation       |
 | egenskap                     | property                       |
 | endelse                      | suffix                         |
 | enhetstesting                | unit testing                   |
-| feil                         | bug                            |
 | feil                         | error                          |
+| feil                         | bug                            |
 | feilsøk                      | debug                          |
 | feilsøkingsprogram           | debugger                       |
 | flagg                        | flag                           |
@@ -197,7 +201,7 @@ Contributions to this dictionary are more than welcomed. Please submit a pull re
 | grafisk brukergrensesnitt    | graphical user interface (GUI) |
 | gren                         | branch                         |
 | grensesnitt                  | interface                      |
-| grensesnitt                  | interface                      |
+| hastighet                    | velocity                       |
 | heltall                      | integer                        |
 | hjemme mappe                 | home directory                 |
 | hurtiglager                  | cache                          |
@@ -231,8 +235,8 @@ Contributions to this dictionary are more than welcomed. Please submit a pull re
 | liste                        | list                           |
 | lukke                        | close                          |
 | løkke                        | loop                           |
-| mappe                        | directory                      |
 | mappe                        | folder                         |
+| mappe                        | directory                      |
 | markov prosess               | markov process                 |
 | matrise                      | matrix                         |
 | medlemsfelt                  | member fields                  |
@@ -246,6 +250,7 @@ Contributions to this dictionary are more than welcomed. Please submit a pull re
 | minne                        | memory                         |
 | minne lekasje                | memory leak                    |
 | navnerom                     | namespace                      |
+| numerikk                     | numerics                       |
 | nøkkel                       | key                            |
 | objekt                       | object                         |
 | oppsett                      | configuration                  |
@@ -286,6 +291,7 @@ Contributions to this dictionary are more than welcomed. Please submit a pull re
 | tilfeldig                    | random                         |
 | tilføye                      | amend                          |
 | tilgangsspesifikasjon        | access specifier               |
+| treghetssystem               | inertial frame of reference    |
 | tråd                         | thread                         |
 | tuppel                       | tuple                          |
 | type                         | type                           |

@@ -63,14 +63,14 @@ parts:
   - file: docs/lectures/summary/course_summary.md
 - caption: Exercises
   chapters:
-  - file: docs/exercises/week1/E1_python_refresh_and_git.ipynb
+  - file: docs/exercises/week1/E1_python_refresh_and_git.md
   - file: docs/exercises/week3/E3_testing_and_docstrings.ipynb
   - file: docs/exercises/week2/E2_exercises_on_oop.ipynb
   - file: docs/exercises/week4/pancake_sort.md
-  - file: docs/exercises/week6/E6_intro_to_cpp.md
+  - file: docs/exercises/week6/week6.md
     sections:
+    - file: docs/exercises/week6/E6_intro_to_cpp.md
     - file: docs/exercises/week6/E6_references_and_pointers.md
-    - file: docs/exercises/week6/C1_primes_by_trial_division.md
   - file: docs/exercises/week7/E7_oop_in_cpp.md
     sections:
     - file: docs/exercises/week7/C2_primes_by_sieve.md
@@ -82,12 +82,9 @@ parts:
   - file: docs/exercises/week13/E11_parallel_programming.md
 - caption: Exercise solutions
   chapters:
-  - file: docs/exercises/week1/E1_solutions.ipynb
   - file: docs/exercises/week3/E3_solutions.ipynb
   - file: docs/exercises/week2/E2_solutions.ipynb
   - file: docs/exercises/week4/pancake_sort_solution.md
-  - file: docs/exercises/week6/E6_solutions.md
-  - file: docs/exercises/week6/week6-challenge.md
   - file: docs/exercises/week7/E7_solutions.md
   - file: docs/exercises/week11/E9_solutions.ipynb
   - file: docs/exercises/week12/E10_solutions.md

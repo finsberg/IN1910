@@ -5,7 +5,7 @@ Note that if you install anaconda, then you will end up installing a lot more pa
 ```
 conda env create -f environment.yml
 ```
-This will create a new environment called `IN1910`, see [Virtual environments](#virtual-environments) for more info about virtual environments.
+This will create a new environment called `IN1910`, see [Virtual environments](virtual-environments) for more info about virtual environments.
 
 ## Installing third party packages with conda
 
@@ -18,6 +18,7 @@ For the course IN1910 you need to install the following software:
 
 This can be installed using the [Anaconda distribution](https://www.anaconda.com/distribution/#download-section) which is recommended. There are also other options to install [python](https://realpython.com/installing-python/) depending on your operating system. You may also consult the [guide from IN1900](https://www.uio.no/studier/emner/matnat/ifi/IN1900/h18/ressurser/installering.html).
 
+(virtual-environments)=
 ### Virtual environments
 The main purpose of a virtual environment is to create an isolated environment where you install all your dependencies. Say that you are working on a project where you need a specific version of a package (say numpy). First thing you might wonder is *why would you need a specific version of numpy?*. Well, numpy evolves all the time. New functionality is added and some functions might be deprecated and removed. If you are working on a large code base that depends on some old numpy functionality that is removed in the most recent version, then you can either try to upgrade the package to support the most recent version of numpy, or you can just stick to an older version.
 
