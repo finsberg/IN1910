@@ -34,7 +34,7 @@ template_nor_to_eng = """
 {}
 """
 
-df = pandas.read_csv("wordlist.csv", header=0, dtype=str)
+df = pandas.read_csv("wordlist.csv", header=0, dtype=str, encoding="utf-8")
 
 
 eng_to_nor = ""
@@ -51,7 +51,7 @@ text = (
     + template_nor_to_eng.format(nor_to_eng)
 )
 
-with open("book/docs/info/dictionary.md", "w") as f:
+with open("book/docs/info/dictionary.md", "w", encoding="utf-8") as f:
     f.write(text)
 
 # Make sure tables are formatted correctly

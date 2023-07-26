@@ -14,7 +14,7 @@ kernelspec:
 
 We expect that most of those taking IN1910 to have some Python experience. However, you might not have used the language that recently. This notebook is meant as a quick refresher on some Python syntax. We will show some simple examples to get the ball rolling, and you can use the first set of exercises to try your hand at writing some code yourself.
 
-If you don't know any Python going into IN1910, you should be able to pick it up along the way. However, you should expect to devote more time to working with the material, especially in the first weeks of the course. In this case, please ensure you do all the weekly exercises, and please ask the lecturer of your TA (gruppelærer) for helpful advice on how to better learn Python.
+If you do not know any Python going into IN1910, you should be able to pick it up along the way. However, you should expect to devote more time to working with the material, especially in the first weeks of the course. In this case, please ensure you do all the weekly exercises, and please ask the lecturer of your TA (gruppelærer) for helpful advice on how to better learn Python.
 
 If this refresher is not sufficient for your needs, we can recommend *Introduction to Scientific Programming with Python* by Joakim Sundnes. You can find it as an open access eBook here:
 * https://www.springer.com/gp/book/9783030503550
@@ -178,19 +178,19 @@ Python scripts are typically saved with the extension `.py`. When you create a P
 ```
 python3 find_volume.py
 ```
-Depending on your installation, the command `python` might refer to Python 2 instead of 3. To check the version of python you can execute the command
+Depending on your installation, the command `python` might refer to Python 2 instead of 3. To check the version of Python you can execute the command
 ```
 python --version
 ```
-If it says Python 2.X (most likely 2.7), you should make sure to use `python3`, i.e
+If it says Python 2.X (most likely 2.7), you should make sure to use `python3`, i.e.,
 ```
 python3 --version
 ```
 
 A lot of code editors and IDEs (integrated developer environments) also let you run Python scripts directly from the editor. If you prefer to do it this way, you should also ensure you are running Python 3 instead of 2.
 
-Note also that we will assume that you are using python version 3.8 or newer in this course, so some of the code might not be working even if you are using python 3. One example is the f-string trick that we showed earlier (i.e `print(f"{t=}")`). This syntax was introduced in python version 3.8
-However, most of the code will be compatible with all versions of python.
+Note also that we will assume that you are using Python version 3.8 or newer in this course, so some of the code might not be working even if you are using Python 3. One example is the f-string trick that we showed earlier (i.e `print(f"{t=}")`). This syntax was introduced in Python version 3.8
+However, most of the code will be compatible with all versions of Python.
 
 As you work on bigger projects, many of the Python scripts you create are not necessarily meant to be run directly, but rather imported by other scripts. A useful code structure to include then is the following statement
 ```{code-cell} python
@@ -274,7 +274,7 @@ x.append(1)
 print(f"{x = }")
 print(f"{y = }")
 ```
-Now python will take the list that is assigned to `x` and copy it to a brand new location in memory.
+Now Python will take the list that is assigned to `x` and copy it to a brand new location in memory.
 
 This example might feel like we are making a lot of fuss about minor details. But the differences between mutable and immutable objects and how they are treated is quite important for properly understanding Python. As we will work a lot with object-oriented programming in IN1910, it is worth spending time to properly grasp these basics.
 
@@ -282,7 +282,7 @@ This example might feel like we are making a lot of fuss about minor details. Bu
 
 ## PythonTutor
 
-When learning programming, it is easy to get confused by examples such as the one we just saw. In such cases, it can be good to visualizing what is going by drawing a small sketch of what is going on behind the scenes in the program. A helpful tool here is the online Python tutor:
+When learning programming, it is easy to get confused by examples such as the one we just saw. In such cases, it can be good to visualizing what is going by drawing a small sketch of what is going on behind the scenes in the program. A helpful tool here is the online Python tutor
 [http://pythontutor.com](http://pythontutor.com/visualize.html#mode=edit)
 
 This tools lets you write Python code and execute it line by line. For each statement executed, it shows what objects and variables exist, and in which scopes. This can be super helpful for understanding confusing examples such as mutable variables. You can run the two cases shown above in Python tutor and observe the differences.
@@ -323,16 +323,17 @@ for n in range(10):
 
 ### Defining your own functions
 
-You can define your own functions in Python using the `def` keyword. You should use the `return` keyword to specify the return-value (the output) of the function, and if you don't specify the return value, then the function will return a special object called None.
+You can define your own functions in Python using the `def` keyword. You should use the `return` keyword to specify the return-value (the output) of the function, and if you do not specify the return value, then the function will return a special object called None.
 
 ```{code-cell} python
 def function_no_return_value():
     ...
 
+
 x = function_no_return_value()
 print(x)
 ```
-Noticed also that here we have used ellipsis (i.e `...`) as a placeholder for the body of the function. This is perfectly valid code, but it doesn't do anything.
+Noticed also that here we have used ellipsis (i.e `...`) as a placeholder for the body of the function. This is perfectly valid code, but it does not do anything.
 
 
 You can choose freely how many arguments and keyword-arguments a function should have, and you can name these yourself. For any keyword argument you must specify their default value.
@@ -392,6 +393,7 @@ def append_one(x):
     x += [1]
     return x
 
+
 a = [0]
 b = append_one(a)
 print(f"{a = }")
@@ -402,7 +404,7 @@ At the first glance you might expect the output to be
 [0]
 [0, 1]
 ```
-However, since you passed in a list you also changed the argument that is passed in. If you don't want to change that input argument, then you would be much better of using a `tuple`, i.e
+However, since you passed in a list you also changed the argument that is passed in. If you do not want to change that input argument, then you would be much better of using a `tuple`, i.e
 ```{code-cell} python
 def append_one(x):
     x += (1,)
@@ -427,7 +429,7 @@ for <element> in <iterable>:
 
 Here, we can name the element whatever we want, for simply integer counts it is normal to use `i`, `j`, and `k`.
 
-We can loop over any iterable object in Python, for example sequences such as lists and tuples. If you want to loop over a range of numbers, you can use the built-in range function:
+We can loop over any iterable object in Python, for example sequences such as lists and tuples. If you want to loop over a range of numbers, you can use the built-in range function
 ```python
 for i in range(10):
     ...
@@ -498,7 +500,7 @@ print(primes)
 
 Now, to be clear. Doing something in the least amount of code lines is rarely a goal in and of itself. And more compact code can often be considered less readable and should in certain cases often be avoided.
 
-However, list comprehensions are considered very "pythonic" and are actually faster than using a loops and appending. As such they are very useful, and you shouldn't hesitate to use list comprehensions were applicable (and similarly dictionary comprehensions).
+However, list comprehensions are considered very "pythonic" and are actually faster than using a loops and appending. As such they are very useful, and you should not hesitate to use list comprehensions were applicable (and similarly dictionary comprehensions).
 
 One think to note is that in list comprehension we use square brackets `[]`. However it is also possible to obtain a similar behavior using parenthesis `()`, but the results is not a list but something called a generator expression. We will talk more about this [later in the course](software-optimization:memory-optimization)
 
@@ -540,7 +542,7 @@ Likewise you could `zip` three or more sequences together.
 
 ## While Loops
 
-We have covered for loops, which iterate over some sequence. The other kind of loop is a while loop, which repeats a block of code as long as some condition is true. The syntax is as follows:
+We have covered for loops, which iterate over some sequence. The other kind of loop is a while loop, which repeats a block of code as long as some condition is true. The syntax is as follows
 ```{code-cell} python
 while condition:
     ...
@@ -586,7 +588,7 @@ We will cover some more advanced use cases of matplotlib later in the course, bu
 import matplotlib.pyplot as plt
 ```
 
-The `plt.plot` command takes a list of values on the $x$-axis and a list of values on the $y$-axis, and draws a line through them. As an example we use `np.linspace` and `np.sin` to define a sine-curve:
+The `plt.plot` command takes a list of values on the $x$-axis and a list of values on the $y$-axis, and draws a line through them. As an example we use `np.linspace` and `np.sin` to define a sine-curve
 
 ```{code-cell} python
 x = np.linspace(0, 2 * pi, 11)
@@ -598,7 +600,7 @@ plt.ylabel("sin(x)")
 plt.show()
 ```
 
-The curve is choppy because we have such few points, which is more obvious if we redefine the linestyle:
+The curve is choppy because we have such few points, which is more obvious if we redefine the linestyle
 
 ```{code-cell} python
 plt.plot(x, y, "o--")
@@ -638,9 +640,9 @@ Also add in the enveloping curves $e^{-y}$ and $-e^{-y}$ as dashed gray lines (
 # Fill in your code here
 ```
 
-## Solving ODE's with Finite Differences
+## Solving ODEs with Finite Differences
 
-The final topic we cover in this lecture is how to solve integrals and differential equations numerically. This is a major topic in scientific computing, and it can get a bit advanced. If you have taken IN1900 this should be familiar to you. If you have not and this is a new topic for you, don't panic, we won't focus to much on differential equations in this course. Here we only use this as a more advanced problem case to showcase some Python code.
+The final topic we cover in this chapter is how to solve integrals and differential equations numerically. This is a major topic in scientific computing, and it can get a bit advanced. If you have taken IN1900 this should be familiar to you. If you have not and this is a new topic for you, do not panic, we will not focus to much on differential equations in this course. Here we only use this as a more advanced problem case to showcase some Python code.
 
 As our example we choose one of the most fundamental and important differential equations, the exponential decay problem
 
@@ -660,7 +662,7 @@ $$
 u_{i+1} = (1 - a\Delta t)u_{i}.
 $$
 
-If the mathematics of what we are doing here is a bit over your head: Don't panic. Put simply we have found an equation we can use to compute a curve or array one value at the time. The goal is now simply to implement this equation as code, and this is mainly a programming challenge, and not a mathematical one.
+If the mathematics of what we are doing here is a bit over your head, do not panic. Put simply we have found an equation we can use to compute a curve or array one value at the time. The goal is now simply to implement this equation as code, and this is mainly a programming challenge, and not a mathematical one.
 
 To solve the equation we first need to define all our parameters and initial conditions. Let us say that $u_0 = 4$ and $a=0.5$. Let us use a time step of $\Delta t = 0.001$ and solve for the time $t\in[0, 10].$
 

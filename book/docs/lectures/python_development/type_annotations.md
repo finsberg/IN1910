@@ -21,7 +21,8 @@ In python everything is an object. To see this you can take any class and check 
 
 ```{code-cell} python
 class A:
-  pass
+    pass
+
 
 print("A: ", issubclass(A, object))
 print("int: ", issubclass(int, object))
@@ -83,6 +84,7 @@ If you want say that a function expects a `list`, `set`, `dictionary` or `tuple`
 ```{code-cell} python
 from typing import Dict, List
 
+
 def extract_ages_from_dict(age_dict: Dict[str, int], names: List[str]) -> List[int]:
     ages = []
     for name in names:
@@ -111,13 +113,13 @@ Sometimes, your function can take more than one type of argument. In this case w
 import datetime
 from typing import Union
 
+
 def compute_age_this_year(year_born: Union[int, str]) -> int:
     this_year = datetime.datetime.now().year
     if isinstance(year_born, str):
         return this_year - int(year_born)
     else:
-      return this_year - year_born
-
+        return this_year - year_born
 ```
 You can use this function in two ways, either pass an integer
 ```{code-cell} python
@@ -134,11 +136,13 @@ Another common use case is when an argument is either something or `None`. Consi
 ```{code-cell} python
 from typing import Union
 
+
 def print_hello(name: str, city: Union[str, None] = None) -> None:
     msg = f"Hello {name}"
     if city is not None:
         msg += f" from {city}"
     print(msg)
+
 
 print_hello("Henrik")  # prints 'Hello Henrik'
 print_hello("Henrik", "Oslo")  # prints 'Hello Henrik from Oslo'
@@ -163,6 +167,7 @@ There is a special type called `Any` which means that you basically don't care a
 
 ```{code-cell} python
 from typing import Any
+
 
 def stringify(x: Any) -> str:
     return str(x)
@@ -233,6 +238,7 @@ Try to run mypy on this code
 ```{code-cell} python
 import datetime
 
+
 class Person:
     def __init__(self, name, year_born):
         self.name = name
@@ -263,8 +269,6 @@ class Person:
 
     def __repr__(self) -> str:
         return f"{type(self).__name__}(name={self.name}, year_born={self.year_burn})"
-
-
 ```
 
 ```{note}
@@ -301,7 +305,7 @@ def extract_name_and_capitalize(data: Dict[str, str]) -> Optional[str]:
 
 
 def count_letters_in_names(names: List[str]) -> int:
-    return sum(len(name) for name in  names)
+    return sum(len(name) for name in names)
 
 
 data = [

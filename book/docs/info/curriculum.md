@@ -95,3 +95,19 @@ For C++ some online resources are
 - <https://cs.berea.edu//cpp4python/index.html>
 - <https://docs.microsoft.com/en-us/cpp/cpp/cpp-language-reference>
 - <https://www.cplusplus.com/doc/tutorial/>
+
+### Further material for algorithms and data structures
+
+At UiO, the course [IN2010 – Algorithms and Data Structures](https://www.uio.no/studier/emner/matnat/ifi/IN2010/index-eng.html) (previously INF2220) focuses more in-depth on the topic of data structures and algorithms. The course comes highly recommended for anyone who wants to become a better programmer, and it is essentially a prerequisite if one's goal is to go further into computer science.
+
+There are also hundreds of books on this subject. Not only are there many to choose from, but there are several dedicated to each programming language one might want to use. We recommend the book used in IN2010, [*Algorithm Design and Application* by Goodrich and Tamassia](https://www.wiley.com/en-us/Algorithm+Design+and+Applications-p-9781118335918), as that is probably the best choice if the reader wants to get a dedicated book and might be taking IN2010 in the future.
+
+```{figure} ../figures/goodrich_and_tamissa.jpg
+---
+width: 175px
+name: goodrich-and-tamissa
+---
+Book used by IN2010, [*Algorithm Design and Application* by Goodrich and Tamassia](https://www.wiley.com/en-us/Algorithm+Design+and+Applications-p-9781118335918).
+```
+
+Another excellent resource to use is the teaching materials for the [MIT course 6.006 *Introduction to Algorithms*](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/). The course materials are openly available through Open CourseWare, with recorded video lectures. This course covers the theory behind many data structures and algorithms, so it works well with any programming language but mostly uses Python for code examples. Note that 6.006 goes into many topics we do not cover, but they also have lectures that cover what we do in IN1910.
