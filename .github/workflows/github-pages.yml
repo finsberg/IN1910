@@ -1,12 +1,14 @@
 name: Github Pages
 
 on:
+  pull_request:
   push:
     branches:
       - main
+
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       # Directory that will be published on github pages
       PUBLISH_DIR: ./book/_build/html
