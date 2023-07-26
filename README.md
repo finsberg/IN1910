@@ -5,6 +5,11 @@ This repository contains teaching material for *IN1910 Programming with Scientif
 
 The content in this repository is available at github pages (<http://finsberg.github.io/IN1910>)
 
+There is also an experimental interactive version of this site that uses [jupyter-lite](https://jupyterlite.readthedocs.io/en/latest/) at <https://finsberg.github.io/IN1910/lite>
+
+
+## Contributing
+If you want to contribute please read the [contributing guidelines](CONTRIBUTING.md)
 
 ## License
 
